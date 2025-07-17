@@ -1,0 +1,19 @@
+project:
+  type: website
+
+website:
+  title: "Parks Canada - Intermedate R"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - about.qmd
+      - workflows.qmd
+
+format:
+  html:
+    theme:
+      - cosmo
+      - brand
+    css: styles.css
+    toc: true

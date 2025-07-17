@@ -1,0 +1,75 @@
+---
+title: "Creating Efficient Workflows in R"
+author: "Andy Teucher"
+format: 
+  revealjs: 
+    height: 900
+    width: 1600
+    theme: [night]
+    highlight-style: a11y
+    slide-number: true
+    chalkboard: true
+execute:
+  freeze: auto
+---
+
+# Introductions
+
+<br>
+
+:::: {.columns}
+::: {.column width="50%"}
+**Me: Andy Teucher**
+
+![](img/andy-hognose-circle.png){width="40%"}
+
+{{< fa globe >}} [andyteucher.ca](https://andyteucher.ca)
+
+{{< fa brands github >}} [ateucher](https://github.com/ateucher)
+
+{{< fa brands bluesky >}} [andyteucher](https://bsky.app/profile/andyteucher.bsky.social)
+
+{{< fa brands linkedin >}} [andy-teucher](https://www.linkedin.com/in/andy-teucher/)
+
+
+:::
+
+::: {.column width="50%"}
+**Yourselves**
+
+
+:::
+::::
+# Resources
+
+<br>
+
+Workshop website: <https://andyteucher.ca/pc-intermediate-r/>
+
+<br>
+
+WTF Book: <https://rstats.wtf/>
+
+# Project-oriented workflows
+
+- RStudio settings
+- Positron settings
+- Concept of a project (vs `setwd("it/works/on/my/machine")`)
+- Project structure
+- Embrace the blank slate - Restart often (vs `rm(list = ls())`)
+- Naming things
+- File organization
+- README
+
+# Personal R administration
+
+- Where do packages live?
+- Installing and updating packages
+- R Startup
+- `.Rprofile` and `.Renviron` files
+
+# Efficient use of your IDE
+- Customizing your IDE
+- Keyboard shortcuts
+- Tab completion
+- Getting help: Reprexes
