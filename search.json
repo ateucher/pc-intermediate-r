@@ -1,5 +1,61 @@
 [
   {
+    "objectID": "workflows.html#introductions",
+    "href": "workflows.html#introductions",
+    "title": "Creating Efficient Workflows in R",
+    "section": "Introductions",
+    "text": "Introductions\n\n\n\nMe: Andy Teucher\n\n andyteucher.ca\n ateucher\n andyteucher\n andy-teucher\n\nYourselves"
+  },
+  {
+    "objectID": "workflows.html#resources",
+    "href": "workflows.html#resources",
+    "title": "Creating Efficient Workflows in R",
+    "section": "Resources",
+    "text": "Resources\n\nWorkshop website: https://andyteucher.ca/pc-intermediate-r/\n\nWTF Book: https://rstats.wtf/"
+  },
+  {
+    "objectID": "workflows.html#project-oriented-workflows",
+    "href": "workflows.html#project-oriented-workflows",
+    "title": "Creating Efficient Workflows in R",
+    "section": "Project-oriented workflows",
+    "text": "Project-oriented workflows\n\nConcept of a project \nProject structure\nEmbrace the blank slate \nRStudio and/or Positron settings\nNaming things\nFile organization"
+  },
+  {
+    "objectID": "workflows.html#personal-r-administration",
+    "href": "workflows.html#personal-r-administration",
+    "title": "Creating Efficient Workflows in R",
+    "section": "Personal R administration",
+    "text": "Personal R administration\n\nWhere do packages live?\nInstalling and updating packages\nR Startup\n.Rprofile and .Renviron files"
+  },
+  {
+    "objectID": "workflows.html#efficient-use-of-your-ide",
+    "href": "workflows.html#efficient-use-of-your-ide",
+    "title": "Creating Efficient Workflows in R",
+    "section": "Efficient use of your IDE",
+    "text": "Efficient use of your IDE\n\nCustomizing your IDE\nKeyboard shortcuts\nTab completion\nGetting help: Reprexes"
+  },
+  {
+    "objectID": "workflows.html#what-is-a-project",
+    "href": "workflows.html#what-is-a-project",
+    "title": "Creating Efficient Workflows in R",
+    "section": "What is a project?",
+    "text": "What is a project?\n\nProject-oriented workflows"
+  },
+  {
+    "objectID": "workflows.html#slide-1",
+    "href": "workflows.html#slide-1",
+    "title": "Creating Efficient Workflows in R",
+    "section": "Slide 1",
+    "text": "Slide 1\n\nPersonal R administration"
+  },
+  {
+    "objectID": "workflows.html#slide-1-1",
+    "href": "workflows.html#slide-1-1",
+    "title": "Creating Efficient Workflows in R",
+    "section": "Slide 1",
+    "text": "Slide 1\n\nEfficient use of your IDE"
+  },
+  {
     "objectID": "about.html",
     "href": "about.html",
     "title": "About",
