@@ -1,5 +1,5 @@
 ---
-title: "Parks Canada - Intermedate R"
+title: "Parks Canada - Intermediate R"
 ---
 
 This is a Quarto website.
