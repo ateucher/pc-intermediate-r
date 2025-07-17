@@ -10,6 +10,9 @@ website:
       - about.qmd
       - workflows.qmd
 
+execute: 
+  freeze: auto
+
 format:
   html:
     theme:
