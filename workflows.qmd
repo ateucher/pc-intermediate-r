@@ -13,7 +13,7 @@ execute:
   freeze: auto
 ---
 
-# Introductions
+## Introductions
 
 <br>
 
@@ -40,7 +40,7 @@ execute:
 
 :::
 ::::
-# Resources
+## Resources
 
 <br>
 
@@ -50,26 +50,56 @@ Workshop website: <https://andyteucher.ca/pc-intermediate-r/>
 
 WTF Book: <https://rstats.wtf/>
 
-# Project-oriented workflows
+## Project-oriented workflows
 
-- RStudio settings
-- Positron settings
-- Concept of a project (vs `setwd("it/works/on/my/machine")`)
+- Concept of a project <!-- (vs `setwd("it/works/on/my/machine")`) -->
 - Project structure
-- Embrace the blank slate - Restart often (vs `rm(list = ls())`)
+- Embrace the blank slate <!-- Restart often (vs `rm(list = ls())`) -->
+- RStudio and/or Positron settings
 - Naming things
 - File organization
-- README
 
-# Personal R administration
+## Personal R administration
 
 - Where do packages live?
 - Installing and updating packages
 - R Startup
 - `.Rprofile` and `.Renviron` files
 
-# Efficient use of your IDE
+## Efficient use of your IDE
 - Customizing your IDE
 - Keyboard shortcuts
 - Tab completion
 - Getting help: Reprexes
+
+# Project-oriented workflows
+
+Often we are (or think we are) only doing our 
+data work on our own
+</br></br>
+When we want to facilitate collaboration or focus on reproducibility, we need new strategies
+</br></br>
+[What they Forgot to Teach You About R](https://rstats.wtf/) - Much of this thinking is distilled from Bryan & Hester’s awesome course. Jenny Bryan is a hero in the R world. An early adopter teaching R/GitHub as a prof at Univ. British Columbia, now at Posit
+
+
+##  What is a project?
+
+::: footer
+Project-oriented workflows
+:::
+
+# Personal R administration
+
+## Slide 1
+
+::: footer
+Personal R administration
+:::
+
+# Efficient use of your IDE
+
+## Slide 1
+
+::: footer
+Efficient use of your IDE
+:::
