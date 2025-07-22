@@ -32,14 +32,105 @@
     "href": "workflows.html#efficient-use-of-your-ide",
     "title": "Creating Efficient Workflows in R",
     "section": "Efficient use of your IDE",
-    "text": "Efficient use of your IDE\n\nCustomizing your IDE\nKeyboard shortcuts\nTab completion\nGetting help: Reprexes"
+    "text": "Efficient use of your IDE\n\nCustomizing your IDE\nKeyboard shortcuts\nCommand palette\nTab completion\nAutoformatting code\nGetting help: Reprexes"
   },
   {
-    "objectID": "workflows.html#what-is-a-project",
-    "href": "workflows.html#what-is-a-project",
+    "objectID": "workflows.html#learning-objectives",
+    "href": "workflows.html#learning-objectives",
     "title": "Creating Efficient Workflows in R",
-    "section": "What is a project?",
-    "text": "What is a project?\n\nProject-oriented workflows"
+    "section": "Learning objectives",
+    "text": "Learning objectives\n\nEstablish the concept of the project as the basic organizational unit of work.\nApply best practices in and leverage benefits of using a project-oriented workflow.\n\n\nCreating robust file paths that travel well in time and space.\nConstructing human and machine readable file names that sort nicely.\nDifferentiating workflow elements, analysis inputs, and analysis outputs in project structure to create navigable programming interfaces.\nRestarting R frequently, with a blank slate."
+  },
+  {
+    "objectID": "workflows.html#be-organized-as-you-go-not-tomorrow",
+    "href": "workflows.html#be-organized-as-you-go-not-tomorrow",
+    "title": "Creating Efficient Workflows in R",
+    "section": "Be organized as you go,  not “tomorrow”",
+    "text": "Be organized as you go,  not “tomorrow”\n\n\nDon’t fret over past mistakes.\n\n\n\n\nRaise the bar for new work."
+  },
+  {
+    "objectID": "workflows.html#prerequisite-save-code-in-scripts",
+    "href": "workflows.html#prerequisite-save-code-in-scripts",
+    "title": "Creating Efficient Workflows in R",
+    "section": "Prerequisite: Save code in scripts",
+    "text": "Prerequisite: Save code in scripts\nSaving code is an absolute requirement for reproducibility. (Future you, future us)\nSave commands as “scripts” (.R) or “notebooks” (.Rmd). It doesn’t have to be polished. Just save it!\nEverything that really matters should be achieved through code that you save - Including creating figures - Contrast: Series of unrecorded mouse clicks\nThe process is important, the product is just an outcome - Outputs should be treated as disposable - Scripts are the source of truth"
+  },
+  {
+    "objectID": "workflows.html#adopt-a-project-oriented-workflow",
+    "href": "workflows.html#adopt-a-project-oriented-workflow",
+    "title": "Creating Efficient Workflows in R",
+    "section": "Adopt a project-oriented workflow",
+    "text": "Adopt a project-oriented workflow\n\n\n\nWhy\n\nwork on more than 1 thing at a time\ncollaborate, communicate, distribute\nstart and stop safely\n\n\n\n\nHow\n\ndedicated directory\nRStudio Project\nGit repo, probably syncing to a remote\n\n\n\nProject-oriented workflows"
+  },
+  {
+    "objectID": "workflows.html#if-the-top-of-your-script-is",
+    "href": "workflows.html#if-the-top-of-your-script-is",
+    "title": "Creating Efficient Workflows in R",
+    "section": "If the top of your script is",
+    "text": "If the top of your script is\n\n\nsetwd(\"C:/Users/andy/path/that/only/I/have\")\nrm(list = ls())\n\n\nThere is another path.\n\n\nProject-oriented workflow designs this away. 🙌\n\n\nProject-oriented workflows"
+  },
+  {
+    "objectID": "workflows.html#organize-your-work-into-projects",
+    "href": "workflows.html#organize-your-work-into-projects",
+    "title": "Creating Efficient Workflows in R",
+    "section": "Organize your work into projects",
+    "text": "Organize your work into projects\nOne folder per project.\n\nReport? R package? Chapter? Website? Whatever.\nCan be the same unit as a GitHub Repo.\nIf using RStudio, it’s Project (capital P)\nEach Project gets its own R instance\nR starts at the project root working directory: all paths are relative to the project’s folder.\n\n\nProject-oriented workflows"
+  },
+  {
+    "objectID": "workflows.html#organize-your-work-into-projects-1",
+    "href": "workflows.html#organize-your-work-into-projects-1",
+    "title": "Creating Efficient Workflows in R",
+    "section": "Organize your work into projects",
+    "text": "Organize your work into projects\n\n\nmy-project/\n├── 01-read_data.R\n├── 02-clean_data.R\n├── 03-analysis.R\n├── 04-output.R\n├── R\n├── README.md\n├── data\n│   ├── derived_data\n│   └── raw_data\n├── outputs\n└── paper\n    ├── paper.qmd\n    └── references.bib\n\n\n\nProject-oriented workflows"
+  },
+  {
+    "objectID": "workflows.html#what-does-it-mean-to-be-an-rstudio-project",
+    "href": "workflows.html#what-does-it-mean-to-be-an-rstudio-project",
+    "title": "Creating Efficient Workflows in R",
+    "section": "What does it mean to be an RStudio Project?",
+    "text": "What does it mean to be an RStudio Project?\nOpen Project = dedicated instance of RStudio\n\ndedicated R process\nfile browser pointed at Project directory\nworking directory set to Project directory\n\n\n\nRStudio leaves notes to itself in foo.Rproj"
+  },
+  {
+    "objectID": "workflows.html#what-does-it-mean-to-be-a-positron-project-workspace",
+    "href": "workflows.html#what-does-it-mean-to-be-a-positron-project-workspace",
+    "title": "Creating Efficient Workflows in R",
+    "section": "What does it mean to be a Positron Project Workspace?",
+    "text": "What does it mean to be a Positron Project Workspace?\nOpen Project = dedicated instance of Positron\n\ndedicated R process\nfile browser pointed at Project directory\nworking directory set to Project directory\n\n\n\nOften just a project folder that’s been opened in its own window via Open Folder or similar\n\n.git/ directory\n.Rproj file\n.vscode/settings.json file\n_quarto.yml file\nDESCRIPTION file\nrenv.lock file\n.here file"
+  },
+  {
+    "objectID": "workflows.html#practice-safe-paths",
+    "href": "workflows.html#practice-safe-paths",
+    "title": "Creating Efficient Workflows in R",
+    "section": "Practice “safe paths”",
+    "text": "Practice “safe paths”\n\nrelative to a stable base, not absolute paths.\n\nuse file system functions, not paste(), strsplit(), etc.\n\nWorking directory is associated with a specific process or running application.\nWhen you open a project in RStudio or Positron, it sets the working directory to the project root - this is that “stable base”\n“Working directory” as a concept is not comparable to “home directory”. “Home directory” is a static, persistent thing."
+  },
+  {
+    "objectID": "workflows.html#practice-safe-paths-1",
+    "href": "workflows.html#practice-safe-paths-1",
+    "title": "Creating Efficient Workflows in R",
+    "section": "Practice “safe paths”",
+    "text": "Practice “safe paths”\nInstead of:\n\nsetwd(\"C:/Users/andy/path/that/only/I/have\")\nmy_data &lt;- read.csv(\"data/my_data.csv\")\n\nOr:\n\nmy_data &lt;- read.csv(\"C:/Users/andy/path/that/only/I/have/data/my_data.csv\")"
+  },
+  {
+    "objectID": "workflows.html#practice-safe-paths-2",
+    "href": "workflows.html#practice-safe-paths-2",
+    "title": "Creating Efficient Workflows in R",
+    "section": "Practice “safe paths”",
+    "text": "Practice “safe paths”\nSet your work up as an RStudio or Positron Project/Workspace and use relative paths:\n\nmy_data &lt;- read.csv(\"data/my_data.csv\")\n\nOr:\n\nmy_data &lt;- read.csv(file.path(\"data\", \"my_data.csv\"))"
+  },
+  {
+    "objectID": "workflows.html#which-persist-after-rmlist-ls",
+    "href": "workflows.html#which-persist-after-rmlist-ls",
+    "title": "Creating Efficient Workflows in R",
+    "section": "Which persist after rm(list = ls())?",
+    "text": "Which persist after rm(list = ls())?\n\n\n\n\n\n\n\nOption\nPersists?\n\n\n\n\nA. library(dplyr)\n\n\n\nB. summary &lt;- head\n\n\n\nC. options(stringsAsFactors = FALSE)\n\n\n\nD. Sys.setenv(LANGUAGE = \"fr\")\n\n\n\nE. x &lt;- 1:5\n\n\n\nF. attach(iris)\n\n\n\n\n\n\n\n−+\n02:00"
+  },
+  {
+    "objectID": "workflows.html#which-persist-after-rmlist-ls-1",
+    "href": "workflows.html#which-persist-after-rmlist-ls-1",
+    "title": "Creating Efficient Workflows in R",
+    "section": "Which persist after rm(list = ls())?",
+    "text": "Which persist after rm(list = ls())?\n\n\n\n\n\n\n\nOption\nPersists?\n\n\n\n\nA. library(dplyr)\n\n\n\nB. summary &lt;- head\n\n\n\nC. options(stringsAsFactors = FALSE)\n\n\n\nD. Sys.setenv(LANGUAGE = \"fr\")\n\n\n\nE. x &lt;- 1:5\n\n\n\nF. attach(iris)"
   },
   {
     "objectID": "workflows.html#slide-1",
@@ -54,6 +145,48 @@
     "title": "Creating Efficient Workflows in R",
     "section": "Slide 1",
     "text": "Slide 1\n\nEfficient use of your IDE"
+  },
+  {
+    "objectID": "workflows.html#keyboard-shortcuts",
+    "href": "workflows.html#keyboard-shortcuts",
+    "title": "Creating Efficient Workflows in R",
+    "section": "Keyboard shortcuts",
+    "text": "Keyboard shortcuts"
+  },
+  {
+    "objectID": "workflows.html#navigation-files",
+    "href": "workflows.html#navigation-files",
+    "title": "Creating Efficient Workflows in R",
+    "section": "Navigation & Files",
+    "text": "Navigation & Files\n\nCtrl + Shift + N - New file\nCtrl + S - Save current file\nCtrl + F - Find in current file\nCtrl + Shift + F - Find in files (global search)\nCtrl + . - Go to file/function\nCtrl + 1 - Focus source editor\nCtrl + 2 - Focus console"
+  },
+  {
+    "objectID": "workflows.html#code-editing",
+    "href": "workflows.html#code-editing",
+    "title": "Creating Efficient Workflows in R",
+    "section": "Code Editing",
+    "text": "Code Editing\n\nCtrl + Shift + C - Comment/uncomment lines\nTab - Indent selection\nShift + Tab - Unindent selection\nAlt + Up/Down - Move line(s) up/down\nAlt + Shift + Up/Down - Duplicate line(s) ???\nCtrl + X - Cut entire line (when no selection)"
+  },
+  {
+    "objectID": "workflows.html#magic-of-multiple-cursors",
+    "href": "workflows.html#magic-of-multiple-cursors",
+    "title": "Creating Efficient Workflows in R",
+    "section": "Magic of Multiple Cursors",
+    "text": "Magic of Multiple Cursors\n\nCtrl + Alt + Up/Down - Add cursor above/below\nCtrl + D - Add next occurrence of selected text (custom)"
+  },
+  {
+    "objectID": "workflows.html#navigation-within-code",
+    "href": "workflows.html#navigation-within-code",
+    "title": "Creating Efficient Workflows in R",
+    "section": "Navigation Within Code",
+    "text": "Navigation Within Code\n\nCtrl + Left/Right - Jump word by word\nHome/End - Jump to beginning/end of line\nCtrl + Home/End - Jump to beginning/end of document\nCtrl + P - Jump to matching brace"
+  },
+  {
+    "objectID": "workflows.html#r-specific",
+    "href": "workflows.html#r-specific",
+    "title": "Creating Efficient Workflows in R",
+    "section": "R-Specific",
+    "text": "R-Specific\n\nTab - Auto-complete\nF1 - Show help for function under cursor\nCtrl + Shift + F10 - Restart R session\nCtrl + Shift + M - Insert pipe operator (%&gt;% or |&gt;)\nAlt + - - Insert assignment operator (&lt;-)"
   },
   {
     "objectID": "about.html",
