@@ -122,7 +122,7 @@ Raise the bar for new work.
 :::
 :::
 
-## Prerequisites: Save code in scripts
+## Prerequisite: Save code in scripts
 
 **Saving code is an absolute requirement for reproducibility. (Future you, future us)**
 
