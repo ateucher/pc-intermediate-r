@@ -304,6 +304,10 @@ Or:
 my_data <- read.csv(file.path("data", "my_data.csv"))
 ```
 
+## Work on multiple projects at once
+
+![](img/many-projects.png)
+
 ## Which persist after `rm(list = ls())`?
 
 | Option                               | Persists?                                      |
