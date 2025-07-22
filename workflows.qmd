@@ -1,17 +1,23 @@
 ---
 title: "Creating Efficient Workflows in R"
+subtitle: "Parks Canada; Ecological Integrity Monitoring Program"
 author: "Andy Teucher"
 format: 
   revealjs: 
     height: 900
     width: 1600
-    theme: [night]
+    theme: [moon]
     highlight-style: a11y
     slide-number: true
     chalkboard: true
 execute:
   freeze: auto
 ---
+
+```{r}
+library(countdown)
+library(fs)
+```
 
 ## Introductions
 
@@ -69,7 +75,9 @@ WTF Book: <https://rstats.wtf/>
 ## Efficient use of your IDE
 - Customizing your IDE
 - Keyboard shortcuts
+- Command palette
 - Tab completion
+- Autoformatting code
 - Getting help: Reprexes
 
 # Project-oriented workflows
@@ -81,12 +89,252 @@ When we want to facilitate collaboration or focus on reproducibility, we need ne
 </br></br>
 [What they Forgot to Teach You About R](https://rstats.wtf/) - Much of this thinking is distilled from Bryan & Hester’s awesome course. Jenny Bryan is a hero in the R world. An early adopter teaching R/GitHub as a prof at Univ. British Columbia, now at Posit
 
+## Learning objectives
 
-##  What is a project?
+1. Establish the concept of the project as the basic organizational unit of work.
+
+2. Apply best practices in and leverage benefits of using a project-oriented workflow.
+
+* Creating robust file paths that travel well in time and space.
+
+* Constructing human and machine readable file names that sort nicely.
+
+* Differentiating workflow elements, analysis inputs, and analysis outputs in project structure to create navigable programming interfaces.
+
+* Restarting R frequently, with a blank slate.
+
+## Be organized as you go, <br> not "tomorrow"
+
+::: columns
+::: {.column width="50%"}
+Don't fret over past mistakes.
+
+<!-- ![](img/beer-house.png) -->
+:::
+
+::: {.column width="4%"}
+:::
+
+::: {.column .fragment width="46%"}
+Raise the bar for new work.
+
+<!-- ![](img/beer-organized.png) -->
+:::
+:::
+
+## Prerequisites: Save code in scripts
+
+**Saving code is an absolute requirement for reproducibility. (Future you, future us)**
+
+Save commands as "scripts" (.R) or “notebooks” (.Rmd). It doesn't have to be polished. Just save it!
+
+Everything that really matters should be achieved through code that you save
+- Including creating figures
+- Contrast: Series of unrecorded mouse clicks
+
+The **process** is important, the **product** is just an outcome
+- Outputs should be treated as disposable 
+- Scripts are the source of truth
+
+
+## Adopt a project-oriented workflow
+
+<br>
+
+::: columns
+::: {.column width="48%"}
+### Why
+
+-   work on more than 1 thing at a time
+
+-   collaborate, communicate, distribute
+
+-   start and stop safely
+:::
+
+::: {.column width="4%"}
+:::
+
+::: {.column .fragment width="48%"}
+### How
+
+-   dedicated directory
+
+-   RStudio <ins>**P**</ins>roject
+
+-   Git repo, probably syncing to a remote
+:::
+:::
 
 ::: footer
 Project-oriented workflows
 :::
+
+## If the top of your script is
+
+<br>
+
+```{r, eval=FALSE, echo=TRUE}
+setwd("C:/Users/andy/path/that/only/I/have")
+rm(list = ls())
+```
+
+<br>
+
+There is another path.
+
+<br>
+
+::: {.fragment fragment-index="1"}
+Project-oriented workflow designs this away.
+🙌
+:::
+
+::: footer
+Project-oriented workflows
+:::
+
+## Organize your work into projects
+
+One folder per project.
+
+* Report? R package? Chapter? Website? Whatever.
+* Can be the same unit as a GitHub Repo.
+
+* If using RStudio, it’s Project (capital P)
+* Each Project gets its own R instance
+* R starts at the project root working directory: 
+all paths are relative to the project's folder.
+
+::: footer
+Project-oriented workflows
+:::
+
+## Organize your work into projects
+
+```{r}
+withr::with_dir(
+  "_examples",
+  fs::dir_tree("my-project/")
+)
+```
+
+::: footer
+Project-oriented workflows
+:::
+
+## What does it mean to be an RStudio **P**roject?
+
+Open Project = dedicated instance of **RStudio**
+
+-   dedicated **R** process
+-   file browser pointed at Project directory
+-   working directory set to Project directory
+
+. . .
+
+<br>
+
+RStudio leaves notes to itself in `foo.Rproj`
+
+## What does it mean to be a Positron ~~**P**roject~~ Workspace?
+
+Open Project = dedicated instance of **Positron**
+
+-   dedicated **R** process
+-   file browser pointed at Project directory
+-   working directory set to Project directory
+
+. . .
+
+<br>
+
+Often just a project folder that’s been opened in its own window via _Open Folder_ or similar
+
+- `.git/` directory
+- `.Rproj` file
+- `.vscode/settings.json` file
+- `_quarto.yml` file
+- `DESCRIPTION` file
+- `renv.lock` file
+- `.here` file
+
+## Practice "safe paths"
+
+<br>
+
+relative to a **stable base**, not **absolute paths**.
+
+<br>
+
+use **file system functions**, not paste(), strsplit(), etc.
+
+::: notes
+Working directory is associated with a specific process or running application.
+
+When you open a project in RStudio or Positron, it sets the working directory to the project root - this is that "stable base"
+
+"Working directory" as a concept is not comparable to "home directory".
+"Home directory" is a static, persistent thing.
+:::
+
+## Practice "safe paths"
+
+Instead of:
+```{r, eval=FALSE, echo=TRUE}
+setwd("C:/Users/andy/path/that/only/I/have")
+my_data <- read.csv("data/my_data.csv")
+```
+
+Or: 
+```{r, eval=FALSE, echo=TRUE}
+my_data <- read.csv("C:/Users/andy/path/that/only/I/have/data/my_data.csv")
+```
+
+## Practice "safe paths"
+
+Set your work up as an RStudio or Positron Project/Workspace and use relative paths:
+
+```{r, eval=FALSE, echo=TRUE}
+my_data <- read.csv("data/my_data.csv")
+```
+
+Or:
+```{r, eval=FALSE, echo=TRUE}
+my_data <- read.csv(file.path("data", "my_data.csv"))
+```
+
+## Which persist after `rm(list = ls())`?
+
+| Option                               | Persists?                                      |
+|-------------------------------------------------------|-----------------|
+| A. `library(dplyr)`                    |  |
+| B. `summary <- head`                  |  |
+| C. `options(stringsAsFactors = FALSE)` |  |
+| D. `Sys.setenv(LANGUAGE = "fr")`        |  |
+| E. `x <- 1:5`                         |  |
+| F. `attach(iris)`                      |  |
+
+```{r}
+countdown(
+  minutes = 2
+)
+```
+
+## Which persist after `rm(list = ls())`?
+
+| Option                               | Persists?                                    |
+|-------------------------------------------------------|-----------------|
+| A. `library(dplyr)`                    | <span style="color:green;">{{< fa check >}}</span> |
+| B. `summary <- head`                  | <span style="color:red;">{{< fa xmark >}}</span> |
+| C. `options(stringsAsFactors = FALSE)` | <span style="color:green;">{{< fa check >}}</span> |
+| D. `Sys.setenv(LANGUAGE = "fr")`       | <span style="color:green;">{{< fa check >}}</span> |
+| E. `x <- 1:5`                         | <span style="color:red;">{{< fa xmark >}}</span> |
+| F. `attach(iris)`                      | <span style="color:green;">{{< fa check >}}</span> |
+
+
+
+
 
 # Personal R administration
 
@@ -103,3 +351,40 @@ Personal R administration
 ::: footer
 Efficient use of your IDE
 :::
+
+
+## Keyboard shortcuts
+
+## Navigation & Files
+- **Ctrl + Shift + N** - New file
+- **Ctrl + S** - Save current file
+- **Ctrl + F** - Find in current file
+- **Ctrl + Shift + F** - Find in files (global search)
+- **Ctrl + .** - Go to file/function
+- **Ctrl + 1** - Focus source editor
+- **Ctrl + 2** - Focus console
+
+## Code Editing
+- **Ctrl + Shift + C** - Comment/uncomment lines
+- **Tab** - Indent selection
+- **Shift + Tab** - Unindent selection
+- **Alt + Up/Down** - Move line(s) up/down
+- **Alt + Shift + Up/Down** - Duplicate line(s) ???
+- **Ctrl + X** - Cut entire line (when no selection)
+
+## Magic of Multiple Cursors
+- **Ctrl + Alt + Up/Down** - Add cursor above/below
+- **Ctrl + D** - Add next occurrence of selected text (custom)
+
+## Navigation Within Code
+- **Ctrl + Left/Right** - Jump word by word
+- **Home/End** - Jump to beginning/end of line
+- **Ctrl + Home/End** - Jump to beginning/end of document
+- **Ctrl + P** - Jump to matching brace
+
+## R-Specific
+- **Tab** - Auto-complete
+- **F1** - Show help for function under cursor
+- **Ctrl + Shift + F10** - Restart R session
+- **Ctrl + Shift + M** - Insert pipe operator (`%>%` or `|>`)
+- **Alt + -** - Insert assignment operator (`<-`)
