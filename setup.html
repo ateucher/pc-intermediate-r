@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>About – Parks Canada - Intermediate R</title>
+<title>System Setup 🤖 – Parks Canada - Intermediate R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -94,8 +94,8 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./about.html" aria-current="page"> 
-<span class="menu-text">About</span></a>
+    <a class="nav-link active" href="./setup.html" aria-current="page"> 
+<span class="menu-text">System Setup 🤖</span></a>
   </li>  
   <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-modules" role="link" data-bs-toggle="dropdown" aria-expanded="false">
@@ -119,15 +119,34 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#computing-requirements" id="toc-computing-requirements" class="nav-link active" data-scroll-target="#computing-requirements">Computing requirements</a></li>
+  <li><a href="#install-r-and-rstudio" id="toc-install-r-and-rstudio" class="nav-link" data-scroll-target="#install-r-and-rstudio">Install R and RStudio</a>
+  <ul class="collapse">
+  <li><a href="#install-r" id="toc-install-r" class="nav-link" data-scroll-target="#install-r">Install R</a></li>
+  <li><a href="#install-r-studio" id="toc-install-r-studio" class="nav-link" data-scroll-target="#install-r-studio">Install R Studio</a></li>
+  </ul></li>
+  <li><a href="#install-r-package-development-tools" id="toc-install-r-package-development-tools" class="nav-link" data-scroll-target="#install-r-package-development-tools">Install R package development tools</a></li>
+  <li><a href="#git" id="toc-git" class="nav-link" data-scroll-target="#git">Git</a>
+  <ul class="collapse">
+  <li><a href="#windows" id="toc-windows" class="nav-link" data-scroll-target="#windows">Windows</a></li>
+  <li><a href="#mac" id="toc-mac" class="nav-link" data-scroll-target="#mac">Mac</a></li>
+  </ul></li>
+  <li><a href="#github" id="toc-github" class="nav-link" data-scroll-target="#github">GitHub</a></li>
+  <li><a href="#troubleshooting" id="toc-troubleshooting" class="nav-link" data-scroll-target="#troubleshooting">Troubleshooting</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content page-columns page-full" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">About</h1>
+<h1 class="title">System Setup 🤖</h1>
 </div>
 
 
@@ -144,9 +163,105 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>About this site</p>
+<p>You will require the following software installed and configured for the workshop. Please have this set up and ready to go <strong>before</strong> we start.</p>
+<section id="computing-requirements" class="level2">
+<h2 class="anchored" data-anchor-id="computing-requirements">Computing requirements</h2>
+<p>You will need:</p>
+<ul>
+<li>A laptop computer with administrative privileges</li>
+<li><a href="#install-r-and-rstudio">R and RStudio</a></li>
+<li><a href="#install-r-package-development-tools">R package development toolchain</a></li>
+<li><a href="#packages">Several R packages</a></li>
+<li><a href="#git">Git</a></li>
+<li><a href="#github">GitHub account</a></li>
+<li><a href="#check-link-between-r-and-github">GitHub linked to R</a></li>
+</ul>
+</section>
+<section id="install-r-and-rstudio" class="level2">
+<h2 class="anchored" data-anchor-id="install-r-and-rstudio">Install R and RStudio</h2>
+<p>You will need:</p>
+<ul>
+<li>R version &gt;= 4.4.0</li>
+<li>RStudio &gt;= 2024.04</li>
+</ul>
+<section id="install-r" class="level3">
+<h3 class="anchored" data-anchor-id="install-r">Install R</h3>
+<p>Download and install R for your operating system from <a href="https://cloud.r-project.org/" class="uri">https://cloud.r-project.org/</a>.</p>
+</section>
+<section id="install-r-studio" class="level3">
+<h3 class="anchored" data-anchor-id="install-r-studio">Install R Studio</h3>
+<p>Download and install RStudio Desktop from <a href="https://posit.co/download/rstudio-desktop/" class="uri">https://posit.co/download/rstudio-desktop/</a>. This page should automatically offer you the version suitable for your operating system, but you can scroll down to find versions for all operating systems.</p>
+</section>
+</section>
+<section id="install-r-package-development-tools" class="level2">
+<h2 class="anchored" data-anchor-id="install-r-package-development-tools">Install R package development tools</h2>
+<section id="for-windows" class="level4">
+<h4 class="anchored" data-anchor-id="for-windows">For Windows</h4>
+<p>Download and run the latest <strong>Rtools</strong> installer, <code>Rtools.exe</code>, from <a href="https://cran.r-project.org/bin/windows/Rtools/" class="uri">https://cran.r-project.org/bin/windows/Rtools/</a>.</p>
+<ul>
+<li>Keep the default settings for the installation location and components to install</li>
+<li>check the box to add rtools to the system PATH.</li>
+</ul>
+</section>
+<section id="for-mac" class="level4">
+<h4 class="anchored" data-anchor-id="for-mac">For Mac</h4>
+<p>Install <strong>XCode</strong>. The easiest way is to open a Terminal window (Applications &gt; Utilities &gt; Terminal.app; or use the Terminal pane in RStudio) and type the following:</p>
+<pre><code>xcode-select --install</code></pre>
+<p>You will be prompted to confirm the install, and possibly enter your computer password. Do so to complete the installation.</p>
+<p>Alternatively you can:</p>
+<ol type="1">
+<li>Download and install XCode from the Mac AppStore: <a href="http://itunes.apple.com/us/app/xcode/id497799835?mt=12" class="uri">http://itunes.apple.com/us/app/xcode/id497799835?mt=12</a></li>
+<li>Within XCode go to Preferences : Downloads and install the Command Line Tools</li>
+</ol>
+</section>
+<section id="for-linux" class="level4">
+<h4 class="anchored" data-anchor-id="for-linux">For Linux</h4>
+<p>If you installed <code>r-base-dev</code> when installing R, you should have all you need to build packages from source. If not, go back to <a href="https://cloud.r-project.org/" class="uri">https://cloud.r-project.org/</a> and follow the instructions for your distribution (Ubuntu and Debian are likely the most common, and install it with <code>sudo apt-get install r-base-dev</code>).</p>
+</section>
+</section>
+<section id="git" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="git">Git</h2>
+<p>We will be demonstrating the use of Git and GitHub for tracking changes during package development, and sharing and collaborating on our package.</p>
+<section id="windows" class="level3">
+<h3 class="anchored" data-anchor-id="windows">Windows</h3>
+<p>Check if Git is installed by running <code>which git</code> in the <strong>Terminal</strong> pane in RStudio.</p>
+<p>If <code>which git</code> didn’t find Git installed:</p>
+<ul>
+<li>Download and install from <a href="https://git-scm.com/downloads" class="uri">https://git-scm.com/downloads</a></li>
+<li>Keep all the default settings. If asked about “Adjusting your PATH environment”, make sure to select “Git from the command line and also from 3rd-party software”.</li>
+<li>Open RStudio. In the menus go to Tools &gt; Global Options &gt; Git/SVN.</li>
+<li>Check RStudio has found git under “Git executable:”
+<ul>
+<li>You may need to click Browse and find the git executable.</li>
+<li>It may be in <code>C:/Users/[username]/AppData/Local/Programs/Git/</code></li>
+</ul></li>
+</ul>
+</section>
+<section id="mac" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="mac">Mac</h3>
+<p>Check if Git is installed by running <code>which git</code> in the Terminal. You should see something like <code>/usr/bin/git</code>, <code>/usr/local/bin/</code>, or <code>/opt/homebrew/bin/git</code>.</p>
+<p>If you are asked to install the Xcode command line tools, say yes.</p>
+<p>If <code>which git</code> didn’t find Git installed, and if you weren’t prompted to install it, run the following in the <strong>Terminal</strong>: <code>xcode-select --install</code></p>
+
+<div class="no-row-height column-margin column-container"><div class="margin-aside">
+<p>If you do lots of scientific computing and especially if you use command-line programs in the Terminal, we recommend using Homebrew. See <a href="https://brew.sh/">brew.sh</a> for installation instructions. To install Git using Homebrew, run the following in the Terminal: <code>brew install git</code></p>
+</div></div></section>
+</section>
+<section id="github" class="level2">
+<h2 class="anchored" data-anchor-id="github">GitHub</h2>
+<p>Register a GitHub account at <a href="https://github.com/">github.com</a>.</p>
+<p>I highly recommend the book <a href="https://happygitwithr.com/">Happy Git with R</a> for advice on setting up and using Git with R <span class="citation" data-cites="bryan">[@bryan]</span>.</p>
+</section>
+<section id="troubleshooting" class="level2">
+<h2 class="anchored" data-anchor-id="troubleshooting">Troubleshooting</h2>
+<p>If you are having issues with the setup please start a discussion on GitHub <a href="https://github.com/ateucher/pc-intermediate-r/discussions">here</a>.</p>
+<!-- ### References
+
+::: {#refs}
+::: -->
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

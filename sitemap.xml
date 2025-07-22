@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://ateucher.github.io/pc-intermediate-r/workflows.html</loc>
-    <lastmod>2025-07-22T17:56:01.009Z</lastmod>
+    <loc>https://ateucher.github.io/pc-intermediate-r/git-github.html</loc>
+    <lastmod>2025-07-22T18:21:03.691Z</lastmod>
   </url>
   <url>
-    <loc>https://ateucher.github.io/pc-intermediate-r/about.html</loc>
-    <lastmod>2025-07-22T17:56:01.009Z</lastmod>
+    <loc>https://ateucher.github.io/pc-intermediate-r/workflows.html</loc>
+    <lastmod>2025-07-22T18:21:03.692Z</lastmod>
   </url>
   <url>
     <loc>https://ateucher.github.io/pc-intermediate-r/index.html</loc>
-    <lastmod>2025-07-22T17:56:01.009Z</lastmod>
+    <lastmod>2025-07-22T18:21:03.692Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ateucher.github.io/pc-intermediate-r/setup.html</loc>
+    <lastmod>2025-07-22T18:21:03.692Z</lastmod>
   </url>
 </urlset>
