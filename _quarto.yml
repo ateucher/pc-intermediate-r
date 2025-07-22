@@ -7,10 +7,11 @@ website:
     left:
       - href: index.qmd
         text: Home
-      - about.qmd
+      - setup.qmd
       - text: Modules
         menu:
           - workflows.qmd
+          # - git-github.qmd
 
 execute: 
   freeze: auto
