@@ -6,7 +6,7 @@ format:
   revealjs: 
     height: 900
     width: 1600
-    theme: [moon]
+    theme: [moon, slides.scss]
     highlight-style: a11y
     slide-number: true
     chalkboard: true
@@ -174,7 +174,9 @@ Project-oriented workflows
 
 <br>
 
-```{r, eval=FALSE, echo=TRUE}
+```{r}
+#| eval: false
+#| echo: true
 setwd("C:/Users/andy/path/that/only/I/have")
 rm(list = ls())
 ```
@@ -261,6 +263,22 @@ Often just a project folder that’s been opened in its own window via _Open Fol
 
 ## Practice "safe paths"
 
+**The chance of `setwd()` having the desired effect -- making the file paths work -- for anyone besides its author is `~0%`.**
+
+```r
+library(ggplot2)
+setwd("/Users/andy/cuddly_broccoli/verbose/foofy/data")
+df <- read.csv(“raw_foofy_data.csv”)
+p <- ggplot(df, aes(x, y)) + geom_point()
+ggsave("/Users/andy/cuddly_broccoi/ambiguous/fig.png")
+```
+<br>
+It's also unlikely to work for the author one or two years or computers from now.
+
+Hard-wired, absolute paths, especially when sprinkled throughout the code, make a project brittle. Such code does not travel well across time or space.
+
+## Practice "safe paths"
+
 <br>
 
 relative to a **stable base**, not **absolute paths**.
@@ -281,13 +299,17 @@ When you open a project in RStudio or Positron, it sets the working directory to
 ## Practice "safe paths"
 
 Instead of:
-```{r, eval=FALSE, echo=TRUE}
+```{r}
+#| eval: false
+#| echo: true
 setwd("C:/Users/andy/path/that/only/I/have")
 my_data <- read.csv("data/my_data.csv")
 ```
 
 Or: 
-```{r, eval=FALSE, echo=TRUE}
+```{r}
+#| eval: false
+#| echo: true
 my_data <- read.csv("C:/Users/andy/path/that/only/I/have/data/my_data.csv")
 ```
 
@@ -295,16 +317,22 @@ my_data <- read.csv("C:/Users/andy/path/that/only/I/have/data/my_data.csv")
 
 Set your work up as an RStudio or Positron Project/Workspace and use relative paths:
 
-```{r, eval=FALSE, echo=TRUE}
+```{r}
+#| eval: false
+#| echo: true
 my_data <- read.csv("data/my_data.csv")
 ```
 
 Or:
-```{r, eval=FALSE, echo=TRUE}
+```{r}
+#| eval: false
+#| echo: true
 my_data <- read.csv(file.path("data", "my_data.csv"))
 ```
 
 ## Work on multiple projects at once
+
+Because each project uses an isolated **R** process
 
 ![](img/many-projects.png)
 
@@ -336,8 +364,327 @@ countdown(
 | E. `x <- 1:5`                         | <span style="color:red;">{{< fa xmark >}}</span> |
 | F. `attach(iris)`                      | <span style="color:green;">{{< fa check >}}</span> |
 
+## Start R with a blank slate
+
+::: {.columns}
+::: {.column width="48%"}
+- Save **code** for reproducibility.
+- When you quit: do not save the workspace to an `.Rdata` file. 
+- When you start: do not reload the workspace from an `.Rdata` file.
+- In RStudio, set this via `Tools > Global Options`.
+- Or use `usethis::use_blank_slate()`
+:::
+
+::: {.column width="2%"}
+:::
+
+::: {.column width="50%"}
+![](img/rstudio-blank-slate.png)
+:::
+:::
+
+## Restart R often
+
+<br>
+
+::: columns
+::: {.column width="48%"}
+Session -\> Restart R
+
+![](img/restart-rstudio.png)
+:::
+
+::: {.column width="4%"}
+:::
+
+::: {.column width="48%"}
+
+Windows
+
+-   `Ctrl + Shift + F10`
+
+Mac
+
+-   `Cmd + Shift + 0`
+
+:::
+:::
+
+## Project initiation: the local case 
+
+1.  New folder + make it an RStudio Project
+
+* `usethis::create_project("~/i_am_new")`
+
+* File -\> New Project -\> New Directory -\> New Project
+
+. . .
+
+2.  Make existing folder into an RStudio Project
+
+* `usethis::create_project("~/i_exist")`
+
+* File -\> New Project -\> Existing Directory
+
+. . .
+
+::: question
+Try option 2 now.
+:::
+
+```{r}
+countdown(
+  minutes = 2
+  )
+```
+
+## Naming things
+
+::: columns
+::: {.column width="48%"}
+<br>
+machine readable
+
+<br>
+
+human readable
+
+<br>
+
+sort nicely
+:::
+
+::: {.column width="4%"}
+:::
+
+::: {.column width = "48%"}
+![](img/jenny-naming-things.png)
+Jenny Bryan “Naming things” video
+
+NormConf · Dec 4, 2022: 
+
+<https://www.youtube.com/watch?v=ES1LTlnpLMk>
+:::
+:::
 
 
+## 
+
+::: question
+What features differentiate 😔 vs 😍?
+:::
+
+::: columns
+::: {.column width="10%"}
+<br>
+
+::: r-fit-text
+😔
+:::
+
+<br>
+
+<br>
+
+
+::: r-fit-text
+😍
+:::
+
+:::
+
+::: {.column width="4%"}
+:::
+
+::: {.column .small width="86%"}
+myabstract.docx
+
+Joe's Filenames Use Spaces and Punctuation.xlsx
+
+figure 1.png
+
+homework.R
+
+JW7d\^(2sl\@deletethisandyourcareerisoverWx2\*.txt
+
+<br>
+
+2018-01_teucher-abstract-conference.docx
+
+joes-filenames-are-getting-better.xlsx
+
+fig01_scatterplot-talk-length-vs-interest.png
+
+2024-07-25_ecol-455_assignment-5.R
+
+1986-01-28_raw-data-from-challenger-o-rings.txt
+:::
+:::
+
+```{r}
+countdown(
+  minutes = 1
+  )
+```
+
+## Names machines like {.smaller}
+
+1.  don't leave white space
+
+. . .
+
+2.  use letters, numbers, hyphens and underscores... that's it <br> (characters like \^.\*?+\|\$ can have a special meaning)
+
+. . .
+
+3.  be consistent with case <br> (some operating systems treat a and A the same, some differently).
+
+. . .
+
+4.  use separator characters wisely
+
+    use underscore `_` to separate different chunks
+
+    use hyphen `-` for words in the same chunk
+
+. . .
+
+<br>
+
+This creates names that are regular expression and globbing friendly, and easy to compute on!
+🎉
+
+::: footer
+Adapted from <br> <https://djnavarro.net/slides-project-structure/#1>.
+:::
+
+::: notes
+Globbing: use of pattern matching against the names in a filesystem directory such that a name pattern is expanded into a list of names matching that pattern.
+:::
+
+## Names humans like
+
+<br>
+
+name contains info on content
+
+name anticipates context
+
+concept of a slug 🐌 from user-friendly URLs
+
+-   1986-01-28\_`raw-data-from-challenger-o-rings`.txt
+
+-   concise, meaningful description
+
+-   usually appended to the end
+
+::: notes
+Note: A URL slug is the part of the URL after the last backslash - important for keyword SEO
+:::
+
+## Names that sort nicely
+
+<br>
+
+put something numeric in there
+
+left pad with zeros for constant width, nice sorting, `01`
+
+use the ISO 8601 standard for dates, `YYYY-MM-DD`
+
+order = chronological or ... consider common sense
+
+## ISO 8601
+
+::: {.columns .v-center-container}
+::: {.column width="40%"}
+![](img/chicken-broth.PNG)
+:::
+
+::: {.column width="4%"}
+:::
+
+::: {.column width="56%"}
+::: r-fit-text
+YYYY-MM-DD
+
+ISO 8601
+:::
+
+<https://www.iso.org/iso-8601-date-and-time-format.html>
+:::
+:::
+
+::: footer
+<https://twitter.com/JennyBryan/status/816143967695687684>
+:::
+
+## 👍 file names {.center-x}
+
+```{r}
+#| echo: true
+library(fs)
+library(dplyr)
+
+ft <- tibble(files = dir_ls("_examples/data/", glob = "*.csv"))
+ft
+```
+
+. . .
+
+Anyone can guess at file's purpose
+
+
+## 👍 file names {.center-x}
+
+```{r}
+#| echo: true
+library(stringr)
+
+filter(ft, str_detect(files, pattern = "plot-data"))
+```
+
+Easy to filter in R (or the shell or whatever)
+
+
+## 👍 file names {.center-x}
+
+```{r}
+#| echo: true
+library(tidyr)
+
+ft |> 
+  mutate(files = path_ext_remove(files)) |> 
+  separate(files, into = c("date", "site", "data_type"), sep = "_")
+```
+
+Intentional delimiters means meta-data is easily recovered.
+
+`_` delimits fields; `-` delimits words
+
+
+## 👍 file names {.center-x}
+
+![](img/file-names-04.png)
+
+Sorts in the same order as you <br> experience in real life.
+
+
+## Names matter
+
+<br>
+
+machine readable, human readable, and sort nicely
+
+<br>
+
+. . .
+
+easy to implement NOW
+
+<br>
+
+payoffs accumulate as your skills evolve and <br> projects get more complex
 
 
 # Personal R administration
@@ -358,6 +705,7 @@ Efficient use of your IDE
 
 
 ## Keyboard shortcuts
+
 
 ## Navigation & Files
 - **Ctrl + Shift + N** - New file
