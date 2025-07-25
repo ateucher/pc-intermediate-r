@@ -5,12 +5,13 @@
 
 $font-family-sans-serif: "Atkinson Hyperlegible", sans-serif;
 
-$body-bg: #343838;
+$body-bg:rgb(50, 92, 101);
 $body-color: #FFFFFF;
 $link-color: #C7B41D;
 $presentation-font-size-root: 40px;
 
 // headings
+$headingTextTransform: none;
 $h1-font-size: 1.6em !default;
 $h2-font-size: 1.3em !default;
 $h3-font-size: 1.15em !default;
@@ -41,7 +42,7 @@ $h3-font-size: 1.15em !default;
 
 .brshort {
     line-height: 10px;
- }
+}
 
 .reveal .slide .question {
   border-left: 3px solid #7aa81e;
@@ -99,15 +100,15 @@ $h3-font-size: 1.15em !default;
 }
 
 .huge-primary {
- font-family: $font-family-sans-serif;
- font-size: 1500%;
- font-weight: bold;
- color: #FFFFFF;
+  font-family: $font-family-sans-serif;
+  font-size: 1500%;
+  font-weight: bold;
+  color: #FFFFFF;
 }
 
 
 .center-x{
-    text-align: center;
+  text-align: center;
 }
 
 .important {

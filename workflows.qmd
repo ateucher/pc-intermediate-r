@@ -23,7 +23,7 @@ library(fs)
 
 <br>
 
-:::: {.columns}
+::::: columns
 ::: {.column width="50%"}
 **Me: Andy Teucher**
 
@@ -36,16 +36,19 @@ library(fs)
 {{< fa brands bluesky >}} [andyteucher](https://bsky.app/profile/andyteucher.bsky.social)
 
 {{< fa brands linkedin >}} [andy-teucher](https://www.linkedin.com/in/andy-teucher/)
-
-
 :::
 
 ::: {.column width="50%"}
 **Yourselves**
 
+- Name
+- Where you are
+- What you work on
+- Hardest thing about R
 
 :::
-::::
+:::::
+
 ## Resources
 
 <br>
@@ -58,54 +61,133 @@ WTF Book: <https://rstats.wtf/>
 
 ## Project-oriented workflows
 
-- Concept of a project <!-- (vs `setwd("it/works/on/my/machine")`) -->
-- Project structure
-- Embrace the blank slate <!-- Restart often (vs `rm(list = ls())`) -->
-- RStudio and/or Positron settings
-- Naming things
-- File organization
+-   Concept of a project <!-- (vs `setwd("it/works/on/my/machine")`) -->
+-   Project structure
+-   Embrace the blank slate <!-- Restart often (vs `rm(list = ls())`) -->
+-   RStudio and/or Positron settings
+-   Naming things
+-   File organization
 
 ## Personal R administration
 
-- Where do packages live?
-- Installing and updating packages
-- R Startup
-- `.Rprofile` and `.Renviron` files
+-   Where do packages live?
+-   Installing and updating packages
+-   R Startup
+-   `.Rprofile` and `.Renviron` files
 
 ## Efficient use of your IDE
-- Customizing your IDE
-- Keyboard shortcuts
-- Command palette
-- Tab completion
-- Autoformatting code
-- Getting help: Reprexes
+
+-   Customizing your IDE
+-   Keyboard shortcuts
+-   Command palette
+-   Tab completion
+-   Autoformatting code
+-   Getting help: Reprexes
+
+# Getting started with Positron
+
+![](img/positron-logo.png)
+
+<https://positron.posit.co/> 
+
+- See "Migrating from RStudio" section
+
+## Layout
+
+![](img/user-interface-rstudio-vs-positron.jpeg)
+
+::: footer
+<https://github.com/posit-dev/positron-website/pull/116/>
+:::
+
+## Layout
+
+![](img/user-interface-for-rstudio-migration.jpeg)
+
+::: footer
+<https://github.com/posit-dev/positron-website/pull/116/>
+:::
+
+::: notes
+These UI elements are the most novel for RStudio users:
+
+The Activity bar provides access to different functional capabilities of Positron. Clicking here changes what appears in the Primary side bar.
+The Primary side bar displays context-specific content based on which icon is clicked in the Activity bar.
+:::
+
+## Keyboard shortcuts
+
+Enable Rstudio keyboard shortcuts via:
+
+`Settings > Workbench > Keybindings: Rstudio Keybindings`
+
+![](img/rstudio-shortcuts-positron)
+
+## Command palette
+<br>
+
+### Access all the things
+<br>
+`Ctrl + Shift + P`
+
+## Extensions
+<br>
+
+::: columns
+
+::: {.column width="50%"}
+
+### Pre-installed
+
+- Quarto
+- Air
+
+:::
+
+::: {.column width="50%"}
+
+### Other extensions
+
+- Rainbow csv
+- vscode-pdf
+- Themes
+
+:::
+:::
+
+::: notes
+Command palette: "install". Search "tomorrow night".
+:::
+
+## Data Explorer
+
+![](img/data-viewer-iris.png)
 
 # Project-oriented workflows
 
-Often we are (or think we are) only doing our 
-data work on our own
-</br></br>
-When we want to facilitate collaboration or focus on reproducibility, we need new strategies
-</br></br>
-[What they Forgot to Teach You About R](https://rstats.wtf/) - Much of this thinking is distilled from Bryan & Hester’s awesome course. Jenny Bryan is a hero in the R world. An early adopter teaching R/GitHub as a prof at Univ. British Columbia, now at Posit
+Often we are (or think we are) only doing our data work on our own </br></br> When we want to facilitate collaboration or focus on reproducibility, we need new strategies </br></br> [What they Forgot to Teach You About R](https://rstats.wtf/) - Much of this thinking is distilled from this book.
+
+Jenny Bryan is a hero in the R world.
+
+An early adopter teaching R/GitHub as a prof at UBC, now at Posit
 
 ## Learning objectives
 
-1. Establish the concept of the project as the basic organizational unit of work.
+1.  Establish the concept of the project as the basic organizational unit of work.
 
-2. Apply best practices in and leverage benefits of using a project-oriented workflow.
+2.  Apply best practices in and leverage benefits of using a project-oriented workflow.
 
-* Creating robust file paths that travel well in time and space.
+-   Creating robust file paths that travel well in time and space.
 
-* Constructing human and machine readable file names that sort nicely.
+-   Constructing human and machine readable file names that sort nicely.
 
-* Differentiating workflow elements, analysis inputs, and analysis outputs in project structure to create navigable programming interfaces.
+-   Differentiating workflow elements, analysis inputs, and analysis outputs in project structure to create navigable programming interfaces.
 
-* Restarting R frequently, with a blank slate.
+-   Restarting R frequently, with a blank slate.
 
 ## Be organized as you go, <br> not "tomorrow"
 
-::: columns
+:::::: columns
 ::: {.column width="50%"}
 Don't fret over past mistakes.
 
@@ -120,28 +202,25 @@ Raise the bar for new work.
 
 <!-- ![](img/beer-organized.png) -->
 :::
-:::
+::::::
 
 ## Prerequisite: Save code in scripts
 
 **Saving code is an absolute requirement for reproducibility. (Future you, future us)**
 
-Save commands as "scripts" (.R) or “notebooks” (.Rmd). It doesn't have to be polished. Just save it!
+Save commands as "scripts" (.R) or “notebooks” (.Rmd).
+It doesn't have to be polished.
+Just save it!
 
-Everything that really matters should be achieved through code that you save
-- Including creating figures
-- Contrast: Series of unrecorded mouse clicks
+Everything that really matters should be achieved through code that you save - Including creating figures - Contrast: Series of unrecorded mouse clicks
 
-The **process** is important, the **product** is just an outcome
-- Outputs should be treated as disposable 
-- Scripts are the source of truth
-
+The **process** is important, the **product** is just an outcome - Outputs should be treated as disposable - Scripts are the source of truth
 
 ## Adopt a project-oriented workflow
 
 <br>
 
-::: columns
+:::::: columns
 ::: {.column width="48%"}
 ### Why
 
@@ -160,11 +239,11 @@ The **process** is important, the **product** is just an outcome
 
 -   dedicated directory
 
--   RStudio <ins>**P**</ins>roject
+-   RStudio <ins>**P**</ins>roject or Positron Workspace
 
 -   Git repo, probably syncing to a remote
 :::
-:::
+::::::
 
 ::: footer
 Project-oriented workflows
@@ -200,13 +279,19 @@ Project-oriented workflows
 
 One folder per project.
 
-* Report? R package? Chapter? Website? Whatever.
-* Can be the same unit as a GitHub Repo.
+-   Report?
+    R package?
+    Chapter?
+    Website?
+    Whatever.
 
-* If using RStudio, it’s Project (capital P)
-* Each Project gets its own R instance
-* R starts at the project root working directory: 
-all paths are relative to the project's folder.
+-   Can be the same unit as a GitHub Repo.
+
+-   If using RStudio, it’s Project (capital P)
+
+-   Each Project gets its own R instance
+
+-   R starts at the project root working directory: all paths are relative to the project's folder.
 
 ::: footer
 Project-oriented workflows
@@ -251,31 +336,32 @@ Open Project = dedicated instance of **Positron**
 
 <br>
 
-Often just a project folder that’s been opened in its own window via _Open Folder_ or similar
+Often just a project folder that’s been opened in its own window via *Open Folder* or similar
 
-- `.git/` directory
-- `.Rproj` file
-- `.vscode/settings.json` file
-- `_quarto.yml` file
-- `DESCRIPTION` file
-- `renv.lock` file
-- `.here` file
+-   `.git/` directory
+-   `.Rproj` file
+-   `.vscode/settings.json` file
+-   `_quarto.yml` file
+-   `DESCRIPTION` file
+-   `renv.lock` file
+-   `.here` file
 
 ## Practice "safe paths"
 
 **The chance of `setwd()` having the desired effect -- making the file paths work -- for anyone besides its author is `~0%`.**
 
-```r
+``` r
 library(ggplot2)
 setwd("/Users/andy/cuddly_broccoli/verbose/foofy/data")
 df <- read.csv(“raw_foofy_data.csv”)
 p <- ggplot(df, aes(x, y)) + geom_point()
 ggsave("/Users/andy/cuddly_broccoi/ambiguous/fig.png")
 ```
-<br>
-It's also unlikely to work for the author one or two years or computers from now.
 
-Hard-wired, absolute paths, especially when sprinkled throughout the code, make a project brittle. Such code does not travel well across time or space.
+<br> It's also unlikely to work for the author one or two years or computers from now.
+
+Hard-wired, absolute paths, especially when sprinkled throughout the code, make a project brittle.
+Such code does not travel well across time or space.
 
 ## Practice "safe paths"
 
@@ -299,6 +385,7 @@ When you open a project in RStudio or Positron, it sets the working directory to
 ## Practice "safe paths"
 
 Instead of:
+
 ```{r}
 #| eval: false
 #| echo: true
@@ -306,7 +393,8 @@ setwd("C:/Users/andy/path/that/only/I/have")
 my_data <- read.csv("data/my_data.csv")
 ```
 
-Or: 
+Or:
+
 ```{r}
 #| eval: false
 #| echo: true
@@ -324,6 +412,7 @@ my_data <- read.csv("data/my_data.csv")
 ```
 
 Or:
+
 ```{r}
 #| eval: false
 #| echo: true
@@ -338,14 +427,14 @@ Because each project uses an isolated **R** process
 
 ## Which persist after `rm(list = ls())`?
 
-| Option                               | Persists?                                      |
-|-------------------------------------------------------|-----------------|
-| A. `library(dplyr)`                    |  |
-| B. `summary <- head`                  |  |
-| C. `options(stringsAsFactors = FALSE)` |  |
-| D. `Sys.setenv(LANGUAGE = "fr")`        |  |
-| E. `x <- 1:5`                         |  |
-| F. `attach(iris)`                      |  |
+| Option                                 | Persists? |
+|----------------------------------------|-----------|
+| A. `library(dplyr)`                    |           |
+| B. `summary <- head`                   |           |
+| C. `options(stringsAsFactors = FALSE)` |           |
+| D. `Sys.setenv(LANGUAGE = "fr")`       |           |
+| E. `x <- 1:5`                          |           |
+| F. `attach(iris)`                      |           |
 
 ```{r}
 countdown(
@@ -355,24 +444,24 @@ countdown(
 
 ## Which persist after `rm(list = ls())`?
 
-| Option                               | Persists?                                    |
-|-------------------------------------------------------|-----------------|
-| A. `library(dplyr)`                    | <span style="color:green;">{{< fa check >}}</span> |
-| B. `summary <- head`                  | <span style="color:red;">{{< fa xmark >}}</span> |
-| C. `options(stringsAsFactors = FALSE)` | <span style="color:green;">{{< fa check >}}</span> |
-| D. `Sys.setenv(LANGUAGE = "fr")`       | <span style="color:green;">{{< fa check >}}</span> |
-| E. `x <- 1:5`                         | <span style="color:red;">{{< fa xmark >}}</span> |
-| F. `attach(iris)`                      | <span style="color:green;">{{< fa check >}}</span> |
+| Option | Persists? |
+|-----------------------------------------------------|-------------------|
+| A. `library(dplyr)` | [{{< fa check >}}]{style="color:green;"} |
+| B. `summary <- head` | [{{< fa xmark >}}]{style="color:red;"} |
+| C. `options(stringsAsFactors = FALSE)` | [{{< fa check >}}]{style="color:green;"} |
+| D. `Sys.setenv(LANGUAGE = "fr")` | [{{< fa check >}}]{style="color:green;"} |
+| E. `x <- 1:5` | [{{< fa xmark >}}]{style="color:red;"} |
+| F. `attach(iris)` | [{{< fa check >}}]{style="color:green;"} |
 
 ## Start R with a blank slate
 
-::: {.columns}
+:::::: columns
 ::: {.column width="48%"}
-- Save **code** for reproducibility.
-- When you quit: do not save the workspace to an `.Rdata` file. 
-- When you start: do not reload the workspace from an `.Rdata` file.
-- In RStudio, set this via `Tools > Global Options`.
-- Or use `usethis::use_blank_slate()`
+-   Save **code** for reproducibility.
+-   When you quit: do not save the workspace to an `.Rdata` file.
+-   When you start: do not reload the workspace from an `.Rdata` file.
+-   In RStudio, set this via `Tools > Global Options`.
+-   Or use `usethis::use_blank_slate()`
 :::
 
 ::: {.column width="2%"}
@@ -381,13 +470,16 @@ countdown(
 ::: {.column width="50%"}
 ![](img/rstudio-blank-slate.png)
 :::
-:::
+::::::
+
+*This is the default (and not customizable) in Positron* 
 
 ## Restart R often
 
 <br>
 
-::: columns
+:::::: columns
+
 ::: {.column width="48%"}
 Session -\> Restart R
 
@@ -398,7 +490,6 @@ Session -\> Restart R
 :::
 
 ::: {.column width="48%"}
-
 Windows
 
 -   `Ctrl + Shift + F10`
@@ -406,30 +497,60 @@ Windows
 Mac
 
 -   `Cmd + Shift + 0`
-
-:::
 :::
 
-## Project initiation: the local case 
+::::::
+
+## Project initiation: the local case
+
+:::: columns
+
+::: {.column width="48%"}
+### RStudio Project
 
 1.  New folder + make it an RStudio Project
 
-* `usethis::create_project("~/i_am_new")`
+-   `usethis::create_project("~/i_am_new")`
 
-* File -\> New Project -\> New Directory -\> New Project
+-   File -\> New Project -\> New Directory -\> New Project
 
 . . .
 
 2.  Make existing folder into an RStudio Project
 
-* `usethis::create_project("~/i_exist")`
+-   `usethis::create_project("~/i_exist")`
 
-* File -\> New Project -\> Existing Directory
+-   File -\> New Project -\> Existing Directory
+::: 
+
+::: {.column width="4%"}
+:::
+
+::: {.column width="48%"}
+### Positron Workspace
+
+1.  New folder + make it a workspace
+
+-   `usethis::create_project("~/i_am_new", rstudio = FALSE)`
+
+-   File -\> New Folder From Template
+
+. . .
+
+2.  Open an existing directory as a workspace
+
+-   `usethis::create_project("~/i_exist", rstudio = FALSE)`
+
+-   File -\> New Project -\> Existing Directory
+
+*Note: if you don't specify `rstudio = FALSE`, it will create an RStudio `.Rproj` file. This does no harm.*
+:::
+::::
 
 . . .
 
 ::: question
-Try option 2 now.
+Try either option now with a folder containing (or that will contain) `Bivalve Data 2014-2022_ICE.csv`.
 :::
 
 ```{r}
@@ -440,10 +561,9 @@ countdown(
 
 ## Naming things
 
-::: columns
+:::::: columns
 ::: {.column width="48%"}
-<br>
-machine readable
+<br> machine readable
 
 <br>
 
@@ -457,25 +577,25 @@ sort nicely
 ::: {.column width="4%"}
 :::
 
-::: {.column width = "48%"}
+::: {.column width="48%"}
 ![](img/jenny-naming-things.png)
+
 Jenny Bryan “Naming things” video
 
-NormConf · Dec 4, 2022: 
+NormConf · Dec 4, 2022:
 
 <https://www.youtube.com/watch?v=ES1LTlnpLMk>
 :::
-:::
+::::::
 
-
-## 
+## Naming things
 
 ::: question
 What features differentiate 😔 vs 😍?
 :::
 
-::: columns
-::: {.column width="10%"}
+:::::::: columns
+::::: {.column width="10%"}
 <br>
 
 ::: r-fit-text
@@ -486,12 +606,10 @@ What features differentiate 😔 vs 😍?
 
 <br>
 
-
 ::: r-fit-text
 😍
 :::
-
-:::
+:::::
 
 ::: {.column width="4%"}
 :::
@@ -519,7 +637,7 @@ fig01_scatterplot-talk-length-vs-interest.png
 
 1986-01-28_raw-data-from-challenger-o-rings.txt
 :::
-:::
+::::::::
 
 ```{r}
 countdown(
@@ -579,7 +697,7 @@ concept of a slug 🐌 from user-friendly URLs
 -   usually appended to the end
 
 ::: notes
-Note: A URL slug is the part of the URL after the last backslash - important for keyword SEO
+Note: A URL slug is the part of the URL after the last backslash
 :::
 
 ## Names that sort nicely
@@ -592,11 +710,12 @@ left pad with zeros for constant width, nice sorting, `01`
 
 use the ISO 8601 standard for dates, `YYYY-MM-DD`
 
-order = chronological or ... consider common sense
+order = chronological or ...
+consider common sense
 
 ## ISO 8601
 
-::: {.columns .v-center-container}
+::::::: {.columns .v-center-container}
 ::: {.column width="40%"}
 ![](img/chicken-broth.PNG)
 :::
@@ -604,7 +723,7 @@ order = chronological or ... consider common sense
 ::: {.column width="4%"}
 :::
 
-::: {.column width="56%"}
+:::: {.column width="56%"}
 ::: r-fit-text
 YYYY-MM-DD
 
@@ -612,8 +731,8 @@ ISO 8601
 :::
 
 <https://www.iso.org/iso-8601-date-and-time-format.html>
-:::
-:::
+::::
+:::::::
 
 ::: footer
 <https://twitter.com/JennyBryan/status/816143967695687684>
@@ -627,12 +746,29 @@ library(fs)
 library(dplyr)
 
 ft <- tibble(files = dir_ls("_examples/data/", glob = "*.csv"))
-ft
 ```
 
-. . .
+<br>
 
-Anyone can guess at file's purpose
+Intuitive sorting.
+
+:::: columns
+
+::: column
+```{r}
+#| echo: true
+ft
+```
+:::
+
+::: column
+```{r}
+#| echo: true
+arrange(ft, desc(files))
+```
+:::
+
+::::
 
 
 ## 👍 file names {.center-x}
@@ -645,7 +781,6 @@ filter(ft, str_detect(files, pattern = "plot-data"))
 ```
 
 Easy to filter in R (or the shell or whatever)
-
 
 ## 👍 file names {.center-x}
 
@@ -662,13 +797,11 @@ Intentional delimiters means meta-data is easily recovered.
 
 `_` delimits fields; `-` delimits words
 
+::: question
+Rename the file `Bivalve Data 2014-2022_ICE.csv` to something that is machine readable, human readable, and sorts nicely.
 
-## 👍 file names {.center-x}
-
-![](img/file-names-04.png)
-
-Sorts in the same order as you <br> experience in real life.
-
+Read the file in to R using a relateive path
+:::
 
 ## Names matter
 
@@ -686,14 +819,159 @@ easy to implement NOW
 
 payoffs accumulate as your skills evolve and <br> projects get more complex
 
-
 # Personal R administration
 
-## Slide 1
+## Your R installation
+
+::: {.fragment fragment-index="1"}
+**R packages**
+
+-   the natural unit for distributing R code
+:::
+
+::: {.fragment fragment-index="2"}
+**base R**
+
+-   14 base + 15 recommended packages
+
+-   ships with all binary distributions of R
+:::
+
+
+## Additional packages
+
+:::: columns
+::: {.column width="48%"}
+**CRAN, \~20k packages**
+
+```{r}
+#| eval: false
+#| echo: true
+# install from CRAN
+install.packages("devtools")
+# attach
+library(devtools)
+```
+:::
+
+::: {.column width="4%"}
+:::
+
+::: {.column width="48%"}
+
+**GitHub ~∞ packages**
+
+
+```{r}
+#| eval: false
+#| echo: true
+# install from GitHub
+remotes::install_github("r-lib/devtools")
+# attach
+library(devtools)
+```
+*development versions, or packages not on CRAN*
+
+:::
+::::
+
+## `pak`
+
+## Where do packages live locally?
+
+<br>
+
+By default, in the default library (base/recommended packages).
+
+`.Library`
+
+<br>
+
+All libraries for the current session
+
+`.libPaths()`
+
+<br>
+
+All installed packages
+
+`installed.packages()`
+
+## Syntax aside: pipes
+
+-   2014+ magrittr pipe `%>%`
+
+-   2021+ (R $\geq$ 4.1.0) native R pipe `|>`
+
+2022 Isabella Velásquez Understanding the native R pipe \|\> <https://ivelasq.rbind.io/blog/understanding-the-r-pipe/>
+
+. . .
+
+<brshort>
+
+::: columns
+::: {.column width="50%"}
+```{r echo=TRUE, eval=FALSE}
+whatever(arg1, arg2, arg3, ...)
+arg1 |>  
+  whatever(arg2, arg3)
+```
+:::
+
+::: {.column width="5%"}
+:::
+
+::: {.column width="45%"}
+```{r echo=TRUE, eval=FALSE}
+mean(0:10)
+0:10 |> 
+  mean()
+```
+:::
+:::
 
 ::: footer
-Personal R administration
+Change `CTRL + Shift + M` shortcut to native pipe:
+
+`Tools -> Global Options -> Code ->`
+
+   `Editing -> check Use Native Pipe Operator`
 :::
+
+## Installing and updating packages
+
+## R Startup
+
+![](img/r-startup.svg)
+
+::: notes
+complexity in R startup, for both personal and system-level customization. We can ignore most of it
+:::
+
+## R Startup
+
+1. `.Rprofile` - contains **R code** to be run at the start of each session.
+2. `.Renviron` - contains **environment variables** to be set in R sessions.
+
+## `.Rprofile` 
+
+```{r}
+# eval: false
+# echo: true
+if (interactive()) {
+  if ("fortunes" %in% rownames(installed.packages())) {
+    fortunes::fortune()
+  }
+  require("usethis")
+}
+```
+
+## `.Renviron` files
+
+API Keys
+Database username and password
+Some R options
+
 
 # Efficient use of your IDE
 
@@ -703,40 +981,45 @@ Personal R administration
 Efficient use of your IDE
 :::
 
-
 ## Keyboard shortcuts
 
-
 ## Navigation & Files
-- **Ctrl + Shift + N** - New file
-- **Ctrl + S** - Save current file
-- **Ctrl + F** - Find in current file
-- **Ctrl + Shift + F** - Find in files (global search)
-- **Ctrl + .** - Go to file/function
-- **Ctrl + 1** - Focus source editor
-- **Ctrl + 2** - Focus console
+
+-   **Ctrl + Shift + N** - New file
+-   **Ctrl + S** - Save current file
+-   **Ctrl + F** - Find in current file
+-   **Ctrl + Shift + F** - Find in files (global search)
+-   **Ctrl + .** - Go to file/function
+-   **Ctrl + 1** - Focus source editor
+-   **Ctrl + 2** - Focus console
 
 ## Code Editing
-- **Ctrl + Shift + C** - Comment/uncomment lines
-- **Tab** - Indent selection
-- **Shift + Tab** - Unindent selection
-- **Alt + Up/Down** - Move line(s) up/down
-- **Alt + Shift + Up/Down** - Duplicate line(s) ???
-- **Ctrl + X** - Cut entire line (when no selection)
+
+-   **Ctrl + Shift + C** - Comment/uncomment lines
+-   **Tab** - Indent selection
+-   **Shift + Tab** - Unindent selection
+-   **Alt + Up/Down** - Move line(s) up/down
+-   **Alt + Shift + Up/Down** - Duplicate line(s) ???
+-   **Ctrl + X** - Cut entire line (when no selection)
 
 ## Magic of Multiple Cursors
-- **Ctrl + Alt + Up/Down** - Add cursor above/below
-- **Ctrl + D** - Add next occurrence of selected text (custom)
+
+-   **Ctrl + Alt + Up/Down** - Add cursor above/below
+-   **Ctrl + D** - Add next occurrence of selected text (custom)
 
 ## Navigation Within Code
-- **Ctrl + Left/Right** - Jump word by word
-- **Home/End** - Jump to beginning/end of line
-- **Ctrl + Home/End** - Jump to beginning/end of document
-- **Ctrl + P** - Jump to matching brace
+
+-   **Ctrl + Left/Right** - Jump word by word
+-   **Home/End** - Jump to beginning/end of line
+-   **Ctrl + Home/End** - Jump to beginning/end of document
+-   **Ctrl + P** - Jump to matching brace
 
 ## R-Specific
-- **Tab** - Auto-complete
-- **F1** - Show help for function under cursor
-- **Ctrl + Shift + F10** - Restart R session
-- **Ctrl + Shift + M** - Insert pipe operator (`%>%` or `|>`)
-- **Alt + -** - Insert assignment operator (`<-`)
+
+-   **Tab** - Auto-complete
+-   **F1** - Show help for function under cursor
+-   **Ctrl + Shift + F10** - Restart R session
+-   **Ctrl + Shift + M** - Insert pipe operator (`%>%` or `|>`)
+-   **Alt + -** - Insert assignment operator (`<-`)
+
+## `.Last.value`
