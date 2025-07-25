@@ -194,7 +194,7 @@ install.packages(c("tidyverse", "devtools"))
 devtools::install_github("r-lib/usethis")
 ```
 
-## Be organized as you go, <br> not "tomorrow"
+## Be organized as you go, not "tomorrow"
 
 :::::: columns
 ::: {.column width="50%"}
@@ -217,17 +217,17 @@ Raise the bar for new work.
 
 **Saving code is an absolute requirement for reproducibility. (Future you, future us)**
 
-- Save commands as "scripts" (.R) or “notebooks” (.Rmd).
-- It doesn't have to be polished.
-- Just save it!
+-   Save commands as "scripts" (.R) or “notebooks” (.Rmd).
+-   It doesn't have to be polished.
+-   Just save it!
 
-- Everything that really matters should be achieved through code that you save
-- Contrast: Series of unrecorded mouse clicks
+-   Everything that really matters should be achieved through code that you save
+-   Contrast: Series of unrecorded mouse clicks
 
 The **process** is important, the **product** is just an outcome 
 
-- Outputs should be treated as disposable 
-- Scripts are the source of truth
+-   Outputs should be treated as disposable 
+-   Scripts are the source of truth
 
 ## Adopt a project-oriented workflow
 
@@ -385,7 +385,7 @@ relative to a **stable base**, not **absolute paths**.
 
 <br>
 
-use **file system functions**, not paste(), strsplit(), etc.
+use **file system functions**, not `paste()`, `strsplit()`, etc.
 
 ::: notes
 Working directory is associated with a specific process or running application.
@@ -528,8 +528,6 @@ Mac
 
 -   File -\> New Project -\> New Directory -\> New Project
 
-. . .
-
 2.  Make existing folder into an RStudio Project
 
 -   `usethis::create_project("~/i_exist")`
@@ -549,8 +547,6 @@ Mac
 
 -   File -\> New Folder From Template
 
-. . .
-
 2.  Open an existing directory as a workspace
 
 -   `usethis::create_project("~/i_exist", rstudio = FALSE)`
@@ -567,11 +563,6 @@ Mac
 Try either option now with a folder containing (or that will contain) `Bivalve Data 2014-2022_ICE.csv`.
 :::
 
-```{r}
-countdown(
-  minutes = 2
-  )
-```
 
 ## Naming things
 
