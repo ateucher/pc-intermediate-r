@@ -515,12 +515,7 @@ Mac
 
 ::::::
 
-## Project initiation
-
-:::: columns
-
-::: {.column width="48%"}
-### RStudio Project
+## Project initiation: RStudio Project
 
 1.  New folder + make it an RStudio Project
 
@@ -533,13 +528,8 @@ Mac
 -   `usethis::create_project("~/i_exist")`
 
 -   File -\> New Project -\> Existing Directory
-::: 
 
-::: {.column width="4%"}
-:::
-
-::: {.column width="48%"}
-### Positron Workspace
+## Project initiation: Positron Workspace
 
 1.  New folder + make it a workspace
 
@@ -552,9 +542,6 @@ Mac
 -   `usethis::create_project("~/i_exist", rstudio = FALSE)`
 
 -   File -\> New Project -\> Existing Directory
-
-:::
-::::
 
 *Note: if you don't specify `rstudio = FALSE`, it will create an RStudio `.Rproj` file. This does no harm.*
 
