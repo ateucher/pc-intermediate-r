@@ -64,7 +64,6 @@ WTF Book: <https://rstats.wtf/>
 -   Concept of a project <!-- (vs `setwd("it/works/on/my/machine")`) -->
 -   Project structure
 -   Embrace the blank slate <!-- Restart often (vs `rm(list = ls())`) -->
--   RStudio and/or Positron settings
 -   Naming things
 -   File organization
 
@@ -165,7 +164,7 @@ Command palette: "install". Search "tomorrow night".
 
 # Project-oriented workflows
 
-Often we are (or think we are) only doing our data work on our own </br></br> When we want to facilitate collaboration or focus on reproducibility, we need new strategies </br></br> [What they Forgot to Teach You About R](https://rstats.wtf/) - Much of this thinking is distilled from this book.
+Often we are (or think we are) only doing our data work on our own </br></br> When we want to facilitate collaboration or focus on reproducibility, we need new strategies </br></br> [What they Forgot to Teach You About R](https://rstats.wtf/) - Much of this material is distilled from this book.
 
 Jenny Bryan is a hero in the R world.
 
@@ -184,6 +183,16 @@ An early adopter teaching R/GitHub as a prof at UBC, now at Posit
 -   Differentiating workflow elements, analysis inputs, and analysis outputs in project structure to create navigable programming interfaces.
 
 -   Restarting R frequently, with a blank slate.
+
+## Prerequisites
+
+```{r}
+#| eval: false
+#| echo: true
+install.packages(c("tidyverse", "devtools"))
+
+devtools::install_github("r-lib/usethis")
+```
 
 ## Be organized as you go, <br> not "tomorrow"
 
@@ -208,13 +217,17 @@ Raise the bar for new work.
 
 **Saving code is an absolute requirement for reproducibility. (Future you, future us)**
 
-Save commands as "scripts" (.R) or “notebooks” (.Rmd).
-It doesn't have to be polished.
-Just save it!
+- Save commands as "scripts" (.R) or “notebooks” (.Rmd).
+- It doesn't have to be polished.
+- Just save it!
 
-Everything that really matters should be achieved through code that you save - Including creating figures - Contrast: Series of unrecorded mouse clicks
+- Everything that really matters should be achieved through code that you save
+- Contrast: Series of unrecorded mouse clicks
 
-The **process** is important, the **product** is just an outcome - Outputs should be treated as disposable - Scripts are the source of truth
+The **process** is important, the **product** is just an outcome 
+
+- Outputs should be treated as disposable 
+- Scripts are the source of truth
 
 ## Adopt a project-oriented workflow
 
@@ -288,6 +301,7 @@ One folder per project.
 -   Can be the same unit as a GitHub Repo.
 
 -   If using RStudio, it’s Project (capital P)
+- If using Positron, it’s Workspace
 
 -   Each Project gets its own R instance
 
@@ -446,12 +460,12 @@ countdown(
 
 | Option | Persists? |
 |-----------------------------------------------------|-------------------|
-| A. `library(dplyr)` | [{{< fa check >}}]{style="color:green;"} |
-| B. `summary <- head` | [{{< fa xmark >}}]{style="color:red;"} |
-| C. `options(stringsAsFactors = FALSE)` | [{{< fa check >}}]{style="color:green;"} |
-| D. `Sys.setenv(LANGUAGE = "fr")` | [{{< fa check >}}]{style="color:green;"} |
-| E. `x <- 1:5` | [{{< fa xmark >}}]{style="color:red;"} |
-| F. `attach(iris)` | [{{< fa check >}}]{style="color:green;"} |
+| A. `library(dplyr)` | [{{< fa check >}}]{style="color:#8afb00;"} |
+| B. `summary <- head` | [{{< fa xmark >}}]{style="color:#ccc;"} |
+| C. `options(stringsAsFactors = FALSE)` | [{{< fa check >}}]{style="color:#8afb00;"} |
+| D. `Sys.setenv(LANGUAGE = "fr")` | [{{< fa check >}}]{style="color:#8afb00;"} |
+| E. `x <- 1:5` | [{{< fa xmark >}}]{style="color:#ccc;"} |
+| F. `attach(iris)` | [{{< fa check >}}]{style="color:#8afb00;"} |
 
 ## Start R with a blank slate
 
@@ -501,7 +515,7 @@ Mac
 
 ::::::
 
-## Project initiation: the local case
+## Project initiation
 
 :::: columns
 
@@ -819,9 +833,20 @@ easy to implement NOW
 
 payoffs accumulate as your skills evolve and <br> projects get more complex
 
+## Project structure
+
+```{r}
+withr::with_dir(
+  "_examples",
+  fs::dir_tree("my-project/")
+)
+```
+
 # Personal R administration
 
 ## Your R installation
+
+## R packages
 
 ::: {.fragment fragment-index="1"}
 **R packages**
@@ -875,13 +900,22 @@ library(devtools)
 :::
 ::::
 
-## `pak`
+## R Libraries - where do packages live?
+
+- A library is a directory containing installed packages
+- You have at least one library on your computer
+- Common (and recommended) to have two libraries: 
+    - A *system* library with base (14) and recommended (15) packages; installed with R.
+    - A *user* library with user-installed packages
+- We use `library(pkg)` function to attach a package
+- 7 base packages are always attached (base, methods, utils, stats, grDevices, datasets, graphics)
+
 
 ## Where do packages live locally?
 
 <br>
 
-By default, in the default library (base/recommended packages).
+The system library (base/recommended packages).
 
 `.Library`
 
@@ -897,48 +931,14 @@ All installed packages
 
 `installed.packages()`
 
-## Syntax aside: pipes
+## Your turn
 
--   2014+ magrittr pipe `%>%`
-
--   2021+ (R $\geq$ 4.1.0) native R pipe `|>`
-
-2022 Isabella Velásquez Understanding the native R pipe \|\> <https://ivelasq.rbind.io/blog/understanding-the-r-pipe/>
-
-. . .
-
-<brshort>
-
-::: columns
-::: {.column width="50%"}
-```{r echo=TRUE, eval=FALSE}
-whatever(arg1, arg2, arg3, ...)
-arg1 |>  
-  whatever(arg2, arg3)
-```
-:::
-
-::: {.column width="5%"}
-:::
-
-::: {.column width="45%"}
-```{r echo=TRUE, eval=FALSE}
-mean(0:10)
-0:10 |> 
-  mean()
-```
-:::
-:::
-
-::: footer
-Change `CTRL + Shift + M` shortcut to native pipe:
-
-`Tools -> Global Options -> Code ->`
-
-   `Editing -> check Use Native Pipe Operator`
-:::
+1. What libraries are in use in your current R session?
+2. Using `installed.packages()`, what are the base and recommended packages?
 
 ## Installing and updating packages
+
+
 
 ## R Startup
 
@@ -953,7 +953,39 @@ complexity in R startup, for both personal and system-level customization. We ca
 1. `.Rprofile` - contains **R code** to be run at the start of each session.
 2. `.Renviron` - contains **environment variables** to be set in R sessions.
 
+## what to put in `.Rprofile`
+
+-   set a default CRAN mirror
+-   custom startup message
+
+## what *not* to put in `.Rprofile`
+
+If it matters for code you share, it **should not** be in `.Rprofile`
+
+### why shouldn't these go in `.Rprofile`?
+
+::: incremental
+-   `library(tidyverse)`
+-   `f <- dplyr::filter`
+-   `theme_set(theme_bw())`
+:::
+
+## Why *might* these be safe to put in `.Rprofile`?
+
+<br>
+
+``` r
+library(usethis)
+library(devtools)
+```
+
 ## `.Rprofile` 
+
+```{r}
+#| eval: false
+#| echo: true
+usethis::edit_r_profile()
+```
 
 ```{r}
 # eval: false
@@ -966,22 +998,60 @@ if (interactive()) {
 }
 ```
 
-## `.Renviron` files
+## `.Renviron`
 
-API Keys
-Database username and password
-Some R options
+- Set environment variables for R sessions
+- Often sensitive information that you don't want to share
 
+### Examples
+- API Keys (Eg GitHub, ChatGPT etc)
+- Database username and password
+- Some R options
+
+## `.Renviron`
+
+```{r}
+#| eval: false
+#| echo: true
+usethis::edit_r_environ()
+```
+
+```
+VAR_NAME=value
+GOOGLE_API_KEY=your_api_key_here
+```
+
+## `.Renviron`
+
+Access environment variables in R with `Sys.getenv("VAR_NAME")`
+
+```{r}
+#| eval: false
+#| echo: true
+Sys.getenv("GOOGLE_API_KEY")
+#> [1] "your_api_key_here"
+```
+
+## Your turn
+
+- Create an environment variable in `.Renviron` called `MY_NAME` with your name as the value.
+- Create a custom startup message in `.Rprofile` that gives you a personalized message when you start R.
 
 # Efficient use of your IDE
 
-## Slide 1
+## Customizing your IDE
 
-::: footer
-Efficient use of your IDE
-:::
+<br>
+
+- Pane layout
+- Themes
+- Fonts
+- Positron extensions
+
 
 ## Keyboard shortcuts
+
+### If in doubt, use the command palette: `Ctrl + Shift + P`
 
 ## Navigation & Files
 
@@ -1023,3 +1093,65 @@ Efficient use of your IDE
 -   **Alt + -** - Insert assignment operator (`<-`)
 
 ## `.Last.value`
+
+Shows last evaluated value in console
+
+### RStudio
+
+- Tools > Global Options > General > Advanced > Show `.Last.value` in environment listing
+
+### Positron
+
+Controlled by an option:
+
+```{r}
+#| eval: false
+#| echo: true
+usethis::edit_r_profile()
+options(positron.show_last_value = TRUE)
+```
+
+## Automatic code formatting
+
+### Air: <https://posit-dev.github.io/air/>
+
+- In charge of the *layout* of your R code. 
+- Formatters do not change the meaning of code
+- Ensure that whitespace, newlines, and other punctuation conform to a set of rules and standards
+
+```{r}
+#| eval: false
+#| echo: true
+usethis::use_air()
+```
+
+## Reprexes
+
+
+
+# Homework
+
+## Start using project-oriented workflows in your work
+
+<br>
+
+- Use RStudio or Positron Projects/Workspaces
+- don't use `setwd()`
+- use relative paths
+- Use a blank slate - restart R often
+
+## Try to name files well
+
+<br>
+
+- machine readable
+- human readable
+- sorts nicely (including ISO 8601 dates)
+
+## Use Positron or RStudio more efficiently
+
+<br>
+
+- use keyboard shortcuts
+- use the command palette
+- use Air
