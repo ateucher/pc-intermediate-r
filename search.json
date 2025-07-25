@@ -25,7 +25,7 @@
     "href": "workflows.html#project-oriented-workflows",
     "title": "Creating Efficient Workflows in R",
     "section": "Project-oriented workflows",
-    "text": "Project-oriented workflows\n\nConcept of a project \nProject structure\nEmbrace the blank slate \nRStudio and/or Positron settings\nNaming things\nFile organization"
+    "text": "Project-oriented workflows\n\nConcept of a project \nProject structure\nEmbrace the blank slate \nNaming things\nFile organization"
   },
   {
     "objectID": "workflows.html#personal-r-administration",
@@ -91,6 +91,13 @@
     "text": "Learning objectives\n\nEstablish the concept of the project as the basic organizational unit of work.\nApply best practices in and leverage benefits of using a project-oriented workflow.\n\n\nCreating robust file paths that travel well in time and space.\nConstructing human and machine readable file names that sort nicely.\nDifferentiating workflow elements, analysis inputs, and analysis outputs in project structure to create navigable programming interfaces.\nRestarting R frequently, with a blank slate."
   },
   {
+    "objectID": "workflows.html#prerequisites",
+    "href": "workflows.html#prerequisites",
+    "title": "Creating Efficient Workflows in R",
+    "section": "Prerequisites",
+    "text": "Prerequisites\n\ninstall.packages(c(\"tidyverse\", \"devtools\"))\n\ndevtools::install_github(\"r-lib/usethis\")"
+  },
+  {
     "objectID": "workflows.html#be-organized-as-you-go-not-tomorrow",
     "href": "workflows.html#be-organized-as-you-go-not-tomorrow",
     "title": "Creating Efficient Workflows in R",
@@ -102,7 +109,7 @@
     "href": "workflows.html#prerequisite-save-code-in-scripts",
     "title": "Creating Efficient Workflows in R",
     "section": "Prerequisite: Save code in scripts",
-    "text": "Prerequisite: Save code in scripts\nSaving code is an absolute requirement for reproducibility. (Future you, future us)\nSave commands as “scripts” (.R) or “notebooks” (.Rmd). It doesn’t have to be polished. Just save it!\nEverything that really matters should be achieved through code that you save - Including creating figures - Contrast: Series of unrecorded mouse clicks\nThe process is important, the product is just an outcome - Outputs should be treated as disposable - Scripts are the source of truth"
+    "text": "Prerequisite: Save code in scripts\nSaving code is an absolute requirement for reproducibility. (Future you, future us)\n\nSave commands as “scripts” (.R) or “notebooks” (.Rmd).\nIt doesn’t have to be polished.\nJust save it!\nEverything that really matters should be achieved through code that you save\nContrast: Series of unrecorded mouse clicks\n\nThe process is important, the product is just an outcome\n\nOutputs should be treated as disposable\nScripts are the source of truth"
   },
   {
     "objectID": "workflows.html#adopt-a-project-oriented-workflow",
@@ -123,7 +130,7 @@
     "href": "workflows.html#organize-your-work-into-projects",
     "title": "Creating Efficient Workflows in R",
     "section": "Organize your work into projects",
-    "text": "Organize your work into projects\nOne folder per project.\n\nReport? R package? Chapter? Website? Whatever.\nCan be the same unit as a GitHub Repo.\nIf using RStudio, it’s Project (capital P)\nEach Project gets its own R instance\nR starts at the project root working directory: all paths are relative to the project’s folder.\n\n\nProject-oriented workflows"
+    "text": "Organize your work into projects\nOne folder per project.\n\nReport? R package? Chapter? Website? Whatever.\nCan be the same unit as a GitHub Repo.\nIf using RStudio, it’s Project (capital P)\nIf using Positron, it’s Workspace\nEach Project gets its own R instance\nR starts at the project root working directory: all paths are relative to the project’s folder.\n\n\nProject-oriented workflows"
   },
   {
     "objectID": "workflows.html#organize-your-work-into-projects-1",
@@ -210,11 +217,11 @@
     "text": "Restart R often\n\n\n\nSession -&gt; Restart R\n\n\n\n\nWindows\n\nCtrl + Shift + F10\n\nMac\n\nCmd + Shift + 0"
   },
   {
-    "objectID": "workflows.html#project-initiation-the-local-case",
-    "href": "workflows.html#project-initiation-the-local-case",
+    "objectID": "workflows.html#project-initiation",
+    "href": "workflows.html#project-initiation",
     "title": "Creating Efficient Workflows in R",
-    "section": "Project initiation: the local case",
-    "text": "Project initiation: the local case\n\n\nRStudio Project\n\nNew folder + make it an RStudio Project\n\n\nusethis::create_project(\"~/i_am_new\")\nFile -&gt; New Project -&gt; New Directory -&gt; New Project\n\n. . .\n\nMake existing folder into an RStudio Project\n\n\nusethis::create_project(\"~/i_exist\")\nFile -&gt; New Project -&gt; Existing Directory\n\n\n\n\nPositron Workspace\n\nNew folder + make it a workspace\n\n\nusethis::create_project(\"~/i_am_new\", rstudio = FALSE)\nFile -&gt; New Folder From Template\n\n. . .\n\nOpen an existing directory as a workspace\n\n\nusethis::create_project(\"~/i_exist\", rstudio = FALSE)\nFile -&gt; New Project -&gt; Existing Directory\n\nNote: if you don’t specify rstudio = FALSE, it will create an RStudio .Rproj file. This does no harm.\n\n\n\nTry either option now with a folder containing (or that will contain) Bivalve Data 2014-2022_ICE.csv.\n\n\n\n\n−+\n02:00"
+    "section": "Project initiation",
+    "text": "Project initiation\n\n\nRStudio Project\n\nNew folder + make it an RStudio Project\n\n\nusethis::create_project(\"~/i_am_new\")\nFile -&gt; New Project -&gt; New Directory -&gt; New Project\n\n. . .\n\nMake existing folder into an RStudio Project\n\n\nusethis::create_project(\"~/i_exist\")\nFile -&gt; New Project -&gt; Existing Directory\n\n\n\n\nPositron Workspace\n\nNew folder + make it a workspace\n\n\nusethis::create_project(\"~/i_am_new\", rstudio = FALSE)\nFile -&gt; New Folder From Template\n\n. . .\n\nOpen an existing directory as a workspace\n\n\nusethis::create_project(\"~/i_exist\", rstudio = FALSE)\nFile -&gt; New Project -&gt; Existing Directory\n\nNote: if you don’t specify rstudio = FALSE, it will create an RStudio .Rproj file. This does no harm.\n\n\n\nTry either option now with a folder containing (or that will contain) Bivalve Data 2014-2022_ICE.csv.\n\n\n\n\n−+\n02:00"
   },
   {
     "objectID": "workflows.html#naming-things",
@@ -287,11 +294,25 @@
     "text": "Names matter\n\nmachine readable, human readable, and sort nicely\n\n\neasy to implement NOW\n\npayoffs accumulate as your skills evolve and  projects get more complex"
   },
   {
+    "objectID": "workflows.html#project-structure",
+    "href": "workflows.html#project-structure",
+    "title": "Creating Efficient Workflows in R",
+    "section": "Project structure",
+    "text": "Project structure\n\n\nmy-project/\n├── 01_read-data.R\n├── 02_clean-data.R\n├── 03_analysis.R\n├── 04_output.R\n├── R\n├── README.md\n├── data\n│   ├── derived_data\n│   └── raw_data\n├── outputs\n└── paper\n    ├── paper.qmd\n    └── references.bib"
+  },
+  {
     "objectID": "workflows.html#your-r-installation",
     "href": "workflows.html#your-r-installation",
     "title": "Creating Efficient Workflows in R",
     "section": "Your R installation",
-    "text": "Your R installation\n\nR packages\n\nthe natural unit for distributing R code\n\n\n\nbase R\n\n14 base + 15 recommended packages\nships with all binary distributions of R"
+    "text": "Your R installation"
+  },
+  {
+    "objectID": "workflows.html#r-packages",
+    "href": "workflows.html#r-packages",
+    "title": "Creating Efficient Workflows in R",
+    "section": "R packages",
+    "text": "R packages\n\nR packages\n\nthe natural unit for distributing R code\n\n\n\nbase R\n\n14 base + 15 recommended packages\nships with all binary distributions of R"
   },
   {
     "objectID": "workflows.html#additional-packages",
@@ -301,25 +322,25 @@
     "text": "Additional packages\n\n\nCRAN, ~20k packages\n\n# install from CRAN\ninstall.packages(\"devtools\")\n# attach\nlibrary(devtools)\n\n\n\n\nGitHub ~∞ packages\n\n# install from GitHub\nremotes::install_github(\"r-lib/devtools\")\n# attach\nlibrary(devtools)\n\ndevelopment versions, or packages not on CRAN"
   },
   {
-    "objectID": "workflows.html#pak",
-    "href": "workflows.html#pak",
+    "objectID": "workflows.html#r-libraries---where-do-packages-live",
+    "href": "workflows.html#r-libraries---where-do-packages-live",
     "title": "Creating Efficient Workflows in R",
-    "section": "pak",
-    "text": "pak"
+    "section": "R Libraries - where do packages live?",
+    "text": "R Libraries - where do packages live?\n\nA library is a directory containing installed packages\nYou have at least one library on your computer\nCommon (and recommended) to have two libraries:\n\nA system library with base (14) and recommended (15) packages; installed with R.\nA user library with user-installed packages\n\nWe use library(pkg) function to attach a package\n7 base packages are always attached (base, methods, utils, stats, grDevices, datasets, graphics)"
   },
   {
     "objectID": "workflows.html#where-do-packages-live-locally",
     "href": "workflows.html#where-do-packages-live-locally",
     "title": "Creating Efficient Workflows in R",
     "section": "Where do packages live locally?",
-    "text": "Where do packages live locally?\n\nBy default, in the default library (base/recommended packages).\n.Library\n\nAll libraries for the current session\n.libPaths()\n\nAll installed packages\ninstalled.packages()"
+    "text": "Where do packages live locally?\n\nThe system library (base/recommended packages).\n.Library\n\nAll libraries for the current session\n.libPaths()\n\nAll installed packages\ninstalled.packages()"
   },
   {
-    "objectID": "workflows.html#syntax-aside-pipes",
-    "href": "workflows.html#syntax-aside-pipes",
+    "objectID": "workflows.html#your-turn",
+    "href": "workflows.html#your-turn",
     "title": "Creating Efficient Workflows in R",
-    "section": "Syntax aside: pipes",
-    "text": "Syntax aside: pipes\n\n2014+ magrittr pipe %&gt;%\n2021+ (R \\(\\geq\\) 4.1.0) native R pipe |&gt;\n\n2022 Isabella Velásquez Understanding the native R pipe |&gt; https://ivelasq.rbind.io/blog/understanding-the-r-pipe/\n\n\n\n\n\nwhatever(arg1, arg2, arg3, ...)\narg1 |&gt;  \n  whatever(arg2, arg3)\n\n\n\n\n\nmean(0:10)\n0:10 |&gt; \n  mean()\n\n\n\nChange CTRL + Shift + M shortcut to native pipe:\nTools -&gt; Global Options -&gt; Code -&gt;\n   Editing -&gt; check Use Native Pipe Operator"
+    "section": "Your turn",
+    "text": "Your turn\n\nWhat libraries are in use in your current R session?\nUsing installed.packages(), what are the base and recommended packages?"
   },
   {
     "objectID": "workflows.html#installing-and-updating-packages",
@@ -343,32 +364,74 @@
     "text": "R Startup\n\n.Rprofile - contains R code to be run at the start of each session.\n.Renviron - contains environment variables to be set in R sessions."
   },
   {
+    "objectID": "workflows.html#what-to-put-in-.rprofile",
+    "href": "workflows.html#what-to-put-in-.rprofile",
+    "title": "Creating Efficient Workflows in R",
+    "section": "what to put in .Rprofile",
+    "text": "what to put in .Rprofile\n\nset a default CRAN mirror\ncustom startup message"
+  },
+  {
+    "objectID": "workflows.html#what-not-to-put-in-.rprofile",
+    "href": "workflows.html#what-not-to-put-in-.rprofile",
+    "title": "Creating Efficient Workflows in R",
+    "section": "what not to put in .Rprofile",
+    "text": "what not to put in .Rprofile\nIf it matters for code you share, it should not be in .Rprofile\nwhy shouldn’t these go in .Rprofile?\n\nlibrary(tidyverse)\nf &lt;- dplyr::filter\ntheme_set(theme_bw())"
+  },
+  {
+    "objectID": "workflows.html#why-might-these-be-safe-to-put-in-.rprofile",
+    "href": "workflows.html#why-might-these-be-safe-to-put-in-.rprofile",
+    "title": "Creating Efficient Workflows in R",
+    "section": "Why might these be safe to put in .Rprofile?",
+    "text": "Why might these be safe to put in .Rprofile?\n\nlibrary(usethis)\nlibrary(devtools)"
+  },
+  {
     "objectID": "workflows.html#rprofile",
     "href": "workflows.html#rprofile",
     "title": "Creating Efficient Workflows in R",
     "section": ".Rprofile",
-    "text": ".Rprofile"
+    "text": ".Rprofile\n\nusethis::edit_r_profile()"
   },
   {
-    "objectID": "workflows.html#renviron-files",
-    "href": "workflows.html#renviron-files",
+    "objectID": "workflows.html#renviron",
+    "href": "workflows.html#renviron",
     "title": "Creating Efficient Workflows in R",
-    "section": ".Renviron files",
-    "text": ".Renviron files\nAPI Keys Database username and password Some R options"
+    "section": ".Renviron",
+    "text": ".Renviron\n\nSet environment variables for R sessions\nOften sensitive information that you don’t want to share\n\nExamples\n\nAPI Keys (Eg GitHub, ChatGPT etc)\nDatabase username and password\nSome R options"
   },
   {
-    "objectID": "workflows.html#slide-1",
-    "href": "workflows.html#slide-1",
+    "objectID": "workflows.html#renviron-1",
+    "href": "workflows.html#renviron-1",
     "title": "Creating Efficient Workflows in R",
-    "section": "Slide 1",
-    "text": "Slide 1\n\nEfficient use of your IDE"
+    "section": ".Renviron",
+    "text": ".Renviron\n\nusethis::edit_r_environ()\n\nVAR_NAME=value\nGOOGLE_API_KEY=your_api_key_here"
+  },
+  {
+    "objectID": "workflows.html#renviron-2",
+    "href": "workflows.html#renviron-2",
+    "title": "Creating Efficient Workflows in R",
+    "section": ".Renviron",
+    "text": ".Renviron\nAccess environment variables in R with Sys.getenv(\"VAR_NAME\")\n\nSys.getenv(\"GOOGLE_API_KEY\")\n#&gt; [1] \"your_api_key_here\""
+  },
+  {
+    "objectID": "workflows.html#your-turn-1",
+    "href": "workflows.html#your-turn-1",
+    "title": "Creating Efficient Workflows in R",
+    "section": "Your turn",
+    "text": "Your turn\n\nCreate an environment variable in .Renviron called MY_NAME with your name as the value.\nCreate a custom startup message in .Rprofile that gives you a personalized message when you start R."
+  },
+  {
+    "objectID": "workflows.html#customizing-your-ide",
+    "href": "workflows.html#customizing-your-ide",
+    "title": "Creating Efficient Workflows in R",
+    "section": "Customizing your IDE",
+    "text": "Customizing your IDE\n\n\nPane layout\nThemes\nFonts\nPositron extensions"
   },
   {
     "objectID": "workflows.html#keyboard-shortcuts-1",
     "href": "workflows.html#keyboard-shortcuts-1",
     "title": "Creating Efficient Workflows in R",
     "section": "Keyboard shortcuts",
-    "text": "Keyboard shortcuts"
+    "text": "Keyboard shortcuts\nIf in doubt, use the command palette: Ctrl + Shift + P"
   },
   {
     "objectID": "workflows.html#navigation-files",
@@ -410,7 +473,42 @@
     "href": "workflows.html#last.value",
     "title": "Creating Efficient Workflows in R",
     "section": ".Last.value",
-    "text": ".Last.value"
+    "text": ".Last.value\nShows last evaluated value in console\nRStudio\n\nTools &gt; Global Options &gt; General &gt; Advanced &gt; Show .Last.value in environment listing\n\nPositron\nControlled by an option:\n\nusethis::edit_r_profile()\noptions(positron.show_last_value = TRUE)"
+  },
+  {
+    "objectID": "workflows.html#automatic-code-formatting",
+    "href": "workflows.html#automatic-code-formatting",
+    "title": "Creating Efficient Workflows in R",
+    "section": "Automatic code formatting",
+    "text": "Automatic code formatting\nAir: https://posit-dev.github.io/air/\n\nIn charge of the layout of your R code.\nFormatters do not change the meaning of code\nEnsure that whitespace, newlines, and other punctuation conform to a set of rules and standards\n\n\nusethis::use_air()"
+  },
+  {
+    "objectID": "workflows.html#reprexes",
+    "href": "workflows.html#reprexes",
+    "title": "Creating Efficient Workflows in R",
+    "section": "Reprexes",
+    "text": "Reprexes"
+  },
+  {
+    "objectID": "workflows.html#start-using-project-oriented-workflows-in-your-work",
+    "href": "workflows.html#start-using-project-oriented-workflows-in-your-work",
+    "title": "Creating Efficient Workflows in R",
+    "section": "Start using project-oriented workflows in your work",
+    "text": "Start using project-oriented workflows in your work\n\n\nUse RStudio or Positron Projects/Workspaces\ndon’t use setwd()\nuse relative paths\nUse a blank slate - restart R often"
+  },
+  {
+    "objectID": "workflows.html#try-to-name-files-well",
+    "href": "workflows.html#try-to-name-files-well",
+    "title": "Creating Efficient Workflows in R",
+    "section": "Try to name files well",
+    "text": "Try to name files well\n\n\nmachine readable\nhuman readable\nsorts nicely (including ISO 8601 dates)"
+  },
+  {
+    "objectID": "workflows.html#use-positron-or-rstudio-more-efficiently",
+    "href": "workflows.html#use-positron-or-rstudio-more-efficiently",
+    "title": "Creating Efficient Workflows in R",
+    "section": "Use Positron or RStudio more efficiently",
+    "text": "Use Positron or RStudio more efficiently\n\n\nuse keyboard shortcuts\nuse the command palette\nuse Air"
   },
   {
     "objectID": "index.html",
