@@ -553,9 +553,10 @@ Mac
 
 -   File -\> New Project -\> Existing Directory
 
-*Note: if you don't specify `rstudio = FALSE`, it will create an RStudio `.Rproj` file. This does no harm.*
 :::
 ::::
+
+*Note: if you don't specify `rstudio = FALSE`, it will create an RStudio `.Rproj` file. This does no harm.*
 
 . . .
 
