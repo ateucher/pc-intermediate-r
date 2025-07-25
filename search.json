@@ -11,7 +11,7 @@
     "href": "workflows.html#introductions",
     "title": "Creating Efficient Workflows in R",
     "section": "Introductions",
-    "text": "Introductions\n\n\n\nMe: Andy Teucher\n\n andyteucher.ca\n ateucher\n andyteucher\n andy-teucher\n\nYourselves"
+    "text": "Introductions\n\n\n\nMe: Andy Teucher\n\n andyteucher.ca\n ateucher\n andyteucher\n andy-teucher\n\nYourselves\n\nName\nWhere you are\nWhat you work on\nHardest thing about R"
   },
   {
     "objectID": "workflows.html#resources",
@@ -42,6 +42,48 @@
     "text": "Efficient use of your IDE\n\nCustomizing your IDE\nKeyboard shortcuts\nCommand palette\nTab completion\nAutoformatting code\nGetting help: Reprexes"
   },
   {
+    "objectID": "workflows.html#layout",
+    "href": "workflows.html#layout",
+    "title": "Creating Efficient Workflows in R",
+    "section": "Layout",
+    "text": "Layout\n\n\nhttps://github.com/posit-dev/positron-website/pull/116/"
+  },
+  {
+    "objectID": "workflows.html#layout-1",
+    "href": "workflows.html#layout-1",
+    "title": "Creating Efficient Workflows in R",
+    "section": "Layout",
+    "text": "Layout\n\n\nhttps://github.com/posit-dev/positron-website/pull/116/\n\n\nThese UI elements are the most novel for RStudio users:\nThe Activity bar provides access to different functional capabilities of Positron. Clicking here changes what appears in the Primary side bar. The Primary side bar displays context-specific content based on which icon is clicked in the Activity bar."
+  },
+  {
+    "objectID": "workflows.html#keyboard-shortcuts",
+    "href": "workflows.html#keyboard-shortcuts",
+    "title": "Creating Efficient Workflows in R",
+    "section": "Keyboard shortcuts",
+    "text": "Keyboard shortcuts\nEnable Rstudio keyboard shortcuts via:\nSettings &gt; Workbench &gt; Keybindings: Rstudio Keybindings"
+  },
+  {
+    "objectID": "workflows.html#command-palette",
+    "href": "workflows.html#command-palette",
+    "title": "Creating Efficient Workflows in R",
+    "section": "Command palette",
+    "text": "Command palette\n\nAccess all the things\n Ctrl + Shift + P"
+  },
+  {
+    "objectID": "workflows.html#extensions",
+    "href": "workflows.html#extensions",
+    "title": "Creating Efficient Workflows in R",
+    "section": "Extensions",
+    "text": "Extensions\n\n\n\nPre-installed\n\nQuarto\nAir\n\n\nOther extensions\n\nRainbow csv\nvscode-pdf\nThemes\n\n\n\nCommand palette: “install”. Search “tomorrow night”."
+  },
+  {
+    "objectID": "workflows.html#data-explorer",
+    "href": "workflows.html#data-explorer",
+    "title": "Creating Efficient Workflows in R",
+    "section": "Data Explorer",
+    "text": "Data Explorer"
+  },
+  {
     "objectID": "workflows.html#learning-objectives",
     "href": "workflows.html#learning-objectives",
     "title": "Creating Efficient Workflows in R",
@@ -67,7 +109,7 @@
     "href": "workflows.html#adopt-a-project-oriented-workflow",
     "title": "Creating Efficient Workflows in R",
     "section": "Adopt a project-oriented workflow",
-    "text": "Adopt a project-oriented workflow\n\n\n\nWhy\n\nwork on more than 1 thing at a time\ncollaborate, communicate, distribute\nstart and stop safely\n\n\n\n\nHow\n\ndedicated directory\nRStudio Project\nGit repo, probably syncing to a remote\n\n\n\nProject-oriented workflows"
+    "text": "Adopt a project-oriented workflow\n\n\n\nWhy\n\nwork on more than 1 thing at a time\ncollaborate, communicate, distribute\nstart and stop safely\n\n\n\n\nHow\n\ndedicated directory\nRStudio Project or Positron Workspace\nGit repo, probably syncing to a remote\n\n\n\nProject-oriented workflows"
   },
   {
     "objectID": "workflows.html#if-the-top-of-your-script-is",
@@ -88,7 +130,7 @@
     "href": "workflows.html#organize-your-work-into-projects-1",
     "title": "Creating Efficient Workflows in R",
     "section": "Organize your work into projects",
-    "text": "Organize your work into projects\n\n\nmy-project/\n├── 01-read_data.R\n├── 02-clean_data.R\n├── 03-analysis.R\n├── 04-output.R\n├── R\n├── README.md\n├── data\n│   ├── derived_data\n│   └── raw_data\n├── outputs\n└── paper\n    ├── paper.qmd\n    └── references.bib\n\n\n\nProject-oriented workflows"
+    "text": "Organize your work into projects\n\n\nmy-project/\n├── 01_read-data.R\n├── 02_clean-data.R\n├── 03_analysis.R\n├── 04_output.R\n├── R\n├── README.md\n├── data\n│   ├── derived_data\n│   └── raw_data\n├── outputs\n└── paper\n    ├── paper.qmd\n    └── references.bib\n\n\n\nProject-oriented workflows"
   },
   {
     "objectID": "workflows.html#what-does-it-mean-to-be-an-rstudio-project",
@@ -109,28 +151,42 @@
     "href": "workflows.html#practice-safe-paths",
     "title": "Creating Efficient Workflows in R",
     "section": "Practice “safe paths”",
-    "text": "Practice “safe paths”\n\nrelative to a stable base, not absolute paths.\n\nuse file system functions, not paste(), strsplit(), etc.\n\nWorking directory is associated with a specific process or running application.\nWhen you open a project in RStudio or Positron, it sets the working directory to the project root - this is that “stable base”\n“Working directory” as a concept is not comparable to “home directory”. “Home directory” is a static, persistent thing."
+    "text": "Practice “safe paths”\nThe chance of setwd() having the desired effect – making the file paths work – for anyone besides its author is ~0%.\nlibrary(ggplot2)\nsetwd(\"/Users/andy/cuddly_broccoli/verbose/foofy/data\")\ndf &lt;- read.csv(“raw_foofy_data.csv”)\np &lt;- ggplot(df, aes(x, y)) + geom_point()\nggsave(\"/Users/andy/cuddly_broccoi/ambiguous/fig.png\")\n It’s also unlikely to work for the author one or two years or computers from now.\nHard-wired, absolute paths, especially when sprinkled throughout the code, make a project brittle. Such code does not travel well across time or space."
   },
   {
     "objectID": "workflows.html#practice-safe-paths-1",
     "href": "workflows.html#practice-safe-paths-1",
     "title": "Creating Efficient Workflows in R",
     "section": "Practice “safe paths”",
-    "text": "Practice “safe paths”\nInstead of:\n\nsetwd(\"C:/Users/andy/path/that/only/I/have\")\nmy_data &lt;- read.csv(\"data/my_data.csv\")\n\nOr:\n\nmy_data &lt;- read.csv(\"C:/Users/andy/path/that/only/I/have/data/my_data.csv\")"
+    "text": "Practice “safe paths”\n\nrelative to a stable base, not absolute paths.\n\nuse file system functions, not paste(), strsplit(), etc.\n\nWorking directory is associated with a specific process or running application.\nWhen you open a project in RStudio or Positron, it sets the working directory to the project root - this is that “stable base”\n“Working directory” as a concept is not comparable to “home directory”. “Home directory” is a static, persistent thing."
   },
   {
     "objectID": "workflows.html#practice-safe-paths-2",
     "href": "workflows.html#practice-safe-paths-2",
     "title": "Creating Efficient Workflows in R",
     "section": "Practice “safe paths”",
+    "text": "Practice “safe paths”\nInstead of:\n\nsetwd(\"C:/Users/andy/path/that/only/I/have\")\nmy_data &lt;- read.csv(\"data/my_data.csv\")\n\nOr:\n\nmy_data &lt;- read.csv(\"C:/Users/andy/path/that/only/I/have/data/my_data.csv\")"
+  },
+  {
+    "objectID": "workflows.html#practice-safe-paths-3",
+    "href": "workflows.html#practice-safe-paths-3",
+    "title": "Creating Efficient Workflows in R",
+    "section": "Practice “safe paths”",
     "text": "Practice “safe paths”\nSet your work up as an RStudio or Positron Project/Workspace and use relative paths:\n\nmy_data &lt;- read.csv(\"data/my_data.csv\")\n\nOr:\n\nmy_data &lt;- read.csv(file.path(\"data\", \"my_data.csv\"))"
+  },
+  {
+    "objectID": "workflows.html#work-on-multiple-projects-at-once",
+    "href": "workflows.html#work-on-multiple-projects-at-once",
+    "title": "Creating Efficient Workflows in R",
+    "section": "Work on multiple projects at once",
+    "text": "Work on multiple projects at once\nBecause each project uses an isolated R process"
   },
   {
     "objectID": "workflows.html#which-persist-after-rmlist-ls",
     "href": "workflows.html#which-persist-after-rmlist-ls",
     "title": "Creating Efficient Workflows in R",
     "section": "Which persist after rm(list = ls())?",
-    "text": "Which persist after rm(list = ls())?\n\n\n\n\n\n\n\nOption\nPersists?\n\n\n\n\nA. library(dplyr)\n\n\n\nB. summary &lt;- head\n\n\n\nC. options(stringsAsFactors = FALSE)\n\n\n\nD. Sys.setenv(LANGUAGE = \"fr\")\n\n\n\nE. x &lt;- 1:5\n\n\n\nF. attach(iris)\n\n\n\n\n\n\n\n−+\n02:00"
+    "text": "Which persist after rm(list = ls())?\n\n\n\nOption\nPersists?\n\n\n\n\nA. library(dplyr)\n\n\n\nB. summary &lt;- head\n\n\n\nC. options(stringsAsFactors = FALSE)\n\n\n\nD. Sys.setenv(LANGUAGE = \"fr\")\n\n\n\nE. x &lt;- 1:5\n\n\n\nF. attach(iris)\n\n\n\n\n\n\n\n−+\n02:00"
   },
   {
     "objectID": "workflows.html#which-persist-after-rmlist-ls-1",
@@ -140,22 +196,176 @@
     "text": "Which persist after rm(list = ls())?\n\n\n\n\n\n\n\nOption\nPersists?\n\n\n\n\nA. library(dplyr)\n\n\n\nB. summary &lt;- head\n\n\n\nC. options(stringsAsFactors = FALSE)\n\n\n\nD. Sys.setenv(LANGUAGE = \"fr\")\n\n\n\nE. x &lt;- 1:5\n\n\n\nF. attach(iris)"
   },
   {
-    "objectID": "workflows.html#slide-1",
-    "href": "workflows.html#slide-1",
+    "objectID": "workflows.html#start-r-with-a-blank-slate",
+    "href": "workflows.html#start-r-with-a-blank-slate",
     "title": "Creating Efficient Workflows in R",
-    "section": "Slide 1",
-    "text": "Slide 1\n\nPersonal R administration"
+    "section": "Start R with a blank slate",
+    "text": "Start R with a blank slate\n\n\n\nSave code for reproducibility.\nWhen you quit: do not save the workspace to an .Rdata file.\nWhen you start: do not reload the workspace from an .Rdata file.\nIn RStudio, set this via Tools &gt; Global Options.\nOr use usethis::use_blank_slate()\n\n\n\n\n\n\nThis is the default (and not customizable) in Positron"
   },
   {
-    "objectID": "workflows.html#slide-1-1",
-    "href": "workflows.html#slide-1-1",
+    "objectID": "workflows.html#restart-r-often",
+    "href": "workflows.html#restart-r-often",
+    "title": "Creating Efficient Workflows in R",
+    "section": "Restart R often",
+    "text": "Restart R often\n\n\n\nSession -&gt; Restart R\n\n\n\n\nWindows\n\nCtrl + Shift + F10\n\nMac\n\nCmd + Shift + 0"
+  },
+  {
+    "objectID": "workflows.html#project-initiation-the-local-case",
+    "href": "workflows.html#project-initiation-the-local-case",
+    "title": "Creating Efficient Workflows in R",
+    "section": "Project initiation: the local case",
+    "text": "Project initiation: the local case\n\n\nRStudio Project\n\nNew folder + make it an RStudio Project\n\n\nusethis::create_project(\"~/i_am_new\")\nFile -&gt; New Project -&gt; New Directory -&gt; New Project\n\n. . .\n\nMake existing folder into an RStudio Project\n\n\nusethis::create_project(\"~/i_exist\")\nFile -&gt; New Project -&gt; Existing Directory\n\n\n\n\nPositron Workspace\n\nNew folder + make it a workspace\n\n\nusethis::create_project(\"~/i_am_new\", rstudio = FALSE)\nFile -&gt; New Folder From Template\n\n. . .\n\nOpen an existing directory as a workspace\n\n\nusethis::create_project(\"~/i_exist\", rstudio = FALSE)\nFile -&gt; New Project -&gt; Existing Directory\n\nNote: if you don’t specify rstudio = FALSE, it will create an RStudio .Rproj file. This does no harm.\n\n\n\nTry either option now with a folder containing (or that will contain) Bivalve Data 2014-2022_ICE.csv.\n\n\n\n\n−+\n02:00"
+  },
+  {
+    "objectID": "workflows.html#naming-things",
+    "href": "workflows.html#naming-things",
+    "title": "Creating Efficient Workflows in R",
+    "section": "Naming things",
+    "text": "Naming things\n\n\n machine readable\n\nhuman readable\n\nsort nicely\n\n\n\n\nJenny Bryan “Naming things” video\nNormConf · Dec 4, 2022:\nhttps://www.youtube.com/watch?v=ES1LTlnpLMk"
+  },
+  {
+    "objectID": "workflows.html#naming-things-1",
+    "href": "workflows.html#naming-things-1",
+    "title": "Creating Efficient Workflows in R",
+    "section": "Naming things",
+    "text": "Naming things\n\nWhat features differentiate 😔 vs 😍?\n\n\n\n\n\n😔\n\n\n\n\n😍\n\n\n\n\nmyabstract.docx\nJoe’s Filenames Use Spaces and Punctuation.xlsx\nfigure 1.png\nhomework.R\nJW7d^(2sl@deletethisandyourcareerisoverWx2*.txt\n\n2018-01_teucher-abstract-conference.docx\njoes-filenames-are-getting-better.xlsx\nfig01_scatterplot-talk-length-vs-interest.png\n2024-07-25_ecol-455_assignment-5.R\n1986-01-28_raw-data-from-challenger-o-rings.txt\n\n\n\n\n−+\n01:00"
+  },
+  {
+    "objectID": "workflows.html#names-machines-like",
+    "href": "workflows.html#names-machines-like",
+    "title": "Creating Efficient Workflows in R",
+    "section": "Names machines like",
+    "text": "Names machines like\n\ndon’t leave white space\n\n\n\nuse letters, numbers, hyphens and underscores… that’s it  (characters like ^.*?+|$ can have a special meaning)\n\n\n\n\nbe consistent with case  (some operating systems treat a and A the same, some differently).\n\n\n\n\nuse separator characters wisely\n\n    use underscore _ to separate different chunks\n    use hyphen - for words in the same chunk\n\n\n\nThis creates names that are regular expression and globbing friendly, and easy to compute on! 🎉\n\nAdapted from  https://djnavarro.net/slides-project-structure/#1.\n\n\nGlobbing: use of pattern matching against the names in a filesystem directory such that a name pattern is expanded into a list of names matching that pattern."
+  },
+  {
+    "objectID": "workflows.html#names-humans-like",
+    "href": "workflows.html#names-humans-like",
+    "title": "Creating Efficient Workflows in R",
+    "section": "Names humans like",
+    "text": "Names humans like\n\nname contains info on content\nname anticipates context\nconcept of a slug 🐌 from user-friendly URLs\n\n1986-01-28_raw-data-from-challenger-o-rings.txt\nconcise, meaningful description\nusually appended to the end\n\n\nNote: A URL slug is the part of the URL after the last backslash"
+  },
+  {
+    "objectID": "workflows.html#names-that-sort-nicely",
+    "href": "workflows.html#names-that-sort-nicely",
+    "title": "Creating Efficient Workflows in R",
+    "section": "Names that sort nicely",
+    "text": "Names that sort nicely\n\nput something numeric in there\nleft pad with zeros for constant width, nice sorting, 01\nuse the ISO 8601 standard for dates, YYYY-MM-DD\norder = chronological or … consider common sense"
+  },
+  {
+    "objectID": "workflows.html#iso-8601",
+    "href": "workflows.html#iso-8601",
+    "title": "Creating Efficient Workflows in R",
+    "section": "ISO 8601",
+    "text": "ISO 8601\n\n\n\n\n\n\n\nYYYY-MM-DD\nISO 8601\n\nhttps://www.iso.org/iso-8601-date-and-time-format.html\n\n\nhttps://twitter.com/JennyBryan/status/816143967695687684"
+  },
+  {
+    "objectID": "workflows.html#file-names",
+    "href": "workflows.html#file-names",
+    "title": "Creating Efficient Workflows in R",
+    "section": "👍 file names",
+    "text": "👍 file names\n\nlibrary(fs)\nlibrary(dplyr)\n\nft &lt;- tibble(files = dir_ls(\"_examples/data/\", glob = \"*.csv\"))\n\n\nIntuitive sorting.\n\n\n\nft\n\n# A tibble: 4 × 1\n  files                                           \n  &lt;fs::path&gt;                                      \n1 _examples/data/2024-07-16_site-2_plot-data.csv  \n2 _examples/data/2024-07-25_site-2_survey-data.csv\n3 _examples/data/2024-08-12_site-1_plot-data.csv  \n4 _examples/data/2024-08-18_site-1_survey-data.csv\n\n\n\n\narrange(ft, desc(files))\n\n# A tibble: 4 × 1\n  files                                           \n  &lt;fs::path&gt;                                      \n1 _examples/data/2024-08-18_site-1_survey-data.csv\n2 _examples/data/2024-08-12_site-1_plot-data.csv  \n3 _examples/data/2024-07-25_site-2_survey-data.csv\n4 _examples/data/2024-07-16_site-2_plot-data.csv"
+  },
+  {
+    "objectID": "workflows.html#file-names-1",
+    "href": "workflows.html#file-names-1",
+    "title": "Creating Efficient Workflows in R",
+    "section": "👍 file names",
+    "text": "👍 file names\n\nlibrary(stringr)\n\nfilter(ft, str_detect(files, pattern = \"plot-data\"))\n\n# A tibble: 2 × 1\n  files                                         \n  &lt;fs::path&gt;                                    \n1 _examples/data/2024-07-16_site-2_plot-data.csv\n2 _examples/data/2024-08-12_site-1_plot-data.csv\n\n\nEasy to filter in R (or the shell or whatever)"
+  },
+  {
+    "objectID": "workflows.html#file-names-2",
+    "href": "workflows.html#file-names-2",
+    "title": "Creating Efficient Workflows in R",
+    "section": "👍 file names",
+    "text": "👍 file names\n\nlibrary(tidyr)\n\nft |&gt; \n  mutate(files = path_ext_remove(files)) |&gt; \n  separate(files, into = c(\"date\", \"site\", \"data_type\"), sep = \"_\")\n\n# A tibble: 4 × 3\n  date  site                     data_type\n  &lt;chr&gt; &lt;chr&gt;                    &lt;chr&gt;    \n1 \"\"    examples/data/2024-07-16 site-2   \n2 \"\"    examples/data/2024-07-25 site-2   \n3 \"\"    examples/data/2024-08-12 site-1   \n4 \"\"    examples/data/2024-08-18 site-1   \n\n\nIntentional delimiters means meta-data is easily recovered.\n_ delimits fields; - delimits words\n\nRename the file Bivalve Data 2014-2022_ICE.csv to something that is machine readable, human readable, and sorts nicely.\nRead the file in to R using a relateive path"
+  },
+  {
+    "objectID": "workflows.html#names-matter",
+    "href": "workflows.html#names-matter",
+    "title": "Creating Efficient Workflows in R",
+    "section": "Names matter",
+    "text": "Names matter\n\nmachine readable, human readable, and sort nicely\n\n\neasy to implement NOW\n\npayoffs accumulate as your skills evolve and  projects get more complex"
+  },
+  {
+    "objectID": "workflows.html#your-r-installation",
+    "href": "workflows.html#your-r-installation",
+    "title": "Creating Efficient Workflows in R",
+    "section": "Your R installation",
+    "text": "Your R installation\n\nR packages\n\nthe natural unit for distributing R code\n\n\n\nbase R\n\n14 base + 15 recommended packages\nships with all binary distributions of R"
+  },
+  {
+    "objectID": "workflows.html#additional-packages",
+    "href": "workflows.html#additional-packages",
+    "title": "Creating Efficient Workflows in R",
+    "section": "Additional packages",
+    "text": "Additional packages\n\n\nCRAN, ~20k packages\n\n# install from CRAN\ninstall.packages(\"devtools\")\n# attach\nlibrary(devtools)\n\n\n\n\nGitHub ~∞ packages\n\n# install from GitHub\nremotes::install_github(\"r-lib/devtools\")\n# attach\nlibrary(devtools)\n\ndevelopment versions, or packages not on CRAN"
+  },
+  {
+    "objectID": "workflows.html#pak",
+    "href": "workflows.html#pak",
+    "title": "Creating Efficient Workflows in R",
+    "section": "pak",
+    "text": "pak"
+  },
+  {
+    "objectID": "workflows.html#where-do-packages-live-locally",
+    "href": "workflows.html#where-do-packages-live-locally",
+    "title": "Creating Efficient Workflows in R",
+    "section": "Where do packages live locally?",
+    "text": "Where do packages live locally?\n\nBy default, in the default library (base/recommended packages).\n.Library\n\nAll libraries for the current session\n.libPaths()\n\nAll installed packages\ninstalled.packages()"
+  },
+  {
+    "objectID": "workflows.html#syntax-aside-pipes",
+    "href": "workflows.html#syntax-aside-pipes",
+    "title": "Creating Efficient Workflows in R",
+    "section": "Syntax aside: pipes",
+    "text": "Syntax aside: pipes\n\n2014+ magrittr pipe %&gt;%\n2021+ (R \\(\\geq\\) 4.1.0) native R pipe |&gt;\n\n2022 Isabella Velásquez Understanding the native R pipe |&gt; https://ivelasq.rbind.io/blog/understanding-the-r-pipe/\n\n\n\n\n\nwhatever(arg1, arg2, arg3, ...)\narg1 |&gt;  \n  whatever(arg2, arg3)\n\n\n\n\n\nmean(0:10)\n0:10 |&gt; \n  mean()\n\n\n\nChange CTRL + Shift + M shortcut to native pipe:\nTools -&gt; Global Options -&gt; Code -&gt;\n   Editing -&gt; check Use Native Pipe Operator"
+  },
+  {
+    "objectID": "workflows.html#installing-and-updating-packages",
+    "href": "workflows.html#installing-and-updating-packages",
+    "title": "Creating Efficient Workflows in R",
+    "section": "Installing and updating packages",
+    "text": "Installing and updating packages"
+  },
+  {
+    "objectID": "workflows.html#r-startup",
+    "href": "workflows.html#r-startup",
+    "title": "Creating Efficient Workflows in R",
+    "section": "R Startup",
+    "text": "R Startup\n\n\ncomplexity in R startup, for both personal and system-level customization. We can ignore most of it"
+  },
+  {
+    "objectID": "workflows.html#r-startup-1",
+    "href": "workflows.html#r-startup-1",
+    "title": "Creating Efficient Workflows in R",
+    "section": "R Startup",
+    "text": "R Startup\n\n.Rprofile - contains R code to be run at the start of each session.\n.Renviron - contains environment variables to be set in R sessions."
+  },
+  {
+    "objectID": "workflows.html#rprofile",
+    "href": "workflows.html#rprofile",
+    "title": "Creating Efficient Workflows in R",
+    "section": ".Rprofile",
+    "text": ".Rprofile"
+  },
+  {
+    "objectID": "workflows.html#renviron-files",
+    "href": "workflows.html#renviron-files",
+    "title": "Creating Efficient Workflows in R",
+    "section": ".Renviron files",
+    "text": ".Renviron files\nAPI Keys Database username and password Some R options"
+  },
+  {
+    "objectID": "workflows.html#slide-1",
+    "href": "workflows.html#slide-1",
     "title": "Creating Efficient Workflows in R",
     "section": "Slide 1",
     "text": "Slide 1\n\nEfficient use of your IDE"
   },
   {
-    "objectID": "workflows.html#keyboard-shortcuts",
-    "href": "workflows.html#keyboard-shortcuts",
+    "objectID": "workflows.html#keyboard-shortcuts-1",
+    "href": "workflows.html#keyboard-shortcuts-1",
     "title": "Creating Efficient Workflows in R",
     "section": "Keyboard shortcuts",
     "text": "Keyboard shortcuts"
@@ -194,6 +404,13 @@
     "title": "Creating Efficient Workflows in R",
     "section": "R-Specific",
     "text": "R-Specific\n\nTab - Auto-complete\nF1 - Show help for function under cursor\nCtrl + Shift + F10 - Restart R session\nCtrl + Shift + M - Insert pipe operator (%&gt;% or |&gt;)\nAlt + - - Insert assignment operator (&lt;-)"
+  },
+  {
+    "objectID": "workflows.html#last.value",
+    "href": "workflows.html#last.value",
+    "title": "Creating Efficient Workflows in R",
+    "section": ".Last.value",
+    "text": ".Last.value"
   },
   {
     "objectID": "index.html",
