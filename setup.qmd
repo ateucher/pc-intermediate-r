@@ -15,14 +15,13 @@ You will need:
 -   [Several R packages](#packages)
 -   [Git](#git)
 -   [GitHub account](#github)
--   [GitHub linked to R](#check-link-between-r-and-github)
 
 ## Install R and RStudio {#install-r-and-rstudio}
 
 You will need:
 
 -   R version \>= 4.4.0
--   RStudio \>= 2024.04
+-   RStudio \>= 2024.04 or Positron \>= 2025.09.0-139
 
 ### Install R
 
@@ -31,6 +30,11 @@ Download and install R for your operating system from <https://cloud.r-project.o
 ### Install R Studio
 
 Download and install RStudio Desktop from <https://posit.co/download/rstudio-desktop/>.
+This page should automatically offer you the version suitable for your operating system, but you can scroll down to find versions for all operating systems.
+
+### Install Positron
+
+Download and install Positron from <https://positron.posit.co/download.html>.
 This page should automatically offer you the version suitable for your operating system, but you can scroll down to find versions for all operating systems.
 
 ## Install R package development tools {#install-r-package-development-tools}
@@ -66,7 +70,7 @@ If not, go back to <https://cloud.r-project.org/> and follow the instructions fo
 
 ## Git
 
-We will be demonstrating the use of Git and GitHub for tracking changes during package development, and sharing and collaborating on our package.
+We will be learning the use of Git and GitHub for version control and collaboration.
 
 ### Windows
 
@@ -76,10 +80,21 @@ If `which git` didn't find Git installed:
 
 -   Download and install from <https://git-scm.com/downloads>
 -   Keep all the default settings. If asked about "Adjusting your PATH environment", make sure to select "Git from the command line and also from 3rd-party software".
+
+#### RStudio + Git
+
 -   Open RStudio. In the menus go to Tools \> Global Options \> Git/SVN.
--   Check RStudio has found git under "Git executable:"
+-   Check RStudio has found git under "Git executable". If it hasn't:
     -   You may need to click Browse and find the git executable.
     -   It may be in `C:/Users/[username]/AppData/Local/Programs/Git/`
+
+#### Positron + Git
+
+- Positron is smart about finding git, but if it doesn't find it automatically:
+-   In the menu go to File \> Preferences \> Settings.
+-   Search for "Git Path".
+    -   Click "Edit in settings.json" and add the path to the git executable.
+    -   It may be in `C:/Users/[username]/AppData/Local/Programs/Git/cmd/git.exe`
 
 ### Mac
 
