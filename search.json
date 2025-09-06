@@ -518,6 +518,55 @@
     "text": "Use Positron or RStudio more efficiently\n\n\nuse keyboard shortcuts\nuse the command palette\nuse Air"
   },
   {
+    "objectID": "setup.html",
+    "href": "setup.html",
+    "title": "System Setup 🤖",
+    "section": "",
+    "text": "You will require the following software installed and configured for the workshop. Please have this set up and ready to go before we start."
+  },
+  {
+    "objectID": "setup.html#computing-requirements",
+    "href": "setup.html#computing-requirements",
+    "title": "System Setup 🤖",
+    "section": "Computing requirements",
+    "text": "Computing requirements\nYou will need:\n\nA laptop computer with administrative privileges\nR and RStudio\nR package development toolchain\nSeveral R packages\nGit\nGitHub account"
+  },
+  {
+    "objectID": "setup.html#install-r-and-rstudio",
+    "href": "setup.html#install-r-and-rstudio",
+    "title": "System Setup 🤖",
+    "section": "Install R and RStudio",
+    "text": "Install R and RStudio\nYou will need:\n\nR version &gt;= 4.4.0\nRStudio &gt;= 2024.04 or Positron &gt;= 2025.09.0-139\n\n\nInstall R\nDownload and install R for your operating system from https://cloud.r-project.org/.\n\n\nInstall R Studio\nDownload and install RStudio Desktop from https://posit.co/download/rstudio-desktop/. This page should automatically offer you the version suitable for your operating system, but you can scroll down to find versions for all operating systems.\n\n\nInstall Positron\nDownload and install Positron from https://positron.posit.co/download.html. This page should automatically offer you the version suitable for your operating system, but you can scroll down to find versions for all operating systems."
+  },
+  {
+    "objectID": "setup.html#install-r-package-development-tools",
+    "href": "setup.html#install-r-package-development-tools",
+    "title": "System Setup 🤖",
+    "section": "Install R package development tools",
+    "text": "Install R package development tools\n\nFor Windows\nDownload and run the latest Rtools installer, Rtools.exe, from https://cran.r-project.org/bin/windows/Rtools/.\n\nKeep the default settings for the installation location and components to install\ncheck the box to add rtools to the system PATH.\n\n\n\nFor Mac\nInstall XCode. The easiest way is to open a Terminal window (Applications &gt; Utilities &gt; Terminal.app; or use the Terminal pane in RStudio) and type the following:\nxcode-select --install\nYou will be prompted to confirm the install, and possibly enter your computer password. Do so to complete the installation.\nAlternatively you can:\n\nDownload and install XCode from the Mac AppStore: http://itunes.apple.com/us/app/xcode/id497799835?mt=12\nWithin XCode go to Preferences : Downloads and install the Command Line Tools\n\n\n\nFor Linux\nIf you installed r-base-dev when installing R, you should have all you need to build packages from source. If not, go back to https://cloud.r-project.org/ and follow the instructions for your distribution (Ubuntu and Debian are likely the most common, and install it with sudo apt-get install r-base-dev)."
+  },
+  {
+    "objectID": "setup.html#git",
+    "href": "setup.html#git",
+    "title": "System Setup 🤖",
+    "section": "Git",
+    "text": "Git\nWe will be learning the use of Git and GitHub for version control and collaboration.\n\nWindows\nCheck if Git is installed by running which git in the Terminal pane in RStudio.\nIf which git didn’t find Git installed:\n\nDownload and install from https://git-scm.com/downloads\nKeep all the default settings. If asked about “Adjusting your PATH environment”, make sure to select “Git from the command line and also from 3rd-party software”.\n\n\nRStudio + Git\n\nOpen RStudio. In the menus go to Tools &gt; Global Options &gt; Git/SVN.\nCheck RStudio has found git under “Git executable”. If it hasn’t:\n\nYou may need to click Browse and find the git executable.\nIt may be in C:/Users/[username]/AppData/Local/Programs/Git/\n\n\n\n\nPositron + Git\n\nPositron is smart about finding git, but if it doesn’t find it automatically:\nIn the menu go to File &gt; Preferences &gt; Settings.\nSearch for “Git Path”.\n\nClick “Edit in settings.json” and add the path to the git executable.\nIt may be in C:/Users/[username]/AppData/Local/Programs/Git/cmd/git.exe\n\n\n\n\n\nMac\nCheck if Git is installed by running which git in the Terminal. You should see something like /usr/bin/git, /usr/local/bin/, or /opt/homebrew/bin/git.\nIf you are asked to install the Xcode command line tools, say yes.\nIf which git didn’t find Git installed, and if you weren’t prompted to install it, run the following in the Terminal: xcode-select --install\n\n\nIf you do lots of scientific computing and especially if you use command-line programs in the Terminal, we recommend using Homebrew. See brew.sh for installation instructions. To install Git using Homebrew, run the following in the Terminal: brew install git"
+  },
+  {
+    "objectID": "setup.html#github",
+    "href": "setup.html#github",
+    "title": "System Setup 🤖",
+    "section": "GitHub",
+    "text": "GitHub\nRegister a GitHub account at github.com.\nI highly recommend the book Happy Git with R for advice on setting up and using Git with R [@bryan]."
+  },
+  {
+    "objectID": "setup.html#troubleshooting",
+    "href": "setup.html#troubleshooting",
+    "title": "System Setup 🤖",
+    "section": "Troubleshooting",
+    "text": "Troubleshooting\nIf you are having issues with the setup please start a discussion on GitHub here."
+  },
+  {
     "objectID": "index.html",
     "href": "index.html",
     "title": "Parks Canada - Intermediate R",
@@ -551,54 +600,5 @@
     "title": "Parks Canada - Intermediate R",
     "section": "Instructor:",
     "text": "Instructor:\nAndy Teucher is a freelance data scientist and package developer with a passion for teaching others how to use data science tools to make their work more efficient and reproducible. His background is in conservation biology, with an MSc in Ecology from the University of Calgary. He has spent much of his career as a data scientist in government, where he made it his mission to promote and teach open, reproducible data science practices. He has written many R packages for internal use in his teams as well as for a broader audience, with several hosted on CRAN. Andy is a certified Software Carpentry and Data Carpentry instructor, and has led many workshops teaching programming skills to scientists and data professionals."
-  },
-  {
-    "objectID": "setup.html",
-    "href": "setup.html",
-    "title": "System Setup 🤖",
-    "section": "",
-    "text": "You will require the following software installed and configured for the workshop. Please have this set up and ready to go before we start."
-  },
-  {
-    "objectID": "setup.html#computing-requirements",
-    "href": "setup.html#computing-requirements",
-    "title": "System Setup 🤖",
-    "section": "Computing requirements",
-    "text": "Computing requirements\nYou will need:\n\nA laptop computer with administrative privileges\nR and RStudio\nR package development toolchain\nSeveral R packages\nGit\nGitHub account\nGitHub linked to R"
-  },
-  {
-    "objectID": "setup.html#install-r-and-rstudio",
-    "href": "setup.html#install-r-and-rstudio",
-    "title": "System Setup 🤖",
-    "section": "Install R and RStudio",
-    "text": "Install R and RStudio\nYou will need:\n\nR version &gt;= 4.4.0\nRStudio &gt;= 2024.04\n\n\nInstall R\nDownload and install R for your operating system from https://cloud.r-project.org/.\n\n\nInstall R Studio\nDownload and install RStudio Desktop from https://posit.co/download/rstudio-desktop/. This page should automatically offer you the version suitable for your operating system, but you can scroll down to find versions for all operating systems."
-  },
-  {
-    "objectID": "setup.html#install-r-package-development-tools",
-    "href": "setup.html#install-r-package-development-tools",
-    "title": "System Setup 🤖",
-    "section": "Install R package development tools",
-    "text": "Install R package development tools\n\nFor Windows\nDownload and run the latest Rtools installer, Rtools.exe, from https://cran.r-project.org/bin/windows/Rtools/.\n\nKeep the default settings for the installation location and components to install\ncheck the box to add rtools to the system PATH.\n\n\n\nFor Mac\nInstall XCode. The easiest way is to open a Terminal window (Applications &gt; Utilities &gt; Terminal.app; or use the Terminal pane in RStudio) and type the following:\nxcode-select --install\nYou will be prompted to confirm the install, and possibly enter your computer password. Do so to complete the installation.\nAlternatively you can:\n\nDownload and install XCode from the Mac AppStore: http://itunes.apple.com/us/app/xcode/id497799835?mt=12\nWithin XCode go to Preferences : Downloads and install the Command Line Tools\n\n\n\nFor Linux\nIf you installed r-base-dev when installing R, you should have all you need to build packages from source. If not, go back to https://cloud.r-project.org/ and follow the instructions for your distribution (Ubuntu and Debian are likely the most common, and install it with sudo apt-get install r-base-dev)."
-  },
-  {
-    "objectID": "setup.html#git",
-    "href": "setup.html#git",
-    "title": "System Setup 🤖",
-    "section": "Git",
-    "text": "Git\nWe will be demonstrating the use of Git and GitHub for tracking changes during package development, and sharing and collaborating on our package.\n\nWindows\nCheck if Git is installed by running which git in the Terminal pane in RStudio.\nIf which git didn’t find Git installed:\n\nDownload and install from https://git-scm.com/downloads\nKeep all the default settings. If asked about “Adjusting your PATH environment”, make sure to select “Git from the command line and also from 3rd-party software”.\nOpen RStudio. In the menus go to Tools &gt; Global Options &gt; Git/SVN.\nCheck RStudio has found git under “Git executable:”\n\nYou may need to click Browse and find the git executable.\nIt may be in C:/Users/[username]/AppData/Local/Programs/Git/\n\n\n\n\nMac\nCheck if Git is installed by running which git in the Terminal. You should see something like /usr/bin/git, /usr/local/bin/, or /opt/homebrew/bin/git.\nIf you are asked to install the Xcode command line tools, say yes.\nIf which git didn’t find Git installed, and if you weren’t prompted to install it, run the following in the Terminal: xcode-select --install\n\n\nIf you do lots of scientific computing and especially if you use command-line programs in the Terminal, we recommend using Homebrew. See brew.sh for installation instructions. To install Git using Homebrew, run the following in the Terminal: brew install git"
-  },
-  {
-    "objectID": "setup.html#github",
-    "href": "setup.html#github",
-    "title": "System Setup 🤖",
-    "section": "GitHub",
-    "text": "GitHub\nRegister a GitHub account at github.com.\nI highly recommend the book Happy Git with R for advice on setting up and using Git with R [@bryan]."
-  },
-  {
-    "objectID": "setup.html#troubleshooting",
-    "href": "setup.html#troubleshooting",
-    "title": "System Setup 🤖",
-    "section": "Troubleshooting",
-    "text": "Troubleshooting\nIf you are having issues with the setup please start a discussion on GitHub here."
   }
 ]
