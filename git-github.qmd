@@ -1,20 +1,34 @@
 ---
 title: "Version Control with Git and Collaboration with GitHub"
+subtitle: "Parks Canada; Ecological Integrity Monitoring Program"
+author: "Andy Teucher"
 format: revealjs
 ---
 
-## Check link between R and GitHub {#check-link-between-r-and-github}
+## Configure Git
 
-Configure your `user.name` and `user.email` for git in RStudio with:
+Configure your `user.name` and `user.email` for git. This information will be associated with your commits.
 
-```{r}
-#| eval: false
+### In the terminal
+
+
+```bash
+git config --global user.name "Jane Doe"
+git config --global user.email "jane@doe.ca"
+```
+
+<br>
+
+### In RStudio
+
+```r
 usethis::use_git_config(
-  user.name = "Jane Doe", # actual first and last name
-  user.email = "jane@example.com" # email associated with GitHub account
+  user.name = "Jane Doe",
+  user.email = "jane@example.com"
 )
 ```
 
+## Check link between R and GitHub {#check-link-between-r-and-github}
 Communicating with GitHub requires authentication with your GitHub account.
 This is achieved by creating and securely storing a Personal Access Token (PAT).
 The [Managing Git(Hub) Credentials](https://usethis.r-lib.org/articles/articles/git-credentials.html) vignette in the **`usethis`** [@usethis] package has details on using PATs, but for now the following should suffice.

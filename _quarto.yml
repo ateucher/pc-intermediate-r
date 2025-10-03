@@ -1,5 +1,8 @@
 project:
   type: website
+  render:
+    - "*"
+    - "!CLAUDE.md"
 
 website:
   title: "Parks Canada - Intermediate R"
@@ -11,7 +14,7 @@ website:
       - text: Modules
         menu:
           - workflows.qmd
-          # - git-github.qmd
+          - git-github.qmd
 
 execute: 
   freeze: auto
@@ -23,3 +26,15 @@ format:
       - brand
     css: styles.css
     toc: true
+    
+  revealjs: 
+    height: 900
+    width: 1600
+    theme: [moon, slides.scss]
+    highlight-style: a11y
+    slide-number: true
+    chalkboard: true
+    revealjs-plugins:
+      - editable
+    filters:
+      - editable

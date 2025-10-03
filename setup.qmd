@@ -1,5 +1,6 @@
 ---
 title: "System Setup 🤖"
+format: html
 ---
 
 You will require the following software installed and configured for the workshop.

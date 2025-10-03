@@ -2,16 +2,7 @@
 title: "Creating Efficient Workflows in R"
 subtitle: "Parks Canada; Ecological Integrity Monitoring Program"
 author: "Andy Teucher"
-format: 
-  revealjs: 
-    height: 900
-    width: 1600
-    theme: [moon, slides.scss]
-    highlight-style: a11y
-    slide-number: true
-    chalkboard: true
-execute:
-  freeze: auto
+format: revealjs
 ---
 
 ```{r}

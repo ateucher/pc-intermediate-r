@@ -1,5 +1,6 @@
 ---
 title: "Parks Canada - Intermediate R"
+format: html
 ---
 
 This website contains the materials for the Parks Canada Intermediate R workshop. The workshop is designed to help participants improve their R programming skills, focusing on efficient workflows, , and reproducible research practices.
