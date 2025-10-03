@@ -2,3 +2,6 @@
 
 /.quarto/
 .Rproj.user
+
+**/*.quarto_ipynb
+CLAUDE.md
