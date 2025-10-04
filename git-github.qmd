@@ -5,12 +5,42 @@ author: "Andy Teucher"
 format: revealjs
 ---
 
+## Why Git?
+
+![](img/why-github-bryan.png)
+
+## Why Git?
+
+![](img/why-github-climbing.png)
+
+::: notes
+A commit is a snapshot of your project at a point in time. Next slide
+:::
+
+## Why Git? {background-image="img/why-git-climbing-2.png" background-position="50% 45%" background-size="90%"}
+
+::: {.absolute bottom=0}
+"Commits" help us focus on the work, not the bookkeeping.
+
+It takes care of otherwise time- consuming versioning & unrelenting file tracking. 
+:::
+
+## What is GitHub (traditional answer)?
+
+- **GitHub** is an online collaborative platform. It is built on top of **Git** - software that does file versioning and bookkeeping.
+- You can think of GitHub working like Dropbox - but with more control.
+
+## What is GitHub (non-traditional answer)?
+
+- **Publishing platform.** A new way for sharing documentation & scicomm - your files can become websites! Share the url once, it’s always the latest version.  
+
+- **Project management system.** Short- and long-term collaborative "todo" lists: "Issues" & "Projects"
+
 ## Configure Git
 
 Configure your `user.name` and `user.email` for git. This information will be associated with your commits.
 
 ### In the terminal
-
 
 ```bash
 git config --global user.name "Jane Doe"
@@ -31,12 +61,11 @@ usethis::use_git_config(
 ## Check link between R and GitHub {#check-link-between-r-and-github}
 Communicating with GitHub requires authentication with your GitHub account.
 This is achieved by creating and securely storing a Personal Access Token (PAT).
-The [Managing Git(Hub) Credentials](https://usethis.r-lib.org/articles/articles/git-credentials.html) vignette in the **`usethis`** [@usethis] package has details on using PATs, but for now the following should suffice.
+The [Managing Git(Hub) Credentials](https://usethis.r-lib.org/articles/articles/git-credentials.html) vignette in the **`usethis`** package has details on using PATs, but for now the following should suffice.
 
 Create a PAT with:
 
-```{r}
-#| eval: false
+```r
 usethis::create_github_token()
 ```
 
@@ -45,19 +74,24 @@ usethis::create_github_token()
 -   Run `gitcreds::gitcreds_set()` in R and paste in your PAT when prompted.
 -   After you close the PAT webpage, you won't be able to see your PAT again! You can store it somewhere secure, such as in a password manager.
 
-### Caveat about storing PATs on Linux:
+::: notes
+
+Caveat about storing PATs on Linux:
 
 macOS and Windows both have built-in credential managers that will securely store your PAT, however the same does not exist in Linux.
 [Happy Git with R has a section on options for storing your PAT on Linux](https://happygitwithr.com/https-pat#pat-doesnt-persist-on-linux).
 
-::: aside
-You may need to install the **`gitcreds`** package [@gitcreds].
 :::
+
+::: aside
+You may need to install the **`gitcreds`** package.
+:::
+
+---
 
 You can now check your Git setup by asking for a "situation report":
 
-```{r}
-#| eval: false
+```r
 usethis::git_sitrep()
 ```
 
