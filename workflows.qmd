@@ -25,10 +25,6 @@ format: revealjs
 
 ![](img/user-interface-for-rstudio-migration.jpeg)
 
-::: footer
-<https://github.com/posit-dev/positron-website/pull/116/>
-:::
-
 ::: notes
 These UI elements are the most novel for RStudio users:
 
