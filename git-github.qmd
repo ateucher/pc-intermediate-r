@@ -58,11 +58,19 @@ usethis::use_git_config(
 )
 ```
 
-## Check link between R and GitHub {#check-link-between-r-and-github}
+## Check link between R and GitHub
+
+:::: section
+::: {.fragment .step-fade-in-then-out}
+
 Communicating with GitHub requires authentication with your GitHub account.
 This is achieved by creating and securely storing a Personal Access Token (PAT).
-The [Managing Git(Hub) Credentials](https://usethis.r-lib.org/articles/articles/git-credentials.html) vignette in the **`usethis`** package has details on using PATs, but for now the following should suffice.
+The [Managing Git(Hub) Credentials](https://usethis.r-lib.org/articles/articles/git-credentials.html) vignette in the **`usethis`** package has details on using PATs.
 
+![](img/ChatGPT_R-GitHub.png){ width=60% fig-align="center" style="border-radius: 20px;" }
+:::
+
+::: {.fragment .step-fade-in-then-out}
 Create a PAT with:
 
 ```r
@@ -74,7 +82,12 @@ usethis::create_github_token()
 -   Run `gitcreds::gitcreds_set()` in R and paste in your PAT when prompted.
 -   After you close the PAT webpage, you won't be able to see your PAT again! You can store it somewhere secure, such as in a password manager.
 
+:::
+::::
+
 ::: notes
+
+You may need to install the **`gitcreds`** package.
 
 Caveat about storing PATs on Linux:
 
@@ -83,20 +96,17 @@ macOS and Windows both have built-in credential managers that will securely stor
 
 :::
 
-::: aside
-You may need to install the **`gitcreds`** package.
-:::
 
----
-
-You can now check your Git setup by asking for a "situation report":
+## Check your Git setup with a "situation report"
 
 ```r
 usethis::git_sitrep()
 ```
 
-::: cell-output
-```
+:::: fragment
+::: cell-output-tall
+
+```{.default code-line-numbers="|18"}
 ── Git global (user)
 • Name: 'Andy Teucher'
 • Email: 'andy.teucher@gmail.com'
@@ -113,14 +123,22 @@ usethis::git_sitrep()
 • Token scopes: 'gist, repo, user, workflow'
 • Email(s): 'andy.teucher@gmail.com (primary)'
 ℹ No active usethis project
-```
-:::
 
-The output shows information about the link between RStudio and GitHub.
-Not all of it is relevant now, but it is essential to check whether your name and email are correct and the PAT is showing as "discovered":
-
-::: cell-output
-```
 Personal access token for 'https://github.com': '<discovered>'
 ```
+
+:::
+::::
+
+::: fragment
+It is essential to check whether your name and email are correct and the PAT is showing as "discovered"
+:::
+
+::: {.question .fragment}
+Do you see anything different in your output?
+:::
+
+::: notes
+The output shows information about the link between RStudio and GitHub.
+Not all of it is relevant now, but it is essential to check whether your name and email are correct and the PAT is showing as "discovered":
 :::
