@@ -5,17 +5,27 @@ author: "Andy Teucher"
 format: revealjs
 ---
 
-## Why Git?
+## What is Git? [{{< fa brands git-alt size=lg >}}]{style="color: orange;"}
 
-![](img/why-github-bryan.png)
-
-## Why Git?
-
-![](img/why-github-climbing.png)
-
-::: notes
-A commit is a snapshot of your project at a point in time. Next slide
+::: incremental
+- A version control system
+- It tracks and manages the evolution of a set of files — called a repository* 
+- It keeps a history of changes to files, who made the changes, and when
+- It allows you to revert to previous versions of files
+- It enables collaboration by merging changes from multiple contributors
+- It is a command-line tool, but there are graphical user interfaces (GUIs) available
 :::
+
+::: {.notebox .fragment}
+*repository (repo) == folder == RStudio or Positron project
+:::
+
+[Using a project-oriented workflow is critical]{.fragment}
+
+
+## Why Git?
+
+![](img/why-git-climbing.png)
 
 ## Why Git? {background-image="img/why-git-climbing-2.png" background-position="50% 45%" background-size="90%"}
 
@@ -25,16 +35,36 @@ A commit is a snapshot of your project at a point in time. Next slide
 It takes care of otherwise time- consuming versioning & unrelenting file tracking. 
 :::
 
+## Why GitHub? {{< fa brands github size=lg >}}
+
+![](img/why-github-bryan.png)
+
+
+::: notes
+A commit is a snapshot of your project at a point in time.
+:::
+
+
 ## What is GitHub (traditional answer)?
 
+::: incremental
 - **GitHub** is an online collaborative platform. It is built on top of **Git** - software that does file versioning and bookkeeping.
+- It is a remote host for your Git repositories.
+- It provides a web interface for managing, sharing, and collaborating on your repositories.
 - You can think of GitHub working like Dropbox - but with more control.
+:::
 
 ## What is GitHub (non-traditional answer)?
 
 - **Publishing platform.** A new way for sharing documentation & scicomm - your files can become websites! Share the url once, it’s always the latest version.  
 
 - **Project management system.** Short- and long-term collaborative "todo" lists: "Issues" & "Projects"
+
+::: notes
+for most folks, the pros of Git only outweigh the cons once you take the additional step of hooking your local repository up to a remote host like GitHub. The joint use of Git and GitHub offers many benefits that more than justify the learning curve.
+:::
+
+# Let's get set up! [{{< fa brands git-alt size=xl >}}&emsp;{{< fa brands github size=xl >}}]{style="float: right; padding-right: 100px;"}
 
 ## Configure Git
 
