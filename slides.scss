@@ -171,15 +171,30 @@ $h3-font-size: 1.15em !default;
 
 // Fade in then out fragment in the same place. Used on slide #check-link-between-r-and-github
 // Borrowed from https://github.com/hakimel/reveal.js/issues/745#issuecomment-422507012
-.reveal .slides section .fragment.step-fade-in-then-out {
-	opacity: 0;
-	display: none; 
-}
-.reveal .slides section .fragment.step-fade-in-then-out.current-fragment {
-	opacity: 1;
-	display: inline; 
-}
+// .reveal .slides section .fragment.step-fade-in-then-out {
+// 	opacity: 0;
+// 	display: none; 
+// }
+// .reveal .slides section .fragment.step-fade-in-then-out.current-fragment {
+// 	opacity: 1;
+// 	display: inline; 
+// }
 
 .reveal .slides .cell-output-tall code {
   max-height: 600px;
+}
+
+.reveal .slides .resources {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding: 5px 0 0 0;
+  margin: 0 0 -10px 0;
+  border-top: $link-color 1px solid;
+}
+
+.reveal .slides .resources p {
+  font-size: 0.75em;
+  color: $link-color;
+  margin: 0;
 }

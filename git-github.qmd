@@ -39,11 +39,9 @@ It takes care of otherwise time- consuming versioning & unrelenting file trackin
 
 ![](img/why-github-bryan.png)
 
-
 ::: notes
 A commit is a snapshot of your project at a point in time.
 :::
-
 
 ## What is GitHub (traditional answer)?
 
@@ -64,22 +62,54 @@ A commit is a snapshot of your project at a point in time.
 for most folks, the pros of Git only outweigh the cons once you take the additional step of hooking your local repository up to a remote host like GitHub. The joint use of Git and GitHub offers many benefits that more than justify the learning curve.
 :::
 
-# Let's get set up! [{{< fa brands git-alt size=xl >}}&emsp;{{< fa brands github size=xl >}}]{style="float: right; padding-right: 100px;"}
+# Let's &nbsp;[{{< fa brands git size=lg >}}]{style="color: orange;"}&nbsp; set up! [{{< fa brands git-alt size=xl >}}&emsp;{{< fa brands github size=xl >}}]{style="float: right; padding-right: 100px;"}
 
-## Configure Git
+## An aside: set up your terminal in Positron
+
+- Unless you are already a Windows Powershell or Command Prompt user, I recommend switching the terminal in Positron to Git Bash.
+
+::: {.columns}
+::: {.column width="45%"}
+![](img/windows-terminal-bash.png)
+:::
+::: {.column width="55%"}
+
+- {{< kbd Ctrl-Shift-P >}} to open the command palette
+- search for `"terminal default profile"`
+- select **Terminal: Select Default Profile"** and set it to "Git Bash".
+
+### settings.json
+```json
+{
+  "git.path": "C:/Program Files/Git/bin/bash.exe",
+  "terminal.integrated.defaultProfile.windows": "Git Bash",
+  "workbench.keybindings.rstudioKeybindings": true,
+}
+```
+:::
+:::
+<!-- end columns -->
+
+## Introduce yourself to Git
 
 Configure your `user.name` and `user.email` for git. This information will be associated with your commits.
 
+<br>
+
+::: fragment
 ### In the terminal
 
-```bash
+```{.bash code-line-numbers="1|2|3"}
+which git
 git config --global user.name "Jane Doe"
 git config --global user.email "jane@doe.ca"
 ```
+:::
 
 <br>
 
-### In RStudio
+::: fragment
+### In Positron or RStudio
 
 ```r
 usethis::use_git_config(
@@ -87,45 +117,40 @@ usethis::use_git_config(
   user.email = "jane@example.com"
 )
 ```
+:::
 
 ## Check link between R and GitHub
-
-:::: section
-::: {.fragment .step-fade-in-then-out}
 
 Communicating with GitHub requires authentication with your GitHub account.
 This is achieved by creating and securely storing a Personal Access Token (PAT).
 The [Managing Git(Hub) Credentials](https://usethis.r-lib.org/articles/articles/git-credentials.html) vignette in the **`usethis`** package has details on using PATs.
 
 ![](img/ChatGPT_R-GitHub.png){ width=60% fig-align="center" style="border-radius: 20px;" }
-:::
 
-::: {.fragment .step-fade-in-then-out}
+## Check link between R and GitHub
+
 Create a PAT with:
 
 ```r
 usethis::create_github_token()
 ```
 
+::: fragment
 -   Give the token a descriptive name, accept the default scopes, and click "Generate Token".
 -   Copy the newly generated PAT to your clipboard.
 -   Run `gitcreds::gitcreds_set()` in R and paste in your PAT when prompted.
 -   After you close the PAT webpage, you won't be able to see your PAT again! You can store it somewhere secure, such as in a password manager.
 
 :::
-::::
 
 ::: notes
-
 You may need to install the **`gitcreds`** package.
 
 Caveat about storing PATs on Linux:
 
 macOS and Windows both have built-in credential managers that will securely store your PAT, however the same does not exist in Linux.
 [Happy Git with R has a section on options for storing your PAT on Linux](https://happygitwithr.com/https-pat#pat-doesnt-persist-on-linux).
-
 :::
-
 
 ## Check your Git setup with a "situation report"
 
@@ -133,9 +158,8 @@ macOS and Windows both have built-in credential managers that will securely stor
 usethis::git_sitrep()
 ```
 
-:::: fragment
+::: fragment
 ::: cell-output-tall
-
 ```{.default code-line-numbers="|18"}
 ── Git global (user)
 • Name: 'Andy Teucher'
@@ -156,9 +180,8 @@ usethis::git_sitrep()
 
 Personal access token for 'https://github.com': '<discovered>'
 ```
-
 :::
-::::
+:::
 
 ::: fragment
 It is essential to check whether your name and email are correct and the PAT is showing as "discovered"
@@ -171,4 +194,17 @@ Do you see anything different in your output?
 ::: notes
 The output shows information about the link between RStudio and GitHub.
 Not all of it is relevant now, but it is essential to check whether your name and email are correct and the PAT is showing as "discovered":
+:::
+
+## Create a local Git repository
+
+### From the command line (terminal)
+
+```bash
+cd path/to/your/project
+git init
+```
+
+::: resources
+<https://positron.posit.co/git.html>
 :::
