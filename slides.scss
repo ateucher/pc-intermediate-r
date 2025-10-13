@@ -198,3 +198,9 @@ $h3-font-size: 1.15em !default;
   color: $link-color;
   margin: 0;
 }
+
+.reveal .slides span.highlight-term {
+  color: #e2b4c3ff;
+  font-weight: bold;
+  font-style: italic;
+}
