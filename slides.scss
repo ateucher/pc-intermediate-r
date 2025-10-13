@@ -199,8 +199,16 @@ $h3-font-size: 1.15em !default;
   margin: 0;
 }
 
-.reveal .slides span.highlight-term {
+span.highlight-term {
   color: #e2b4c3ff;
   font-weight: bold;
   font-style: italic;
+}
+
+span.git-orange {
+  color: #ffa500;
+}
+
+.reveal .slides .sourceCode code {
+  background-color: #3a3a3aff;
 }
