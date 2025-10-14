@@ -322,12 +322,25 @@ git init
 - All collaborators can push changes to the remote repository (given they have permission)
 - Changes made by collaborators can be pulled into your local repository
 
-::: {.fragment}
-### Your turn
+## Your turn
 
 - In pairs, one person is the "owner" of a repo, the other is a "collaborator"
 - Owner adds collaborator to a on GitHub
 - Collaborator clones the repo to their computer
 - Collaborator makes a change, commits, and pushes to GitHub
 - Owner pulls the change to their computer
-:::
+
+## Collaborating via branching + "Pull Requests"
+
+- More formal collaboration workflow
+- Allows fearless experimentation
+- Allows efficient code review and discussion
+- Good for bigger contributions
+
+<br>
+
+```{mermaid}
+%%| label: branching-pr-2
+%%| fig-width: 1000
+%%| file: pull-request.mmd
+```
