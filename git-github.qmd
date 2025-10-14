@@ -344,3 +344,59 @@ git init
 %%| fig-width: 1000
 %%| file: pull-request.mmd
 ```
+
+## Licensing and best practices
+
+> Share evidence, research and decision making openly. Make all non-sensitive data, information, and new code developed in delivery of services open to the outside world for sharing and reuse under an open licence.
+
+> It is recommended that the source code be released as early as possible in the project's life cycle to avoid the overhead of publishing source code late in the process.
+
+> Employees should use their full name and Government of Canada email address for all code contributions to public repositories while acting within the scope of their duties or employment.
+
+::: {.resources}
+*https://canada-ca.github.io/open-source-logiciel-libre/en/open-source-standards.html
+
+https://github.com/canada-ca/template-gabarit
+:::
+
+::: {.notes}
+- Spend some time exploring this repo. 
+- Can make a PR or open an issue if they want to contribute.
+- GitHub as a publishing platform.
+:::
+
+## Choose a license
+
+### For work
+
+> By default, a project without an open source licence applied to it would only be released under the Crown Copyright.
+
+- MIT is a good, permissive license for most projects
+- Apache 2.0 is similar, but adds an explicit patent grant
+
+```r
+usethis::use_mit_license(
+  copyright_holder = "His Majesty the King in Right of Canada, as represented by the Minister responsible for Parks Canada Agency"
+)
+```
+
+### For personal projects {style="padding-top: 30px;"}
+
+```r
+usethis::use_mit_license(
+  copyright_holder = "Andy Teucher"
+)
+```
+
+::: {.resources}
+https://github.com/canada-ca/open-source-logiciel-libre/blob/master/en/guides/publishing-open-source-code.md#select-open-source-software-licence
+:::
+
+::: {.notes}
+- Show text of license
+- Explain I own the copyright, but anyone is free to borrow/use/modify it.
+:::
+
+## Your turn
+
+Add a license to your repo via a pull request

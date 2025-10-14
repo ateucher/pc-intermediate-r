@@ -5,10 +5,13 @@
 
 $font-family-sans-serif: "Atkinson Hyperlegible", sans-serif;
 
-$body-bg:rgb(50, 92, 101);
+$body-bg:#325c65ff;
 $body-color: #FFFFFF;
 $link-color: #C7B41D;
 $presentation-font-size-root: 40px;
+$git-orange: #ffa500;
+$highlight-term-color: #e2b4c3ff;
+$quote-color: adjust-color($color: $highlight-term-color, $lightness: 5%, $alpha: 1.0);
 
 // headings
 $headingTextTransform: none;
@@ -200,15 +203,21 @@ $h3-font-size: 1.15em !default;
 }
 
 span.highlight-term {
-  color: #e2b4c3ff;
+  color: $highlight-term-color;
   font-weight: bold;
   font-style: italic;
 }
 
 span.git-orange {
-  color: #ffa500;
+  color: $git-orange;
 }
 
 .reveal .slides .sourceCode code {
   background-color: #3a3a3aff;
+}
+
+.reveal .slides blockquote {
+  font-style: italic;
+  color: $quote-color;
+  border-color: $quote-color;
 }
