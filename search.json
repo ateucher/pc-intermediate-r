@@ -546,18 +546,186 @@
     "text": "Instructor:\nAndy Teucher is a freelance data scientist and package developer with a passion for teaching others how to use data science tools to make their work more efficient and reproducible. His background is in conservation biology, with an MSc in Ecology from the University of Calgary. He has spent much of his career as a data scientist in government, where he made it his mission to promote and teach open, reproducible data science practices. He has written many R packages for internal use in his teams as well as for a broader audience, with several hosted on CRAN. Andy is a certified Software Carpentry and Data Carpentry instructor, and has led many workshops teaching programming skills to scientists and data professionals."
   },
   {
-    "objectID": "git-github.html#configure-git",
-    "href": "git-github.html#configure-git",
+    "objectID": "git-github.html#what-is-git",
+    "href": "git-github.html#what-is-git",
     "title": "Version Control with Git and Collaboration with GitHub",
-    "section": "Configure Git",
-    "text": "Configure Git\nConfigure your user.name and user.email for git. This information will be associated with your commits.\nIn the terminal\ngit config --global user.name \"Jane Doe\"\ngit config --global user.email \"jane@doe.ca\"\n\nIn RStudio\nusethis::use_git_config(\n  user.name = \"Jane Doe\",\n  user.email = \"jane@example.com\"\n)"
+    "section": "What is Git? ",
+    "text": "What is Git? \n\nA version control system\nIt tracks and manages the evolution of a set of files — called a repository*\nIt keeps a history of changes to files, who made the changes, and when\nIt allows you to revert to previous versions of files\nIt enables collaboration by merging changes from multiple contributors\nIt is a command-line tool, but there are graphical user interfaces (GUIs) available\n\n\n*repository (repo) == folder == RStudio or Positron project\n\nUsing a project-oriented workflow is critical"
+  },
+  {
+    "objectID": "git-github.html#why-git",
+    "href": "git-github.html#why-git",
+    "title": "Version Control with Git and Collaboration with GitHub",
+    "section": "Why Git?",
+    "text": "Why Git?"
+  },
+  {
+    "objectID": "git-github.html#why-git-1",
+    "href": "git-github.html#why-git-1",
+    "title": "Version Control with Git and Collaboration with GitHub",
+    "section": "Why Git?",
+    "text": "Why Git?\n\n“Commits” help us focus on the work, not the bookkeeping.\nIt takes care of otherwise time- consuming versioning & unrelenting file tracking."
+  },
+  {
+    "objectID": "git-github.html#why-github",
+    "href": "git-github.html#why-github",
+    "title": "Version Control with Git and Collaboration with GitHub",
+    "section": "Why GitHub? ",
+    "text": "Why GitHub? \n\n\nA commit is a snapshot of your project at a point in time."
+  },
+  {
+    "objectID": "git-github.html#what-is-github-traditional-answer",
+    "href": "git-github.html#what-is-github-traditional-answer",
+    "title": "Version Control with Git and Collaboration with GitHub",
+    "section": "What is GitHub (traditional answer)?",
+    "text": "What is GitHub (traditional answer)?\n\nGitHub is an online collaborative platform. It is built on top of Git - software that does file versioning and bookkeeping.\nIt is a remote host for your Git repositories.\nIt provides a web interface for managing, sharing, and collaborating on your repositories.\nYou can think of GitHub working like Dropbox - but with more control."
+  },
+  {
+    "objectID": "git-github.html#what-is-github-non-traditional-answer",
+    "href": "git-github.html#what-is-github-non-traditional-answer",
+    "title": "Version Control with Git and Collaboration with GitHub",
+    "section": "What is GitHub (non-traditional answer)?",
+    "text": "What is GitHub (non-traditional answer)?\n\nPublishing platform. A new way for sharing documentation & scicomm - your files can become websites! Share the url once, it’s always the latest version.\nProject management system. Short- and long-term collaborative “todo” lists: “Issues” & “Projects”\n\n\nfor most folks, the pros of Git only outweigh the cons once you take the additional step of hooking your local repository up to a remote host like GitHub. The joint use of Git and GitHub offers many benefits that more than justify the learning curve."
+  },
+  {
+    "objectID": "git-github.html#an-aside-set-up-your-terminal-in-positron",
+    "href": "git-github.html#an-aside-set-up-your-terminal-in-positron",
+    "title": "Version Control with Git and Collaboration with GitHub",
+    "section": "An aside: set up your terminal in Positron",
+    "text": "An aside: set up your terminal in Positron\n\nUnless you are already a Windows Powershell or Command Prompt user, I recommend switching the terminal in Positron to Git Bash.\n\n\n\n\n\n\nCtrl-Shift-PCtrl-Shift-P to open the command palette\nsearch for \"terminal default profile\"\nselect Terminal: Select Default Profile” and set it to “Git Bash”.\n\nsettings.json\n{\n  \"git.path\": \"C:/Program Files/Git/bin/bash.exe\",\n  \"terminal.integrated.defaultProfile.windows\": \"Git Bash\",\n  \"workbench.keybindings.rstudioKeybindings\": true,\n}"
+  },
+  {
+    "objectID": "git-github.html#introduce-yourself-to-git",
+    "href": "git-github.html#introduce-yourself-to-git",
+    "title": "Version Control with Git and Collaboration with GitHub",
+    "section": "Introduce yourself to Git",
+    "text": "Introduce yourself to Git\nConfigure your user.name and user.email for git. This information will be associated with your commits.\n\n\nIn the terminal\nwhich git\ngit config --global user.name \"Jane Doe\"\ngit config --global user.email \"jane@doe.ca\"\n\n\n\nIn Positron or RStudio\nusethis::use_git_config(\n  user.name = \"Jane Doe\",\n  user.email = \"jane@example.com\"\n)"
   },
   {
     "objectID": "git-github.html#check-link-between-r-and-github",
     "href": "git-github.html#check-link-between-r-and-github",
     "title": "Version Control with Git and Collaboration with GitHub",
     "section": "Check link between R and GitHub",
-    "text": "Check link between R and GitHub\nCommunicating with GitHub requires authentication with your GitHub account. This is achieved by creating and securely storing a Personal Access Token (PAT). The Managing Git(Hub) Credentials vignette in the usethis [@usethis] package has details on using PATs, but for now the following should suffice.\nCreate a PAT with:\n\nGive the token a descriptive name, accept the default scopes, and click “Generate Token”.\nCopy the newly generated PAT to your clipboard.\nRun gitcreds::gitcreds_set() in R and paste in your PAT when prompted.\nAfter you close the PAT webpage, you won’t be able to see your PAT again! You can store it somewhere secure, such as in a password manager.\n\nCaveat about storing PATs on Linux:\nmacOS and Windows both have built-in credential managers that will securely store your PAT, however the same does not exist in Linux. Happy Git with R has a section on options for storing your PAT on Linux.\n\nYou can now check your Git setup by asking for a “situation report”:\n\n── Git global (user)\n• Name: 'Andy Teucher'\n• Email: 'andy.teucher@gmail.com'\n• Global (user-level) gitignore file: '/Users/andy/.gitignore'\n• Vaccinated: TRUE\nℹ Defaulting to 'https' Git protocol\n• Default Git protocol: 'https'\n• Default initial branch name: 'main'\n\n── GitHub user\n• Default GitHub host: 'https://github.com'\n• Personal access token for 'https://github.com': '&lt;discovered&gt;'\n• GitHub user: 'ateucher'\n• Token scopes: 'gist, repo, user, workflow'\n• Email(s): 'andy.teucher@gmail.com (primary)'\nℹ No active usethis project\n\nThe output shows information about the link between RStudio and GitHub. Not all of it is relevant now, but it is essential to check whether your name and email are correct and the PAT is showing as “discovered”:\n\nPersonal access token for 'https://github.com': '&lt;discovered&gt;'\n\n\n\n\n\n\nYou may need to install the gitcreds package [@gitcreds]."
+    "text": "Check link between R and GitHub\nCommunicating with GitHub requires authentication with your GitHub account. This is achieved by creating and securely storing a Personal Access Token (PAT). The Managing Git(Hub) Credentials vignette in the usethis package has details on using PATs."
+  },
+  {
+    "objectID": "git-github.html#check-link-between-r-and-github-1",
+    "href": "git-github.html#check-link-between-r-and-github-1",
+    "title": "Version Control with Git and Collaboration with GitHub",
+    "section": "Check link between R and GitHub",
+    "text": "Check link between R and GitHub\nCreate a PAT with:\nusethis::create_github_token()\n\n\nGive the token a descriptive name, accept the default scopes, and click “Generate Token”.\nCopy the newly generated PAT to your clipboard.\nRun gitcreds::gitcreds_set() in R and paste in your PAT when prompted.\nAfter you close the PAT webpage, you won’t be able to see your PAT again! You can store it somewhere secure, such as in a password manager.\n\n\n\nYou may need to install the gitcreds package.\nCaveat about storing PATs on Linux:\nmacOS and Windows both have built-in credential managers that will securely store your PAT, however the same does not exist in Linux. Happy Git with R has a section on options for storing your PAT on Linux."
+  },
+  {
+    "objectID": "git-github.html#check-your-git-setup-with-a-situation-report",
+    "href": "git-github.html#check-your-git-setup-with-a-situation-report",
+    "title": "Version Control with Git and Collaboration with GitHub",
+    "section": "Check your Git setup with a “situation report”",
+    "text": "Check your Git setup with a “situation report”\nusethis::git_sitrep()\n\n\n── Git global (user)\n• Name: 'Andy Teucher'\n• Email: 'andy.teucher@gmail.com'\n• Global (user-level) gitignore file: '/Users/andy/.gitignore'\n• Vaccinated: TRUE\nℹ Defaulting to 'https' Git protocol\n• Default Git protocol: 'https'\n• Default initial branch name: 'main'\n\n── GitHub user\n• Default GitHub host: 'https://github.com'\n• Personal access token for 'https://github.com': '&lt;discovered&gt;'\n• GitHub user: 'ateucher'\n• Token scopes: 'gist, repo, user, workflow'\n• Email(s): 'andy.teucher@gmail.com (primary)'\nℹ No active usethis project\n\nPersonal access token for 'https://github.com': '&lt;discovered&gt;'\n\n\n\nIt is essential to check whether your name and email are correct and the PAT is showing as “discovered”\n\n\nDo you see anything different in your output?\n\n\nThe output shows information about the link between RStudio and GitHub. Not all of it is relevant now, but it is essential to check whether your name and email are correct and the PAT is showing as “discovered”\ngit_vaccinate()"
+  },
+  {
+    "objectID": "git-github.html#we-can-interact-with-git-and-github",
+    "href": "git-github.html#we-can-interact-with-git-and-github",
+    "title": "Version Control with Git and Collaboration with GitHub",
+    "section": "We can interact with Git and GitHub:",
+    "text": "We can interact with Git and GitHub:\n\nfrom with Positron  GUI,\nusing usethis git-related functions,\n command-line tools + GitHub web interface"
+  },
+  {
+    "objectID": "git-github.html#starting-a-new-project-with-git-and-github",
+    "href": "git-github.html#starting-a-new-project-with-git-and-github",
+    "title": "Version Control with Git and Collaboration with GitHub",
+    "section": "Starting a new project with Git and GitHub",
+    "text": "Starting a new project with Git and GitHub\n\nGitHub First\n\nCreate a new repo on GitHub, then clone it to your computer\nPreferred, cleanest workflow \n\nLocal First\n\nCreate a new repo on your computer, then push it to GitHub\nTotally fine, a bit more awkward"
+  },
+  {
+    "objectID": "git-github.html#we-will",
+    "href": "git-github.html#we-will",
+    "title": "Version Control with Git and Collaboration with GitHub",
+    "section": "We will:",
+    "text": "We will:\n\nCreate a new repo on GitHub\nClone it to your computer and open as a new project using Positron\nCreate some commits\nPush the commits to GitHub\n\n\nWe’re going to make a repository for recipes!\nOrganization:\n\nREADME.md with a description of the project\none .md file per recipe in a recipes/ folder"
+  },
+  {
+    "objectID": "git-github.html#making-a-commit",
+    "href": "git-github.html#making-a-commit",
+    "title": "Version Control with Git and Collaboration with GitHub",
+    "section": "Making a commit",
+    "text": "Making a commit\n\nMake changes to file(s)\nChoose what files you want to include in the commit\nStage the changes (using git add)\nCommit the staged changes (using git commit)\n\n\nIf you think of Git as taking snapshots of changes over the life of a project, git add specifies what will go in a snapshot (putting things in the staging area), and git commit then actually takes the snapshot, and makes a permanent record of it (as a commit). It’s almost always better to explicitly add things to the staging area, because you might commit changes you forgot you made. Try to stage things manually, or you might find yourself searching for “git undo commit” more than you would like!"
+  },
+  {
+    "objectID": "git-github.html#converting-an-existing-project-to-use-git-and-github",
+    "href": "git-github.html#converting-an-existing-project-to-use-git-and-github",
+    "title": "Version Control with Git and Collaboration with GitHub",
+    "section": "Converting an existing project to use Git and GitHub",
+    "text": "Converting an existing project to use Git and GitHub\n\nInitialize a Git repository in your existing project\nCommit the existing files\nCreate a new repo on GitHub\nLink your local repo to the GitHub repo\nPush the commits to GitHub"
+  },
+  {
+    "objectID": "git-github.html#ignoring-things",
+    "href": "git-github.html#ignoring-things",
+    "title": "Version Control with Git and Collaboration with GitHub",
+    "section": "Ignoring things",
+    "text": "Ignoring things\n\nWhat about files that you don’t want to track with Git or put on GitHub?\n\nlarge/sensitive data files,\nrendered outputs,\ntemporary files created by IDE\n\n.gitignore file in the root of your project\n\n\n\n# R data files\n*.RData\n*.rda\n\n# Specific data files\ndata/large_data.csv\n\n# output files\nreports/\n\n\nEach line specifies a pattern\nComments starting with # are ignored\nWildcards (e.g., *) to specify patterns\nSpecify specific files or entire directories"
+  },
+  {
+    "objectID": "git-github.html#createadd-to-a-.gitignore-file",
+    "href": "git-github.html#createadd-to-a-.gitignore-file",
+    "title": "Version Control with Git and Collaboration with GitHub",
+    "section": "Create/add to a .gitignore file",
+    "text": "Create/add to a .gitignore file\n\n\n\n\nOr\nusethis::use_git_ignore(\n  c(\"*.RData\", \"data/large_data.csv\", \"reports/\")\n)"
+  },
+  {
+    "objectID": "git-github.html#your-turn",
+    "href": "git-github.html#your-turn",
+    "title": "Version Control with Git and Collaboration with GitHub",
+    "section": "Your Turn",
+    "text": "Your Turn\n\nFind an existing project on your computer, and turn it into a git repository\nChoose carefully* what files to include in your first commit, and commit the files\nCreate a new repository on GitHub and push your local commits to GitHub\n\n\nRemember to use the .gitignore file\n\n\n\nhttps://positron.posit.co/git.html"
+  },
+  {
+    "objectID": "git-github.html#collaborating",
+    "href": "git-github.html#collaborating",
+    "title": "Version Control with Git and Collaboration with GitHub",
+    "section": "Collaborating",
+    "text": "Collaborating\n\nGit is a distributed version control system\nEach collaborator has a full copy of the repository, including its history\nAll collaborators can push changes to the remote repository (given they have permission)\nChanges made by collaborators can be pulled into your local repository"
+  },
+  {
+    "objectID": "git-github.html#your-turn-1",
+    "href": "git-github.html#your-turn-1",
+    "title": "Version Control with Git and Collaboration with GitHub",
+    "section": "Your turn",
+    "text": "Your turn\n\nIn pairs, one person is the “owner” of a repo, the other is a “collaborator”\nOwner adds collaborator to a on GitHub\nCollaborator clones the repo to their computer\nCollaborator makes a change, commits, and pushes to GitHub\nOwner pulls the change to their computer"
+  },
+  {
+    "objectID": "git-github.html#collaborating-via-branching-pull-requests",
+    "href": "git-github.html#collaborating-via-branching-pull-requests",
+    "title": "Version Control with Git and Collaboration with GitHub",
+    "section": "Collaborating via branching + “Pull Requests”",
+    "text": "Collaborating via branching + “Pull Requests”\n\nMore formal collaboration workflow\nAllows fearless experimentation\nAllows efficient code review and discussion\nGood for bigger contributions\n\n\n\n\n\n\n%%{\n    init: {\n        'theme':'base', \n        'showCommitLabel': false, \n        'themeVariables': { \n            'git0':'#6cc644', \n            'git1':'#f39c12', \n            'commitLabelColor': '#325c65', \n            'commitLabelBackground':'#325c65'\n        }\n    }\n}%%\n\ngitGraph\n    commit id: \" \"\n    commit id: \"  \"\n    commit id: \"   \"\n    commit id: \"    \"\n    branch feature\n    commit id: \"     \"\n    commit id: \"      \"\n    commit id: \"       \"\n    commit id: \"        \"\n    checkout main\n    merge feature tag: \"PR review & merge\"\n    commit id: \"         \"\n    commit id: \"          \""
+  },
+  {
+    "objectID": "git-github.html#steps",
+    "href": "git-github.html#steps",
+    "title": "Version Control with Git and Collaboration with GitHub",
+    "section": "Steps",
+    "text": "Steps\n\nCreate a new branch\nMake changes, commit, and push the branch to GitHub\nOpen a Pull Request (PR) on GitHub\nDiscuss and review the PR\nMerge the PR into the main branch\nPull the latest changes to your local main branch"
+  },
+  {
+    "objectID": "git-github.html#licensing-and-best-practices",
+    "href": "git-github.html#licensing-and-best-practices",
+    "title": "Version Control with Git and Collaboration with GitHub",
+    "section": "Licensing and best practices",
+    "text": "Licensing and best practices\n\nShare evidence, research and decision making openly. Make all non-sensitive data, information, and new code developed in delivery of services open to the outside world for sharing and reuse under an open licence.\n\n\nIt is recommended that the source code be released as early as possible in the project’s life cycle to avoid the overhead of publishing source code late in the process.\n\n\nEmployees should use their full name and Government of Canada email address for all code contributions to public repositories while acting within the scope of their duties or employment.\n\n\n*https://canada-ca.github.io/open-source-logiciel-libre/en/open-source-standards.html\nhttps://github.com/canada-ca/template-gabarit\n\n\n\nSpend some time exploring this repo.\nCan make a PR or open an issue if they want to contribute.\nGitHub as a publishing platform."
+  },
+  {
+    "objectID": "git-github.html#choose-a-license",
+    "href": "git-github.html#choose-a-license",
+    "title": "Version Control with Git and Collaboration with GitHub",
+    "section": "Choose a license",
+    "text": "Choose a license\nFor work\n\nBy default, a project without an open source licence applied to it would only be released under the Crown Copyright.\n\n\nMIT is a good, permissive license for most projects\nApache 2.0 is similar, but adds an explicit patent grant\n\nusethis::use_mit_license(\n  copyright_holder = \"His Majesty the King in Right of Canada, as represented by the Minister responsible for Parks Canada Agency\"\n)\nFor personal projects\nusethis::use_mit_license(\n  copyright_holder = \"Andy Teucher\"\n)\n\nhttps://github.com/canada-ca/open-source-logiciel-libre/blob/master/en/guides/publishing-open-source-code.md#select-open-source-software-licence\n\n\n\nShow text of license\nExplain I own the copyright, but anyone is free to borrow/use/modify it."
+  },
+  {
+    "objectID": "git-github.html#your-turn-2",
+    "href": "git-github.html#your-turn-2",
+    "title": "Version Control with Git and Collaboration with GitHub",
+    "section": "Your turn",
+    "text": "Your turn\nAdd a license to your repo via a pull request"
   },
   {
     "objectID": "setup.html",
