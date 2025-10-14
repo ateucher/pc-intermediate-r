@@ -3,6 +3,7 @@ project:
   render:
     - "*"
     - "!CLAUDE.md"
+    - "!LICENSE.md"
 
 website:
   title: "Parks Canada - Intermediate R"
