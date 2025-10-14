@@ -3,6 +3,7 @@ project:
   render:
     - "*"
     - "!CLAUDE.md"
+    - "!LICENSE.md"
 
 website:
   title: "Parks Canada - Intermediate R"
@@ -24,7 +25,7 @@ format:
     theme:
       - cosmo
       - brand
-    css: styles.css
+    css: style.css
     toc: true
     
   revealjs: 
@@ -38,3 +39,4 @@ format:
       - editable
     filters:
       - editable
+    footer: "[{{< fa house >}}](index.qmd)"

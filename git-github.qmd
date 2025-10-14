@@ -5,21 +5,110 @@ author: "Andy Teucher"
 format: revealjs
 ---
 
-## Configure Git
+## What is Git? [{{< fa brands git-alt size=lg >}}]{.git-orange}
+
+::: {.incremental}
+- A version control system
+- It tracks and manages the evolution of a set of files — called a [repository]{.highlight-term}* 
+- It keeps a history of changes to files, who made the changes, and when
+- It allows you to revert to previous versions of files
+- It enables collaboration by merging changes from multiple contributors
+- It is a command-line tool, but there are graphical user interfaces (GUIs) available
+:::
+
+::: {.notebox .fragment}
+*repository (repo) == folder == RStudio or Positron project
+:::
+
+[Using a project-oriented workflow is critical]{.fragment}
+
+## Why Git?
+
+![](img/why-git-climbing.png)
+
+## Why Git? {background-image="img/why-git-climbing-2.png" background-position="50% 45%" background-size="90%"}
+
+::: {.absolute bottom=0}
+"Commits" help us focus on the work, not the bookkeeping.
+
+It takes care of otherwise time- consuming versioning & unrelenting file tracking. 
+:::
+
+## Why GitHub? {{< fa brands github size=lg >}}
+
+![](img/why-github-bryan.png)
+
+::: {.notes}
+A commit is a snapshot of your project at a point in time.
+:::
+
+## What is GitHub (traditional answer)?
+
+::: {.incremental}
+- **GitHub** is an online collaborative platform. It is built on top of **Git** - software that does file versioning and bookkeeping.
+- It is a remote host for your Git repositories.
+- It provides a web interface for managing, sharing, and collaborating on your repositories.
+- You can think of GitHub working like Dropbox - but with more control.
+:::
+
+## What is GitHub (non-traditional answer)?
+
+- **Publishing platform.** A new way for sharing documentation & scicomm - your files can become websites! Share the url once, it’s always the latest version.  
+
+- **Project management system.** Short- and long-term collaborative "todo" lists: "Issues" & "Projects"
+
+::: {.notes}
+for most folks, the pros of Git only outweigh the cons once you take the additional step of hooking your local repository up to a remote host like GitHub. The joint use of Git and GitHub offers many benefits that more than justify the learning curve.
+:::
+
+# Let's &nbsp;[{{< fa brands git size=lg >}}]{.git-orange}&nbsp; set up! [{{< fa brands git-alt size=xl >}}&emsp;{{< fa brands github size=xl >}}]{style="float: right; padding-right: 100px;"}
+
+## An aside: set up your terminal in Positron
+
+- Unless you are already a Windows Powershell or Command Prompt user, I recommend switching the terminal in Positron to Git Bash.
+
+::: {.columns}
+::: {.column width="45%"}
+![](img/windows-terminal-bash.png)
+:::
+::: {.column width="55%"}
+
+- {{< kbd Ctrl-Shift-P >}} to open the command palette
+- search for `"terminal default profile"`
+- select **Terminal: Select Default Profile"** and set it to "Git Bash".
+
+### settings.json
+```json
+{
+  "git.path": "C:/Program Files/Git/bin/bash.exe",
+  "terminal.integrated.defaultProfile.windows": "Git Bash",
+  "workbench.keybindings.rstudioKeybindings": true,
+}
+```
+:::
+:::
+<!-- end columns -->
+
+## Introduce yourself to Git
 
 Configure your `user.name` and `user.email` for git. This information will be associated with your commits.
 
+<br>
+
+::: {.fragment}
 ### In the terminal
 
-
-```bash
+```{.bash code-line-numbers="1|2|3"}
+which git
 git config --global user.name "Jane Doe"
 git config --global user.email "jane@doe.ca"
 ```
+:::
 
 <br>
 
-### In RStudio
+::: {.fragment}
+### In Positron or RStudio
 
 ```r
 usethis::use_git_config(
@@ -27,42 +116,50 @@ usethis::use_git_config(
   user.email = "jane@example.com"
 )
 ```
+:::
 
-## Check link between R and GitHub {#check-link-between-r-and-github}
+## Check link between R and GitHub
+
 Communicating with GitHub requires authentication with your GitHub account.
 This is achieved by creating and securely storing a Personal Access Token (PAT).
-The [Managing Git(Hub) Credentials](https://usethis.r-lib.org/articles/articles/git-credentials.html) vignette in the **`usethis`** [@usethis] package has details on using PATs, but for now the following should suffice.
+The [Managing Git(Hub) Credentials](https://usethis.r-lib.org/articles/articles/git-credentials.html) vignette in the **`usethis`** package has details on using PATs.
+
+![](img/ChatGPT_R-GitHub.png){ width=60% fig-align="center" style="border-radius: 20px;" }
+
+## Check link between R and GitHub
 
 Create a PAT with:
 
-```{r}
-#| eval: false
+```r
 usethis::create_github_token()
 ```
 
+::: {.fragment}
 -   Give the token a descriptive name, accept the default scopes, and click "Generate Token".
 -   Copy the newly generated PAT to your clipboard.
 -   Run `gitcreds::gitcreds_set()` in R and paste in your PAT when prompted.
 -   After you close the PAT webpage, you won't be able to see your PAT again! You can store it somewhere secure, such as in a password manager.
 
-### Caveat about storing PATs on Linux:
+:::
+
+::: {.notes}
+You may need to install the **`gitcreds`** package.
+
+Caveat about storing PATs on Linux:
 
 macOS and Windows both have built-in credential managers that will securely store your PAT, however the same does not exist in Linux.
 [Happy Git with R has a section on options for storing your PAT on Linux](https://happygitwithr.com/https-pat#pat-doesnt-persist-on-linux).
-
-::: aside
-You may need to install the **`gitcreds`** package [@gitcreds].
 :::
 
-You can now check your Git setup by asking for a "situation report":
+## Check your Git setup with a "situation report"
 
-```{r}
-#| eval: false
+```r
 usethis::git_sitrep()
 ```
 
-::: cell-output
-```
+::: {.fragment}
+::: {.cell-output-tall}
+```{.plaintext code-line-numbers="|18"}
 ── Git global (user)
 • Name: 'Andy Teucher'
 • Email: 'andy.teucher@gmail.com'
@@ -79,14 +176,236 @@ usethis::git_sitrep()
 • Token scopes: 'gist, repo, user, workflow'
 • Email(s): 'andy.teucher@gmail.com (primary)'
 ℹ No active usethis project
-```
-:::
 
-The output shows information about the link between RStudio and GitHub.
-Not all of it is relevant now, but it is essential to check whether your name and email are correct and the PAT is showing as "discovered":
-
-::: cell-output
-```
 Personal access token for 'https://github.com': '<discovered>'
 ```
 :::
+:::
+
+::: {.fragment}
+It is essential to check whether your name and email are correct and the PAT is showing as "discovered"
+:::
+
+::: {.question .fragment}
+Do you see anything different in your output?
+:::
+
+::: {.notes}
+The output shows information about the link between RStudio and GitHub.
+Not all of it is relevant now, but it is essential to check whether your name and email are correct and the PAT is showing as "discovered"
+
+`git_vaccinate()`
+:::
+
+## We can interact with Git and GitHub:
+
+- from with Positron [{{< fa code-branch size=lg >}}]{.git-orange} GUI, 
+- using `usethis` git-related functions, 
+- [{{< fa brands git size=lg >}}]{.git-orange} command-line tools + GitHub web interface
+
+## Starting a *new project* with Git and GitHub
+
+- GitHub First
+  - Create a new repo on GitHub, then [clone]{.highlight-term} it to your computer
+  - Preferred, cleanest workflow
+<br><br>
+- Local First
+  - Create a new repo on your computer, then push it to GitHub
+  - Totally fine, a bit more awkward
+
+## We will:
+
+1. Create a new repo on GitHub
+2. Clone it to your computer and open as a new project using Positron
+3. Create some commits
+4. Push the commits to GitHub
+
+::: {.fragment}
+We're going to make a repository for recipes!
+
+### Organization:
+
+- `README.md` with a description of the project
+- one `.md` file per recipe in a `recipes/` folder
+:::
+
+## Making a commit
+
+- Make changes to file(s)
+- Choose what files you want to include in the commit
+- Stage the changes (using `git add`)
+- Commit the staged changes (using `git commit`)
+
+::: {.notes}
+If you think of Git as taking snapshots of changes over the life of a project, git add specifies what will go in a snapshot (putting things in the staging area), and git commit then actually takes the snapshot, and makes a permanent record of it (as a commit). It’s almost always better to explicitly add things to the staging area, because you might commit changes you forgot you made. Try to stage things manually, or you might find yourself searching for "git undo commit" more than you would like!
+:::
+
+## Converting an *existing project* to use Git and GitHub
+
+1. Initialize a Git repository in your existing project
+2. Commit the existing files
+3. Create a new repo on GitHub
+4. Link your local repo to the GitHub repo
+5. Push the commits to GitHub
+
+## Ignoring things
+
+- What about files that you don't want to track with Git or put on GitHub?
+  - large/sensitive data files,
+  - rendered outputs,
+  - temporary files created by IDE
+- `.gitignore` file in the root of your project
+
+:::: {.columns}
+::: {.column width="50%"}
+```plaintext
+# R data files
+*.RData
+*.rda
+
+# Specific data files
+data/large_data.csv
+
+# output files
+reports/
+```
+:::
+
+::: {.column width="50%"}
+- Each line specifies a pattern
+- Comments starting with `#` are ignored
+- Wildcards (e.g., `*`) to specify patterns
+- Specify specific files or entire directories
+:::
+::::
+
+## Create/add to a `.gitignore` file
+
+:::: {.columns}
+::: {.column width="50%"}
+![](img/positron-add-gitignore.png)
+:::
+::: {.column width="50%"}
+### Or
+```r
+usethis::use_git_ignore(
+  c("*.RData", "data/large_data.csv", "reports/")
+)
+```
+:::
+::::
+
+## Your Turn
+
+1. Find an existing project on your computer, and turn it into a git repository
+2. Choose carefully* what files to include in your first commit, and commit the files
+3. Create a new repository on GitHub and push your local commits to GitHub
+
+* Remember to use the `.gitignore` file
+
+<!--
+### From the command line (terminal)
+
+```bash
+cd path/to/your/project
+git init
+```
+-->
+::: {.resources}
+<https://positron.posit.co/git.html>
+:::
+
+## Collaborating
+
+- Git is a *distributed* version control system
+- Each collaborator has a full copy of the repository, including its history
+- All collaborators can push changes to the remote repository (given they have permission)
+- Changes made by collaborators can be pulled into your local repository
+
+## Your turn
+
+- In pairs, one person is the "owner" of a repo, the other is a "collaborator"
+- Owner adds collaborator to a on GitHub
+- Collaborator clones the repo to their computer
+- Collaborator makes a change, commits, and pushes to GitHub
+- Owner pulls the change to their computer
+
+## Collaborating via branching + "Pull Requests"
+
+- More formal collaboration workflow
+- Allows fearless experimentation
+- Allows efficient code review and discussion
+- Good for bigger contributions
+
+<br>
+
+```{mermaid}
+%%| label: branching-pr-2
+%%| fig-width: 1000
+%%| file: pull-request.mmd
+```
+
+## Steps
+
+1. Create a new branch
+2. Make changes, commit, and push the branch to GitHub
+3. Open a Pull Request (PR) on GitHub
+4. Discuss and review the PR
+5. Merge the PR into the main branch
+6. Pull the latest changes to your local main branch
+
+## Licensing and best practices
+
+> Share evidence, research and decision making openly. Make all non-sensitive data, information, and new code developed in delivery of services open to the outside world for sharing and reuse under an open licence.
+
+> It is recommended that the source code be released as early as possible in the project's life cycle to avoid the overhead of publishing source code late in the process.
+
+> Employees should use their full name and Government of Canada email address for all code contributions to public repositories while acting within the scope of their duties or employment.
+
+::: {.resources}
+*https://canada-ca.github.io/open-source-logiciel-libre/en/open-source-standards.html
+
+https://github.com/canada-ca/template-gabarit
+:::
+
+::: {.notes}
+- Spend some time exploring this repo. 
+- Can make a PR or open an issue if they want to contribute.
+- GitHub as a publishing platform.
+:::
+
+## Choose a license
+
+### For work
+
+> By default, a project without an open source licence applied to it would only be released under the Crown Copyright.
+
+- MIT is a good, permissive license for most projects
+- Apache 2.0 is similar, but adds an explicit patent grant
+
+```r
+usethis::use_mit_license(
+  copyright_holder = "His Majesty the King in Right of Canada, as represented by the Minister responsible for Parks Canada Agency"
+)
+```
+
+### For personal projects {style="padding-top: 30px;"}
+
+```r
+usethis::use_mit_license(
+  copyright_holder = "Andy Teucher"
+)
+```
+
+::: {.resources}
+https://github.com/canada-ca/open-source-logiciel-libre/blob/master/en/guides/publishing-open-source-code.md#select-open-source-software-licence
+:::
+
+::: {.notes}
+- Show text of license
+- Explain I own the copyright, but anyone is free to borrow/use/modify it.
+:::
+
+## Your turn
+
+Add a license to your repo via a pull request
