@@ -25,7 +25,8 @@ Use the GUI or `usethis::create_project("data-manipulation")`
 
 4. Download the data:
 
-```r
+```{r}
+#| eval: false
 install.packages("portalr")
 library(portalr)
 
@@ -153,7 +154,6 @@ https://r4ds.hadley.nz/joins.html#how-do-joins-work
 https://r4ds.hadley.nz/joins.html#how-do-joins-work
 :::
 
-
 ## Mutating joins
 
 ::: {.columns}
@@ -216,34 +216,60 @@ https://r4ds.hadley.nz/joins.html#how-do-joins-work
 https://r4ds.hadley.nz/joins.html#how-do-joins-work
 :::
 
-
 ## Filtering joins
 
-:::{.columns}
+::: {.columns}
 ::: {.column width="50%"}
+
 ### `semi_join()`
-- Keeps all rows in the [left]{.highlight-term} table where there ***are*** matching key values in the [right]{.highlight-term} table
+
+- Keeps all rows in the [left]{.highlight-term} table where there are matching key values in the [right]{.highlight-term} table
 - Does not add any columns
+
 :::
+
 ::: {.column width="50%"}
 ![](img/semi-join.png)
 :::
 :::
 
+
 ## Filtering joins
 
-:::{.columns}
+::: {.columns}
 ::: {.column width="50%"}
+
 ### `anti_join()`
-- Keeps all rows in the [left]{.highlight-term} table where there ***are not*** matching values in the [right]{.highlight-term} table
+
+- Keeps all rows in the [left]{.highlight-term} table where there are not matching values in the [right]{.highlight-term} table
 - Does not add any columns
+
 :::
+
 ::: {.column width="50%"}
 ![](img/anti-join.png)
 :::
 :::
 
-# Column-wise operations
+## Column-wise operations
+
+- Apply one or more functions to a set of columns in a data frame using `across()`
+- Specfiy columns using [selection helpers](https://tidyselect.r-lib.org/reference/language.html) (e.g., `starts_with()`, `ends_with()`, `contains()`, `where()`, etc.)
+- Used with `summarize()`, `mutate()`, `filter()`
+
+### Example: calculate mean and sd of all numeric columns
+
+::: {.fragment}
+
+```{r}
+#| echo: true
+library(dplyr)
+penguins |> 
+    summarize(
+        across(where(is.numeric), list(mean = mean, sd = sd), na.rm = TRUE)
+    )
+```
+:::
 
 # Row-wise operations
 
