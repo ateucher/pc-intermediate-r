@@ -107,15 +107,23 @@ Read in the rodent capture data (`PortalData/Rodents/Portal_rodent.csv`).
 ::::
 :::::
 
-# Two-table verbs (joins)
+## Two-table verbs
 
 ::: {.columns}
 ::: {.column width="50%"}
-![](img/tables-join-1.png){fig-align="center"}
+![](img/tables-join-1.png){fig-align="center" .editable}
 :::
 
 ::: {.column width="50%"}
-![](img/tables-join-2.png){fig-align="center"}
+
+### Mutatating joins
+
+- Combine two tables based on common values in one or more columns
+
+### Filtering joins
+
+- Filter rows from one table based on values in another table
+
 :::
 :::
 
@@ -130,8 +138,9 @@ https://r4ds.hadley.nz/joins.html#how-do-joins-work
 
 ### `left_join()`
 
-- Keeps all rows in the left table
-- Drops rows in the right table that don't match
+- Keeps all rows in the [left]{.highlight-term} table
+- Drops rows from the [right]{.highlight-term} table that don't match
+- Rows in the [left]{.highlight-term} that don't match get `NA` in the columns from the [right]{.highlight-term} table
 
 :::
 
@@ -152,8 +161,9 @@ https://r4ds.hadley.nz/joins.html#how-do-joins-work
 
 ### `right_join()`
 
-- Keeps all rows in the right table
-- Drops rows in the left table that don't match
+- Keeps all rows in the [right]{.highlight-term} table
+- Drops rows from the [left]{.highlight-term} table that don't match
+- Rows in the [right]{.highlight-term} table that don't match get `NA` in the columns from the [left]{.highlight-term} table
 
 :::
 
@@ -174,6 +184,7 @@ https://r4ds.hadley.nz/joins.html#how-do-joins-work
 ### `inner_join()`
 
 - Keeps all rows in both tables where keys match
+- Rows from either table that don't match are dropped
 
 :::
 ::: {.column width="50%"}
