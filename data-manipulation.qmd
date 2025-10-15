@@ -111,6 +111,56 @@ Read in the rodent capture data (`PortalData/Rodents/Portal_rodent.csv`).
 ::::
 :::::
 
+## Column-wise operations
+
+- Apply one or more functions to a set of columns in a data frame using `across()`
+- Specfiy columns using [selection helpers](https://tidyselect.r-lib.org/reference/language.html) (e.g., `starts_with()`, `ends_with()`, `contains()`, `where()`, etc.)
+- Specify function(s) to apply to selected columns
+- Used with `summarize()` & `mutate()`
+
+::: {.fragment}
+
+### Example: calculate mean of all numeric columns
+
+
+```{r}
+#| echo: true
+#| output-location: fragment
+library(dplyr)
+mtcars |>
+  group_by(cyl) |>
+  summarize(across(where(is.numeric), mean))
+```
+
+:::
+
+## Column-wise operations
+
+specify multiple functions to apply in a `list()`
+
+### Example: calculate mean and sd of all numeric columns
+
+::: {.fragment}
+
+```{r}
+#| echo: true
+#| output-location: fragment
+library(dplyr)
+mtcars |>
+  group_by(cyl) |>
+  summarize(
+    across(where(is.numeric), list(mean = mean, sd = sd))
+  )
+```
+
+:::
+
+::: {.resources}
+
+<https://tidyselect.r-lib.org/reference/language.html>
+
+:::
+
 ## Two-table verbs (joins)
 
 ::: {.columns}
@@ -144,6 +194,7 @@ Read in the rodent capture data (`PortalData/Rodents/Portal_rodent.csv`).
 If don't specify join columns, will join on all common names
 
 - E.g., both tables have columns year, month, day
+
 ```r
 left_join(x, y)
 #> Joining with `by = join_by(year, month, day)`
@@ -266,6 +317,15 @@ left_join(x, y, by = c("column_in_x" = "column_in_y"))
 
 :::
 
+## Your turn
+
+Use a join to add location information to the rodent captures data
+
+- The rodent captures data is in the `PortalData/Rodents/Portal_rodent.csv` file.
+
+- The `SiteandMethods/Portal_UTMCoords.csv` file contains information about the location of each plot
+
+
 ## Filtering joins
 
 ::: {.columns}
@@ -305,13 +365,20 @@ left_join(x, y, by = c("column_in_x" = "column_in_y"))
 :::
 :::
 
+## Your turn
+
+Use a join to find all the captures where the species is a granivore
+
+- The rodent captures data is in the `PortalData/Rodents/Portal_rodent.csv` file
+- The `PortalData/Rodents/Portal_rodent_species.csv` file contains information about the species
+
 ## More complex joins using `dplyr::join_by()`. 
 
 **Cross joins** create the full cartesian product of two tables
 
 ```{r}
 #| echo: true
-#| output-location: column
+#| output-location: column-fragment
 library(dplyr)
 x <- data.frame(a = 1:3)
 y <- data.frame(b = c("x", "y"))
@@ -343,6 +410,14 @@ left_join(
 )
 ```
 
+Rolling joins are good for finding things like "the most recent rainy day before a survey date"
+
+:::
+
+
+::: {.notes}
+I haven't found a good reason to use inequality joins, but they are a necessary 
+precursor to rolling joins, which are very useful.
 :::
 
 
@@ -352,7 +427,7 @@ left_join(
 ::: {.column width="50%"}
 
 ```r
-between(x, y_1, y2)
+between(x, y_1, y_2)
 within(x_1, x_2, y_1, y_2)
 overlaps(x_1, x_2, y_1, y_2)
 ```
@@ -360,24 +435,26 @@ overlaps(x_1, x_2, y_1, y_2)
 :::
 ::: {.column width="50%"}
 
-```plaintext
+```{.plaintext .cell-output-tall}
 between(x, y_1, y_2):
 
   y_1 [════════════════════] y_2
          •
          x
 
+
 within(x_1, x_2, y_1, y_2):
 
-  y_1 [═══════════════════════] y_2
+  y_1 [════════════════════] y_2
          [═════]
        x_1     x_2
 
+
 overlaps(x_1, x_2, y_1, y_2):
 
-  y_1 [═══════════════] y_2
-         [═══════════════] 
-       x_1             x_2
+  y_1 [════════════════════] y_2
+                   [═══════════════] 
+                 x_1             x_2
 ```
 :::
 :::
@@ -410,32 +487,6 @@ rodent_trapping <- read_csv("PortalData/Rodents/Portal_rodent_trapping.csv")
 ```
 
 * Hint: use an overlap join with `between()`
-
-## Column-wise operations
-
-- Apply one or more functions to a set of columns in a data frame using `across()`
-- Specfiy columns using [selection helpers](https://tidyselect.r-lib.org/reference/language.html) (e.g., `starts_with()`, `ends_with()`, `contains()`, `where()`, etc.)
-- Used with `summarize()`, `mutate()`, `filter()`
-
-### Example: calculate mean and sd of all numeric columns
-
-::: {.fragment}
-
-```{r}
-#| echo: true
-library(dplyr)
-penguins |> 
-    summarize(
-        across(where(is.numeric), list(mean = mean, sd = sd), na.rm = TRUE)
-    )
-```
-:::
-
-::: {.resources}
-
-<https://tidyselect.r-lib.org/reference/language.html>
-
-:::
 
 # Row-wise operations
 
