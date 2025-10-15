@@ -59,11 +59,13 @@ Read in the rodent capture data (`PortalData/Rodents/Portal_rodent.csv`).
 
 ::::: {.columns}
 ::: {.column width="68%"}
+
 1. Remove records from invalid sampling periods (when `period` is negative). Re-assign the result to the `rodents` data frame.
 
 2. How many individuals of each species were caught in 1995?
 
 3. What date had the highest number of individual rodents caught?
+
 :::
 
 :::: {.column width="30%"}
@@ -90,6 +92,7 @@ Read in the rodent capture data (`PortalData/Rodents/Portal_rodent.csv`).
 4. For each capture record, calculate the percent difference in weight from the average weight of that species.
 
 5. Of all individual Ord's Kangaroo Rats (species code "DO") that have been caught more than 5 times, which individual was consistently the biggest? (i.e., has the highest average percent difference in weight from the species' average weight)?
+
 :::
 
 :::: {.column width="30%"}
@@ -112,7 +115,9 @@ Read in the rodent capture data (`PortalData/Rodents/Portal_rodent.csv`).
 
 ::: {.columns}
 ::: {.column width="50%"}
+
 ![](img/tables-join-1.png){.absolute width=540px left=80px top=225px}
+
 :::
 
 ::: {.column width="50%"}
@@ -129,7 +134,55 @@ Read in the rodent capture data (`PortalData/Rodents/Portal_rodent.csv`).
 :::
 
 ::: {.resources}
-https://r4ds.hadley.nz/joins.html#how-do-joins-work
+
+<https://r4ds.hadley.nz/joins.html#how-do-joins-work>
+
+:::
+
+## Join syntax
+
+If don't specify join columns, will join on all common names
+
+- E.g., both tables have columns year, month, day
+```r
+left_join(x, y)
+#> Joining with `by = join_by(year, month, day)`
+```
+
+<br>
+
+Better to specify the join columns explicitly
+
+- Both tables have columns column_1 and column_2
+
+```r
+left_join(x, y, by = c("column_1", "column_2"))
+```
+
+
+- If the columns to join on have different names in each table
+
+```r
+left_join(x, y, by = c("column_in_x" = "column_in_y"))
+```
+## Join syntax
+
+More complex joins using `dplyr::join_by()`. 
+
+- Eg., inequality joins
+
+```r
+left_join(x, y, by = join_by(column_1 >= column_2))
+```
+
+```r
+left_join(x, y, by = join_by(id, closest(capture_date >= survey_start_date)))
+```
+
+::: {.resources}
+
+<https://dplyr.tidyverse.org/reference/join_by.html#join-types>
+
 :::
 
 ## Mutating joins
@@ -146,12 +199,16 @@ https://r4ds.hadley.nz/joins.html#how-do-joins-work
 :::
 
 ::: {.column width="50%"}
+
 ![](img/left-join.png)
+
 :::
 :::
 
 ::: {.resources}
-https://r4ds.hadley.nz/joins.html#how-do-joins-work
+
+<https://r4ds.hadley.nz/joins.html#how-do-joins-work>
+
 :::
 
 ## Mutating joins
@@ -168,12 +225,16 @@ https://r4ds.hadley.nz/joins.html#how-do-joins-work
 :::
 
 ::: {.column width="50%"}
+
 ![](img/right-join.png)
+
 :::
 :::
 
 ::: {.resources}
-https://r4ds.hadley.nz/joins.html#how-do-joins-work
+
+<https://r4ds.hadley.nz/joins.html#how-do-joins-work>
+
 :::
 
 ## Mutating joins
@@ -188,12 +249,16 @@ https://r4ds.hadley.nz/joins.html#how-do-joins-work
 
 :::
 ::: {.column width="50%"}
+
 ![](img/inner-join.png)
+
 :::
 :::
 
 ::: {.resources}
-https://r4ds.hadley.nz/joins.html#how-do-joins-work
+
+<https://r4ds.hadley.nz/joins.html#how-do-joins-work>
+
 :::
 
 ## Mutating joins
@@ -208,12 +273,16 @@ https://r4ds.hadley.nz/joins.html#how-do-joins-work
 
 :::
 ::: {.column width="50%"}
+
 ![](img/full-join.png)
+
 :::
 :::
 
 ::: {.resources}
-https://r4ds.hadley.nz/joins.html#how-do-joins-work
+
+<https://r4ds.hadley.nz/joins.html#how-do-joins-work>
+
 :::
 
 ## Filtering joins
@@ -229,7 +298,9 @@ https://r4ds.hadley.nz/joins.html#how-do-joins-work
 :::
 
 ::: {.column width="50%"}
+
 ![](img/semi-join.png)
+
 :::
 :::
 
@@ -247,7 +318,9 @@ https://r4ds.hadley.nz/joins.html#how-do-joins-work
 :::
 
 ::: {.column width="50%"}
+
 ![](img/anti-join.png)
+
 :::
 :::
 
@@ -269,6 +342,12 @@ penguins |>
         across(where(is.numeric), list(mean = mean, sd = sd), na.rm = TRUE)
     )
 ```
+:::
+
+::: {.resources}
+
+<https://tidyselect.r-lib.org/reference/language.html>
+
 :::
 
 # Row-wise operations
