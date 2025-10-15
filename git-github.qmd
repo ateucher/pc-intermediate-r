@@ -61,6 +61,15 @@ A commit is a snapshot of your project at a point in time.
 for most folks, the pros of Git only outweigh the cons once you take the additional step of hooking your local repository up to a remote host like GitHub. The joint use of Git and GitHub offers many benefits that more than justify the learning curve.
 :::
 
+## GitHub account management
+
+- You can have one GitHub account for all of your work and personal projects
+- Add different email addresses to your GitHub account
+  - work email for work projects
+  - personal email for personal projects
+  - associate activity with the correct email address
+- You can use multiple GitHub accounts, but it is more complicated to set up
+
 # Let's &nbsp;[{{< fa brands git size=lg >}}]{.git-orange}&nbsp; set up! [{{< fa brands git-alt size=xl >}}&emsp;{{< fa brands github size=xl >}}]{style="float: right; padding-right: 100px;"}
 
 ## An aside: set up your terminal in Positron
@@ -113,7 +122,7 @@ git config --global user.email "jane@doe.ca"
 ```r
 usethis::use_git_config(
   user.name = "Jane Doe",
-  user.email = "jane@example.com"
+  user.email = "jane@doe.ca"
 )
 ```
 :::
