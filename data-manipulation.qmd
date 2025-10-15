@@ -165,25 +165,6 @@ left_join(x, y, by = c("column_1", "column_2"))
 ```r
 left_join(x, y, by = c("column_in_x" = "column_in_y"))
 ```
-## Join syntax
-
-More complex joins using `dplyr::join_by()`. 
-
-- Eg., inequality joins
-
-```r
-left_join(x, y, by = join_by(column_1 >= column_2))
-```
-
-```r
-left_join(x, y, by = join_by(id, closest(capture_date >= survey_start_date)))
-```
-
-::: {.resources}
-
-<https://dplyr.tidyverse.org/reference/join_by.html#join-types>
-
-:::
 
 ## Mutating joins
 
@@ -323,6 +304,112 @@ left_join(x, y, by = join_by(id, closest(capture_date >= survey_start_date)))
 
 :::
 :::
+
+## More complex joins using `dplyr::join_by()`. 
+
+**Cross joins** create the full cartesian product of two tables
+
+```{r}
+#| echo: true
+#| output-location: column
+library(dplyr)
+x <- data.frame(a = 1:3)
+y <- data.frame(b = c("x", "y"))
+cross_join(x, y)
+```
+
+<br>
+
+::: {.fragment}
+
+Inequality joins
+
+```r
+left_join(x, y, by = join_by(column_1 >= column_2))
+```
+
+:::
+
+<br>
+
+::: {.fragment}
+
+Rolling joins (inequality joins constrained by `closest()`)
+
+```r
+left_join(
+    x, y, 
+    by = join_by(id, closest(capture_date >= survey_start_date))
+)
+```
+
+:::
+
+
+## Overlap joins
+
+::: {.columns}
+::: {.column width="50%"}
+
+```r
+between(x, y_1, y2)
+within(x_1, x_2, y_1, y_2)
+overlaps(x_1, x_2, y_1, y_2)
+```
+
+:::
+::: {.column width="50%"}
+
+```plaintext
+between(x, y_1, y_2):
+
+  y_1 [════════════════════] y_2
+         •
+         x
+
+within(x_1, x_2, y_1, y_2):
+
+  y_1 [═══════════════════════] y_2
+         [═════]
+       x_1     x_2
+
+overlaps(x_1, x_2, y_1, y_2):
+
+  y_1 [═══════════════] y_2
+         [═══════════════] 
+       x_1             x_2
+```
+:::
+:::
+
+::: {.resources}
+
+<https://dplyr.tidyverse.org/reference/join_by.html#join-types>
+
+:::
+
+## Your turn
+
+Using the rodent trapping data and the plant census dates data, join the two 
+datasets to find out which plant census (year and season) each rodent capture 
+is associated with.
+
+Starting code:
+
+```r
+library(dplyr)
+library(readr)
+library(lubridate)
+
+plant_census_dates <- read_csv(
+  "PortalData/Plants/Portal_plant_census_dates.csv",
+  na = c("unknown", "none")
+)
+
+rodent_trapping <- read_csv("PortalData/Rodents/Portal_rodent_trapping.csv")
+```
+
+* Hint: use an overlap join with `between()`
 
 ## Column-wise operations
 
