@@ -1,0 +1,220 @@
+---
+title: "Advanced Data Manipulation with `dplyr` and `tidyr`"
+subtitle: "Parks Canada; Ecological Integrity Monitoring Program"
+author: "Andy Teucher"
+format: revealjs
+---
+
+## Data
+
+### Using data from the [Portal Project](https://portal.weecology.org/)
+
+Long-term ecological research site studying the dynamics of desert rodents, plants, ants and weather in Arizona.
+
+Data available from the [GitHub repo](https://github.com/weecology/PortalData) via the [`portalr`](https://github.com/weecology/portalr) package.
+
+## Setup
+
+1. Create a new project in Positron
+
+Use the GUI or `usethis::create_project("data-manipulation")`
+
+2. Put the project under version control
+
+3. Create a new file: `01-get-data.R`
+
+4. Download the data:
+
+```r
+install.packages("portalr")
+library(portalr)
+
+download_observations(".")
+```
+
+Explore the downloaded data in Positron
+
+
+## Review of main `dplyr` operations
+
+- Selecting columns with `select()`
+- Filtering rows with `filter()`
+- "Slice" rows with `slice()`/`slice_*()`
+- Creating new columns with `mutate()`
+- Summarizing data with `summarize()`
+
+::: {.fragment}
+- Grouping data with `group_by()` applies `filter()`, `mutate()`, and `summarize()` by group
+:::
+
+## Warm-up
+
+Read in the rodent capture data (`PortalData/Rodents/Portal_rodent.csv`). 
+
+1. Use `readr::read_csv()` and assign it to a data frame called `rodents`.
+2. Standardize column names to use `snake_case` *(hint: check out the `janitor` package)*
+
+## `dplyr` practice
+
+::::: {.columns}
+::: {.column width="68%"}
+1. Remove records from invalid sampling periods (when `period` is negative). Re-assign the result to the `rodents` data frame.
+
+2. How many individuals of each species were caught in 1995?
+
+3. What date had the highest number of individual rodents caught?
+:::
+
+:::: {.column width="30%"}
+::: {style="padding-left: 1em; border-left: 1px solid #ccc;"}
+
+**Key columns**
+
+- `id` = individual identifier
+- `day`, `month`, `year` = date of capture
+- `period` = sampling period
+- `species` = species code
+- `wgt` = weight (grams)
+- `year` = year of capture
+
+:::
+::::
+:::::
+
+## `dplyr` practice
+
+::::: {.columns}
+::: {.column width="68%"}
+
+4. For each capture record, calculate the percent difference in weight from the average weight of that species.
+
+5. Of all individual Ord's Kangaroo Rats (species code "DO") that have been caught more than 5 times, which individual was consistently the biggest? (i.e., has the highest average percent difference in weight from the species' average weight)?
+:::
+
+:::: {.column width="30%"}
+::: {style="padding-left: 1em; border-left: 1px solid #ccc;"}
+
+**Key columns**
+
+- `id` = individual identifier
+- `day`, `month`, `year` = date of capture
+- `period` = sampling period
+- `species` = species code
+- `wgt` = weight (grams)
+- `year` = year of capture
+
+:::
+::::
+:::::
+
+# Two-table verbs (joins)
+
+::: {.columns}
+::: {.column width="50%"}
+![](img/tables-join-1.png){fig-align="center"}
+:::
+
+::: {.column width="50%"}
+![](img/tables-join-2.png){fig-align="center"}
+:::
+:::
+
+::: {.resources}
+https://r4ds.hadley.nz/joins.html#how-do-joins-work
+:::
+
+## Mutating joins
+
+::: {.columns}
+::: {.column width="50%"}
+
+### `left_join()`
+
+- Keeps all rows in the left table
+- Drops rows in the right table that don't match
+
+:::
+
+::: {.column width="50%"}
+![](img/left-join.png)
+:::
+:::
+
+::: {.resources}
+https://r4ds.hadley.nz/joins.html#how-do-joins-work
+:::
+
+
+## Mutating joins
+
+::: {.columns}
+::: {.column width="50%"}
+
+### `right_join()`
+
+- Keeps all rows in the right table
+- Drops rows in the left table that don't match
+
+:::
+
+::: {.column width="50%"}
+![](img/right-join.png)
+:::
+:::
+
+::: {.resources}
+https://r4ds.hadley.nz/joins.html#how-do-joins-work
+:::
+
+## Mutating joins
+
+::: {.columns}
+::: {.column width="50%"}
+
+### `inner_join()`
+
+- Keeps all rows in both tables where keys match
+
+:::
+::: {.column width="50%"}
+![](img/inner-join.png)
+:::
+:::
+
+::: {.resources}
+https://r4ds.hadley.nz/joins.html#how-do-joins-work
+:::
+
+## Mutating joins
+
+::: {.columns}
+::: {.column width="50%"}
+
+### `full_join()`
+
+- Keeps all rows in both tables
+- Values in x and y that don't match get `NA` in the result
+
+:::
+::: {.column width="50%"}
+![](img/full-join.png)
+:::
+:::
+
+::: {.resources}
+https://r4ds.hadley.nz/joins.html#how-do-joins-work
+:::
+
+
+## Filtering joins
+
+- `semi_join()`
+- `anti_join()`
+
+# Column-wise operations
+
+# Row-wise operations
+
+# Window functions
+
+# `tidyr`
