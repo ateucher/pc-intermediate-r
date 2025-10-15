@@ -5,6 +5,16 @@ author: "Andy Teucher"
 format: revealjs
 ---
 
+## Schedule
+
+| Pacific Time   | Eastern Time      | Duration |
+| :------------- | :---------------- | :------- |
+| 09:30 - 10:50  | 12:30 – 13:50     | 80 min   |
+| Break          | Break             | 15 min   |
+| 11:05 – 12:25  | 14:05– 15:25      | 80 min   |
+| Break          | Break             | 15 min   |
+| 12:40 – 14:00  | 15:40 – 17:00     | 80 min   |
+
 ## What is Git? [{{< fa brands git-alt size=lg >}}]{.git-orange}
 
 ::: {.incremental}
