@@ -107,11 +107,11 @@ Read in the rodent capture data (`PortalData/Rodents/Portal_rodent.csv`).
 ::::
 :::::
 
-## Two-table verbs
+## Two-table verbs (joins)
 
 ::: {.columns}
 ::: {.column width="50%"}
-![](img/tables-join-1.png){fig-align="center" .editable}
+![](img/tables-join-1.png){.absolute width=540px left=80px top=225px}
 :::
 
 ::: {.column width="50%"}
@@ -124,7 +124,7 @@ Read in the rodent capture data (`PortalData/Rodents/Portal_rodent.csv`).
 
 - Filter rows from one table based on values in another table
 
-:::
+::: 
 :::
 
 ::: {.resources}
@@ -219,8 +219,29 @@ https://r4ds.hadley.nz/joins.html#how-do-joins-work
 
 ## Filtering joins
 
-- `semi_join()`
-- `anti_join()`
+:::{.columns}
+::: {.column width="50%"}
+### `semi_join()`
+- Keeps all rows in the [left]{.highlight-term} table where there ***are*** matching key values in the [right]{.highlight-term} table
+- Does not add any columns
+:::
+::: {.column width="50%"}
+![](img/semi-join.png)
+:::
+:::
+
+## Filtering joins
+
+:::{.columns}
+::: {.column width="50%"}
+### `anti_join()`
+- Keeps all rows in the [left]{.highlight-term} table where there ***are not*** matching values in the [right]{.highlight-term} table
+- Does not add any columns
+:::
+::: {.column width="50%"}
+![](img/anti-join.png)
+:::
+:::
 
 # Column-wise operations
 
