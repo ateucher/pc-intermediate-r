@@ -382,9 +382,9 @@ git init
 > Employees should use their full name and Government of Canada email address for all code contributions to public repositories while acting within the scope of their duties or employment.
 
 ::: {.resources}
-*https://canada-ca.github.io/open-source-logiciel-libre/en/open-source-standards.html
+*<https://canada-ca.github.io/open-source-logiciel-libre/en/open-source-standards.html>
 
-https://github.com/canada-ca/template-gabarit
+<https://github.com/canada-ca/template-gabarit>
 :::
 
 ::: {.notes}
@@ -417,7 +417,7 @@ usethis::use_mit_license(
 ```
 
 ::: {.resources}
-https://github.com/canada-ca/open-source-logiciel-libre/blob/master/en/guides/publishing-open-source-code.md#select-open-source-software-licence
+<https://github.com/canada-ca/open-source-logiciel-libre/blob/master/en/guides/publishing-open-source-code.md#select-open-source-software-licence>
 :::
 
 ::: {.notes}
