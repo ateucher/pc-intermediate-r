@@ -14,6 +14,15 @@ knitr:
 penguins <- dplyr::as_tibble(penguins)
 ```
 
+## Outline
+
+- `dplyr` fundamentals review
+- Column-wise operations
+- Two-table verbs (joins)
+- Row-wise operations
+- Window functions
+- `tidyr` basics
+
 ## Data
 
 ### Using data from the [Portal Project](https://portal.weecology.org/)
