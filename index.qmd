@@ -15,14 +15,17 @@ This will be an online, interactive workshop delivered virtually.
 
 ### 1. Project-oriented workflows and effective use of your IDE (RStudio/Positron)
 
-Learn holistic workflows that address the most common sources of friction in data analysis. We’ll work on project-oriented workflows, effective use of your Integrated Development Environment (IDE), maintaining your R installation, and how to plan for collaboration, communication, and iteration
+### 2. Version control and Collaboration with Git and GitHub
 
-Key Topics:
+### 3. Advanced data manipulation with dplyr and tidyr
 
-- Project-oriented workflows
-- RStudio/Positron project management features
-- Effective use of RStudio/Positron including keyboard shortcuts
-- Personal R Administration
+### 4. Programming with R - functions, functional programming, and iteration
+
+### 5. Reproducible reporting with Quarto
+
+## Exercises
+
+- Exercises for the data manipulation module can be found [here](https://github.com/ateucher/pc-data-manipulation).
 
 ## Prework
 

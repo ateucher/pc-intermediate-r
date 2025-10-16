@@ -51,7 +51,7 @@ Data available from the [GitHub repo](https://github.com/weecology/PortalData) v
 
 - Either: 
 	- Fork and clone the exercises repository:  
-	 `https://github.com/ateucher/pc-data-manipulation/`
+	 `https://github.com/ateucher/pc-data-manipulation/` OR 
 	- Run:
 	 ```r
 	 usethis::use_course("https://github.com/ateucher/pc-data-manipulation/archive/refs/heads/main.zip")
