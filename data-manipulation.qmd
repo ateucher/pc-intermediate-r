@@ -3,7 +3,16 @@ title: "Advanced Data Manipulation with `dplyr` and `tidyr`"
 subtitle: "Parks Canada; Ecological Integrity Monitoring Program"
 author: "Andy Teucher"
 format: revealjs
+knitr:
+  opts_chunk: 
+    R.options:
+      width: 120
 ---
+
+```{r}
+#| include: false
+penguins <- dplyr::as_tibble(penguins)
+```
 
 ## Data
 
@@ -120,12 +129,13 @@ Read in the rodent capture data (`PortalData/Rodents/Portal_rodent.csv`).
 
 ::: {.fragment}
 
-### Example: calculate mean of all numeric columns
+#### Example: calculate mean of all numeric columns
 
 
 ```{r}
 #| echo: true
 #| output-location: fragment
+
 library(dplyr)
 mtcars |>
   group_by(cyl) |>
@@ -143,9 +153,11 @@ Functions in R are objects that can be passed around and used later.
 
 specify multiple functions to apply in a `list()`
 
-### Example: calculate mean and sd of all numeric columns
+<br>
 
 ::: {.fragment}
+
+#### Example: calculate mean and sd of all numeric columns
 
 ```{r}
 #| echo: true
@@ -184,7 +196,8 @@ penguins |>
 ::: {.fragment}
 
 - When we pass a function to `across()` it is passed with its default arguments
-- We unfortunately can't pass extra arguments to functions inside `across()` directly
+	- `mean()` and `sd()` both have an argument `na.rm` that defaults to `FALSE`
+- We can't pass extra arguments to functions inside `across()` directly
 - We need to pass a function with the argument values we want "baked in"
 
 :::
@@ -222,6 +235,13 @@ penguins |>
 
 But if we're doing this only once we can define them in place with an [anonymous function]{.highlight-term}:
 
+```r
+\(x) function(x, other_args)
+```
+
+- This defines a function "on the fly" with the arguments specified how we want
+- The `x` will take the values of each column passed to it by `across()`
+
 ```{r}
 #| echo: true
 #| output-location: fragment
@@ -239,9 +259,10 @@ penguins |>
   )
 ```
 
+
 ## Your turn
 
-1. Calculate the median of both types of bill measurements for each species in the built-in penguins dataset
+1. Calculate the median of both types of bill measurements for each species in the built-in `penguins` dataset
 
 2. Round all of the numeric colums in the `PortalData/SiteandMethods/Portal_UTMCoords.csv` dataset to 2 decimal places
 
