@@ -5,6 +5,16 @@ author: "Andy Teucher"
 format: revealjs
 ---
 
+## Schedule
+
+| Pacific Time   | Eastern Time      | Duration |
+| :------------- | :---------------- | :------- |
+| 09:30 - 10:50  | 12:30 – 13:50     | 80 min   |
+| Break          | Break             | 15 min   |
+| 11:05 – 12:25  | 14:05– 15:25      | 80 min   |
+| Break          | Break             | 15 min   |
+| 12:40 – 14:00  | 15:40 – 17:00     | 80 min   |
+
 ## What is Git? [{{< fa brands git-alt size=lg >}}]{.git-orange}
 
 ::: {.incremental}
@@ -61,6 +71,15 @@ A commit is a snapshot of your project at a point in time.
 for most folks, the pros of Git only outweigh the cons once you take the additional step of hooking your local repository up to a remote host like GitHub. The joint use of Git and GitHub offers many benefits that more than justify the learning curve.
 :::
 
+## GitHub account management
+
+- You can have one GitHub account for all of your work and personal projects
+- Add different email addresses to your GitHub account
+  - work email for work projects
+  - personal email for personal projects
+  - associate activity with the correct email address
+- You can use multiple GitHub accounts, but it is more complicated to set up
+
 # Let's &nbsp;[{{< fa brands git size=lg >}}]{.git-orange}&nbsp; set up! [{{< fa brands git-alt size=xl >}}&emsp;{{< fa brands github size=xl >}}]{style="float: right; padding-right: 100px;"}
 
 ## An aside: set up your terminal in Positron
@@ -113,7 +132,7 @@ git config --global user.email "jane@doe.ca"
 ```r
 usethis::use_git_config(
   user.name = "Jane Doe",
-  user.email = "jane@example.com"
+  user.email = "jane@doe.ca"
 )
 ```
 :::
@@ -363,9 +382,9 @@ git init
 > Employees should use their full name and Government of Canada email address for all code contributions to public repositories while acting within the scope of their duties or employment.
 
 ::: {.resources}
-*https://canada-ca.github.io/open-source-logiciel-libre/en/open-source-standards.html
+*<https://canada-ca.github.io/open-source-logiciel-libre/en/open-source-standards.html>
 
-https://github.com/canada-ca/template-gabarit
+<https://github.com/canada-ca/template-gabarit>
 :::
 
 ::: {.notes}
@@ -398,7 +417,7 @@ usethis::use_mit_license(
 ```
 
 ::: {.resources}
-https://github.com/canada-ca/open-source-logiciel-libre/blob/master/en/guides/publishing-open-source-code.md#select-open-source-software-licence
+<https://github.com/canada-ca/open-source-logiciel-libre/blob/master/en/guides/publishing-open-source-code.md#select-open-source-software-licence>
 :::
 
 ::: {.notes}

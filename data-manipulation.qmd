@@ -1,0 +1,627 @@
+---
+title: "Advanced Data Manipulation with `dplyr` and `tidyr`"
+subtitle: "Parks Canada; Ecological Integrity Monitoring Program"
+author: "Andy Teucher"
+format: revealjs
+knitr:
+  opts_chunk: 
+    R.options:
+      width: 120
+---
+
+```{r}
+#| include: false
+penguins <- dplyr::as_tibble(penguins)
+```
+
+## Outline
+
+::: {.columns}
+::: {.column width="50%"}
+
+Today:
+
+- `dplyr` fundamentals review
+- Column-wise operations
+- Two-table verbs (joins)
+
+:::
+::: {.column width="50%"}
+
+Next time:
+
+- Window functions
+- Row-wise operations
+- Data reshaping with `tidyr`
+
+:::
+:::
+
+## Data
+
+### Using data from the [Portal Project](https://portal.weecology.org/)
+
+Long-term ecological research site studying the dynamics of desert rodents, plants, ants and weather in Arizona.
+
+Data available from the [GitHub repo](https://github.com/weecology/PortalData) via the [`portalr`](https://github.com/weecology/portalr) package.
+
+## Setup
+
+1. Create a new project in Positron
+
+- Either: 
+	- Fork and clone the exercises repository:  
+	 `https://github.com/ateucher/pc-data-manipulation/`
+	- Run:
+	 ```r
+	 usethis::use_course("https://github.com/ateucher/pc-data-manipulation/archive/refs/heads/main.zip")
+	 ```
+
+2. Open the file: `01-get-data.R`
+
+3. Download the data:
+
+```{r}
+#| echo: true
+#| eval: false
+install.packages("portalr")
+library(portalr)
+
+download_observations(".")
+```
+
+4. Explore the downloaded data in Positron
+
+
+## Review of main `dplyr` operations
+
+- Selecting columns with `select()`
+- Filtering rows with `filter()`
+- "Slice" rows with `slice()`/`slice_*()`
+- Creating new columns with `mutate()`
+- Summarizing data with `summarize()`
+
+::: {.fragment}
+- Grouping data with `group_by()` applies `filter()`, `mutate()`, and `summarize()` by group
+:::
+
+## Warm-up
+
+Read in the rodent capture data (`PortalData/Rodents/Portal_rodent.csv`). 
+
+1. Use `readr::read_csv()` and assign it to a data frame called `rodents`.
+2. Standardize column names to use `snake_case` *(hint: check out the `janitor` package)*
+
+## `dplyr` practice
+
+::::: {.columns}
+::: {.column width="68%"}
+
+1. Remove records from invalid sampling periods (when `period` is negative). Re-assign the result to the `rodents` data frame.
+
+2. How many individuals of each species were caught in 1995?
+
+3. What date had the highest number of individual rodents caught?
+
+:::
+
+:::: {.column width="30%"}
+::: {style="padding-left: 1em; border-left: 1px solid #ccc;"}
+
+**Key columns**
+
+- `id` = individual identifier
+- `day`, `month`, `year` = date of capture
+- `period` = sampling period
+- `species` = species code
+- `wgt` = weight (grams)
+- `year` = year of capture
+
+:::
+::::
+:::::
+
+## `dplyr` practice
+
+::::: {.columns}
+::: {.column width="68%"}
+
+4. For each capture record, calculate the percent difference in weight from the average weight of that species.
+
+5. Of all individual Ord's Kangaroo Rats (species code "DO") that have been caught more than 5 times, which individual was consistently the biggest? (i.e., has the highest average percent difference in weight from the species' average weight)?
+
+:::
+
+:::: {.column width="30%"}
+::: {style="padding-left: 1em; border-left: 1px solid #ccc;"}
+
+**Key columns**
+
+- `id` = individual identifier
+- `day`, `month`, `year` = date of capture
+- `period` = sampling period
+- `species` = species code
+- `wgt` = weight (grams)
+- `year` = year of capture
+
+:::
+::::
+:::::
+
+## Column-wise operations
+
+- Apply one or more functions to a set of columns in a data frame using `across()`
+- Specfiy columns using [selection helpers](https://tidyselect.r-lib.org/reference/language.html) (e.g., `starts_with()`, `ends_with()`, `contains()`, `where()`, etc.)
+- Specify function(s) to apply to selected columns
+- Used with `summarize()` & `mutate()`
+
+::: {.fragment}
+
+#### Example: calculate mean of all numeric columns
+
+
+```{r}
+#| echo: true
+#| output-location: fragment
+
+library(dplyr)
+mtcars |>
+  group_by(cyl) |>
+  summarize(across(where(is.numeric), mean))
+```
+
+:::
+
+::: {.notes}
+We are passing the function `mean` to `across()`, not calling it (i.e., no parentheses).
+Functions in R are objects that can be passed around and used later.
+:::
+
+## Column-wise operations
+
+specify multiple functions to apply in a `list()`
+
+<br>
+
+::: {.fragment}
+
+#### Example: calculate mean and sd of all numeric columns
+
+```{r}
+#| echo: true
+#| output-location: fragment
+library(dplyr)
+mtcars |>
+  group_by(cyl) |>
+  summarize(
+    across(where(is.numeric), list(mean = mean, sd = sd))
+  )
+```
+
+:::
+
+::: {.resources}
+
+<https://tidyselect.r-lib.org/reference/language.html>
+
+:::
+
+## Column-wise operations
+
+Run this in your R session, what do you get?
+```{r}
+#| echo: true
+#| output-location: fragment
+library(dplyr)
+penguins |>
+  summarize(
+    across(where(is.numeric), list(mean = mean, sd = sd))
+  )
+```
+
+<br>
+
+::: {.fragment}
+
+- When we pass a function to `across()` it is passed with its default arguments
+	- `mean()` and `sd()` both have an argument `na.rm` that defaults to `FALSE`
+- We can't pass extra arguments to functions inside `across()` directly
+- We need to pass a function with the argument values we want "baked in"
+
+:::
+
+::: {.resources}
+
+<https://tidyselect.r-lib.org/reference/language.html>
+
+:::
+
+## Specifying extra arguments
+
+We can define our own helper functions:
+
+```{r}
+#| echo: true
+#| output-location: fragment
+library(dplyr)
+
+sd_na <- function(x) {
+  sd(x, na.rm = TRUE)
+}
+
+mean_na <- function(x) {
+  mean(x, na.rm = TRUE)
+}
+
+penguins |>
+  summarize(
+    across(where(is.numeric), list(mean = mean_na, sd = sd_na))
+  )
+```
+
+## Specifying extra arguments
+
+But if we're doing this only once we can define them in place with an [anonymous function]{.highlight-term}:
+
+```r
+\(x) function(x, other_args)
+```
+
+- This defines a function "on the fly" with the arguments specified how we want
+- The `x` will take the values of each column passed to it by `across()`
+
+```{r}
+#| echo: true
+#| output-location: fragment
+library(dplyr)
+
+penguins |>
+  summarize(
+    across(
+      where(is.numeric),
+      list(
+        mean = \(x) mean(x, na.rm = TRUE),
+        sd = \(x) sd(x, na.rm = TRUE)
+      )
+    )
+  )
+```
+
+
+## Your turn
+
+1. Calculate the median of both types of bill measurements for each species in the built-in `penguins` dataset
+
+2. Round all of the numeric colums in the `PortalData/SiteandMethods/Portal_UTMCoords.csv` dataset to 2 decimal places
+
+## Two-table verbs (joins)
+
+::: {.columns}
+::: {.column width="50%"}
+
+![](img/tables-join-1.png){.absolute width=540px left=80px top=225px}
+
+:::
+
+::: {.column width="50%"}
+
+### Mutatating joins
+
+- Combine two tables based on common values in one or more columns
+
+### Filtering joins
+
+- Filter rows from one table based on values in another table
+
+::: 
+:::
+
+::: {.resources}
+
+<https://r4ds.hadley.nz/joins.html#how-do-joins-work>
+
+:::
+
+## Mutating joins
+
+::: {.columns}
+::: {.column width="50%"}
+
+### `left_join()`
+
+- Keeps all rows in the [left]{.highlight-term} table
+- Drops rows from the [right]{.highlight-term} table that don't match
+- Rows in the [left]{.highlight-term} that don't match get `NA` in the columns from the [right]{.highlight-term} table
+
+:::
+
+::: {.column width="50%"}
+
+![](img/left-join.png)
+
+:::
+:::
+
+::: {.resources}
+
+<https://r4ds.hadley.nz/joins.html#how-do-joins-work>
+
+:::
+
+## Mutating joins
+
+::: {.columns}
+::: {.column width="50%"}
+
+### `right_join()`
+
+- Keeps all rows in the [right]{.highlight-term} table
+- Drops rows from the [left]{.highlight-term} table that don't match
+- Rows in the [right]{.highlight-term} table that don't match get `NA` in the columns from the [left]{.highlight-term} table
+
+:::
+
+::: {.column width="50%"}
+
+![](img/right-join.png)
+
+:::
+:::
+
+::: {.resources}
+
+<https://r4ds.hadley.nz/joins.html#how-do-joins-work>
+
+:::
+
+## Mutating joins
+
+::: {.columns}
+::: {.column width="50%"}
+
+### `inner_join()`
+
+- Keeps all rows in both tables where keys match
+- Rows from either table that don't match are dropped
+
+:::
+::: {.column width="50%"}
+
+![](img/inner-join.png)
+
+:::
+:::
+
+::: {.resources}
+
+<https://r4ds.hadley.nz/joins.html#how-do-joins-work>
+
+:::
+
+## Mutating joins
+
+::: {.columns}
+::: {.column width="50%"}
+
+### `full_join()`
+
+- Keeps all rows in both tables
+- Values in x and y that don't match get `NA` in the result
+
+:::
+::: {.column width="50%"}
+
+![](img/full-join.png)
+
+:::
+:::
+
+::: {.resources}
+
+<https://r4ds.hadley.nz/joins.html#how-do-joins-work>
+
+:::
+
+## Join syntax
+
+If don't specify join columns, will join on all common names
+
+- E.g., both tables have columns year, month, day
+
+```r
+left_join(x, y)
+#> Joining with `by = join_by(year, month, day)`
+```
+
+<br>
+
+Better to specify the join columns explicitly
+
+- Both tables have columns column_1 and column_2
+
+```r
+left_join(x, y, by = c("column_1", "column_2"))
+```
+
+
+- If the columns to join on have different names in each table
+
+```r
+left_join(x, y, by = c("column_in_x" = "column_in_y"))
+```
+
+## Your turn
+
+Use a join to add location information to the rodent captures data
+
+- The rodent captures data is in the `PortalData/Rodents/Portal_rodent.csv` file.
+
+- The `SiteandMethods/Portal_UTMCoords.csv` file contains information about the location of each plot
+
+## Filtering joins
+
+::: {.columns}
+::: {.column width="50%"}
+
+### `semi_join()`
+
+- Keeps all rows in the [left]{.highlight-term} table where there are matching key values in the [right]{.highlight-term} table
+- Does not add any columns
+
+:::
+
+::: {.column width="50%"}
+
+![](img/semi-join.png)
+
+:::
+:::
+
+
+## Filtering joins
+
+::: {.columns}
+::: {.column width="50%"}
+
+### `anti_join()`
+
+- Keeps all rows in the [left]{.highlight-term} table where there are not matching values in the [right]{.highlight-term} table
+- Does not add any columns
+
+:::
+
+::: {.column width="50%"}
+
+![](img/anti-join.png)
+
+:::
+:::
+
+## Your turn
+
+Use a join to find all the captures where the species is a granivore
+
+- The rodent captures data is in the `PortalData/Rodents/Portal_rodent.csv` file
+- The `PortalData/Rodents/Portal_rodent_species.csv` file contains information about the species
+
+## More complex joins using `dplyr::join_by()`. 
+
+**Cross joins** create the full cartesian product of two tables
+
+```{r}
+#| echo: true
+#| output-location: column-fragment
+library(dplyr)
+x <- data.frame(a = 1:3)
+y <- data.frame(b = c("x", "y"))
+cross_join(x, y)
+```
+
+<br>
+
+::: {.fragment}
+
+Inequality joins
+
+```r
+left_join(x, y, by = join_by(column_1 >= column_2))
+```
+
+:::
+
+<br>
+
+::: {.fragment}
+
+Rolling joins (inequality joins constrained by `closest()`)
+
+```r
+left_join(
+    x, y, 
+    by = join_by(id, closest(capture_date >= survey_start_date))
+)
+```
+
+Rolling joins are good for finding things like "the most recent rainy day before a survey date"
+
+:::
+
+
+::: {.notes}
+I haven't found a good reason to use inequality joins, but they are a necessary 
+precursor to rolling joins, which are very useful.
+:::
+
+
+## Overlap joins
+
+::: {.columns}
+::: {.column width="50%"}
+
+```r
+between(x, y_1, y_2)
+within(x_1, x_2, y_1, y_2)
+overlaps(x_1, x_2, y_1, y_2)
+```
+
+:::
+::: {.column width="50%"}
+
+```{.plaintext .cell-output-tall}
+between(x, y_1, y_2):
+
+  y_1 [════════════════════] y_2
+         •
+         x
+
+
+within(x_1, x_2, y_1, y_2):
+
+  y_1 [════════════════════] y_2
+         [═════]
+       x_1     x_2
+
+
+overlaps(x_1, x_2, y_1, y_2):
+
+  y_1 [════════════════════] y_2
+                   [═══════════════] 
+                 x_1             x_2
+```
+:::
+:::
+
+::: {.resources}
+
+<https://dplyr.tidyverse.org/reference/join_by.html#join-types>
+
+:::
+
+## Your turn
+
+Using the rodent trapping data and the plant census dates data, join the two 
+datasets to find out which plant census (year and season) each rodent capture 
+is associated with.
+
+Starting code:
+
+```r
+library(dplyr)
+library(readr)
+library(lubridate)
+
+plant_census_dates <- read_csv(
+  "PortalData/Plants/Portal_plant_census_dates.csv",
+  na = c("unknown", "none")
+)
+
+rodent_trapping <- read_csv("PortalData/Rodents/Portal_rodent_trapping.csv")
+```
+
+* Hint: use an overlap join with `between()`
+
+# Window functions
+
+# Row-wise operations
+
+# `tidyr`
