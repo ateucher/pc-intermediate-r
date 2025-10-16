@@ -625,3 +625,5 @@ rodent_trapping <- read_csv("PortalData/Rodents/Portal_rodent_trapping.csv")
 # Row-wise operations
 
 # `tidyr`
+
+# string manipulation and regular expressions
