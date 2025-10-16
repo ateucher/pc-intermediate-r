@@ -546,6 +546,195 @@
     "text": "Instructor:\nAndy Teucher is a freelance data scientist and package developer with a passion for teaching others how to use data science tools to make their work more efficient and reproducible. His background is in conservation biology, with an MSc in Ecology from the University of Calgary. He has spent much of his career as a data scientist in government, where he made it his mission to promote and teach open, reproducible data science practices. He has written many R packages for internal use in his teams as well as for a broader audience, with several hosted on CRAN. Andy is a certified Software Carpentry and Data Carpentry instructor, and has led many workshops teaching programming skills to scientists and data professionals."
   },
   {
+    "objectID": "data-manipulation.html#outline",
+    "href": "data-manipulation.html#outline",
+    "title": "Advanced Data Manipulation with dplyr and tidyr",
+    "section": "Outline",
+    "text": "Outline\n\n\nToday:\n\ndplyr fundamentals review\nColumn-wise operations\nTwo-table verbs (joins)\n\n\nNext time:\n\nWindow functions\nRow-wise operations\nData reshaping with tidyr"
+  },
+  {
+    "objectID": "data-manipulation.html#data",
+    "href": "data-manipulation.html#data",
+    "title": "Advanced Data Manipulation with dplyr and tidyr",
+    "section": "Data",
+    "text": "Data\nUsing data from the Portal Project\nLong-term ecological research site studying the dynamics of desert rodents, plants, ants and weather in Arizona.\nData available from the GitHub repo via the portalr package."
+  },
+  {
+    "objectID": "data-manipulation.html#setup",
+    "href": "data-manipulation.html#setup",
+    "title": "Advanced Data Manipulation with dplyr and tidyr",
+    "section": "Setup",
+    "text": "Setup\n\nCreate a new project in Positron\n\n\nEither:\n\nFork and clone the exercises repository:\nhttps://github.com/ateucher/pc-data-manipulation/\nRun:\n\nusethis::use_course(\"https://github.com/ateucher/pc-data-manipulation/archive/refs/heads/main.zip\")\n\n\nOpen the file: 01-get-data.R\nDownload the data:\n\n\ninstall.packages(\"portalr\")\nlibrary(portalr)\n\ndownload_observations(\".\")\n\n\nExplore the downloaded data in Positron"
+  },
+  {
+    "objectID": "data-manipulation.html#review-of-main-dplyr-operations",
+    "href": "data-manipulation.html#review-of-main-dplyr-operations",
+    "title": "Advanced Data Manipulation with dplyr and tidyr",
+    "section": "Review of main dplyr operations",
+    "text": "Review of main dplyr operations\n\nSelecting columns with select()\nFiltering rows with filter()\n“Slice” rows with slice()/slice_*()\nCreating new columns with mutate()\nSummarizing data with summarize()\n\n\n\nGrouping data with group_by() applies filter(), mutate(), and summarize() by group"
+  },
+  {
+    "objectID": "data-manipulation.html#warm-up",
+    "href": "data-manipulation.html#warm-up",
+    "title": "Advanced Data Manipulation with dplyr and tidyr",
+    "section": "Warm-up",
+    "text": "Warm-up\nRead in the rodent capture data (PortalData/Rodents/Portal_rodent.csv).\n\nUse readr::read_csv() and assign it to a data frame called rodents.\nStandardize column names to use snake_case (hint: check out the janitor package)"
+  },
+  {
+    "objectID": "data-manipulation.html#dplyr-practice",
+    "href": "data-manipulation.html#dplyr-practice",
+    "title": "Advanced Data Manipulation with dplyr and tidyr",
+    "section": "dplyr practice",
+    "text": "dplyr practice\n\n\n\nRemove records from invalid sampling periods (when period is negative). Re-assign the result to the rodents data frame.\nHow many individuals of each species were caught in 1995?\nWhat date had the highest number of individual rodents caught?\n\n\n\nKey columns\n\nid = individual identifier\nday, month, year = date of capture\nperiod = sampling period\nspecies = species code\nwgt = weight (grams)\nyear = year of capture"
+  },
+  {
+    "objectID": "data-manipulation.html#dplyr-practice-1",
+    "href": "data-manipulation.html#dplyr-practice-1",
+    "title": "Advanced Data Manipulation with dplyr and tidyr",
+    "section": "dplyr practice",
+    "text": "dplyr practice\n\n\n\nFor each capture record, calculate the percent difference in weight from the average weight of that species.\nOf all individual Ord’s Kangaroo Rats (species code “DO”) that have been caught more than 5 times, which individual was consistently the biggest? (i.e., has the highest average percent difference in weight from the species’ average weight)?\n\n\n\nKey columns\n\nid = individual identifier\nday, month, year = date of capture\nperiod = sampling period\nspecies = species code\nwgt = weight (grams)\nyear = year of capture"
+  },
+  {
+    "objectID": "data-manipulation.html#column-wise-operations",
+    "href": "data-manipulation.html#column-wise-operations",
+    "title": "Advanced Data Manipulation with dplyr and tidyr",
+    "section": "Column-wise operations",
+    "text": "Column-wise operations\n\nApply one or more functions to a set of columns in a data frame using across()\nSpecfiy columns using selection helpers (e.g., starts_with(), ends_with(), contains(), where(), etc.)\nSpecify function(s) to apply to selected columns\nUsed with summarize() & mutate()\n\n\nExample: calculate mean of all numeric columns\n\nlibrary(dplyr)\nmtcars |&gt;\n  group_by(cyl) |&gt;\n  summarize(across(where(is.numeric), mean))\n\n\n\n# A tibble: 3 × 11\n    cyl   mpg  disp    hp  drat    wt  qsec    vs    am  gear  carb\n  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;\n1     4  26.7  105.  82.6  4.07  2.29  19.1 0.909 0.727  4.09  1.55\n2     6  19.7  183. 122.   3.59  3.12  18.0 0.571 0.429  3.86  3.43\n3     8  15.1  353. 209.   3.23  4.00  16.8 0     0.143  3.29  3.5 \n\n\n\n\nWe are passing the function mean to across(), not calling it (i.e., no parentheses). Functions in R are objects that can be passed around and used later."
+  },
+  {
+    "objectID": "data-manipulation.html#column-wise-operations-1",
+    "href": "data-manipulation.html#column-wise-operations-1",
+    "title": "Advanced Data Manipulation with dplyr and tidyr",
+    "section": "Column-wise operations",
+    "text": "Column-wise operations\nspecify multiple functions to apply in a list()\n\n\nExample: calculate mean and sd of all numeric columns\n\nlibrary(dplyr)\nmtcars |&gt;\n  group_by(cyl) |&gt;\n  summarize(\n    across(where(is.numeric), list(mean = mean, sd = sd))\n  )\n\n\n\n# A tibble: 3 × 21\n    cyl mpg_mean mpg_sd disp_mean disp_sd hp_mean hp_sd drat_mean drat_sd wt_mean wt_sd qsec_mean qsec_sd vs_mean vs_sd\n  &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;\n1     4     26.7   4.51      105.    26.9    82.6  20.9      4.07   0.365    2.29 0.570      19.1    1.68   0.909 0.302\n2     6     19.7   1.45      183.    41.6   122.   24.3      3.59   0.476    3.12 0.356      18.0    1.71   0.571 0.535\n3     8     15.1   2.56      353.    67.8   209.   51.0      3.23   0.372    4.00 0.759      16.8    1.20   0     0    \n# ℹ 6 more variables: am_mean &lt;dbl&gt;, am_sd &lt;dbl&gt;, gear_mean &lt;dbl&gt;, gear_sd &lt;dbl&gt;, carb_mean &lt;dbl&gt;, carb_sd &lt;dbl&gt;\n\n\n\n\nhttps://tidyselect.r-lib.org/reference/language.html"
+  },
+  {
+    "objectID": "data-manipulation.html#column-wise-operations-2",
+    "href": "data-manipulation.html#column-wise-operations-2",
+    "title": "Advanced Data Manipulation with dplyr and tidyr",
+    "section": "Column-wise operations",
+    "text": "Column-wise operations\nRun this in your R session, what do you get?\n\nlibrary(dplyr)\npenguins |&gt;\n  summarize(\n    across(where(is.numeric), list(mean = mean, sd = sd))\n  )\n\n\n\n# A tibble: 1 × 10\n  bill_len_mean bill_len_sd bill_dep_mean bill_dep_sd flipper_len_mean flipper_len_sd body_mass_mean body_mass_sd\n          &lt;dbl&gt;       &lt;dbl&gt;         &lt;dbl&gt;       &lt;dbl&gt;            &lt;dbl&gt;          &lt;dbl&gt;          &lt;dbl&gt;        &lt;dbl&gt;\n1            NA          NA            NA          NA               NA             NA             NA           NA\n# ℹ 2 more variables: year_mean &lt;dbl&gt;, year_sd &lt;dbl&gt;\n\n\n\n\n\nWhen we pass a function to across() it is passed with its default arguments\n\nmean() and sd() both have an argument na.rm that defaults to FALSE\n\nWe can’t pass extra arguments to functions inside across() directly\nWe need to pass a function with the argument values we want “baked in”\n\n\n\nhttps://tidyselect.r-lib.org/reference/language.html"
+  },
+  {
+    "objectID": "data-manipulation.html#specifying-extra-arguments",
+    "href": "data-manipulation.html#specifying-extra-arguments",
+    "title": "Advanced Data Manipulation with dplyr and tidyr",
+    "section": "Specifying extra arguments",
+    "text": "Specifying extra arguments\nWe can define our own helper functions:\n\nlibrary(dplyr)\n\nsd_na &lt;- function(x) {\n  sd(x, na.rm = TRUE)\n}\n\nmean_na &lt;- function(x) {\n  mean(x, na.rm = TRUE)\n}\n\npenguins |&gt;\n  summarize(\n    across(where(is.numeric), list(mean = mean_na, sd = sd_na))\n  )\n\n\n\n# A tibble: 1 × 10\n  bill_len_mean bill_len_sd bill_dep_mean bill_dep_sd flipper_len_mean flipper_len_sd body_mass_mean body_mass_sd\n          &lt;dbl&gt;       &lt;dbl&gt;         &lt;dbl&gt;       &lt;dbl&gt;            &lt;dbl&gt;          &lt;dbl&gt;          &lt;dbl&gt;        &lt;dbl&gt;\n1          43.9        5.46          17.2        1.97             201.           14.1          4202.         802.\n# ℹ 2 more variables: year_mean &lt;dbl&gt;, year_sd &lt;dbl&gt;"
+  },
+  {
+    "objectID": "data-manipulation.html#specifying-extra-arguments-1",
+    "href": "data-manipulation.html#specifying-extra-arguments-1",
+    "title": "Advanced Data Manipulation with dplyr and tidyr",
+    "section": "Specifying extra arguments",
+    "text": "Specifying extra arguments\nBut if we’re doing this only once we can define them in place with an anonymous function:\n\\(x) function(x, other_args)\n\nThis defines a function “on the fly” with the arguments specified how we want\nThe x will take the values of each column passed to it by across()\n\n\nlibrary(dplyr)\n\npenguins |&gt;\n  summarize(\n    across(\n      where(is.numeric),\n      list(\n        mean = \\(x) mean(x, na.rm = TRUE),\n        sd = \\(x) sd(x, na.rm = TRUE)\n      )\n    )\n  )\n\n\n\n# A tibble: 1 × 10\n  bill_len_mean bill_len_sd bill_dep_mean bill_dep_sd flipper_len_mean flipper_len_sd body_mass_mean body_mass_sd\n          &lt;dbl&gt;       &lt;dbl&gt;         &lt;dbl&gt;       &lt;dbl&gt;            &lt;dbl&gt;          &lt;dbl&gt;          &lt;dbl&gt;        &lt;dbl&gt;\n1          43.9        5.46          17.2        1.97             201.           14.1          4202.         802.\n# ℹ 2 more variables: year_mean &lt;dbl&gt;, year_sd &lt;dbl&gt;"
+  },
+  {
+    "objectID": "data-manipulation.html#your-turn",
+    "href": "data-manipulation.html#your-turn",
+    "title": "Advanced Data Manipulation with dplyr and tidyr",
+    "section": "Your turn",
+    "text": "Your turn\n\nCalculate the median of both types of bill measurements for each species in the built-in penguins dataset\nRound all of the numeric colums in the PortalData/SiteandMethods/Portal_UTMCoords.csv dataset to 2 decimal places"
+  },
+  {
+    "objectID": "data-manipulation.html#two-table-verbs-joins",
+    "href": "data-manipulation.html#two-table-verbs-joins",
+    "title": "Advanced Data Manipulation with dplyr and tidyr",
+    "section": "Two-table verbs (joins)",
+    "text": "Two-table verbs (joins)\n\n\n\n\nMutatating joins\n\nCombine two tables based on common values in one or more columns\n\nFiltering joins\n\nFilter rows from one table based on values in another table\n\n\n\nhttps://r4ds.hadley.nz/joins.html#how-do-joins-work"
+  },
+  {
+    "objectID": "data-manipulation.html#mutating-joins",
+    "href": "data-manipulation.html#mutating-joins",
+    "title": "Advanced Data Manipulation with dplyr and tidyr",
+    "section": "Mutating joins",
+    "text": "Mutating joins\n\n\nleft_join()\n\nKeeps all rows in the left table\nDrops rows from the right table that don’t match\nRows in the left that don’t match get NA in the columns from the right table\n\n\n\n\n\nhttps://r4ds.hadley.nz/joins.html#how-do-joins-work"
+  },
+  {
+    "objectID": "data-manipulation.html#mutating-joins-1",
+    "href": "data-manipulation.html#mutating-joins-1",
+    "title": "Advanced Data Manipulation with dplyr and tidyr",
+    "section": "Mutating joins",
+    "text": "Mutating joins\n\n\nright_join()\n\nKeeps all rows in the right table\nDrops rows from the left table that don’t match\nRows in the right table that don’t match get NA in the columns from the left table\n\n\n\n\n\nhttps://r4ds.hadley.nz/joins.html#how-do-joins-work"
+  },
+  {
+    "objectID": "data-manipulation.html#mutating-joins-2",
+    "href": "data-manipulation.html#mutating-joins-2",
+    "title": "Advanced Data Manipulation with dplyr and tidyr",
+    "section": "Mutating joins",
+    "text": "Mutating joins\n\n\ninner_join()\n\nKeeps all rows in both tables where keys match\nRows from either table that don’t match are dropped\n\n\n\n\n\nhttps://r4ds.hadley.nz/joins.html#how-do-joins-work"
+  },
+  {
+    "objectID": "data-manipulation.html#mutating-joins-3",
+    "href": "data-manipulation.html#mutating-joins-3",
+    "title": "Advanced Data Manipulation with dplyr and tidyr",
+    "section": "Mutating joins",
+    "text": "Mutating joins\n\n\nfull_join()\n\nKeeps all rows in both tables\nValues in x and y that don’t match get NA in the result\n\n\n\n\n\nhttps://r4ds.hadley.nz/joins.html#how-do-joins-work"
+  },
+  {
+    "objectID": "data-manipulation.html#join-syntax",
+    "href": "data-manipulation.html#join-syntax",
+    "title": "Advanced Data Manipulation with dplyr and tidyr",
+    "section": "Join syntax",
+    "text": "Join syntax\nIf don’t specify join columns, will join on all common names\n\nE.g., both tables have columns year, month, day\n\nleft_join(x, y)\n#&gt; Joining with `by = join_by(year, month, day)`\n\nBetter to specify the join columns explicitly\n\nBoth tables have columns column_1 and column_2\n\nleft_join(x, y, by = c(\"column_1\", \"column_2\"))\n\nIf the columns to join on have different names in each table\n\nleft_join(x, y, by = c(\"column_in_x\" = \"column_in_y\"))"
+  },
+  {
+    "objectID": "data-manipulation.html#your-turn-1",
+    "href": "data-manipulation.html#your-turn-1",
+    "title": "Advanced Data Manipulation with dplyr and tidyr",
+    "section": "Your turn",
+    "text": "Your turn\nUse a join to add location information to the rodent captures data\n\nThe rodent captures data is in the PortalData/Rodents/Portal_rodent.csv file.\nThe SiteandMethods/Portal_UTMCoords.csv file contains information about the location of each plot"
+  },
+  {
+    "objectID": "data-manipulation.html#filtering-joins-1",
+    "href": "data-manipulation.html#filtering-joins-1",
+    "title": "Advanced Data Manipulation with dplyr and tidyr",
+    "section": "Filtering joins",
+    "text": "Filtering joins\n\n\nsemi_join()\n\nKeeps all rows in the left table where there are matching key values in the right table\nDoes not add any columns"
+  },
+  {
+    "objectID": "data-manipulation.html#filtering-joins-2",
+    "href": "data-manipulation.html#filtering-joins-2",
+    "title": "Advanced Data Manipulation with dplyr and tidyr",
+    "section": "Filtering joins",
+    "text": "Filtering joins\n\n\nanti_join()\n\nKeeps all rows in the left table where there are not matching values in the right table\nDoes not add any columns"
+  },
+  {
+    "objectID": "data-manipulation.html#your-turn-2",
+    "href": "data-manipulation.html#your-turn-2",
+    "title": "Advanced Data Manipulation with dplyr and tidyr",
+    "section": "Your turn",
+    "text": "Your turn\nUse a join to find all the captures where the species is a granivore\n\nThe rodent captures data is in the PortalData/Rodents/Portal_rodent.csv file\nThe PortalData/Rodents/Portal_rodent_species.csv file contains information about the species"
+  },
+  {
+    "objectID": "data-manipulation.html#more-complex-joins-using-dplyrjoin_by.",
+    "href": "data-manipulation.html#more-complex-joins-using-dplyrjoin_by.",
+    "title": "Advanced Data Manipulation with dplyr and tidyr",
+    "section": "More complex joins using dplyr::join_by().",
+    "text": "More complex joins using dplyr::join_by().\nCross joins create the full cartesian product of two tables\n\n\nlibrary(dplyr)\nx &lt;- data.frame(a = 1:3)\ny &lt;- data.frame(b = c(\"x\", \"y\"))\ncross_join(x, y)\n\n\n  a b\n1 1 x\n2 1 y\n3 2 x\n4 2 y\n5 3 x\n6 3 y\n\n\n\n\nInequality joins\nleft_join(x, y, by = join_by(column_1 &gt;= column_2))\n\n\n\nRolling joins (inequality joins constrained by closest())\nleft_join(\n    x, y, \n    by = join_by(id, closest(capture_date &gt;= survey_start_date))\n)\nRolling joins are good for finding things like “the most recent rainy day before a survey date”\n\n\nI haven’t found a good reason to use inequality joins, but they are a necessary precursor to rolling joins, which are very useful."
+  },
+  {
+    "objectID": "data-manipulation.html#overlap-joins",
+    "href": "data-manipulation.html#overlap-joins",
+    "title": "Advanced Data Manipulation with dplyr and tidyr",
+    "section": "Overlap joins",
+    "text": "Overlap joins\n\n\nbetween(x, y_1, y_2)\nwithin(x_1, x_2, y_1, y_2)\noverlaps(x_1, x_2, y_1, y_2)\n\nbetween(x, y_1, y_2):\n\n  y_1 [════════════════════] y_2\n         •\n         x\n\n\nwithin(x_1, x_2, y_1, y_2):\n\n  y_1 [════════════════════] y_2\n         [═════]\n       x_1     x_2\n\n\noverlaps(x_1, x_2, y_1, y_2):\n\n  y_1 [════════════════════] y_2\n                   [═══════════════] \n                 x_1             x_2\n\n\nhttps://dplyr.tidyverse.org/reference/join_by.html#join-types"
+  },
+  {
+    "objectID": "data-manipulation.html#your-turn-3",
+    "href": "data-manipulation.html#your-turn-3",
+    "title": "Advanced Data Manipulation with dplyr and tidyr",
+    "section": "Your turn",
+    "text": "Your turn\nUsing the rodent trapping data and the plant census dates data, join the two datasets to find out which plant census (year and season) each rodent capture is associated with.\nStarting code:\nlibrary(dplyr)\nlibrary(readr)\nlibrary(lubridate)\n\nplant_census_dates &lt;- read_csv(\n  \"PortalData/Plants/Portal_plant_census_dates.csv\",\n  na = c(\"unknown\", \"none\")\n)\n\nrodent_trapping &lt;- read_csv(\"PortalData/Rodents/Portal_rodent_trapping.csv\")\n\nHint: use an overlap join with between()"
+  },
+  {
+    "objectID": "git-github.html#schedule",
+    "href": "git-github.html#schedule",
+    "title": "Version Control with Git and Collaboration with GitHub",
+    "section": "Schedule",
+    "text": "Schedule\n\n\n\nPacific Time\nEastern Time\nDuration\n\n\n\n\n09:30 - 10:50\n12:30 – 13:50\n80 min\n\n\nBreak\nBreak\n15 min\n\n\n11:05 – 12:25\n14:05– 15:25\n80 min\n\n\nBreak\nBreak\n15 min\n\n\n12:40 – 14:00\n15:40 – 17:00\n80 min"
+  },
+  {
     "objectID": "git-github.html#what-is-git",
     "href": "git-github.html#what-is-git",
     "title": "Version Control with Git and Collaboration with GitHub",
@@ -588,6 +777,13 @@
     "text": "What is GitHub (non-traditional answer)?\n\nPublishing platform. A new way for sharing documentation & scicomm - your files can become websites! Share the url once, it’s always the latest version.\nProject management system. Short- and long-term collaborative “todo” lists: “Issues” & “Projects”\n\n\nfor most folks, the pros of Git only outweigh the cons once you take the additional step of hooking your local repository up to a remote host like GitHub. The joint use of Git and GitHub offers many benefits that more than justify the learning curve."
   },
   {
+    "objectID": "git-github.html#github-account-management",
+    "href": "git-github.html#github-account-management",
+    "title": "Version Control with Git and Collaboration with GitHub",
+    "section": "GitHub account management",
+    "text": "GitHub account management\n\nYou can have one GitHub account for all of your work and personal projects\nAdd different email addresses to your GitHub account\n\nwork email for work projects\npersonal email for personal projects\nassociate activity with the correct email address\n\nYou can use multiple GitHub accounts, but it is more complicated to set up"
+  },
+  {
     "objectID": "git-github.html#an-aside-set-up-your-terminal-in-positron",
     "href": "git-github.html#an-aside-set-up-your-terminal-in-positron",
     "title": "Version Control with Git and Collaboration with GitHub",
@@ -599,7 +795,7 @@
     "href": "git-github.html#introduce-yourself-to-git",
     "title": "Version Control with Git and Collaboration with GitHub",
     "section": "Introduce yourself to Git",
-    "text": "Introduce yourself to Git\nConfigure your user.name and user.email for git. This information will be associated with your commits.\n\n\nIn the terminal\nwhich git\ngit config --global user.name \"Jane Doe\"\ngit config --global user.email \"jane@doe.ca\"\n\n\n\nIn Positron or RStudio\nusethis::use_git_config(\n  user.name = \"Jane Doe\",\n  user.email = \"jane@example.com\"\n)"
+    "text": "Introduce yourself to Git\nConfigure your user.name and user.email for git. This information will be associated with your commits.\n\n\nIn the terminal\nwhich git\ngit config --global user.name \"Jane Doe\"\ngit config --global user.email \"jane@doe.ca\"\n\n\n\nIn Positron or RStudio\nusethis::use_git_config(\n  user.name = \"Jane Doe\",\n  user.email = \"jane@doe.ca\"\n)"
   },
   {
     "objectID": "git-github.html#check-link-between-r-and-github",
