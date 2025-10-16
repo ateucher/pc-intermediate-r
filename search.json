@@ -529,7 +529,14 @@
     "href": "index.html#modules",
     "title": "Parks Canada - Intermediate R",
     "section": "Modules",
-    "text": "Modules\n\n1. Project-oriented workflows and effective use of your IDE (RStudio/Positron)\nLearn holistic workflows that address the most common sources of friction in data analysis. We’ll work on project-oriented workflows, effective use of your Integrated Development Environment (IDE), maintaining your R installation, and how to plan for collaboration, communication, and iteration\nKey Topics:\n\nProject-oriented workflows\nRStudio/Positron project management features\nEffective use of RStudio/Positron including keyboard shortcuts\nPersonal R Administration"
+    "text": "Modules\n\n1. Project-oriented workflows and effective use of your IDE (RStudio/Positron)\n\n\n2. Version control and Collaboration with Git and GitHub\n\n\n3. Advanced data manipulation with dplyr and tidyr\n\n\n4. Programming with R - functions, functional programming, and iteration\n\n\n5. Reproducible reporting with Quarto"
+  },
+  {
+    "objectID": "index.html#exercises",
+    "href": "index.html#exercises",
+    "title": "Parks Canada - Intermediate R",
+    "section": "Exercises",
+    "text": "Exercises\n\nExercises for the data manipulation module can be found here."
   },
   {
     "objectID": "index.html#prework",
@@ -564,7 +571,7 @@
     "href": "data-manipulation.html#setup",
     "title": "Advanced Data Manipulation with dplyr and tidyr",
     "section": "Setup",
-    "text": "Setup\n\nCreate a new project in Positron\n\n\nEither:\n\nFork and clone the exercises repository:\nhttps://github.com/ateucher/pc-data-manipulation/\nRun:\n\nusethis::use_course(\"https://github.com/ateucher/pc-data-manipulation/archive/refs/heads/main.zip\")\n\n\nOpen the file: 01-get-data.R\nDownload the data:\n\n\ninstall.packages(\"portalr\")\nlibrary(portalr)\n\ndownload_observations(\".\")\n\n\nExplore the downloaded data in Positron"
+    "text": "Setup\n\nCreate a new project in Positron\n\n\nEither:\n\nFork and clone the exercises repository:\nhttps://github.com/ateucher/pc-data-manipulation/ OR\nRun:\n\nusethis::use_course(\"https://github.com/ateucher/pc-data-manipulation/archive/refs/heads/main.zip\")\n\n\nOpen the file: 01-get-data.R\nDownload the data:\n\n\ninstall.packages(\"portalr\")\nlibrary(portalr)\n\ndownload_observations(\".\")\n\n\nExplore the downloaded data in Positron"
   },
   {
     "objectID": "data-manipulation.html#review-of-main-dplyr-operations",
