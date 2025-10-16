@@ -16,12 +16,26 @@ penguins <- dplyr::as_tibble(penguins)
 
 ## Outline
 
+::: {.columns}
+::: {.column width="50%"}
+
+Today:
+
 - `dplyr` fundamentals review
 - Column-wise operations
 - Two-table verbs (joins)
-- Row-wise operations
+
+:::
+::: {.column width="50%"}
+
+Next time:
+
 - Window functions
-- `tidyr` basics
+- Row-wise operations
+- Data reshaping with `tidyr`
+
+:::
+:::
 
 ## Data
 
@@ -308,34 +322,6 @@ penguins |>
 
 :::
 
-## Join syntax
-
-If don't specify join columns, will join on all common names
-
-- E.g., both tables have columns year, month, day
-
-```r
-left_join(x, y)
-#> Joining with `by = join_by(year, month, day)`
-```
-
-<br>
-
-Better to specify the join columns explicitly
-
-- Both tables have columns column_1 and column_2
-
-```r
-left_join(x, y, by = c("column_1", "column_2"))
-```
-
-
-- If the columns to join on have different names in each table
-
-```r
-left_join(x, y, by = c("column_in_x" = "column_in_y"))
-```
-
 ## Mutating joins
 
 ::: {.columns}
@@ -436,6 +422,34 @@ left_join(x, y, by = c("column_in_x" = "column_in_y"))
 
 :::
 
+## Join syntax
+
+If don't specify join columns, will join on all common names
+
+- E.g., both tables have columns year, month, day
+
+```r
+left_join(x, y)
+#> Joining with `by = join_by(year, month, day)`
+```
+
+<br>
+
+Better to specify the join columns explicitly
+
+- Both tables have columns column_1 and column_2
+
+```r
+left_join(x, y, by = c("column_1", "column_2"))
+```
+
+
+- If the columns to join on have different names in each table
+
+```r
+left_join(x, y, by = c("column_in_x" = "column_in_y"))
+```
+
 ## Your turn
 
 Use a join to add location information to the rodent captures data
@@ -443,7 +457,6 @@ Use a join to add location information to the rodent captures data
 - The rodent captures data is in the `PortalData/Rodents/Portal_rodent.csv` file.
 
 - The `SiteandMethods/Portal_UTMCoords.csv` file contains information about the location of each plot
-
 
 ## Filtering joins
 
