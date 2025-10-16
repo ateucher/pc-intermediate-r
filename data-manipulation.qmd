@@ -134,6 +134,11 @@ mtcars |>
 
 :::
 
+::: {.notes}
+We are passing the function `mean` to `across()`, not calling it (i.e., no parentheses).
+Functions in R are objects that can be passed around and used later.
+:::
+
 ## Column-wise operations
 
 specify multiple functions to apply in a `list()`
@@ -160,6 +165,85 @@ mtcars |>
 <https://tidyselect.r-lib.org/reference/language.html>
 
 :::
+
+## Column-wise operations
+
+Run this in your R session, what do you get?
+```{r}
+#| echo: true
+#| output-location: fragment
+library(dplyr)
+penguins |>
+  summarize(
+    across(where(is.numeric), list(mean = mean, sd = sd))
+  )
+```
+
+<br>
+
+::: {.fragment}
+
+- When we pass a function to `across()` it is passed with its default arguments
+- We unfortunately can't pass extra arguments to functions inside `across()` directly
+- We need to pass a function with the argument values we want "baked in"
+
+:::
+
+::: {.resources}
+
+<https://tidyselect.r-lib.org/reference/language.html>
+
+:::
+
+## Specifying extra arguments
+
+We can define our own helper functions:
+
+```{r}
+#| echo: true
+#| output-location: fragment
+library(dplyr)
+
+sd_na <- function(x) {
+  sd(x, na.rm = TRUE)
+}
+
+mean_na <- function(x) {
+  mean(x, na.rm = TRUE)
+}
+
+penguins |>
+  summarize(
+    across(where(is.numeric), list(mean = mean_na, sd = sd_na))
+  )
+```
+
+## Specifying extra arguments
+
+But if we're doing this only once we can define them in place with an [anonymous function]{.highlight-term}:
+
+```{r}
+#| echo: true
+#| output-location: fragment
+library(dplyr)
+
+penguins |>
+  summarize(
+    across(
+      where(is.numeric),
+      list(
+        mean = \(x) mean(x, na.rm = TRUE),
+        sd = \(x) sd(x, na.rm = TRUE)
+      )
+    )
+  )
+```
+
+## Your turn
+
+1. Calculate the median of both types of bill measurements for each species in the built-in penguins dataset
+
+2. Round all of the numeric colums in the `PortalData/SiteandMethods/Portal_UTMCoords.csv` dataset to 2 decimal places
 
 ## Two-table verbs (joins)
 
@@ -488,8 +572,8 @@ rodent_trapping <- read_csv("PortalData/Rodents/Portal_rodent_trapping.csv")
 
 * Hint: use an overlap join with `between()`
 
-# Row-wise operations
-
 # Window functions
+
+# Row-wise operations
 
 # `tidyr`
