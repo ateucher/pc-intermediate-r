@@ -7,6 +7,9 @@ knitr:
   opts_chunk: 
     R.options:
       width: 120
+      pillar.print_max: 5
+      pillar.print_min: 5
+    echo: true
 ---
 
 ```{r}
@@ -31,7 +34,6 @@ Today:
 Next time:
 
 - Window functions
-- Row-wise operations
 - Data reshaping with `tidyr`
 
 :::
@@ -62,7 +64,6 @@ Data available from the [GitHub repo](https://github.com/weecology/PortalData) v
 3. Download the data:
 
 ```{r}
-#| echo: true
 #| eval: false
 install.packages("portalr")
 library(portalr)
@@ -72,25 +73,206 @@ download_observations(".")
 
 4. Explore the downloaded data in Positron
 
-
-## Review of main `dplyr` operations
-
-- Selecting columns with `select()`
-- Filtering rows with `filter()`
-- "Slice" rows with `slice()`/`slice_*()`
-- Creating new columns with `mutate()`
-- Summarizing data with `summarize()`
-
-::: {.fragment}
-- Grouping data with `group_by()` applies `filter()`, `mutate()`, and `summarize()` by group
-:::
-
 ## Warm-up
 
 Read in the rodent capture data (`PortalData/Rodents/Portal_rodent.csv`). 
 
 1. Use `readr::read_csv()` and assign it to a data frame called `rodents`.
 2. Standardize column names to use `snake_case` *(hint: check out the `janitor` package)*
+
+## Review of main `dplyr` operations
+
+- Select columns with `select()`
+- Keep rows based on their values with `filter()`
+- Create new columns with `mutate()`
+- Summarize data with `summarize()`
+- Sort rows based on column values with `arrange()`
+- "Slice" rows with `slice()`/`slice_*()`
+
+::: {.fragment}
+- Grouping data with `group_by()` applies `filter()`, `mutate()`, `summarize()`, and `slice()` by group
+:::
+
+## Using `select()`
+
+::: {.columns}
+::: {.column width="50%"}
+
+### Select columns with bare names
+
+```{r}
+library(dplyr)
+
+penguins |>
+  select(species, island, body_mass)
+```
+
+:::
+::: {.column width="50%"}
+
+### Use `all_of()` or `any_of()` to select columns from a character vector
+
+- `all_of()`: throws an error if any names are not found
+- `any_of()`: ignores names that are not found
+
+```{r}
+#| output-location: fragment
+cols <- c("species", "sex", "bill_len", "bill_dep")
+select(penguins, all_of(cols))
+```
+
+:::
+:::
+
+::: {.question}
+[Your turn:]{.color-yellow} Select record_id, id, and species from rodents
+:::
+
+## selection helpers
+
+::: {.columns}
+::: {.column width="50%"}
+### select _specific columns_:
+
+- `everything()`: Matches all variables.
+- `last_col()`: Select last variable, possibly with an offset.
+- `group_cols()`: Select all grouping columns.
+
+:::
+::: {.column width="50%"}
+
+### select columns based on _name patterns_:
+
+- `starts_with()`: Starts with a prefix.
+- `ends_with()`: Ends with a suffix.
+- `contains()`: Contains a literal string.
+- `matches()`: Matches a regular expression.
+
+### select columns based on _data type_:
+
+- `where()`: Select columns based on a predicate function (a function that returns `TRUE` or `FALSE`).
+
+:::
+:::
+
+See help with `?select`
+
+::: {.notes}
+
+- `everything()` is useful when you want to move a column to the front or back of the data frame.
+- Selection helpers can be combined using `c()`, e.g., `select(df, c(starts_with("temp"), ends_with("date")))`
+
+:::
+
+## Your turn
+
+### Using the `rodents` data.frame:
+
+- Select the `id` column and all of the numeric columns
+
+- Select all columns except the "note" columns (starting with `note`)
+
+- Reorder the columns, moving the last column to the first position, without specifying any column names
+
+## Using `filter()`
+
+To retain only a subset of rows:
+```{r}
+filter(penguins, species == "Adelie")
+```
+
+## Combine multiple `filter()` conditions with `,` or `&` (AND) and `|` (OR):
+
+```{r}
+filter(penguins, species == "Adelie", island == "Torgersen")
+```
+
+<br>
+
+```{r}
+filter(penguins, species == "Adelie" | (species == "Gentoo" & body_mass < 4000))
+```
+
+## Using `mutate()`
+
+Create new columns or modify existing columns:
+```{r}
+mutate(penguins, mass_kg = body_mass / 1000)
+```
+
+::: {.fragment}
+Create multiple columns at once:
+
+```{r}
+mutate(
+  penguins,
+  mass_kg = body_mass / 1000,
+  bill_ratio = bill_len / bill_dep
+)
+```
+:::
+
+## The pipe ( |> )
+
+The pipe operator (`|>`) passes the output of one function as the first argument to the next function.
+It allows us to chain together multiple operations in a readable way.
+
+::: {.fragment}
+- Helps avoid deeply nested function calls.
+
+```r
+filter(select(penguins, species, island, body_mass), body_mass > 4000)
+```
+:::
+
+::: {.fragment}
+
+- Helps avoid creating many intermediate variables.
+
+```r
+selected_data <- select(penguins, species, island, body_mass)
+filtered_data <- filter(selected_data, body_mass > 4000)
+```
+:::
+
+::: {.fragment}
+
+Read it out loud as _"and then"_
+
+```{r}
+penguins |> # and then
+  select(species, island, body_mass) |> # and then
+  filter(body_mass > 4000)
+```
+
+:::
+
+## Using `group_by()`
+
+Add grouping attributes that tell other `dplyr` functions to operate by group:
+
+```{r}
+penguins |>
+  select(species, island, body_mass) |>
+  filter(body_mass > 4000) |>
+  group_by(species, island)
+```
+
+## Using `summarize()`
+
+Creates one summary row per unique combination of groups:
+
+```{r}
+penguins |>
+  select(species, island, body_mass) |>
+  filter(body_mass > 4000) |>
+  group_by(species, island) |>
+  summarise(sd_mass = sd(body_mass, na.rm = TRUE))
+```
+
+## Your turn - pulling it all together
+
+Using the `rodents` data set find the mean hindfoot length per weight of Merriam's Kangaroo Rats (`"DM"`) grouped by `plot` and arranged by thew new hfl per weight column.
 
 ## `dplyr` practice
 
@@ -150,8 +332,15 @@ Read in the rodent capture data (`PortalData/Rodents/Portal_rodent.csv`).
 
 ## Column-wise operations
 
+<!-- Start here after dplyr fundamentals -->
+
 - Apply one or more functions to a set of columns in a data frame using `across()`
-- Specfiy columns using [selection helpers](https://tidyselect.r-lib.org/reference/language.html) (e.g., `starts_with()`, `ends_with()`, `contains()`, `where()`, etc.)
+
+```r
+across(<columns>, <functions>)
+```
+
+- Specify columns using [selection helpers](https://tidyselect.r-lib.org/reference/language.html) (e.g., `starts_with()`, `ends_with()`, `contains()`, `where()`, etc.)
 - Specify function(s) to apply to selected columns
 - Used with `summarize()` & `mutate()`
 
@@ -159,12 +348,11 @@ Read in the rodent capture data (`PortalData/Rodents/Portal_rodent.csv`).
 
 #### Example: calculate mean of all numeric columns
 
-
 ```{r}
-#| echo: true
-#| output-location: fragment
+#| eval: false
 
 library(dplyr)
+
 mtcars |>
   group_by(cyl) |>
   summarize(across(where(is.numeric), mean))
@@ -172,7 +360,16 @@ mtcars |>
 
 :::
 
+::: {.question .fragment}
+[Your turn:]{.color-yellow} Scale all numeric columns (use `across()`) in `rodents` to have mean 0 and standard deviation 1.
+
+_hint:_ Check out the `scale()` function
+:::
+
+
 ::: {.notes}
+Selection syntax is the same as in `select()`, i.e., using the same selection helpers
+
 We are passing the function `mean` to `across()`, not calling it (i.e., no parentheses).
 Functions in R are objects that can be passed around and used later.
 :::
@@ -188,7 +385,6 @@ specify multiple functions to apply in a `list()`
 #### Example: calculate mean and sd of all numeric columns
 
 ```{r}
-#| echo: true
 #| output-location: fragment
 library(dplyr)
 mtcars |>
@@ -210,7 +406,6 @@ mtcars |>
 
 Run this in your R session, what do you get?
 ```{r}
-#| echo: true
 #| output-location: fragment
 library(dplyr)
 penguins |>
@@ -223,7 +418,7 @@ penguins |>
 
 ::: {.fragment}
 
-- When we pass a function to `across()` it is passed with its default arguments
+- When we use a function in `across()` it is called with its default arguments
 	- `mean()` and `sd()` both have an argument `na.rm` that defaults to `FALSE`
 - We can't pass extra arguments to functions inside `across()` directly
 - We need to pass a function with the argument values we want "baked in"
@@ -241,7 +436,6 @@ penguins |>
 We can define our own helper functions:
 
 ```{r}
-#| echo: true
 #| output-location: fragment
 library(dplyr)
 
@@ -271,7 +465,6 @@ But if we're doing this only once we can define them in place with an [anonymous
 - The `x` will take the values of each column passed to it by `across()`
 
 ```{r}
-#| echo: true
 #| output-location: fragment
 library(dplyr)
 
@@ -290,9 +483,7 @@ penguins |>
 
 ## Your turn
 
-1. Calculate the median of both types of bill measurements for each species in the built-in `penguins` dataset
-
-2. Round all of the numeric colums in the `PortalData/SiteandMethods/Portal_UTMCoords.csv` dataset to 2 decimal places
+1. Calculate the median of hind-foot length (`hfl`) and weight (`wgt`) for each species in `rodents`, ignoring `NA` values.
 
 ## Two-table verbs (joins)
 
@@ -305,7 +496,7 @@ penguins |>
 
 ::: {.column width="50%"}
 
-### Mutatating joins
+### Mutating joins
 
 - Combine two tables based on common values in one or more columns
 
@@ -509,7 +700,6 @@ Use a join to find all the captures where the species is a granivore
 **Cross joins** create the full cartesian product of two tables
 
 ```{r}
-#| echo: true
 #| output-location: column-fragment
 library(dplyr)
 x <- data.frame(a = 1:3)
@@ -621,8 +811,6 @@ rodent_trapping <- read_csv("PortalData/Rodents/Portal_rodent_trapping.csv")
 * Hint: use an overlap join with `between()`
 
 # Window functions
-
-# Row-wise operations
 
 # `tidyr`
 
