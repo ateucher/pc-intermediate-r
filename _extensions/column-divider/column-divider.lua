@@ -8,8 +8,13 @@ function column_divider(args, kwargs, meta)
     end
     -- quarto.log.output("col after: ", col)
     return pandoc.RawBlock(
-    'html', 
-    '<div class="column" style="width:2%;"><div class="column-divider" style="border-left: 1px solid ' .. col .. '; min-height: 90vh; margin: 0 auto; width: 0;"></div></div>')
+      'html', 
+      '<div class="column" style="width:2%;">' ..
+      '<div class="column-divider" style="border-left: 1px solid ' .. 
+      col .. 
+      '; height: 65vh; margin: 0 auto; width: 0;">' .. 
+      '</div></div>'
+  )
   end
   return pandoc.Null()
 end
