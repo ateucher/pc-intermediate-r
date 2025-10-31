@@ -214,19 +214,15 @@ mutate(
 
 ## The pipe ( |> )
 
-The pipe operator (` |>
-  `) passes the output of one function as the first argument to the next function.
+The pipe operator (`|>`) passes the output of one function as the first argument to the next function.
 It allows us to chain together multiple operations in a readable way.
 
 ::: {.fragment}
 - Helps avoid deeply nested function calls.
 
-`
-``
-r
+```r
 filter(select(penguins, species, island, body_mass), body_mass > 4000)
-``
-`
+```
 :::
 
 ::: {.fragment}
