@@ -836,8 +836,7 @@ rodent_trapping <- read_csv("PortalData/Rodents/Portal_rodent_trapping.csv")
   - Example: dates, treatment groups, measurement types
 
 ::: {.columns}
-
-::: {.column width="50%"}
+::: {.column width="49%"}
 
 ```{r}
 #| echo: false
@@ -849,6 +848,8 @@ knitr::kable(tribble(
   2,         6,           8
 ))
 ```
+
+<br>
 
 ::: {.fragment}
 
@@ -864,21 +865,30 @@ knitr::kable(tribble(
 ```
 
 :::
-
 ::: 
 
-::: {.column width="50%"}
+{{< column-divider >}}
+
+::: {.column width="49%"}
+::: {.fragment}
 
 ```{r}
 #| echo: false
 #| output-location: fragment
 
 knitr::kable(tribble(
-  ~id , ~mass_20250101 , ~mass_20250201 ,
-    1 ,            150 ,            165 ,
-    2 ,            125 ,            118
+  ~id , ~"20250101" , ~"20250201" ,
+    1 , 150 ,         165 ,
+    2 , 125 ,         118
 ))
 ```
+
+- Dates are stored in the column names
+- Values are masses (in grams).
+
+:::
+
+<br>
 
 ::: {.fragment}
 
@@ -896,5 +906,28 @@ knitr::kable(tribble(
 :::
 :::
 ::::
+
+::: {.notes}
+
+- Each row has more than one observation
+- Variables split across multiple columns
+- Second example - we hopefully have metadata that tells us that the values are masses (in grams)
+
+:::
+
+## `tidyr::pivot_longer()`
+
+- Reshape data from wide to long format
+
+```r
+pivot_longer(
+  data,
+  cols, # The columns to pivot into longer format. Use tidyselect helpers
+  names_to, # The name(s) of the new column(s) that will contain the former column names
+  values_to # The name of the new column that will contain the values from the pivoted columns
+)
+```
+
+
 
 # string manipulation and regular expressions
