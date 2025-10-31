@@ -1,12 +1,15 @@
-function column_divider(col)
+function column_divider(args, kwargs, meta)
   if quarto.doc.is_format("revealjs") then
-    local colour = ""
-    if #col > 0 then
-      colour = pandoc.utils.stringify(col[1])
+    -- quarto.log.output("kwargs: ", #kwargs)
+    -- quarto.log.output("col: ", kwargs.col)
+    local col = ""
+    if kwargs.col ~= nil then
+      col = pandoc.utils.stringify(kwargs.col)
     end
+    -- quarto.log.output("col after: ", col)
     return pandoc.RawBlock(
     'html', 
-    '<div class="column" style="width:2%;"><div class="column-divider" style="border-left: 1px solid ' .. colour .. '; min-height: 95vh; margin: 0 auto; width: 0;"></div></div>')
+    '<div class="column" style="width:2%;"><div class="column-divider" style="border-left: 1px solid ' .. col .. '; min-height: 90vh; margin: 0 auto; width: 0;"></div></div>')
   end
   return pandoc.Null()
 end
