@@ -214,15 +214,19 @@ mutate(
 
 ## The pipe ( |> )
 
-The pipe operator (`|>`) passes the output of one function as the first argument to the next function.
+The pipe operator (` |>
+  `) passes the output of one function as the first argument to the next function.
 It allows us to chain together multiple operations in a readable way.
 
 ::: {.fragment}
 - Helps avoid deeply nested function calls.
 
-```r
+`
+``
+r
 filter(select(penguins, species, island, body_mass), body_mass > 4000)
-```
+``
+`
 :::
 
 ::: {.fragment}
@@ -810,8 +814,91 @@ rodent_trapping <- read_csv("PortalData/Rodents/Portal_rodent_trapping.csv")
 
 * Hint: use an overlap join with `between()`
 
-# Window functions
+# Tidying data with `tidyr`
 
-# `tidyr`
+> “Happy families are all alike; every unhappy family is unhappy in its own way.”
+
+— Leo Tolstoy
+
+<br>
+
+> “Tidy datasets are all alike, but every messy dataset is messy in its own way.”
+
+— Hadley Wickham
+
+## What is tidy data?
+
+1. Each variable is a column; each column is a variable.
+2. Each observation is a row; each row is an observation.
+3. Each value is a cell; each cell is a single value.
+
+![](img/tidy-data-r4ds.png)
+
+## Wide vs. long (tidy) data
+
+- Wide data often has "data" stored in the column names
+  - Example: dates, treatment groups, measurement types
+
+::: {.columns}
+
+::: {.column width="50%"}
+
+```{r}
+#| echo: false
+library(tibble)
+
+knitr::kable(tribble(
+  ~subject, ~treatment_A, ~treatment_B,
+  1,         5,           7,
+  2,         6,           8
+))
+```
+
+::: {.fragment}
+
+```{r}
+#| echo: false
+knitr::kable(tribble(
+  ~subject , ~treatment , ~value ,
+         1 , "A"        ,      5 ,
+         1 , "B"        ,      7 ,
+         2 , "A"        ,      6 ,
+         2 , "B"        ,      8
+))
+```
+
+:::
+
+::: 
+
+::: {.column width="50%"}
+
+```{r}
+#| echo: false
+#| output-location: fragment
+
+knitr::kable(tribble(
+  ~id , ~mass_20250101 , ~mass_20250201 ,
+    1 ,            150 ,            165 ,
+    2 ,            125 ,            118
+))
+```
+
+::: {.fragment}
+
+```{r}
+#| echo: false
+knitr::kable(tribble(
+  ~id, ~date,       ~mass,
+  1,   "2025-01-01", 150,
+  1,   "2025-02-01", 165,
+  2,   "2025-01-01", 125,
+  2,   "2025-02-01", 118
+))
+```
+
+:::
+:::
+::::
 
 # string manipulation and regular expressions
