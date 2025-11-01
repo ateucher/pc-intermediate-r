@@ -6,7 +6,7 @@ format: revealjs
 knitr:
   opts_chunk: 
     R.options:
-      width: 120
+      width: 110
       pillar.print_max: 5
       pillar.print_min: 5
     echo: true
@@ -361,9 +361,7 @@ mtcars |>
 :::
 
 ::: {.question .fragment}
-[Your turn:]{.color-yellow} Scale all numeric columns (use `across()`) in `rodents` to have mean 0 and standard deviation 1.
-
-_hint:_ Check out the `scale()` function
+[Your turn:]{.color-yellow} Scale all numeric columns (use `across()`) in `rodents` to have mean 0 and standard deviation 1. *(Hint: Check out the `scale()` function)*
 :::
 
 
@@ -874,7 +872,6 @@ knitr::kable(tribble(
 
 ```{r}
 #| echo: false
-#| output-location: fragment
 
 knitr::kable(tribble(
   ~id , ~"20250101" , ~"20250201" ,
@@ -888,12 +885,11 @@ knitr::kable(tribble(
 
 :::
 
-<br>
-
 ::: {.fragment}
 
 ```{r}
 #| echo: false
+#| 
 knitr::kable(tribble(
   ~id, ~date,       ~mass,
   1,   "2025-01-01", 150,
@@ -909,24 +905,86 @@ knitr::kable(tribble(
 
 ::: {.notes}
 
-- Each row has more than one observation
+- Each row has more than one observation (more than one time, place, or subject)
 - Variables split across multiple columns
+  - Eg., what if we wanted to the get the mean mass per subject?
 - Second example - we hopefully have metadata that tells us that the values are masses (in grams)
 
 :::
 
+## Example - billboard data
+
+```{r}
+#| 
+library(tidyr)
+billboard
+```
+
+::: {.question .fragment}
+How would we plot this data to show how the rank of different songs changed over time?
+:::
+
+::: {.question .fragment}
+What shape would this data have in long format?
+:::
+
 ## `tidyr::pivot_longer()`
 
-- Reshape data from wide to long format
+Reshape data from wide to long format
 
-```r
+::: {.columns}
+
+::: {.column}
+
+```{r}
+#| eval: false
+#| code-line-numbers: "|1,2,3,6,7|13|14"
 pivot_longer(
   data,
-  cols, # The columns to pivot into longer format. Use tidyselect helpers
-  names_to, # The name(s) of the new column(s) that will contain the former column names
-  values_to # The name of the new column that will contain the values from the pivoted columns
+  cols,
+  ...,
+  cols_vary = "fastest",
+  names_to = "name",
+  names_prefix = NULL,
+  names_sep = NULL,
+  names_pattern = NULL,
+  names_ptypes = NULL,
+  names_transform = NULL,
+  names_repair = "check_unique",
+  values_to = "value",
+  values_drop_na = FALSE,
+  values_ptypes = NULL,
+  values_transform = NULL
 )
 ```
+
+:::
+
+::: {.column}
+
+::: {.fragment}
+
+- `cols`: columns to pivot from wide to long. Uses tidyselect syntax.
+- `names_to`: name of new column to create from the column names
+- `values_to`: name of new column to create from the values in the selected columns
+- `values_drop_na`: if `TRUE`, drops rows with `NA` in the values column
+
+:::
+
+:::
+
+:::
+
+::: {.notes}
+
+- go to R and do pivot_longer() on billboard data
+
+:::
+
+## Your turn
+
+- Use `SitesandMethods/Portal_plot_treatments.csv` and pivot it to longer so there is a start_date, end_date, and treatment column. See if you can get the dates into proper date format. The `lubridate` package may be helpful.
+
 
 
 

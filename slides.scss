@@ -60,6 +60,10 @@ $h3-font-size: 1.15em !default;
   text-align: center;
 }
 
+.reveal .slide .question p::before {
+  content: "🤔 ";
+}
+
 .reveal .slide .notebox {
   margin: 1em;
   padding-left: 1.0em;
