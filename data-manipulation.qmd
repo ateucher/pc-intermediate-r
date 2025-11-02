@@ -95,6 +95,7 @@ Read in the rodent capture data (`PortalData/Rodents/Portal_rodent.csv`).
 ### Select columns with bare names
 
 ```{r}
+#| output-location: fragment
 library(dplyr)
 
 penguins |>
@@ -103,6 +104,8 @@ penguins |>
 
 :::
 ::: {.column width="50%"}
+
+::: {.fragment}
 
 ### Use `all_of()` or `any_of()` to select columns from a character vector
 
@@ -117,8 +120,9 @@ select(penguins, all_of(cols))
 
 :::
 :::
+:::
 
-::: {.question}
+::: {.question .fragment}
 [Your turn:]{.color-yellow} Select record_id, id, and species from rodents
 :::
 
@@ -164,7 +168,7 @@ See help with `?select`
 
 - Select the `id` column and all of the numeric columns
 
-- Select all columns except the "note" columns (starting with `note`)
+- Select all columns except the columns starting with `"note"`
 
 - Reorder the columns, moving the last column to the first position, without specifying any column names
 
@@ -187,6 +191,12 @@ filter(penguins, species == "Adelie", island == "Torgersen")
 filter(penguins, species == "Adelie" | (species == "Gentoo" & body_mass < 4000))
 ```
 
+::: {.notes}
+
+live code these
+
+:::
+
 ## Using `mutate()`
 
 Create new columns or modify existing columns:
@@ -195,7 +205,7 @@ mutate(penguins, mass_kg = body_mass / 1000)
 ```
 
 ::: {.fragment}
-Create multiple columns at once:
+Create multiple columns in one mutate call:
 
 ```{r}
 mutate(
@@ -206,13 +216,19 @@ mutate(
 ```
 :::
 
+::: {.notes}
+
+live code these
+
+:::
+
 ## The pipe ( |> )
 
 The pipe operator (`|>`) passes the output of one function as the first argument to the next function.
 It allows us to chain together multiple operations in a readable way.
 
 ::: {.fragment}
-- Helps avoid deeply nested function calls.
+- Helps avoid deeply nested function calls, which are hard to read.
 
 ```r
 filter(select(penguins, species, island, body_mass), body_mass > 4000)
@@ -956,8 +972,6 @@ pivot_longer(
 
 ::: {.column}
 
-::: {.fragment}
-
 - `cols`: columns to pivot from wide to long. Uses tidyselect syntax.
 - `names_to`: name of new column to create from the column names
 - `values_to`: name of new column to create from the values in the selected columns
@@ -966,6 +980,10 @@ pivot_longer(
 :::
 
 :::
+
+::: {.question .fragment}
+
+Let's practice with the billboard data
 
 :::
 
@@ -978,8 +996,3 @@ pivot_longer(
 ## Your turn
 
 - Use `SitesandMethods/Portal_plot_treatments.csv` and pivot it to longer so there is a start_date, end_date, and treatment column. See if you can get the dates into proper date format. The `lubridate` package may be helpful.
-
-
-
-
-# string manipulation and regular expressions
