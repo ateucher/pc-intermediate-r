@@ -557,7 +557,7 @@
     "href": "data-manipulation.html#outline",
     "title": "Advanced Data Manipulation with dplyr and tidyr",
     "section": "Outline",
-    "text": "Outline\n\n\nToday:\n\ndplyr fundamentals review\nColumn-wise operations\nTwo-table verbs (joins)\n\n\nNext time:\n\nWindow functions\nRow-wise operations\nData reshaping with tidyr"
+    "text": "Outline\n\n\nToday:\n\ndplyr fundamentals review\nColumn-wise operations\nTwo-table verbs (joins)\nData reshaping with tidyr\nWindow functions?"
   },
   {
     "objectID": "data-manipulation.html#data",
@@ -574,18 +574,88 @@
     "text": "Setup\n\nCreate a new project in Positron\n\n\nEither:\n\nFork and clone the exercises repository:\nhttps://github.com/ateucher/pc-data-manipulation/ OR\nRun:\n\nusethis::use_course(\"https://github.com/ateucher/pc-data-manipulation/archive/refs/heads/main.zip\")\n\n\nOpen the file: 01-get-data.R\nDownload the data:\n\n\ninstall.packages(\"portalr\")\nlibrary(portalr)\n\ndownload_observations(\".\")\n\n\nExplore the downloaded data in Positron"
   },
   {
-    "objectID": "data-manipulation.html#review-of-main-dplyr-operations",
-    "href": "data-manipulation.html#review-of-main-dplyr-operations",
-    "title": "Advanced Data Manipulation with dplyr and tidyr",
-    "section": "Review of main dplyr operations",
-    "text": "Review of main dplyr operations\n\nSelecting columns with select()\nFiltering rows with filter()\n“Slice” rows with slice()/slice_*()\nCreating new columns with mutate()\nSummarizing data with summarize()\n\n\n\nGrouping data with group_by() applies filter(), mutate(), and summarize() by group"
-  },
-  {
     "objectID": "data-manipulation.html#warm-up",
     "href": "data-manipulation.html#warm-up",
     "title": "Advanced Data Manipulation with dplyr and tidyr",
     "section": "Warm-up",
     "text": "Warm-up\nRead in the rodent capture data (PortalData/Rodents/Portal_rodent.csv).\n\nUse readr::read_csv() and assign it to a data frame called rodents.\nStandardize column names to use snake_case (hint: check out the janitor package)"
+  },
+  {
+    "objectID": "data-manipulation.html#review-of-main-dplyr-operations",
+    "href": "data-manipulation.html#review-of-main-dplyr-operations",
+    "title": "Advanced Data Manipulation with dplyr and tidyr",
+    "section": "Review of main dplyr operations",
+    "text": "Review of main dplyr operations\n\nSelect columns with select()\nKeep rows based on their values with filter()\nCreate new columns with mutate()\nSummarize data with summarize()\nSort rows based on column values with arrange()\n“Slice” rows with slice()/slice_*()\n\n\n\nGrouping data with group_by() applies filter(), mutate(), summarize(), and slice() by group"
+  },
+  {
+    "objectID": "data-manipulation.html#using-select",
+    "href": "data-manipulation.html#using-select",
+    "title": "Advanced Data Manipulation with dplyr and tidyr",
+    "section": "Using select()",
+    "text": "Using select()\n\n\nSelect columns with bare names\n\nlibrary(dplyr)\n\npenguins |&gt;\n  select(species, island, body_mass)\n\n\n\n# A tibble: 344 × 3\n  species island    body_mass\n  &lt;fct&gt;   &lt;fct&gt;         &lt;int&gt;\n1 Adelie  Torgersen      3750\n2 Adelie  Torgersen      3800\n3 Adelie  Torgersen      3250\n4 Adelie  Torgersen        NA\n5 Adelie  Torgersen      3450\n# ℹ 339 more rows\n\n\n\n\nUse all_of() or any_of() to select columns from a character vector\n\nall_of(): throws an error if any names are not found\nany_of(): ignores names that are not found\n\n\ncols &lt;- c(\"species\", \"sex\", \"bill_len\", \"bill_dep\")\nselect(penguins, all_of(cols))\n\n\n\n# A tibble: 344 × 4\n  species sex    bill_len bill_dep\n  &lt;fct&gt;   &lt;fct&gt;     &lt;dbl&gt;    &lt;dbl&gt;\n1 Adelie  male       39.1     18.7\n2 Adelie  female     39.5     17.4\n3 Adelie  female     40.3     18  \n4 Adelie  &lt;NA&gt;       NA       NA  \n5 Adelie  female     36.7     19.3\n# ℹ 339 more rows\n\n\n\n\n\nYour turn: Select record_id, id, and species from rodents"
+  },
+  {
+    "objectID": "data-manipulation.html#selection-helpers",
+    "href": "data-manipulation.html#selection-helpers",
+    "title": "Advanced Data Manipulation with dplyr and tidyr",
+    "section": "selection helpers",
+    "text": "selection helpers\n\n\nselect specific columns:\n\neverything(): Matches all variables.\nlast_col(): Select last variable, possibly with an offset.\ngroup_cols(): Select all grouping columns.\n\n\nselect columns based on name patterns:\n\nstarts_with(): Starts with a prefix.\nends_with(): Ends with a suffix.\ncontains(): Contains a literal string.\nmatches(): Matches a regular expression.\n\nselect columns based on data type:\n\nwhere(): Select columns based on a predicate function (a function that returns TRUE or FALSE).\n\n\nSee help with ?select\n\n\neverything() is useful when you want to move a column to the front or back of the data frame.\nSelection helpers can be combined using c(), e.g., select(df, c(starts_with(\"temp\"), ends_with(\"date\")))"
+  },
+  {
+    "objectID": "data-manipulation.html#your-turn",
+    "href": "data-manipulation.html#your-turn",
+    "title": "Advanced Data Manipulation with dplyr and tidyr",
+    "section": "Your turn",
+    "text": "Your turn\nUsing the rodents data.frame:\n\nSelect the id column and all of the numeric columns\nSelect all columns except the columns starting with \"note\"\nReorder the columns, moving the last column to the first position, without specifying any column names"
+  },
+  {
+    "objectID": "data-manipulation.html#using-filter",
+    "href": "data-manipulation.html#using-filter",
+    "title": "Advanced Data Manipulation with dplyr and tidyr",
+    "section": "Using filter()",
+    "text": "Using filter()\nTo retain only a subset of rows:\n\nfilter(penguins, species == \"Adelie\")\n\n# A tibble: 152 × 8\n  species island    bill_len bill_dep flipper_len body_mass sex     year\n  &lt;fct&gt;   &lt;fct&gt;        &lt;dbl&gt;    &lt;dbl&gt;       &lt;int&gt;     &lt;int&gt; &lt;fct&gt;  &lt;int&gt;\n1 Adelie  Torgersen     39.1     18.7         181      3750 male    2007\n2 Adelie  Torgersen     39.5     17.4         186      3800 female  2007\n3 Adelie  Torgersen     40.3     18           195      3250 female  2007\n4 Adelie  Torgersen     NA       NA            NA        NA &lt;NA&gt;    2007\n5 Adelie  Torgersen     36.7     19.3         193      3450 female  2007\n# ℹ 147 more rows"
+  },
+  {
+    "objectID": "data-manipulation.html#combine-multiple-filter-conditions-with-or-and-and-or",
+    "href": "data-manipulation.html#combine-multiple-filter-conditions-with-or-and-and-or",
+    "title": "Advanced Data Manipulation with dplyr and tidyr",
+    "section": "Combine multiple filter() conditions with , or & (AND) and | (OR):",
+    "text": "Combine multiple filter() conditions with , or & (AND) and | (OR):\n\nfilter(penguins, species == \"Adelie\", island == \"Torgersen\")\n\n# A tibble: 52 × 8\n  species island    bill_len bill_dep flipper_len body_mass sex     year\n  &lt;fct&gt;   &lt;fct&gt;        &lt;dbl&gt;    &lt;dbl&gt;       &lt;int&gt;     &lt;int&gt; &lt;fct&gt;  &lt;int&gt;\n1 Adelie  Torgersen     39.1     18.7         181      3750 male    2007\n2 Adelie  Torgersen     39.5     17.4         186      3800 female  2007\n3 Adelie  Torgersen     40.3     18           195      3250 female  2007\n4 Adelie  Torgersen     NA       NA            NA        NA &lt;NA&gt;    2007\n5 Adelie  Torgersen     36.7     19.3         193      3450 female  2007\n# ℹ 47 more rows\n\n\n\n\nfilter(penguins, species == \"Adelie\" | (species == \"Gentoo\" & body_mass &lt; 4000))\n\n# A tibble: 153 × 8\n  species island    bill_len bill_dep flipper_len body_mass sex     year\n  &lt;fct&gt;   &lt;fct&gt;        &lt;dbl&gt;    &lt;dbl&gt;       &lt;int&gt;     &lt;int&gt; &lt;fct&gt;  &lt;int&gt;\n1 Adelie  Torgersen     39.1     18.7         181      3750 male    2007\n2 Adelie  Torgersen     39.5     17.4         186      3800 female  2007\n3 Adelie  Torgersen     40.3     18           195      3250 female  2007\n4 Adelie  Torgersen     NA       NA            NA        NA &lt;NA&gt;    2007\n5 Adelie  Torgersen     36.7     19.3         193      3450 female  2007\n# ℹ 148 more rows\n\n\n\nlive code these"
+  },
+  {
+    "objectID": "data-manipulation.html#using-mutate",
+    "href": "data-manipulation.html#using-mutate",
+    "title": "Advanced Data Manipulation with dplyr and tidyr",
+    "section": "Using mutate()",
+    "text": "Using mutate()\nCreate new columns or modify existing columns:\n\nmutate(penguins, mass_kg = body_mass / 1000)\n\n# A tibble: 344 × 9\n  species island    bill_len bill_dep flipper_len body_mass sex     year mass_kg\n  &lt;fct&gt;   &lt;fct&gt;        &lt;dbl&gt;    &lt;dbl&gt;       &lt;int&gt;     &lt;int&gt; &lt;fct&gt;  &lt;int&gt;   &lt;dbl&gt;\n1 Adelie  Torgersen     39.1     18.7         181      3750 male    2007    3.75\n2 Adelie  Torgersen     39.5     17.4         186      3800 female  2007    3.8 \n3 Adelie  Torgersen     40.3     18           195      3250 female  2007    3.25\n4 Adelie  Torgersen     NA       NA            NA        NA &lt;NA&gt;    2007   NA   \n5 Adelie  Torgersen     36.7     19.3         193      3450 female  2007    3.45\n# ℹ 339 more rows\n\n\n\nCreate multiple columns in one mutate call:\n\nmutate(\n  penguins,\n  mass_kg = body_mass / 1000,\n  bill_ratio = bill_len / bill_dep\n)\n\n# A tibble: 344 × 10\n  species island    bill_len bill_dep flipper_len body_mass sex     year mass_kg bill_ratio\n  &lt;fct&gt;   &lt;fct&gt;        &lt;dbl&gt;    &lt;dbl&gt;       &lt;int&gt;     &lt;int&gt; &lt;fct&gt;  &lt;int&gt;   &lt;dbl&gt;      &lt;dbl&gt;\n1 Adelie  Torgersen     39.1     18.7         181      3750 male    2007    3.75       2.09\n2 Adelie  Torgersen     39.5     17.4         186      3800 female  2007    3.8        2.27\n3 Adelie  Torgersen     40.3     18           195      3250 female  2007    3.25       2.24\n4 Adelie  Torgersen     NA       NA            NA        NA &lt;NA&gt;    2007   NA         NA   \n5 Adelie  Torgersen     36.7     19.3         193      3450 female  2007    3.45       1.90\n# ℹ 339 more rows\n\n\n\n\nlive code these"
+  },
+  {
+    "objectID": "data-manipulation.html#the-pipe",
+    "href": "data-manipulation.html#the-pipe",
+    "title": "Advanced Data Manipulation with dplyr and tidyr",
+    "section": "The pipe ( |> )",
+    "text": "The pipe ( |&gt; )\nThe pipe operator (|&gt;) passes the output of one function as the first argument to the next function. It allows us to chain together multiple operations in a readable way.\n\n\nHelps avoid deeply nested function calls, which are hard to read.\n\nfilter(select(penguins, species, island, body_mass), body_mass &gt; 4000)\n\n\n\nHelps avoid creating many intermediate variables.\n\nselected_data &lt;- select(penguins, species, island, body_mass)\nfiltered_data &lt;- filter(selected_data, body_mass &gt; 4000)\n\n\nRead it out loud as “and then”\n\npenguins |&gt; # and then\n  select(species, island, body_mass) |&gt; # and then\n  filter(body_mass &gt; 4000)\n\n# A tibble: 172 × 3\n  species island    body_mass\n  &lt;fct&gt;   &lt;fct&gt;         &lt;int&gt;\n1 Adelie  Torgersen      4675\n2 Adelie  Torgersen      4250\n3 Adelie  Torgersen      4400\n4 Adelie  Torgersen      4500\n5 Adelie  Torgersen      4200\n# ℹ 167 more rows"
+  },
+  {
+    "objectID": "data-manipulation.html#using-group_by",
+    "href": "data-manipulation.html#using-group_by",
+    "title": "Advanced Data Manipulation with dplyr and tidyr",
+    "section": "Using group_by()",
+    "text": "Using group_by()\nAdd grouping attributes that tell other dplyr functions to operate by group:\n\npenguins |&gt;\n  select(species, island, body_mass) |&gt;\n  filter(body_mass &gt; 4000) |&gt;\n  group_by(species, island)\n\n# A tibble: 172 × 3\n# Groups:   species, island [5]\n  species island    body_mass\n  &lt;fct&gt;   &lt;fct&gt;         &lt;int&gt;\n1 Adelie  Torgersen      4675\n2 Adelie  Torgersen      4250\n3 Adelie  Torgersen      4400\n4 Adelie  Torgersen      4500\n5 Adelie  Torgersen      4200\n# ℹ 167 more rows"
+  },
+  {
+    "objectID": "data-manipulation.html#using-summarize",
+    "href": "data-manipulation.html#using-summarize",
+    "title": "Advanced Data Manipulation with dplyr and tidyr",
+    "section": "Using summarize()",
+    "text": "Using summarize()\nCreates one summary row per unique combination of groups:\n\npenguins |&gt;\n  select(species, island, body_mass) |&gt;\n  filter(body_mass &gt; 4000) |&gt;\n  group_by(species, island) |&gt;\n  summarise(sd_mass = sd(body_mass, na.rm = TRUE))\n\n# A tibble: 5 × 3\n# Groups:   species [3]\n  species   island    sd_mass\n  &lt;fct&gt;     &lt;fct&gt;       &lt;dbl&gt;\n1 Adelie    Biscoe       268.\n2 Adelie    Dream        170.\n3 Adelie    Torgersen    191.\n4 Chinstrap Dream        230.\n5 Gentoo    Biscoe       496."
+  },
+  {
+    "objectID": "data-manipulation.html#your-turn---pulling-it-all-together",
+    "href": "data-manipulation.html#your-turn---pulling-it-all-together",
+    "title": "Advanced Data Manipulation with dplyr and tidyr",
+    "section": "Your turn - pulling it all together",
+    "text": "Your turn - pulling it all together\nUsing the rodents data set find the mean hindfoot length per weight of Merriam’s Kangaroo Rats (\"DM\") grouped by plot and arranged by thew new hfl per weight column."
   },
   {
     "objectID": "data-manipulation.html#dplyr-practice",
@@ -606,74 +676,74 @@
     "href": "data-manipulation.html#column-wise-operations",
     "title": "Advanced Data Manipulation with dplyr and tidyr",
     "section": "Column-wise operations",
-    "text": "Column-wise operations\n\nApply one or more functions to a set of columns in a data frame using across()\nSpecfiy columns using selection helpers (e.g., starts_with(), ends_with(), contains(), where(), etc.)\nSpecify function(s) to apply to selected columns\nUsed with summarize() & mutate()\n\n\nExample: calculate mean of all numeric columns\n\nlibrary(dplyr)\nmtcars |&gt;\n  group_by(cyl) |&gt;\n  summarize(across(where(is.numeric), mean))\n\n\n\n# A tibble: 3 × 11\n    cyl   mpg  disp    hp  drat    wt  qsec    vs    am  gear  carb\n  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;\n1     4  26.7  105.  82.6  4.07  2.29  19.1 0.909 0.727  4.09  1.55\n2     6  19.7  183. 122.   3.59  3.12  18.0 0.571 0.429  3.86  3.43\n3     8  15.1  353. 209.   3.23  4.00  16.8 0     0.143  3.29  3.5 \n\n\n\n\nWe are passing the function mean to across(), not calling it (i.e., no parentheses). Functions in R are objects that can be passed around and used later."
+    "text": "Column-wise operations\n\n\nApply one or more functions to a set of columns in a data frame using across()\n\nacross(&lt;columns&gt;, &lt;functions&gt;)\n\nSpecify columns using selection helpers (e.g., starts_with(), ends_with(), contains(), where(), etc.)\nSpecify function(s) to apply to selected columns\nUsed with summarize() & mutate()\n\n\nExample: calculate mean of all numeric columns\n\nlibrary(dplyr)\n\nmtcars |&gt;\n  group_by(cyl) |&gt;\n  summarize(across(where(is.numeric), mean))\n\n\n\nYour turn: Scale all numeric columns (use across()) in rodents to have mean 0 and standard deviation 1. (Hint: Check out the scale() function)\n\n\nSelection syntax is the same as in select(), i.e., using the same selection helpers\nWe are passing the function mean to across(), not calling it (i.e., no parentheses). Functions in R are objects that can be passed around and used later."
   },
   {
     "objectID": "data-manipulation.html#column-wise-operations-1",
     "href": "data-manipulation.html#column-wise-operations-1",
     "title": "Advanced Data Manipulation with dplyr and tidyr",
     "section": "Column-wise operations",
-    "text": "Column-wise operations\nspecify multiple functions to apply in a list()\n\n\nExample: calculate mean and sd of all numeric columns\n\nlibrary(dplyr)\nmtcars |&gt;\n  group_by(cyl) |&gt;\n  summarize(\n    across(where(is.numeric), list(mean = mean, sd = sd))\n  )\n\n\n\n# A tibble: 3 × 21\n    cyl mpg_mean mpg_sd disp_mean disp_sd hp_mean hp_sd drat_mean drat_sd wt_mean wt_sd qsec_mean qsec_sd vs_mean vs_sd\n  &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;\n1     4     26.7   4.51      105.    26.9    82.6  20.9      4.07   0.365    2.29 0.570      19.1    1.68   0.909 0.302\n2     6     19.7   1.45      183.    41.6   122.   24.3      3.59   0.476    3.12 0.356      18.0    1.71   0.571 0.535\n3     8     15.1   2.56      353.    67.8   209.   51.0      3.23   0.372    4.00 0.759      16.8    1.20   0     0    \n# ℹ 6 more variables: am_mean &lt;dbl&gt;, am_sd &lt;dbl&gt;, gear_mean &lt;dbl&gt;, gear_sd &lt;dbl&gt;, carb_mean &lt;dbl&gt;, carb_sd &lt;dbl&gt;\n\n\n\n\nhttps://tidyselect.r-lib.org/reference/language.html"
+    "text": "Column-wise operations\nspecify multiple functions to apply in a list()\n\n\nExample: calculate mean and sd of all numeric columns\n\nlibrary(dplyr)\nmtcars |&gt;\n  group_by(cyl) |&gt;\n  summarize(\n    across(where(is.numeric), list(mean = mean, sd = sd))\n  )\n\n\n\n# A tibble: 3 × 21\n    cyl mpg_mean mpg_sd disp_mean disp_sd hp_mean hp_sd drat_mean drat_sd wt_mean wt_sd qsec_mean qsec_sd\n  &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;\n1     4     26.7   4.51      105.    26.9    82.6  20.9      4.07   0.365    2.29 0.570      19.1    1.68\n2     6     19.7   1.45      183.    41.6   122.   24.3      3.59   0.476    3.12 0.356      18.0    1.71\n3     8     15.1   2.56      353.    67.8   209.   51.0      3.23   0.372    4.00 0.759      16.8    1.20\n# ℹ 8 more variables: vs_mean &lt;dbl&gt;, vs_sd &lt;dbl&gt;, am_mean &lt;dbl&gt;, am_sd &lt;dbl&gt;, gear_mean &lt;dbl&gt;, gear_sd &lt;dbl&gt;,\n#   carb_mean &lt;dbl&gt;, carb_sd &lt;dbl&gt;\n\n\n\n\nhttps://tidyselect.r-lib.org/reference/language.html"
   },
   {
     "objectID": "data-manipulation.html#column-wise-operations-2",
     "href": "data-manipulation.html#column-wise-operations-2",
     "title": "Advanced Data Manipulation with dplyr and tidyr",
     "section": "Column-wise operations",
-    "text": "Column-wise operations\nRun this in your R session, what do you get?\n\nlibrary(dplyr)\npenguins |&gt;\n  summarize(\n    across(where(is.numeric), list(mean = mean, sd = sd))\n  )\n\n\n\n# A tibble: 1 × 10\n  bill_len_mean bill_len_sd bill_dep_mean bill_dep_sd flipper_len_mean flipper_len_sd body_mass_mean body_mass_sd\n          &lt;dbl&gt;       &lt;dbl&gt;         &lt;dbl&gt;       &lt;dbl&gt;            &lt;dbl&gt;          &lt;dbl&gt;          &lt;dbl&gt;        &lt;dbl&gt;\n1            NA          NA            NA          NA               NA             NA             NA           NA\n# ℹ 2 more variables: year_mean &lt;dbl&gt;, year_sd &lt;dbl&gt;\n\n\n\n\n\nWhen we pass a function to across() it is passed with its default arguments\n\nmean() and sd() both have an argument na.rm that defaults to FALSE\n\nWe can’t pass extra arguments to functions inside across() directly\nWe need to pass a function with the argument values we want “baked in”\n\n\n\nhttps://tidyselect.r-lib.org/reference/language.html"
+    "text": "Column-wise operations\nRun this in your R session, what do you get?\n\nlibrary(dplyr)\npenguins |&gt;\n  summarize(\n    across(where(is.numeric), list(mean = mean, sd = sd))\n  )\n\n\n\n# A tibble: 1 × 10\n  bill_len_mean bill_len_sd bill_dep_mean bill_dep_sd flipper_len_mean flipper_len_sd body_mass_mean\n          &lt;dbl&gt;       &lt;dbl&gt;         &lt;dbl&gt;       &lt;dbl&gt;            &lt;dbl&gt;          &lt;dbl&gt;          &lt;dbl&gt;\n1            NA          NA            NA          NA               NA             NA             NA\n# ℹ 3 more variables: body_mass_sd &lt;dbl&gt;, year_mean &lt;dbl&gt;, year_sd &lt;dbl&gt;\n\n\n\n\n\nWhen we use a function in across() it is called with its default arguments\n\nmean() and sd() both have an argument na.rm that defaults to FALSE\n\nWe can’t pass extra arguments to functions inside across() directly\nWe need to pass a function with the argument values we want “baked in”\n\n\n\nhttps://tidyselect.r-lib.org/reference/language.html"
   },
   {
     "objectID": "data-manipulation.html#specifying-extra-arguments",
     "href": "data-manipulation.html#specifying-extra-arguments",
     "title": "Advanced Data Manipulation with dplyr and tidyr",
     "section": "Specifying extra arguments",
-    "text": "Specifying extra arguments\nWe can define our own helper functions:\n\nlibrary(dplyr)\n\nsd_na &lt;- function(x) {\n  sd(x, na.rm = TRUE)\n}\n\nmean_na &lt;- function(x) {\n  mean(x, na.rm = TRUE)\n}\n\npenguins |&gt;\n  summarize(\n    across(where(is.numeric), list(mean = mean_na, sd = sd_na))\n  )\n\n\n\n# A tibble: 1 × 10\n  bill_len_mean bill_len_sd bill_dep_mean bill_dep_sd flipper_len_mean flipper_len_sd body_mass_mean body_mass_sd\n          &lt;dbl&gt;       &lt;dbl&gt;         &lt;dbl&gt;       &lt;dbl&gt;            &lt;dbl&gt;          &lt;dbl&gt;          &lt;dbl&gt;        &lt;dbl&gt;\n1          43.9        5.46          17.2        1.97             201.           14.1          4202.         802.\n# ℹ 2 more variables: year_mean &lt;dbl&gt;, year_sd &lt;dbl&gt;"
+    "text": "Specifying extra arguments\nWe can define our own helper functions:\n\nlibrary(dplyr)\n\nsd_na &lt;- function(x) {\n  sd(x, na.rm = TRUE)\n}\n\nmean_na &lt;- function(x) {\n  mean(x, na.rm = TRUE)\n}\n\npenguins |&gt;\n  summarize(\n    across(where(is.numeric), list(mean = mean_na, sd = sd_na))\n  )\n\n\n\n# A tibble: 1 × 10\n  bill_len_mean bill_len_sd bill_dep_mean bill_dep_sd flipper_len_mean flipper_len_sd body_mass_mean\n          &lt;dbl&gt;       &lt;dbl&gt;         &lt;dbl&gt;       &lt;dbl&gt;            &lt;dbl&gt;          &lt;dbl&gt;          &lt;dbl&gt;\n1          43.9        5.46          17.2        1.97             201.           14.1          4202.\n# ℹ 3 more variables: body_mass_sd &lt;dbl&gt;, year_mean &lt;dbl&gt;, year_sd &lt;dbl&gt;"
   },
   {
     "objectID": "data-manipulation.html#specifying-extra-arguments-1",
     "href": "data-manipulation.html#specifying-extra-arguments-1",
     "title": "Advanced Data Manipulation with dplyr and tidyr",
     "section": "Specifying extra arguments",
-    "text": "Specifying extra arguments\nBut if we’re doing this only once we can define them in place with an anonymous function:\n\\(x) function(x, other_args)\n\nThis defines a function “on the fly” with the arguments specified how we want\nThe x will take the values of each column passed to it by across()\n\n\nlibrary(dplyr)\n\npenguins |&gt;\n  summarize(\n    across(\n      where(is.numeric),\n      list(\n        mean = \\(x) mean(x, na.rm = TRUE),\n        sd = \\(x) sd(x, na.rm = TRUE)\n      )\n    )\n  )\n\n\n\n# A tibble: 1 × 10\n  bill_len_mean bill_len_sd bill_dep_mean bill_dep_sd flipper_len_mean flipper_len_sd body_mass_mean body_mass_sd\n          &lt;dbl&gt;       &lt;dbl&gt;         &lt;dbl&gt;       &lt;dbl&gt;            &lt;dbl&gt;          &lt;dbl&gt;          &lt;dbl&gt;        &lt;dbl&gt;\n1          43.9        5.46          17.2        1.97             201.           14.1          4202.         802.\n# ℹ 2 more variables: year_mean &lt;dbl&gt;, year_sd &lt;dbl&gt;"
+    "text": "Specifying extra arguments\nBut if we’re doing this only once we can define them in place with an anonymous function:\n\\(x) function(x, other_args)\n\nThis defines a function “on the fly” with the arguments specified how we want\nThe x will take the values of each column passed to it by across()\n\n\nlibrary(dplyr)\n\npenguins |&gt;\n  summarize(\n    across(\n      where(is.numeric),\n      list(\n        mean = \\(x) mean(x, na.rm = TRUE),\n        sd = \\(x) sd(x, na.rm = TRUE)\n      )\n    )\n  )\n\n\n\n# A tibble: 1 × 10\n  bill_len_mean bill_len_sd bill_dep_mean bill_dep_sd flipper_len_mean flipper_len_sd body_mass_mean\n          &lt;dbl&gt;       &lt;dbl&gt;         &lt;dbl&gt;       &lt;dbl&gt;            &lt;dbl&gt;          &lt;dbl&gt;          &lt;dbl&gt;\n1          43.9        5.46          17.2        1.97             201.           14.1          4202.\n# ℹ 3 more variables: body_mass_sd &lt;dbl&gt;, year_mean &lt;dbl&gt;, year_sd &lt;dbl&gt;"
   },
   {
-    "objectID": "data-manipulation.html#your-turn",
-    "href": "data-manipulation.html#your-turn",
+    "objectID": "data-manipulation.html#your-turn-1",
+    "href": "data-manipulation.html#your-turn-1",
     "title": "Advanced Data Manipulation with dplyr and tidyr",
     "section": "Your turn",
-    "text": "Your turn\n\nCalculate the median of both types of bill measurements for each species in the built-in penguins dataset\nRound all of the numeric colums in the PortalData/SiteandMethods/Portal_UTMCoords.csv dataset to 2 decimal places"
+    "text": "Your turn\n\nCalculate the median of hind-foot length (hfl) and weight (wgt) for each species in rodents, ignoring NA values."
   },
   {
     "objectID": "data-manipulation.html#two-table-verbs-joins",
     "href": "data-manipulation.html#two-table-verbs-joins",
     "title": "Advanced Data Manipulation with dplyr and tidyr",
     "section": "Two-table verbs (joins)",
-    "text": "Two-table verbs (joins)\n\n\n\n\nMutatating joins\n\nCombine two tables based on common values in one or more columns\n\nFiltering joins\n\nFilter rows from one table based on values in another table\n\n\n\nhttps://r4ds.hadley.nz/joins.html#how-do-joins-work"
-  },
-  {
-    "objectID": "data-manipulation.html#mutating-joins",
-    "href": "data-manipulation.html#mutating-joins",
-    "title": "Advanced Data Manipulation with dplyr and tidyr",
-    "section": "Mutating joins",
-    "text": "Mutating joins\n\n\nleft_join()\n\nKeeps all rows in the left table\nDrops rows from the right table that don’t match\nRows in the left that don’t match get NA in the columns from the right table\n\n\n\n\n\nhttps://r4ds.hadley.nz/joins.html#how-do-joins-work"
+    "text": "Two-table verbs (joins)\n\n\n\n\nMutating joins\n\nCombine two tables based on common values in one or more columns\n\nFiltering joins\n\nFilter rows from one table based on values in another table\n\n\n\nhttps://r4ds.hadley.nz/joins.html#how-do-joins-work"
   },
   {
     "objectID": "data-manipulation.html#mutating-joins-1",
     "href": "data-manipulation.html#mutating-joins-1",
     "title": "Advanced Data Manipulation with dplyr and tidyr",
     "section": "Mutating joins",
-    "text": "Mutating joins\n\n\nright_join()\n\nKeeps all rows in the right table\nDrops rows from the left table that don’t match\nRows in the right table that don’t match get NA in the columns from the left table\n\n\n\n\n\nhttps://r4ds.hadley.nz/joins.html#how-do-joins-work"
+    "text": "Mutating joins\n\n\nleft_join()\n\nKeeps all rows in the left table\nDrops rows from the right table that don’t match\nRows in the left that don’t match get NA in the columns from the right table\n\n\n\n\n\nhttps://r4ds.hadley.nz/joins.html#how-do-joins-work"
   },
   {
     "objectID": "data-manipulation.html#mutating-joins-2",
     "href": "data-manipulation.html#mutating-joins-2",
     "title": "Advanced Data Manipulation with dplyr and tidyr",
     "section": "Mutating joins",
-    "text": "Mutating joins\n\n\ninner_join()\n\nKeeps all rows in both tables where keys match\nRows from either table that don’t match are dropped\n\n\n\n\n\nhttps://r4ds.hadley.nz/joins.html#how-do-joins-work"
+    "text": "Mutating joins\n\n\nright_join()\n\nKeeps all rows in the right table\nDrops rows from the left table that don’t match\nRows in the right table that don’t match get NA in the columns from the left table\n\n\n\n\n\nhttps://r4ds.hadley.nz/joins.html#how-do-joins-work"
   },
   {
     "objectID": "data-manipulation.html#mutating-joins-3",
     "href": "data-manipulation.html#mutating-joins-3",
+    "title": "Advanced Data Manipulation with dplyr and tidyr",
+    "section": "Mutating joins",
+    "text": "Mutating joins\n\n\ninner_join()\n\nKeeps all rows in both tables where keys match\nRows from either table that don’t match are dropped\n\n\n\n\n\nhttps://r4ds.hadley.nz/joins.html#how-do-joins-work"
+  },
+  {
+    "objectID": "data-manipulation.html#mutating-joins-4",
+    "href": "data-manipulation.html#mutating-joins-4",
     "title": "Advanced Data Manipulation with dplyr and tidyr",
     "section": "Mutating joins",
     "text": "Mutating joins\n\n\nfull_join()\n\nKeeps all rows in both tables\nValues in x and y that don’t match get NA in the result\n\n\n\n\n\nhttps://r4ds.hadley.nz/joins.html#how-do-joins-work"
@@ -686,8 +756,8 @@
     "text": "Join syntax\nIf don’t specify join columns, will join on all common names\n\nE.g., both tables have columns year, month, day\n\nleft_join(x, y)\n#&gt; Joining with `by = join_by(year, month, day)`\n\nBetter to specify the join columns explicitly\n\nBoth tables have columns column_1 and column_2\n\nleft_join(x, y, by = c(\"column_1\", \"column_2\"))\n\nIf the columns to join on have different names in each table\n\nleft_join(x, y, by = c(\"column_in_x\" = \"column_in_y\"))"
   },
   {
-    "objectID": "data-manipulation.html#your-turn-1",
-    "href": "data-manipulation.html#your-turn-1",
+    "objectID": "data-manipulation.html#your-turn-2",
+    "href": "data-manipulation.html#your-turn-2",
     "title": "Advanced Data Manipulation with dplyr and tidyr",
     "section": "Your turn",
     "text": "Your turn\nUse a join to add location information to the rodent captures data\n\nThe rodent captures data is in the PortalData/Rodents/Portal_rodent.csv file.\nThe SiteandMethods/Portal_UTMCoords.csv file contains information about the location of each plot"
@@ -707,8 +777,8 @@
     "text": "Filtering joins\n\n\nanti_join()\n\nKeeps all rows in the left table where there are not matching values in the right table\nDoes not add any columns"
   },
   {
-    "objectID": "data-manipulation.html#your-turn-2",
-    "href": "data-manipulation.html#your-turn-2",
+    "objectID": "data-manipulation.html#your-turn-3",
+    "href": "data-manipulation.html#your-turn-3",
     "title": "Advanced Data Manipulation with dplyr and tidyr",
     "section": "Your turn",
     "text": "Your turn\nUse a join to find all the captures where the species is a granivore\n\nThe rodent captures data is in the PortalData/Rodents/Portal_rodent.csv file\nThe PortalData/Rodents/Portal_rodent_species.csv file contains information about the species"
@@ -728,11 +798,46 @@
     "text": "Overlap joins\n\n\nbetween(x, y_1, y_2)\nwithin(x_1, x_2, y_1, y_2)\noverlaps(x_1, x_2, y_1, y_2)\n\nbetween(x, y_1, y_2):\n\n  y_1 [════════════════════] y_2\n         •\n         x\n\n\nwithin(x_1, x_2, y_1, y_2):\n\n  y_1 [════════════════════] y_2\n         [═════]\n       x_1     x_2\n\n\noverlaps(x_1, x_2, y_1, y_2):\n\n  y_1 [════════════════════] y_2\n                   [═══════════════] \n                 x_1             x_2\n\n\nhttps://dplyr.tidyverse.org/reference/join_by.html#join-types"
   },
   {
-    "objectID": "data-manipulation.html#your-turn-3",
-    "href": "data-manipulation.html#your-turn-3",
+    "objectID": "data-manipulation.html#your-turn-4",
+    "href": "data-manipulation.html#your-turn-4",
     "title": "Advanced Data Manipulation with dplyr and tidyr",
     "section": "Your turn",
     "text": "Your turn\nUsing the rodent trapping data and the plant census dates data, join the two datasets to find out which plant census (year and season) each rodent capture is associated with.\nStarting code:\nlibrary(dplyr)\nlibrary(readr)\nlibrary(lubridate)\n\nplant_census_dates &lt;- read_csv(\n  \"PortalData/Plants/Portal_plant_census_dates.csv\",\n  na = c(\"unknown\", \"none\")\n)\n\nrodent_trapping &lt;- read_csv(\"PortalData/Rodents/Portal_rodent_trapping.csv\")\n\nHint: use an overlap join with between()"
+  },
+  {
+    "objectID": "data-manipulation.html#what-is-tidy-data",
+    "href": "data-manipulation.html#what-is-tidy-data",
+    "title": "Advanced Data Manipulation with dplyr and tidyr",
+    "section": "What is tidy data?",
+    "text": "What is tidy data?\n\nEach variable is a column; each column is a variable.\nEach observation is a row; each row is an observation.\nEach value is a cell; each cell is a single value."
+  },
+  {
+    "objectID": "data-manipulation.html#wide-vs.-long-tidy-data",
+    "href": "data-manipulation.html#wide-vs.-long-tidy-data",
+    "title": "Advanced Data Manipulation with dplyr and tidyr",
+    "section": "Wide vs. long (tidy) data",
+    "text": "Wide vs. long (tidy) data\n\nWide data often has “data” stored in the column names\n\nExample: dates, treatment groups, measurement types\n\n\n\n\n\n\n\n\n\nsubject\ntreatment_A\ntreatment_B\n\n\n\n\n1\n5\n7\n\n\n2\n6\n8\n\n\n\n\n\n\n\n\n\n\n\n\nsubject\ntreatment\nvalue\n\n\n\n\n1\nA\n5\n\n\n1\nB\n7\n\n\n2\nA\n6\n\n\n2\nB\n8\n\n\n\n\n\n\n\n\n\n\n\n\n\nid\n20250101\n20250201\n\n\n\n\n1\n150\n165\n\n\n2\n125\n118\n\n\n\n\n\n\nDates are stored in the column names\nValues are masses (in grams).\n\n\n\n\n\n\n\n\nid\ndate\nmass\n\n\n\n\n1\n2025-01-01\n150\n\n\n1\n2025-02-01\n165\n\n\n2\n2025-01-01\n125\n\n\n2\n2025-02-01\n118\n\n\n\n\n\n\n\n\n\nEach row has more than one observation (more than one time, place, or subject)\nVariables split across multiple columns\n\nEg., what if we wanted to the get the mean mass per subject?\n\nSecond example - we hopefully have metadata that tells us that the values are masses (in grams)"
+  },
+  {
+    "objectID": "data-manipulation.html#example---billboard-data",
+    "href": "data-manipulation.html#example---billboard-data",
+    "title": "Advanced Data Manipulation with dplyr and tidyr",
+    "section": "Example - billboard data",
+    "text": "Example - billboard data\n\nlibrary(tidyr)\nbillboard\n\n# A tibble: 317 × 79\n  artist      track date.entered   wk1   wk2   wk3   wk4   wk5   wk6   wk7   wk8   wk9  wk10  wk11  wk12  wk13\n  &lt;chr&gt;       &lt;chr&gt; &lt;date&gt;       &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;\n1 2 Pac       Baby… 2000-02-26      87    82    72    77    87    94    99    NA    NA    NA    NA    NA    NA\n2 2Ge+her     The … 2000-09-02      91    87    92    NA    NA    NA    NA    NA    NA    NA    NA    NA    NA\n3 3 Doors Do… Kryp… 2000-04-08      81    70    68    67    66    57    54    53    51    51    51    51    47\n4 3 Doors Do… Loser 2000-10-21      76    76    72    69    67    65    55    59    62    61    61    59    61\n5 504 Boyz    Wobb… 2000-04-15      57    34    25    17    17    31    36    49    53    57    64    70    75\n# ℹ 312 more rows\n# ℹ 63 more variables: wk14 &lt;dbl&gt;, wk15 &lt;dbl&gt;, wk16 &lt;dbl&gt;, wk17 &lt;dbl&gt;, wk18 &lt;dbl&gt;, wk19 &lt;dbl&gt;, wk20 &lt;dbl&gt;,\n#   wk21 &lt;dbl&gt;, wk22 &lt;dbl&gt;, wk23 &lt;dbl&gt;, wk24 &lt;dbl&gt;, wk25 &lt;dbl&gt;, wk26 &lt;dbl&gt;, wk27 &lt;dbl&gt;, wk28 &lt;dbl&gt;,\n#   wk29 &lt;dbl&gt;, wk30 &lt;dbl&gt;, wk31 &lt;dbl&gt;, wk32 &lt;dbl&gt;, wk33 &lt;dbl&gt;, wk34 &lt;dbl&gt;, wk35 &lt;dbl&gt;, wk36 &lt;dbl&gt;,\n#   wk37 &lt;dbl&gt;, wk38 &lt;dbl&gt;, wk39 &lt;dbl&gt;, wk40 &lt;dbl&gt;, wk41 &lt;dbl&gt;, wk42 &lt;dbl&gt;, wk43 &lt;dbl&gt;, wk44 &lt;dbl&gt;,\n#   wk45 &lt;dbl&gt;, wk46 &lt;dbl&gt;, wk47 &lt;dbl&gt;, wk48 &lt;dbl&gt;, wk49 &lt;dbl&gt;, wk50 &lt;dbl&gt;, wk51 &lt;dbl&gt;, wk52 &lt;dbl&gt;,\n#   wk53 &lt;dbl&gt;, wk54 &lt;dbl&gt;, wk55 &lt;dbl&gt;, wk56 &lt;dbl&gt;, wk57 &lt;dbl&gt;, wk58 &lt;dbl&gt;, wk59 &lt;dbl&gt;, wk60 &lt;dbl&gt;, …\n\n\n\nHow would we plot this data to show how the rank of different songs changed over time?\n\n\nWhat shape would this data have in long format?"
+  },
+  {
+    "objectID": "data-manipulation.html#tidyrpivot_longer",
+    "href": "data-manipulation.html#tidyrpivot_longer",
+    "title": "Advanced Data Manipulation with dplyr and tidyr",
+    "section": "tidyr::pivot_longer()",
+    "text": "tidyr::pivot_longer()\nReshape data from wide to long format\n\n\n\npivot_longer(\n  data,\n  cols,\n  ...,\n  cols_vary = \"fastest\",\n  names_to = \"name\",\n  names_prefix = NULL,\n  names_sep = NULL,\n  names_pattern = NULL,\n  names_ptypes = NULL,\n  names_transform = NULL,\n  names_repair = \"check_unique\",\n  values_to = \"value\",\n  values_drop_na = FALSE,\n  values_ptypes = NULL,\n  values_transform = NULL\n)\n\n\n\ncols: columns to pivot from wide to long. Uses tidyselect syntax.\nnames_to: name of new column to create from the column names\nvalues_to: name of new column to create from the values in the selected columns\nvalues_drop_na: if TRUE, drops rows with NA in the values column\n\n\n\nLet’s practice with the billboard data\n\n\n\ngo to R and do pivot_longer() on billboard data"
+  },
+  {
+    "objectID": "data-manipulation.html#your-turn-5",
+    "href": "data-manipulation.html#your-turn-5",
+    "title": "Advanced Data Manipulation with dplyr and tidyr",
+    "section": "Your turn",
+    "text": "Your turn\n\nUse SitesandMethods/Portal_plot_treatments.csv and pivot it to longer so there is a start_date, end_date, and treatment column. See if you can get the dates into proper date format. The lubridate package may be helpful."
   },
   {
     "objectID": "git-github.html#schedule",

@@ -97,7 +97,7 @@
     code span.vs { color: #abe338; } /* VerbatimString */
     code span.wa { color: #d4d0ab; font-style: italic; } /* Warning */
   </style>
-  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-c4fa1d91d2b430626be54299b9de7c2b.css">
+  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-30b736cb7799d7b550ee88759e68d94c.css">
   <link href="site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -218,13 +218,8 @@ Andy Teucher
 <li><code>dplyr</code> fundamentals review</li>
 <li>Column-wise operations</li>
 <li>Two-table verbs (joins)</li>
-</ul>
-</div><div class="column" style="width:50%;">
-<p>Next time:</p>
-<ul>
-<li>Window functions</li>
-<li>Row-wise operations</li>
 <li>Data reshaping with <code>tidyr</code></li>
+<li>Window functions?</li>
 </ul>
 </div></div>
 </section>
@@ -262,21 +257,6 @@ Andy Teucher
 <li>Explore the downloaded data in Positron</li>
 </ol>
 </section>
-<section id="review-of-main-dplyr-operations" class="slide level2">
-<h2>Review of main <code>dplyr</code> operations</h2>
-<ul>
-<li>Selecting columns with <code>select()</code></li>
-<li>Filtering rows with <code>filter()</code></li>
-<li>“Slice” rows with <code>slice()</code>/<code>slice_*()</code></li>
-<li>Creating new columns with <code>mutate()</code></li>
-<li>Summarizing data with <code>summarize()</code></li>
-</ul>
-<div class="fragment">
-<ul>
-<li>Grouping data with <code>group_by()</code> applies <code>filter()</code>, <code>mutate()</code>, and <code>summarize()</code> by group</li>
-</ul>
-</div>
-</section>
 <section id="warm-up" class="slide level2">
 <h2>Warm-up</h2>
 <p>Read in the rodent capture data (<code>PortalData/Rodents/Portal_rodent.csv</code>).</p>
@@ -284,6 +264,325 @@ Andy Teucher
 <li>Use <code>readr::read_csv()</code> and assign it to a data frame called <code>rodents</code>.</li>
 <li>Standardize column names to use <code>snake_case</code> <em>(hint: check out the <code>janitor</code> package)</em></li>
 </ol>
+</section>
+<section id="review-of-main-dplyr-operations" class="slide level2">
+<h2>Review of main <code>dplyr</code> operations</h2>
+<ul>
+<li>Select columns with <code>select()</code></li>
+<li>Keep rows based on their values with <code>filter()</code></li>
+<li>Create new columns with <code>mutate()</code></li>
+<li>Summarize data with <code>summarize()</code></li>
+<li>Sort rows based on column values with <code>arrange()</code></li>
+<li>“Slice” rows with <code>slice()</code>/<code>slice_*()</code></li>
+</ul>
+<div class="fragment">
+<ul>
+<li>Grouping data with <code>group_by()</code> applies <code>filter()</code>, <code>mutate()</code>, <code>summarize()</code>, and <code>slice()</code> by group</li>
+</ul>
+</div>
+</section>
+<section id="using-select" class="slide level2">
+<h2>Using <code>select()</code></h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<h3 id="select-columns-with-bare-names">Select columns with bare names</h3>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb3-2"><a></a></span>
+<span id="cb3-3"><a></a>penguins <span class="sc">|&gt;</span></span>
+<span id="cb3-4"><a></a>  <span class="fu">select</span>(species, island, body_mass)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 344 × 3
+  species island    body_mass
+  &lt;fct&gt;   &lt;fct&gt;         &lt;int&gt;
+1 Adelie  Torgersen      3750
+2 Adelie  Torgersen      3800
+3 Adelie  Torgersen      3250
+4 Adelie  Torgersen        NA
+5 Adelie  Torgersen      3450
+# ℹ 339 more rows</code></pre>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="fragment">
+<h3 id="use-all_of-or-any_of-to-select-columns-from-a-character-vector">Use <code>all_of()</code> or <code>any_of()</code> to select columns from a character vector</h3>
+<ul>
+<li><code>all_of()</code>: throws an error if any names are not found</li>
+<li><code>any_of()</code>: ignores names that are not found</li>
+</ul>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a>cols <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"species"</span>, <span class="st">"sex"</span>, <span class="st">"bill_len"</span>, <span class="st">"bill_dep"</span>)</span>
+<span id="cb5-2"><a></a><span class="fu">select</span>(penguins, <span class="fu">all_of</span>(cols))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 344 × 4
+  species sex    bill_len bill_dep
+  &lt;fct&gt;   &lt;fct&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+1 Adelie  male       39.1     18.7
+2 Adelie  female     39.5     17.4
+3 Adelie  female     40.3     18  
+4 Adelie  &lt;NA&gt;       NA       NA  
+5 Adelie  female     36.7     19.3
+# ℹ 339 more rows</code></pre>
+</div>
+</div>
+</div>
+</div></div>
+<div class="question fragment">
+<p><span class="color-yellow">Your turn:</span> Select record_id, id, and species from rodents</p>
+</div>
+</section>
+<section id="selection-helpers" class="slide level2">
+<h2>selection helpers</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<h3 id="select-specific-columns">select <em>specific columns</em>:</h3>
+<ul>
+<li><code>everything()</code>: Matches all variables.</li>
+<li><code>last_col()</code>: Select last variable, possibly with an offset.</li>
+<li><code>group_cols()</code>: Select all grouping columns.</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<h3 id="select-columns-based-on-name-patterns">select columns based on <em>name patterns</em>:</h3>
+<ul>
+<li><code>starts_with()</code>: Starts with a prefix.</li>
+<li><code>ends_with()</code>: Ends with a suffix.</li>
+<li><code>contains()</code>: Contains a literal string.</li>
+<li><code>matches()</code>: Matches a regular expression.</li>
+</ul>
+<h3 id="select-columns-based-on-data-type">select columns based on <em>data type</em>:</h3>
+<ul>
+<li><code>where()</code>: Select columns based on a predicate function (a function that returns <code>TRUE</code> or <code>FALSE</code>).</li>
+</ul>
+</div></div>
+<p>See help with <code>?select</code></p>
+<aside class="notes">
+<ul>
+<li><code>everything()</code> is useful when you want to move a column to the front or back of the data frame.</li>
+<li>Selection helpers can be combined using <code>c()</code>, e.g., <code>select(df, c(starts_with("temp"), ends_with("date")))</code></li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="your-turn" class="slide level2">
+<h2>Your turn</h2>
+<h3 id="using-the-rodents-data.frame">Using the <code>rodents</code> data.frame:</h3>
+<ul>
+<li><p>Select the <code>id</code> column and all of the numeric columns</p></li>
+<li><p>Select all columns except the columns starting with <code>"note"</code></p></li>
+<li><p>Reorder the columns, moving the last column to the first position, without specifying any column names</p></li>
+</ul>
+</section>
+<section id="using-filter" class="slide level2">
+<h2>Using <code>filter()</code></h2>
+<p>To retain only a subset of rows:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a><span class="fu">filter</span>(penguins, species <span class="sc">==</span> <span class="st">"Adelie"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 152 × 8
+  species island    bill_len bill_dep flipper_len body_mass sex     year
+  &lt;fct&gt;   &lt;fct&gt;        &lt;dbl&gt;    &lt;dbl&gt;       &lt;int&gt;     &lt;int&gt; &lt;fct&gt;  &lt;int&gt;
+1 Adelie  Torgersen     39.1     18.7         181      3750 male    2007
+2 Adelie  Torgersen     39.5     17.4         186      3800 female  2007
+3 Adelie  Torgersen     40.3     18           195      3250 female  2007
+4 Adelie  Torgersen     NA       NA            NA        NA &lt;NA&gt;    2007
+5 Adelie  Torgersen     36.7     19.3         193      3450 female  2007
+# ℹ 147 more rows</code></pre>
+</div>
+</div>
+</section>
+<section id="combine-multiple-filter-conditions-with-or-and-and-or" class="slide level2">
+<h2>Combine multiple <code>filter()</code> conditions with <code>,</code> or <code>&amp;</code> (AND) and <code>|</code> (OR):</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a><span class="fu">filter</span>(penguins, species <span class="sc">==</span> <span class="st">"Adelie"</span>, island <span class="sc">==</span> <span class="st">"Torgersen"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 52 × 8
+  species island    bill_len bill_dep flipper_len body_mass sex     year
+  &lt;fct&gt;   &lt;fct&gt;        &lt;dbl&gt;    &lt;dbl&gt;       &lt;int&gt;     &lt;int&gt; &lt;fct&gt;  &lt;int&gt;
+1 Adelie  Torgersen     39.1     18.7         181      3750 male    2007
+2 Adelie  Torgersen     39.5     17.4         186      3800 female  2007
+3 Adelie  Torgersen     40.3     18           195      3250 female  2007
+4 Adelie  Torgersen     NA       NA            NA        NA &lt;NA&gt;    2007
+5 Adelie  Torgersen     36.7     19.3         193      3450 female  2007
+# ℹ 47 more rows</code></pre>
+</div>
+</div>
+<p><br></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a><span class="fu">filter</span>(penguins, species <span class="sc">==</span> <span class="st">"Adelie"</span> <span class="sc">|</span> (species <span class="sc">==</span> <span class="st">"Gentoo"</span> <span class="sc">&amp;</span> body_mass <span class="sc">&lt;</span> <span class="dv">4000</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 153 × 8
+  species island    bill_len bill_dep flipper_len body_mass sex     year
+  &lt;fct&gt;   &lt;fct&gt;        &lt;dbl&gt;    &lt;dbl&gt;       &lt;int&gt;     &lt;int&gt; &lt;fct&gt;  &lt;int&gt;
+1 Adelie  Torgersen     39.1     18.7         181      3750 male    2007
+2 Adelie  Torgersen     39.5     17.4         186      3800 female  2007
+3 Adelie  Torgersen     40.3     18           195      3250 female  2007
+4 Adelie  Torgersen     NA       NA            NA        NA &lt;NA&gt;    2007
+5 Adelie  Torgersen     36.7     19.3         193      3450 female  2007
+# ℹ 148 more rows</code></pre>
+</div>
+</div>
+<aside class="notes">
+<p>live code these</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="using-mutate" class="slide level2">
+<h2>Using <code>mutate()</code></h2>
+<p>Create new columns or modify existing columns:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a><span class="fu">mutate</span>(penguins, <span class="at">mass_kg =</span> body_mass <span class="sc">/</span> <span class="dv">1000</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 344 × 9
+  species island    bill_len bill_dep flipper_len body_mass sex     year mass_kg
+  &lt;fct&gt;   &lt;fct&gt;        &lt;dbl&gt;    &lt;dbl&gt;       &lt;int&gt;     &lt;int&gt; &lt;fct&gt;  &lt;int&gt;   &lt;dbl&gt;
+1 Adelie  Torgersen     39.1     18.7         181      3750 male    2007    3.75
+2 Adelie  Torgersen     39.5     17.4         186      3800 female  2007    3.8 
+3 Adelie  Torgersen     40.3     18           195      3250 female  2007    3.25
+4 Adelie  Torgersen     NA       NA            NA        NA &lt;NA&gt;    2007   NA   
+5 Adelie  Torgersen     36.7     19.3         193      3450 female  2007    3.45
+# ℹ 339 more rows</code></pre>
+</div>
+</div>
+<div class="fragment">
+<p>Create multiple columns in one mutate call:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a><span class="fu">mutate</span>(</span>
+<span id="cb15-2"><a></a>  penguins,</span>
+<span id="cb15-3"><a></a>  <span class="at">mass_kg =</span> body_mass <span class="sc">/</span> <span class="dv">1000</span>,</span>
+<span id="cb15-4"><a></a>  <span class="at">bill_ratio =</span> bill_len <span class="sc">/</span> bill_dep</span>
+<span id="cb15-5"><a></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 344 × 10
+  species island    bill_len bill_dep flipper_len body_mass sex     year mass_kg bill_ratio
+  &lt;fct&gt;   &lt;fct&gt;        &lt;dbl&gt;    &lt;dbl&gt;       &lt;int&gt;     &lt;int&gt; &lt;fct&gt;  &lt;int&gt;   &lt;dbl&gt;      &lt;dbl&gt;
+1 Adelie  Torgersen     39.1     18.7         181      3750 male    2007    3.75       2.09
+2 Adelie  Torgersen     39.5     17.4         186      3800 female  2007    3.8        2.27
+3 Adelie  Torgersen     40.3     18           195      3250 female  2007    3.25       2.24
+4 Adelie  Torgersen     NA       NA            NA        NA &lt;NA&gt;    2007   NA         NA   
+5 Adelie  Torgersen     36.7     19.3         193      3450 female  2007    3.45       1.90
+# ℹ 339 more rows</code></pre>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p>live code these</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="the-pipe" class="slide level2">
+<h2>The pipe ( |&gt; )</h2>
+<p>The pipe operator (<code>|&gt;</code>) passes the output of one function as the first argument to the next function. It allows us to chain together multiple operations in a readable way.</p>
+<div class="fragment">
+<ul>
+<li>Helps avoid deeply nested function calls, which are hard to read.</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a></a><span class="fu">filter</span>(<span class="fu">select</span>(penguins, species, island, body_mass), body_mass <span class="sc">&gt;</span> <span class="dv">4000</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="fragment">
+<ul>
+<li>Helps avoid creating many intermediate variables.</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a></a>selected_data <span class="ot">&lt;-</span> <span class="fu">select</span>(penguins, species, island, body_mass)</span>
+<span id="cb18-2"><a></a>filtered_data <span class="ot">&lt;-</span> <span class="fu">filter</span>(selected_data, body_mass <span class="sc">&gt;</span> <span class="dv">4000</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="fragment">
+<p>Read it out loud as <em>“and then”</em></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a></a>penguins <span class="sc">|&gt;</span> <span class="co"># and then</span></span>
+<span id="cb19-2"><a></a>  <span class="fu">select</span>(species, island, body_mass) <span class="sc">|&gt;</span> <span class="co"># and then</span></span>
+<span id="cb19-3"><a></a>  <span class="fu">filter</span>(body_mass <span class="sc">&gt;</span> <span class="dv">4000</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 172 × 3
+  species island    body_mass
+  &lt;fct&gt;   &lt;fct&gt;         &lt;int&gt;
+1 Adelie  Torgersen      4675
+2 Adelie  Torgersen      4250
+3 Adelie  Torgersen      4400
+4 Adelie  Torgersen      4500
+5 Adelie  Torgersen      4200
+# ℹ 167 more rows</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="using-group_by" class="slide level2">
+<h2>Using <code>group_by()</code></h2>
+<p>Add grouping attributes that tell other <code>dplyr</code> functions to operate by group:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a></a>penguins <span class="sc">|&gt;</span></span>
+<span id="cb21-2"><a></a>  <span class="fu">select</span>(species, island, body_mass) <span class="sc">|&gt;</span></span>
+<span id="cb21-3"><a></a>  <span class="fu">filter</span>(body_mass <span class="sc">&gt;</span> <span class="dv">4000</span>) <span class="sc">|&gt;</span></span>
+<span id="cb21-4"><a></a>  <span class="fu">group_by</span>(species, island)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 172 × 3
+# Groups:   species, island [5]
+  species island    body_mass
+  &lt;fct&gt;   &lt;fct&gt;         &lt;int&gt;
+1 Adelie  Torgersen      4675
+2 Adelie  Torgersen      4250
+3 Adelie  Torgersen      4400
+4 Adelie  Torgersen      4500
+5 Adelie  Torgersen      4200
+# ℹ 167 more rows</code></pre>
+</div>
+</div>
+</section>
+<section id="using-summarize" class="slide level2">
+<h2>Using <code>summarize()</code></h2>
+<p>Creates one summary row per unique combination of groups:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a></a>penguins <span class="sc">|&gt;</span></span>
+<span id="cb23-2"><a></a>  <span class="fu">select</span>(species, island, body_mass) <span class="sc">|&gt;</span></span>
+<span id="cb23-3"><a></a>  <span class="fu">filter</span>(body_mass <span class="sc">&gt;</span> <span class="dv">4000</span>) <span class="sc">|&gt;</span></span>
+<span id="cb23-4"><a></a>  <span class="fu">group_by</span>(species, island) <span class="sc">|&gt;</span></span>
+<span id="cb23-5"><a></a>  <span class="fu">summarise</span>(<span class="at">sd_mass =</span> <span class="fu">sd</span>(body_mass, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 3
+# Groups:   species [3]
+  species   island    sd_mass
+  &lt;fct&gt;     &lt;fct&gt;       &lt;dbl&gt;
+1 Adelie    Biscoe       268.
+2 Adelie    Dream        170.
+3 Adelie    Torgersen    191.
+4 Chinstrap Dream        230.
+5 Gentoo    Biscoe       496.</code></pre>
+</div>
+</div>
+</section>
+<section id="your-turn---pulling-it-all-together" class="slide level2">
+<h2>Your turn - pulling it all together</h2>
+<p>Using the <code>rodents</code> data set find the mean hindfoot length per weight of Merriam’s Kangaroo Rats (<code>"DM"</code>) grouped by <code>plot</code> and arranged by thew new hfl per weight column.</p>
 </section>
 <section id="dplyr-practice" class="slide level2">
 <h2><code>dplyr</code> practice</h2>
@@ -332,32 +631,31 @@ Andy Teucher
 </section>
 <section id="column-wise-operations" class="slide level2">
 <h2>Column-wise operations</h2>
+<!-- Start here after dplyr fundamentals -->
 <ul>
 <li>Apply one or more functions to a set of columns in a data frame using <code>across()</code></li>
-<li>Specfiy columns using <a href="https://tidyselect.r-lib.org/reference/language.html">selection helpers</a> (e.g., <code>starts_with()</code>, <code>ends_with()</code>, <code>contains()</code>, <code>where()</code>, etc.)</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a></a><span class="fu">across</span>(<span class="sc">&lt;</span>columns<span class="sc">&gt;</span>, <span class="sc">&lt;</span>functions<span class="sc">&gt;</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li>Specify columns using <a href="https://tidyselect.r-lib.org/reference/language.html">selection helpers</a> (e.g., <code>starts_with()</code>, <code>ends_with()</code>, <code>contains()</code>, <code>where()</code>, etc.)</li>
 <li>Specify function(s) to apply to selected columns</li>
 <li>Used with <code>summarize()</code> &amp; <code>mutate()</code></li>
 </ul>
 <div class="fragment">
 <h4 id="example-calculate-mean-of-all-numeric-columns">Example: calculate mean of all numeric columns</h4>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb3-2"><a></a>mtcars <span class="sc">|&gt;</span></span>
-<span id="cb3-3"><a></a>  <span class="fu">group_by</span>(cyl) <span class="sc">|&gt;</span></span>
-<span id="cb3-4"><a></a>  <span class="fu">summarize</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.numeric), mean))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<div class="cell fragment">
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 3 × 11
-    cyl   mpg  disp    hp  drat    wt  qsec    vs    am  gear  carb
-  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-1     4  26.7  105.  82.6  4.07  2.29  19.1 0.909 0.727  4.09  1.55
-2     6  19.7  183. 122.   3.59  3.12  18.0 0.571 0.429  3.86  3.43
-3     8  15.1  353. 209.   3.23  4.00  16.8 0     0.143  3.29  3.5 </code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb26-2"><a></a></span>
+<span id="cb26-3"><a></a>mtcars <span class="sc">|&gt;</span></span>
+<span id="cb26-4"><a></a>  <span class="fu">group_by</span>(cyl) <span class="sc">|&gt;</span></span>
+<span id="cb26-5"><a></a>  <span class="fu">summarize</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.numeric), mean))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
+<div class="question fragment">
+<p><span class="color-yellow">Your turn:</span> Scale all numeric columns (use <code>across()</code>) in <code>rodents</code> to have mean 0 and standard deviation 1. <em>(Hint: Check out the <code>scale()</code> function)</em></p>
 </div>
 <aside class="notes">
+<p>Selection syntax is the same as in <code>select()</code>, i.e., using the same selection helpers</p>
 <p>We are passing the function <code>mean</code> to <code>across()</code>, not calling it (i.e., no parentheses). Functions in R are objects that can be passed around and used later.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -378,22 +676,23 @@ Andy Teucher
 <div class="fragment">
 <h4 id="example-calculate-mean-and-sd-of-all-numeric-columns">Example: calculate mean and sd of all numeric columns</h4>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb5-2"><a></a>mtcars <span class="sc">|&gt;</span></span>
-<span id="cb5-3"><a></a>  <span class="fu">group_by</span>(cyl) <span class="sc">|&gt;</span></span>
-<span id="cb5-4"><a></a>  <span class="fu">summarize</span>(</span>
-<span id="cb5-5"><a></a>    <span class="fu">across</span>(<span class="fu">where</span>(is.numeric), <span class="fu">list</span>(<span class="at">mean =</span> mean, <span class="at">sd =</span> sd))</span>
-<span id="cb5-6"><a></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb27-2"><a></a>mtcars <span class="sc">|&gt;</span></span>
+<span id="cb27-3"><a></a>  <span class="fu">group_by</span>(cyl) <span class="sc">|&gt;</span></span>
+<span id="cb27-4"><a></a>  <span class="fu">summarize</span>(</span>
+<span id="cb27-5"><a></a>    <span class="fu">across</span>(<span class="fu">where</span>(is.numeric), <span class="fu">list</span>(<span class="at">mean =</span> mean, <span class="at">sd =</span> sd))</span>
+<span id="cb27-6"><a></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 21
-    cyl mpg_mean mpg_sd disp_mean disp_sd hp_mean hp_sd drat_mean drat_sd wt_mean wt_sd qsec_mean qsec_sd vs_mean vs_sd
-  &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;
-1     4     26.7   4.51      105.    26.9    82.6  20.9      4.07   0.365    2.29 0.570      19.1    1.68   0.909 0.302
-2     6     19.7   1.45      183.    41.6   122.   24.3      3.59   0.476    3.12 0.356      18.0    1.71   0.571 0.535
-3     8     15.1   2.56      353.    67.8   209.   51.0      3.23   0.372    4.00 0.759      16.8    1.20   0     0    
-# ℹ 6 more variables: am_mean &lt;dbl&gt;, am_sd &lt;dbl&gt;, gear_mean &lt;dbl&gt;, gear_sd &lt;dbl&gt;, carb_mean &lt;dbl&gt;, carb_sd &lt;dbl&gt;</code></pre>
+    cyl mpg_mean mpg_sd disp_mean disp_sd hp_mean hp_sd drat_mean drat_sd wt_mean wt_sd qsec_mean qsec_sd
+  &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
+1     4     26.7   4.51      105.    26.9    82.6  20.9      4.07   0.365    2.29 0.570      19.1    1.68
+2     6     19.7   1.45      183.    41.6   122.   24.3      3.59   0.476    3.12 0.356      18.0    1.71
+3     8     15.1   2.56      353.    67.8   209.   51.0      3.23   0.372    4.00 0.759      16.8    1.20
+# ℹ 8 more variables: vs_mean &lt;dbl&gt;, vs_sd &lt;dbl&gt;, am_mean &lt;dbl&gt;, am_sd &lt;dbl&gt;, gear_mean &lt;dbl&gt;, gear_sd &lt;dbl&gt;,
+#   carb_mean &lt;dbl&gt;, carb_sd &lt;dbl&gt;</code></pre>
 </div>
 </div>
 </div>
@@ -405,25 +704,25 @@ Andy Teucher
 <h2>Column-wise operations</h2>
 <p>Run this in your R session, what do you get?</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb7-2"><a></a>penguins <span class="sc">|&gt;</span></span>
-<span id="cb7-3"><a></a>  <span class="fu">summarize</span>(</span>
-<span id="cb7-4"><a></a>    <span class="fu">across</span>(<span class="fu">where</span>(is.numeric), <span class="fu">list</span>(<span class="at">mean =</span> mean, <span class="at">sd =</span> sd))</span>
-<span id="cb7-5"><a></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb29-2"><a></a>penguins <span class="sc">|&gt;</span></span>
+<span id="cb29-3"><a></a>  <span class="fu">summarize</span>(</span>
+<span id="cb29-4"><a></a>    <span class="fu">across</span>(<span class="fu">where</span>(is.numeric), <span class="fu">list</span>(<span class="at">mean =</span> mean, <span class="at">sd =</span> sd))</span>
+<span id="cb29-5"><a></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 10
-  bill_len_mean bill_len_sd bill_dep_mean bill_dep_sd flipper_len_mean flipper_len_sd body_mass_mean body_mass_sd
-          &lt;dbl&gt;       &lt;dbl&gt;         &lt;dbl&gt;       &lt;dbl&gt;            &lt;dbl&gt;          &lt;dbl&gt;          &lt;dbl&gt;        &lt;dbl&gt;
-1            NA          NA            NA          NA               NA             NA             NA           NA
-# ℹ 2 more variables: year_mean &lt;dbl&gt;, year_sd &lt;dbl&gt;</code></pre>
+  bill_len_mean bill_len_sd bill_dep_mean bill_dep_sd flipper_len_mean flipper_len_sd body_mass_mean
+          &lt;dbl&gt;       &lt;dbl&gt;         &lt;dbl&gt;       &lt;dbl&gt;            &lt;dbl&gt;          &lt;dbl&gt;          &lt;dbl&gt;
+1            NA          NA            NA          NA               NA             NA             NA
+# ℹ 3 more variables: body_mass_sd &lt;dbl&gt;, year_mean &lt;dbl&gt;, year_sd &lt;dbl&gt;</code></pre>
 </div>
 </div>
 <p><br></p>
 <div class="fragment">
 <ul>
-<li>When we pass a function to <code>across()</code> it is passed with its default arguments
+<li>When we use a function in <code>across()</code> it is called with its default arguments
 <ul>
 <li><code>mean()</code> and <code>sd()</code> both have an argument <code>na.rm</code> that defaults to <code>FALSE</code></li>
 </ul></li>
@@ -439,68 +738,67 @@ Andy Teucher
 <h2>Specifying extra arguments</h2>
 <p>We can define our own helper functions:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb9-2"><a></a></span>
-<span id="cb9-3"><a></a>sd_na <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
-<span id="cb9-4"><a></a>  <span class="fu">sd</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb9-5"><a></a>}</span>
-<span id="cb9-6"><a></a></span>
-<span id="cb9-7"><a></a>mean_na <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
-<span id="cb9-8"><a></a>  <span class="fu">mean</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb9-9"><a></a>}</span>
-<span id="cb9-10"><a></a></span>
-<span id="cb9-11"><a></a>penguins <span class="sc">|&gt;</span></span>
-<span id="cb9-12"><a></a>  <span class="fu">summarize</span>(</span>
-<span id="cb9-13"><a></a>    <span class="fu">across</span>(<span class="fu">where</span>(is.numeric), <span class="fu">list</span>(<span class="at">mean =</span> mean_na, <span class="at">sd =</span> sd_na))</span>
-<span id="cb9-14"><a></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb31-2"><a></a></span>
+<span id="cb31-3"><a></a>sd_na <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb31-4"><a></a>  <span class="fu">sd</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb31-5"><a></a>}</span>
+<span id="cb31-6"><a></a></span>
+<span id="cb31-7"><a></a>mean_na <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb31-8"><a></a>  <span class="fu">mean</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb31-9"><a></a>}</span>
+<span id="cb31-10"><a></a></span>
+<span id="cb31-11"><a></a>penguins <span class="sc">|&gt;</span></span>
+<span id="cb31-12"><a></a>  <span class="fu">summarize</span>(</span>
+<span id="cb31-13"><a></a>    <span class="fu">across</span>(<span class="fu">where</span>(is.numeric), <span class="fu">list</span>(<span class="at">mean =</span> mean_na, <span class="at">sd =</span> sd_na))</span>
+<span id="cb31-14"><a></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 10
-  bill_len_mean bill_len_sd bill_dep_mean bill_dep_sd flipper_len_mean flipper_len_sd body_mass_mean body_mass_sd
-          &lt;dbl&gt;       &lt;dbl&gt;         &lt;dbl&gt;       &lt;dbl&gt;            &lt;dbl&gt;          &lt;dbl&gt;          &lt;dbl&gt;        &lt;dbl&gt;
-1          43.9        5.46          17.2        1.97             201.           14.1          4202.         802.
-# ℹ 2 more variables: year_mean &lt;dbl&gt;, year_sd &lt;dbl&gt;</code></pre>
+  bill_len_mean bill_len_sd bill_dep_mean bill_dep_sd flipper_len_mean flipper_len_sd body_mass_mean
+          &lt;dbl&gt;       &lt;dbl&gt;         &lt;dbl&gt;       &lt;dbl&gt;            &lt;dbl&gt;          &lt;dbl&gt;          &lt;dbl&gt;
+1          43.9        5.46          17.2        1.97             201.           14.1          4202.
+# ℹ 3 more variables: body_mass_sd &lt;dbl&gt;, year_mean &lt;dbl&gt;, year_sd &lt;dbl&gt;</code></pre>
 </div>
 </div>
 </section>
 <section id="specifying-extra-arguments-1" class="slide level2">
 <h2>Specifying extra arguments</h2>
 <p>But if we’re doing this only once we can define them in place with an <span class="highlight-term">anonymous function</span>:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a>\(x) <span class="cf">function</span>(x, other_args)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a></a>\(x) <span class="cf">function</span>(x, other_args)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <ul>
 <li>This defines a function “on the fly” with the arguments specified how we want</li>
 <li>The <code>x</code> will take the values of each column passed to it by <code>across()</code></li>
 </ul>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb12-2"><a></a></span>
-<span id="cb12-3"><a></a>penguins <span class="sc">|&gt;</span></span>
-<span id="cb12-4"><a></a>  <span class="fu">summarize</span>(</span>
-<span id="cb12-5"><a></a>    <span class="fu">across</span>(</span>
-<span id="cb12-6"><a></a>      <span class="fu">where</span>(is.numeric),</span>
-<span id="cb12-7"><a></a>      <span class="fu">list</span>(</span>
-<span id="cb12-8"><a></a>        <span class="at">mean =</span> \(x) <span class="fu">mean</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb12-9"><a></a>        <span class="at">sd =</span> \(x) <span class="fu">sd</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb12-10"><a></a>      )</span>
-<span id="cb12-11"><a></a>    )</span>
-<span id="cb12-12"><a></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb34-2"><a></a></span>
+<span id="cb34-3"><a></a>penguins <span class="sc">|&gt;</span></span>
+<span id="cb34-4"><a></a>  <span class="fu">summarize</span>(</span>
+<span id="cb34-5"><a></a>    <span class="fu">across</span>(</span>
+<span id="cb34-6"><a></a>      <span class="fu">where</span>(is.numeric),</span>
+<span id="cb34-7"><a></a>      <span class="fu">list</span>(</span>
+<span id="cb34-8"><a></a>        <span class="at">mean =</span> \(x) <span class="fu">mean</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb34-9"><a></a>        <span class="at">sd =</span> \(x) <span class="fu">sd</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb34-10"><a></a>      )</span>
+<span id="cb34-11"><a></a>    )</span>
+<span id="cb34-12"><a></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 10
-  bill_len_mean bill_len_sd bill_dep_mean bill_dep_sd flipper_len_mean flipper_len_sd body_mass_mean body_mass_sd
-          &lt;dbl&gt;       &lt;dbl&gt;         &lt;dbl&gt;       &lt;dbl&gt;            &lt;dbl&gt;          &lt;dbl&gt;          &lt;dbl&gt;        &lt;dbl&gt;
-1          43.9        5.46          17.2        1.97             201.           14.1          4202.         802.
-# ℹ 2 more variables: year_mean &lt;dbl&gt;, year_sd &lt;dbl&gt;</code></pre>
+  bill_len_mean bill_len_sd bill_dep_mean bill_dep_sd flipper_len_mean flipper_len_sd body_mass_mean
+          &lt;dbl&gt;       &lt;dbl&gt;         &lt;dbl&gt;       &lt;dbl&gt;            &lt;dbl&gt;          &lt;dbl&gt;          &lt;dbl&gt;
+1          43.9        5.46          17.2        1.97             201.           14.1          4202.
+# ℹ 3 more variables: body_mass_sd &lt;dbl&gt;, year_mean &lt;dbl&gt;, year_sd &lt;dbl&gt;</code></pre>
 </div>
 </div>
 </section>
-<section id="your-turn" class="slide level2">
+<section id="your-turn-1" class="slide level2">
 <h2>Your turn</h2>
 <ol type="1">
-<li><p>Calculate the median of both types of bill measurements for each species in the built-in <code>penguins</code> dataset</p></li>
-<li><p>Round all of the numeric colums in the <code>PortalData/SiteandMethods/Portal_UTMCoords.csv</code> dataset to 2 decimal places</p></li>
+<li>Calculate the median of hind-foot length (<code>hfl</code>) and weight (<code>wgt</code>) for each species in <code>rodents</code>, ignoring <code>NA</code> values.</li>
 </ol>
 </section>
 <section id="two-table-verbs-joins" class="slide level2">
@@ -509,7 +807,7 @@ Andy Teucher
 <div class="column" style="width:50%;">
 <p><img data-src="img/tables-join-1.png" class="absolute" style="top: 225px; left: 80px; width: 540px; "></p>
 </div><div class="column" style="width:50%;">
-<h3 id="mutatating-joins">Mutatating joins</h3>
+<h3 id="mutating-joins">Mutating joins</h3>
 <ul>
 <li>Combine two tables based on common values in one or more columns</li>
 </ul>
@@ -522,7 +820,7 @@ Andy Teucher
 <p><a href="https://r4ds.hadley.nz/joins.html#how-do-joins-work" class="uri">https://r4ds.hadley.nz/joins.html#how-do-joins-work</a></p>
 </div>
 </section>
-<section id="mutating-joins" class="slide level2">
+<section id="mutating-joins-1" class="slide level2">
 <h2>Mutating joins</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
@@ -539,7 +837,7 @@ Andy Teucher
 <p><a href="https://r4ds.hadley.nz/joins.html#how-do-joins-work" class="uri">https://r4ds.hadley.nz/joins.html#how-do-joins-work</a></p>
 </div>
 </section>
-<section id="mutating-joins-1" class="slide level2">
+<section id="mutating-joins-2" class="slide level2">
 <h2>Mutating joins</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
@@ -556,7 +854,7 @@ Andy Teucher
 <p><a href="https://r4ds.hadley.nz/joins.html#how-do-joins-work" class="uri">https://r4ds.hadley.nz/joins.html#how-do-joins-work</a></p>
 </div>
 </section>
-<section id="mutating-joins-2" class="slide level2">
+<section id="mutating-joins-3" class="slide level2">
 <h2>Mutating joins</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
@@ -572,7 +870,7 @@ Andy Teucher
 <p><a href="https://r4ds.hadley.nz/joins.html#how-do-joins-work" class="uri">https://r4ds.hadley.nz/joins.html#how-do-joins-work</a></p>
 </div>
 </section>
-<section id="mutating-joins-3" class="slide level2">
+<section id="mutating-joins-4" class="slide level2">
 <h2>Mutating joins</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
@@ -594,20 +892,20 @@ Andy Teucher
 <ul>
 <li>E.g., both tables have columns year, month, day</li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a></a><span class="fu">left_join</span>(x, y)</span>
-<span id="cb14-2"><a></a><span class="co">#&gt; Joining with `by = join_by(year, month, day)`</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a></a><span class="fu">left_join</span>(x, y)</span>
+<span id="cb36-2"><a></a><span class="co">#&gt; Joining with `by = join_by(year, month, day)`</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><br></p>
 <p>Better to specify the join columns explicitly</p>
 <ul>
 <li>Both tables have columns column_1 and column_2</li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a><span class="fu">left_join</span>(x, y, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"column_1"</span>, <span class="st">"column_2"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a></a><span class="fu">left_join</span>(x, y, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"column_1"</span>, <span class="st">"column_2"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <ul>
 <li>If the columns to join on have different names in each table</li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a></a><span class="fu">left_join</span>(x, y, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"column_in_x"</span> <span class="ot">=</span> <span class="st">"column_in_y"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a></a><span class="fu">left_join</span>(x, y, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"column_in_x"</span> <span class="ot">=</span> <span class="st">"column_in_y"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="your-turn-1" class="slide level2">
+<section id="your-turn-2" class="slide level2">
 <h2>Your turn</h2>
 <p>Use a join to add location information to the rodent captures data</p>
 <ul>
@@ -641,7 +939,7 @@ Andy Teucher
 <p><img data-src="img/anti-join.png"></p>
 </div></div>
 </section>
-<section id="your-turn-2" class="slide level2">
+<section id="your-turn-3" class="slide level2">
 <h2>Your turn</h2>
 <p>Use a join to find all the captures where the species is a granivore</p>
 <ul>
@@ -654,10 +952,10 @@ Andy Teucher
 <p><strong>Cross joins</strong> create the full cartesian product of two tables</p>
 <div class="cell columns column-output-location">
 <div class="column">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb17-2"><a></a>x <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">a =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>)</span>
-<span id="cb17-3"><a></a>y <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">b =</span> <span class="fu">c</span>(<span class="st">"x"</span>, <span class="st">"y"</span>))</span>
-<span id="cb17-4"><a></a><span class="fu">cross_join</span>(x, y)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb39-2"><a></a>x <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">a =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>)</span>
+<span id="cb39-3"><a></a>y <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">b =</span> <span class="fu">c</span>(<span class="st">"x"</span>, <span class="st">"y"</span>))</span>
+<span id="cb39-4"><a></a><span class="fu">cross_join</span>(x, y)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div><div class="column fragment">
 <div class="cell-output cell-output-stdout">
 <pre><code>  a b
@@ -672,15 +970,15 @@ Andy Teucher
 <p><br></p>
 <div class="fragment">
 <p>Inequality joins</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a></a><span class="fu">left_join</span>(x, y, <span class="at">by =</span> <span class="fu">join_by</span>(column_1 <span class="sc">&gt;=</span> column_2))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a></a><span class="fu">left_join</span>(x, y, <span class="at">by =</span> <span class="fu">join_by</span>(column_1 <span class="sc">&gt;=</span> column_2))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p><br></p>
 <div class="fragment">
 <p>Rolling joins (inequality joins constrained by <code>closest()</code>)</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a></a><span class="fu">left_join</span>(</span>
-<span id="cb20-2"><a></a>    x, y, </span>
-<span id="cb20-3"><a></a>    <span class="at">by =</span> <span class="fu">join_by</span>(id, <span class="fu">closest</span>(capture_date <span class="sc">&gt;=</span> survey_start_date))</span>
-<span id="cb20-4"><a></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a></a><span class="fu">left_join</span>(</span>
+<span id="cb42-2"><a></a>    x, y, </span>
+<span id="cb42-3"><a></a>    <span class="at">by =</span> <span class="fu">join_by</span>(id, <span class="fu">closest</span>(capture_date <span class="sc">&gt;=</span> survey_start_date))</span>
+<span id="cb42-4"><a></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Rolling joins are good for finding things like “the most recent rainy day before a survey date”</p>
 </div>
 <aside class="notes">
@@ -701,74 +999,329 @@ Andy Teucher
 <h2>Overlap joins</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a></a><span class="fu">between</span>(x, y_1, y_2)</span>
-<span id="cb21-2"><a></a><span class="fu">within</span>(x_1, x_2, y_1, y_2)</span>
-<span id="cb21-3"><a></a><span class="fu">overlaps</span>(x_1, x_2, y_1, y_2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a></a><span class="fu">between</span>(x, y_1, y_2)</span>
+<span id="cb43-2"><a></a><span class="fu">within</span>(x_1, x_2, y_1, y_2)</span>
+<span id="cb43-3"><a></a><span class="fu">overlaps</span>(x_1, x_2, y_1, y_2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div><div class="column" style="width:50%;">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode numberSource plaintext cell-output-tall number-lines code-with-copy"><code class="sourceCode"><span id="cb22-1"><a></a>between(x, y_1, y_2):</span>
-<span id="cb22-2"><a></a></span>
-<span id="cb22-3"><a></a>  y_1 [════════════════════] y_2</span>
-<span id="cb22-4"><a></a>         •</span>
-<span id="cb22-5"><a></a>         x</span>
-<span id="cb22-6"><a></a></span>
-<span id="cb22-7"><a></a></span>
-<span id="cb22-8"><a></a>within(x_1, x_2, y_1, y_2):</span>
-<span id="cb22-9"><a></a></span>
-<span id="cb22-10"><a></a>  y_1 [════════════════════] y_2</span>
-<span id="cb22-11"><a></a>         [═════]</span>
-<span id="cb22-12"><a></a>       x_1     x_2</span>
-<span id="cb22-13"><a></a></span>
-<span id="cb22-14"><a></a></span>
-<span id="cb22-15"><a></a>overlaps(x_1, x_2, y_1, y_2):</span>
-<span id="cb22-16"><a></a></span>
-<span id="cb22-17"><a></a>  y_1 [════════════════════] y_2</span>
-<span id="cb22-18"><a></a>                   [═══════════════] </span>
-<span id="cb22-19"><a></a>                 x_1             x_2</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb44"><pre class="sourceCode numberSource plaintext cell-output-tall number-lines code-with-copy"><code class="sourceCode"><span id="cb44-1"><a></a>between(x, y_1, y_2):</span>
+<span id="cb44-2"><a></a></span>
+<span id="cb44-3"><a></a>  y_1 [════════════════════] y_2</span>
+<span id="cb44-4"><a></a>         •</span>
+<span id="cb44-5"><a></a>         x</span>
+<span id="cb44-6"><a></a></span>
+<span id="cb44-7"><a></a></span>
+<span id="cb44-8"><a></a>within(x_1, x_2, y_1, y_2):</span>
+<span id="cb44-9"><a></a></span>
+<span id="cb44-10"><a></a>  y_1 [════════════════════] y_2</span>
+<span id="cb44-11"><a></a>         [═════]</span>
+<span id="cb44-12"><a></a>       x_1     x_2</span>
+<span id="cb44-13"><a></a></span>
+<span id="cb44-14"><a></a></span>
+<span id="cb44-15"><a></a>overlaps(x_1, x_2, y_1, y_2):</span>
+<span id="cb44-16"><a></a></span>
+<span id="cb44-17"><a></a>  y_1 [════════════════════] y_2</span>
+<span id="cb44-18"><a></a>                   [═══════════════] </span>
+<span id="cb44-19"><a></a>                 x_1             x_2</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div></div>
 <div class="resources">
 <p><a href="https://dplyr.tidyverse.org/reference/join_by.html#join-types" class="uri">https://dplyr.tidyverse.org/reference/join_by.html#join-types</a></p>
 </div>
 </section>
-<section id="your-turn-3" class="slide level2">
+<section id="your-turn-4" class="slide level2">
 <h2>Your turn</h2>
 <p>Using the rodent trapping data and the plant census dates data, join the two datasets to find out which plant census (year and season) each rodent capture is associated with.</p>
 <p>Starting code:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb23-2"><a></a><span class="fu">library</span>(readr)</span>
-<span id="cb23-3"><a></a><span class="fu">library</span>(lubridate)</span>
-<span id="cb23-4"><a></a></span>
-<span id="cb23-5"><a></a>plant_census_dates <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(</span>
-<span id="cb23-6"><a></a>  <span class="st">"PortalData/Plants/Portal_plant_census_dates.csv"</span>,</span>
-<span id="cb23-7"><a></a>  <span class="at">na =</span> <span class="fu">c</span>(<span class="st">"unknown"</span>, <span class="st">"none"</span>)</span>
-<span id="cb23-8"><a></a>)</span>
-<span id="cb23-9"><a></a></span>
-<span id="cb23-10"><a></a>rodent_trapping <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"PortalData/Rodents/Portal_rodent_trapping.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb45"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb45-2"><a></a><span class="fu">library</span>(readr)</span>
+<span id="cb45-3"><a></a><span class="fu">library</span>(lubridate)</span>
+<span id="cb45-4"><a></a></span>
+<span id="cb45-5"><a></a>plant_census_dates <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(</span>
+<span id="cb45-6"><a></a>  <span class="st">"PortalData/Plants/Portal_plant_census_dates.csv"</span>,</span>
+<span id="cb45-7"><a></a>  <span class="at">na =</span> <span class="fu">c</span>(<span class="st">"unknown"</span>, <span class="st">"none"</span>)</span>
+<span id="cb45-8"><a></a>)</span>
+<span id="cb45-9"><a></a></span>
+<span id="cb45-10"><a></a>rodent_trapping <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"PortalData/Rodents/Portal_rodent_trapping.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <ul>
 <li>Hint: use an overlap join with <code>between()</code></li>
 </ul>
 </section>
-<section id="window-functions" class="title-slide slide level1 center">
-<h1>Window functions</h1>
-
+<section>
+<section id="tidying-data-with-tidyr" class="title-slide slide level1 center">
+<h1>Tidying data with <code>tidyr</code></h1>
+<blockquote>
+<p>“Happy families are all alike; every unhappy family is unhappy in its own way.”</p>
+</blockquote>
+<p>— Leo Tolstoy</p>
+<p><br></p>
+<blockquote>
+<p>“Tidy datasets are all alike, but every messy dataset is messy in its own way.”</p>
+</blockquote>
+<p>— Hadley Wickham</p>
 </section>
+<section id="what-is-tidy-data" class="slide level2">
+<h2>What is tidy data?</h2>
+<ol type="1">
+<li>Each variable is a column; each column is a variable.</li>
+<li>Each observation is a row; each row is an observation.</li>
+<li>Each value is a cell; each cell is a single value.</li>
+</ol>
 
-<section id="row-wise-operations" class="title-slide slide level1 center">
-<h1>Row-wise operations</h1>
-
+<img data-src="img/tidy-data-r4ds.png" class="r-stretch"></section>
+<section id="wide-vs.-long-tidy-data" class="slide level2">
+<h2>Wide vs.&nbsp;long (tidy) data</h2>
+<ul>
+<li>Wide data often has “data” stored in the column names
+<ul>
+<li>Example: dates, treatment groups, measurement types</li>
+</ul></li>
+</ul>
+<div class="columns">
+<div class="column" style="width:49%;">
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: right;">subject</th>
+<th style="text-align: right;">treatment_A</th>
+<th style="text-align: right;">treatment_B</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">7</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">8</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><br></p>
+<div class="fragment">
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: right;">subject</th>
+<th style="text-align: left;">treatment</th>
+<th style="text-align: right;">value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">A</td>
+<td style="text-align: right;">5</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">B</td>
+<td style="text-align: right;">7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">A</td>
+<td style="text-align: right;">6</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">B</td>
+<td style="text-align: right;">8</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div><div class="column" style="width: 2%;"><div class="column-divider" style="border-left: 1px solid ; height: 60vh; margin: 0 auto; width: 0;"></div></div><div class="column" style="width:49%;">
+<div class="fragment">
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: right;">id</th>
+<th style="text-align: right;">20250101</th>
+<th style="text-align: right;">20250201</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">150</td>
+<td style="text-align: right;">165</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">125</td>
+<td style="text-align: right;">118</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<ul>
+<li>Dates are stored in the column names</li>
+<li>Values are masses (in grams).</li>
+</ul>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: right;">id</th>
+<th style="text-align: left;">date</th>
+<th style="text-align: right;">mass</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">2025-01-01</td>
+<td style="text-align: right;">150</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">2025-02-01</td>
+<td style="text-align: right;">165</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">2025-01-01</td>
+<td style="text-align: right;">125</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">2025-02-01</td>
+<td style="text-align: right;">118</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div></div>
+<aside class="notes">
+<ul>
+<li>Each row has more than one observation (more than one time, place, or subject)</li>
+<li>Variables split across multiple columns
+<ul>
+<li>Eg., what if we wanted to the get the mean mass per subject?</li>
+</ul></li>
+<li>Second example - we hopefully have metadata that tells us that the values are masses (in grams)</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-
-<section id="tidyr" class="title-slide slide level1 center">
-<h1><code>tidyr</code></h1>
-
+<section id="example---billboard-data" class="slide level2">
+<h2>Example - billboard data</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a></a><span class="fu">library</span>(tidyr)</span>
+<span id="cb46-2"><a></a>billboard</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 317 × 79
+  artist      track date.entered   wk1   wk2   wk3   wk4   wk5   wk6   wk7   wk8   wk9  wk10  wk11  wk12  wk13
+  &lt;chr&gt;       &lt;chr&gt; &lt;date&gt;       &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+1 2 Pac       Baby… 2000-02-26      87    82    72    77    87    94    99    NA    NA    NA    NA    NA    NA
+2 2Ge+her     The … 2000-09-02      91    87    92    NA    NA    NA    NA    NA    NA    NA    NA    NA    NA
+3 3 Doors Do… Kryp… 2000-04-08      81    70    68    67    66    57    54    53    51    51    51    51    47
+4 3 Doors Do… Loser 2000-10-21      76    76    72    69    67    65    55    59    62    61    61    59    61
+5 504 Boyz    Wobb… 2000-04-15      57    34    25    17    17    31    36    49    53    57    64    70    75
+# ℹ 312 more rows
+# ℹ 63 more variables: wk14 &lt;dbl&gt;, wk15 &lt;dbl&gt;, wk16 &lt;dbl&gt;, wk17 &lt;dbl&gt;, wk18 &lt;dbl&gt;, wk19 &lt;dbl&gt;, wk20 &lt;dbl&gt;,
+#   wk21 &lt;dbl&gt;, wk22 &lt;dbl&gt;, wk23 &lt;dbl&gt;, wk24 &lt;dbl&gt;, wk25 &lt;dbl&gt;, wk26 &lt;dbl&gt;, wk27 &lt;dbl&gt;, wk28 &lt;dbl&gt;,
+#   wk29 &lt;dbl&gt;, wk30 &lt;dbl&gt;, wk31 &lt;dbl&gt;, wk32 &lt;dbl&gt;, wk33 &lt;dbl&gt;, wk34 &lt;dbl&gt;, wk35 &lt;dbl&gt;, wk36 &lt;dbl&gt;,
+#   wk37 &lt;dbl&gt;, wk38 &lt;dbl&gt;, wk39 &lt;dbl&gt;, wk40 &lt;dbl&gt;, wk41 &lt;dbl&gt;, wk42 &lt;dbl&gt;, wk43 &lt;dbl&gt;, wk44 &lt;dbl&gt;,
+#   wk45 &lt;dbl&gt;, wk46 &lt;dbl&gt;, wk47 &lt;dbl&gt;, wk48 &lt;dbl&gt;, wk49 &lt;dbl&gt;, wk50 &lt;dbl&gt;, wk51 &lt;dbl&gt;, wk52 &lt;dbl&gt;,
+#   wk53 &lt;dbl&gt;, wk54 &lt;dbl&gt;, wk55 &lt;dbl&gt;, wk56 &lt;dbl&gt;, wk57 &lt;dbl&gt;, wk58 &lt;dbl&gt;, wk59 &lt;dbl&gt;, wk60 &lt;dbl&gt;, …</code></pre>
+</div>
+</div>
+<div class="question fragment">
+<p>How would we plot this data to show how the rank of different songs changed over time?</p>
+</div>
+<div class="question fragment">
+<p>What shape would this data have in long format?</p>
+</div>
 </section>
+<section id="tidyrpivot_longer" class="slide level2">
+<h2><code>tidyr::pivot_longer()</code></h2>
+<p>Reshape data from wide to long format</p>
+<div class="columns">
+<div class="column">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb48" data-code-line-numbers="|1,2,3,6,7|13|14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a></a><span class="fu">pivot_longer</span>(</span>
+<span id="cb48-2"><a></a>  data,</span>
+<span id="cb48-3"><a></a>  cols,</span>
+<span id="cb48-4"><a></a>  ...,</span>
+<span id="cb48-5"><a></a>  <span class="at">cols_vary =</span> <span class="st">"fastest"</span>,</span>
+<span id="cb48-6"><a></a>  <span class="at">names_to =</span> <span class="st">"name"</span>,</span>
+<span id="cb48-7"><a></a>  <span class="at">names_prefix =</span> <span class="cn">NULL</span>,</span>
+<span id="cb48-8"><a></a>  <span class="at">names_sep =</span> <span class="cn">NULL</span>,</span>
+<span id="cb48-9"><a></a>  <span class="at">names_pattern =</span> <span class="cn">NULL</span>,</span>
+<span id="cb48-10"><a></a>  <span class="at">names_ptypes =</span> <span class="cn">NULL</span>,</span>
+<span id="cb48-11"><a></a>  <span class="at">names_transform =</span> <span class="cn">NULL</span>,</span>
+<span id="cb48-12"><a></a>  <span class="at">names_repair =</span> <span class="st">"check_unique"</span>,</span>
+<span id="cb48-13"><a></a>  <span class="at">values_to =</span> <span class="st">"value"</span>,</span>
+<span id="cb48-14"><a></a>  <span class="at">values_drop_na =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb48-15"><a></a>  <span class="at">values_ptypes =</span> <span class="cn">NULL</span>,</span>
+<span id="cb48-16"><a></a>  <span class="at">values_transform =</span> <span class="cn">NULL</span></span>
+<span id="cb48-17"><a></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div><div class="column">
+<ul>
+<li><code>cols</code>: columns to pivot from wide to long. Uses tidyselect syntax.</li>
+<li><code>names_to</code>: name of new column to create from the column names</li>
+<li><code>values_to</code>: name of new column to create from the values in the selected columns</li>
+<li><code>values_drop_na</code>: if <code>TRUE</code>, drops rows with <code>NA</code> in the values column</li>
+</ul>
+</div></div>
+<div class="question fragment">
+<p>Let’s practice with the billboard data</p>
+</div>
+<aside class="notes">
+<ul>
+<li>go to R and do pivot_longer() on billboard data</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="your-turn-5" class="slide level2">
+<h2>Your turn</h2>
+<ul>
+<li>Use <code>SitesandMethods/Portal_plot_treatments.csv</code> and pivot it to longer so there is a start_date, end_date, and treatment column. See if you can get the dates into proper date format. The <code>lubridate</code> package may be helpful.</li>
+</ul>
 
-<section id="string-manipulation-and-regular-expressions" class="title-slide slide level1 center">
-<h1>string manipulation and regular expressions</h1>
 
-
-<script> window._input_file = "---\n" + "title: \"Advanced Data Manipulation with `dplyr` and `tidyr`\"\n" + "subtitle: \"Parks Canada; Ecological Integrity Monitoring Program\"\n" + "author: \"Andy Teucher\"\n" + "format: revealjs\n" + "knitr:\n" + "  opts_chunk: \n" + "    R.options:\n" + "      width: 120\n" + "---\n" + "\n" + "```{r}\n" + "#| include: false\n" + "penguins <- dplyr::as_tibble(penguins)\n" + "```\n" + "\n" + "## Outline\n" + "\n" + "::: {.columns}\n" + "::: {.column width=\"50%\"}\n" + "\n" + "Today:\n" + "\n" + "- `dplyr` fundamentals review\n" + "- Column-wise operations\n" + "- Two-table verbs (joins)\n" + "\n" + ":::\n" + "::: {.column width=\"50%\"}\n" + "\n" + "Next time:\n" + "\n" + "- Window functions\n" + "- Row-wise operations\n" + "- Data reshaping with `tidyr`\n" + "\n" + ":::\n" + ":::\n" + "\n" + "## Data\n" + "\n" + "### Using data from the [Portal Project](https://portal.weecology.org/)\n" + "\n" + "Long-term ecological research site studying the dynamics of desert rodents, plants, ants and weather in Arizona.\n" + "\n" + "Data available from the [GitHub repo](https://github.com/weecology/PortalData) via the [`portalr`](https://github.com/weecology/portalr) package.\n" + "\n" + "## Setup\n" + "\n" + "1. Create a new project in Positron\n" + "\n" + "- Either: \n" + "	- Fork and clone the exercises repository:  \n" + "	 `https://github.com/ateucher/pc-data-manipulation/` OR \n" + "	- Run:\n" + "	 ```r\n" + "	 usethis::use_course(\"https://github.com/ateucher/pc-data-manipulation/archive/refs/heads/main.zip\")\n" + "	 ```\n" + "\n" + "2. Open the file: `01-get-data.R`\n" + "\n" + "3. Download the data:\n" + "\n" + "```{r}\n" + "#| echo: true\n" + "#| eval: false\n" + "install.packages(\"portalr\")\n" + "library(portalr)\n" + "\n" + "download_observations(\".\")\n" + "```\n" + "\n" + "4. Explore the downloaded data in Positron\n" + "\n" + "\n" + "## Review of main `dplyr` operations\n" + "\n" + "- Selecting columns with `select()`\n" + "- Filtering rows with `filter()`\n" + "- \"Slice\" rows with `slice()`/`slice_*()`\n" + "- Creating new columns with `mutate()`\n" + "- Summarizing data with `summarize()`\n" + "\n" + "::: {.fragment}\n" + "- Grouping data with `group_by()` applies `filter()`, `mutate()`, and `summarize()` by group\n" + ":::\n" + "\n" + "## Warm-up\n" + "\n" + "Read in the rodent capture data (`PortalData/Rodents/Portal_rodent.csv`). \n" + "\n" + "1. Use `readr::read_csv()` and assign it to a data frame called `rodents`.\n" + "2. Standardize column names to use `snake_case` *(hint: check out the `janitor` package)*\n" + "\n" + "## `dplyr` practice\n" + "\n" + "::::: {.columns}\n" + "::: {.column width=\"68%\"}\n" + "\n" + "1. Remove records from invalid sampling periods (when `period` is negative). Re-assign the result to the `rodents` data frame.\n" + "\n" + "2. How many individuals of each species were caught in 1995?\n" + "\n" + "3. What date had the highest number of individual rodents caught?\n" + "\n" + ":::\n" + "\n" + ":::: {.column width=\"30%\"}\n" + "::: {style=\"padding-left: 1em; border-left: 1px solid #ccc;\"}\n" + "\n" + "**Key columns**\n" + "\n" + "- `id` = individual identifier\n" + "- `day`, `month`, `year` = date of capture\n" + "- `period` = sampling period\n" + "- `species` = species code\n" + "- `wgt` = weight (grams)\n" + "- `year` = year of capture\n" + "\n" + ":::\n" + "::::\n" + ":::::\n" + "\n" + "## `dplyr` practice\n" + "\n" + "::::: {.columns}\n" + "::: {.column width=\"68%\"}\n" + "\n" + "4. For each capture record, calculate the percent difference in weight from the average weight of that species.\n" + "\n" + "5. Of all individual Ord's Kangaroo Rats (species code \"DO\") that have been caught more than 5 times, which individual was consistently the biggest? (i.e., has the highest average percent difference in weight from the species' average weight)?\n" + "\n" + ":::\n" + "\n" + ":::: {.column width=\"30%\"}\n" + "::: {style=\"padding-left: 1em; border-left: 1px solid #ccc;\"}\n" + "\n" + "**Key columns**\n" + "\n" + "- `id` = individual identifier\n" + "- `day`, `month`, `year` = date of capture\n" + "- `period` = sampling period\n" + "- `species` = species code\n" + "- `wgt` = weight (grams)\n" + "- `year` = year of capture\n" + "\n" + ":::\n" + "::::\n" + ":::::\n" + "\n" + "## Column-wise operations\n" + "\n" + "- Apply one or more functions to a set of columns in a data frame using `across()`\n" + "- Specfiy columns using [selection helpers](https://tidyselect.r-lib.org/reference/language.html) (e.g., `starts_with()`, `ends_with()`, `contains()`, `where()`, etc.)\n" + "- Specify function(s) to apply to selected columns\n" + "- Used with `summarize()` & `mutate()`\n" + "\n" + "::: {.fragment}\n" + "\n" + "#### Example: calculate mean of all numeric columns\n" + "\n" + "\n" + "```{r}\n" + "#| echo: true\n" + "#| output-location: fragment\n" + "\n" + "library(dplyr)\n" + "mtcars |>\n" + "  group_by(cyl) |>\n" + "  summarize(across(where(is.numeric), mean))\n" + "```\n" + "\n" + ":::\n" + "\n" + "::: {.notes}\n" + "We are passing the function `mean` to `across()`, not calling it (i.e., no parentheses).\n" + "Functions in R are objects that can be passed around and used later.\n" + ":::\n" + "\n" + "## Column-wise operations\n" + "\n" + "specify multiple functions to apply in a `list()`\n" + "\n" + "<br>\n" + "\n" + "::: {.fragment}\n" + "\n" + "#### Example: calculate mean and sd of all numeric columns\n" + "\n" + "```{r}\n" + "#| echo: true\n" + "#| output-location: fragment\n" + "library(dplyr)\n" + "mtcars |>\n" + "  group_by(cyl) |>\n" + "  summarize(\n" + "    across(where(is.numeric), list(mean = mean, sd = sd))\n" + "  )\n" + "```\n" + "\n" + ":::\n" + "\n" + "::: {.resources}\n" + "\n" + "<https://tidyselect.r-lib.org/reference/language.html>\n" + "\n" + ":::\n" + "\n" + "## Column-wise operations\n" + "\n" + "Run this in your R session, what do you get?\n" + "```{r}\n" + "#| echo: true\n" + "#| output-location: fragment\n" + "library(dplyr)\n" + "penguins |>\n" + "  summarize(\n" + "    across(where(is.numeric), list(mean = mean, sd = sd))\n" + "  )\n" + "```\n" + "\n" + "<br>\n" + "\n" + "::: {.fragment}\n" + "\n" + "- When we pass a function to `across()` it is passed with its default arguments\n" + "	- `mean()` and `sd()` both have an argument `na.rm` that defaults to `FALSE`\n" + "- We can't pass extra arguments to functions inside `across()` directly\n" + "- We need to pass a function with the argument values we want \"baked in\"\n" + "\n" + ":::\n" + "\n" + "::: {.resources}\n" + "\n" + "<https://tidyselect.r-lib.org/reference/language.html>\n" + "\n" + ":::\n" + "\n" + "## Specifying extra arguments\n" + "\n" + "We can define our own helper functions:\n" + "\n" + "```{r}\n" + "#| echo: true\n" + "#| output-location: fragment\n" + "library(dplyr)\n" + "\n" + "sd_na <- function(x) {\n" + "  sd(x, na.rm = TRUE)\n" + "}\n" + "\n" + "mean_na <- function(x) {\n" + "  mean(x, na.rm = TRUE)\n" + "}\n" + "\n" + "penguins |>\n" + "  summarize(\n" + "    across(where(is.numeric), list(mean = mean_na, sd = sd_na))\n" + "  )\n" + "```\n" + "\n" + "## Specifying extra arguments\n" + "\n" + "But if we're doing this only once we can define them in place with an [anonymous function]{.highlight-term}:\n" + "\n" + "```r\n" + "\(x) function(x, other_args)\n" + "```\n" + "\n" + "- This defines a function \"on the fly\" with the arguments specified how we want\n" + "- The `x` will take the values of each column passed to it by `across()`\n" + "\n" + "```{r}\n" + "#| echo: true\n" + "#| output-location: fragment\n" + "library(dplyr)\n" + "\n" + "penguins |>\n" + "  summarize(\n" + "    across(\n" + "      where(is.numeric),\n" + "      list(\n" + "        mean = \(x) mean(x, na.rm = TRUE),\n" + "        sd = \(x) sd(x, na.rm = TRUE)\n" + "      )\n" + "    )\n" + "  )\n" + "```\n" + "\n" + "\n" + "## Your turn\n" + "\n" + "1. Calculate the median of both types of bill measurements for each species in the built-in `penguins` dataset\n" + "\n" + "2. Round all of the numeric colums in the `PortalData/SiteandMethods/Portal_UTMCoords.csv` dataset to 2 decimal places\n" + "\n" + "## Two-table verbs (joins)\n" + "\n" + "::: {.columns}\n" + "::: {.column width=\"50%\"}\n" + "\n" + "![](img/tables-join-1.png){.absolute width=540px left=80px top=225px}\n" + "\n" + ":::\n" + "\n" + "::: {.column width=\"50%\"}\n" + "\n" + "### Mutatating joins\n" + "\n" + "- Combine two tables based on common values in one or more columns\n" + "\n" + "### Filtering joins\n" + "\n" + "- Filter rows from one table based on values in another table\n" + "\n" + "::: \n" + ":::\n" + "\n" + "::: {.resources}\n" + "\n" + "<https://r4ds.hadley.nz/joins.html#how-do-joins-work>\n" + "\n" + ":::\n" + "\n" + "## Mutating joins\n" + "\n" + "::: {.columns}\n" + "::: {.column width=\"50%\"}\n" + "\n" + "### `left_join()`\n" + "\n" + "- Keeps all rows in the [left]{.highlight-term} table\n" + "- Drops rows from the [right]{.highlight-term} table that don't match\n" + "- Rows in the [left]{.highlight-term} that don't match get `NA` in the columns from the [right]{.highlight-term} table\n" + "\n" + ":::\n" + "\n" + "::: {.column width=\"50%\"}\n" + "\n" + "![](img/left-join.png)\n" + "\n" + ":::\n" + ":::\n" + "\n" + "::: {.resources}\n" + "\n" + "<https://r4ds.hadley.nz/joins.html#how-do-joins-work>\n" + "\n" + ":::\n" + "\n" + "## Mutating joins\n" + "\n" + "::: {.columns}\n" + "::: {.column width=\"50%\"}\n" + "\n" + "### `right_join()`\n" + "\n" + "- Keeps all rows in the [right]{.highlight-term} table\n" + "- Drops rows from the [left]{.highlight-term} table that don't match\n" + "- Rows in the [right]{.highlight-term} table that don't match get `NA` in the columns from the [left]{.highlight-term} table\n" + "\n" + ":::\n" + "\n" + "::: {.column width=\"50%\"}\n" + "\n" + "![](img/right-join.png)\n" + "\n" + ":::\n" + ":::\n" + "\n" + "::: {.resources}\n" + "\n" + "<https://r4ds.hadley.nz/joins.html#how-do-joins-work>\n" + "\n" + ":::\n" + "\n" + "## Mutating joins\n" + "\n" + "::: {.columns}\n" + "::: {.column width=\"50%\"}\n" + "\n" + "### `inner_join()`\n" + "\n" + "- Keeps all rows in both tables where keys match\n" + "- Rows from either table that don't match are dropped\n" + "\n" + ":::\n" + "::: {.column width=\"50%\"}\n" + "\n" + "![](img/inner-join.png)\n" + "\n" + ":::\n" + ":::\n" + "\n" + "::: {.resources}\n" + "\n" + "<https://r4ds.hadley.nz/joins.html#how-do-joins-work>\n" + "\n" + ":::\n" + "\n" + "## Mutating joins\n" + "\n" + "::: {.columns}\n" + "::: {.column width=\"50%\"}\n" + "\n" + "### `full_join()`\n" + "\n" + "- Keeps all rows in both tables\n" + "- Values in x and y that don't match get `NA` in the result\n" + "\n" + ":::\n" + "::: {.column width=\"50%\"}\n" + "\n" + "![](img/full-join.png)\n" + "\n" + ":::\n" + ":::\n" + "\n" + "::: {.resources}\n" + "\n" + "<https://r4ds.hadley.nz/joins.html#how-do-joins-work>\n" + "\n" + ":::\n" + "\n" + "## Join syntax\n" + "\n" + "If don't specify join columns, will join on all common names\n" + "\n" + "- E.g., both tables have columns year, month, day\n" + "\n" + "```r\n" + "left_join(x, y)\n" + "#> Joining with `by = join_by(year, month, day)`\n" + "```\n" + "\n" + "<br>\n" + "\n" + "Better to specify the join columns explicitly\n" + "\n" + "- Both tables have columns column_1 and column_2\n" + "\n" + "```r\n" + "left_join(x, y, by = c(\"column_1\", \"column_2\"))\n" + "```\n" + "\n" + "\n" + "- If the columns to join on have different names in each table\n" + "\n" + "```r\n" + "left_join(x, y, by = c(\"column_in_x\" = \"column_in_y\"))\n" + "```\n" + "\n" + "## Your turn\n" + "\n" + "Use a join to add location information to the rodent captures data\n" + "\n" + "- The rodent captures data is in the `PortalData/Rodents/Portal_rodent.csv` file.\n" + "\n" + "- The `SiteandMethods/Portal_UTMCoords.csv` file contains information about the location of each plot\n" + "\n" + "## Filtering joins\n" + "\n" + "::: {.columns}\n" + "::: {.column width=\"50%\"}\n" + "\n" + "### `semi_join()`\n" + "\n" + "- Keeps all rows in the [left]{.highlight-term} table where there are matching key values in the [right]{.highlight-term} table\n" + "- Does not add any columns\n" + "\n" + ":::\n" + "\n" + "::: {.column width=\"50%\"}\n" + "\n" + "![](img/semi-join.png)\n" + "\n" + ":::\n" + ":::\n" + "\n" + "\n" + "## Filtering joins\n" + "\n" + "::: {.columns}\n" + "::: {.column width=\"50%\"}\n" + "\n" + "### `anti_join()`\n" + "\n" + "- Keeps all rows in the [left]{.highlight-term} table where there are not matching values in the [right]{.highlight-term} table\n" + "- Does not add any columns\n" + "\n" + ":::\n" + "\n" + "::: {.column width=\"50%\"}\n" + "\n" + "![](img/anti-join.png)\n" + "\n" + ":::\n" + ":::\n" + "\n" + "## Your turn\n" + "\n" + "Use a join to find all the captures where the species is a granivore\n" + "\n" + "- The rodent captures data is in the `PortalData/Rodents/Portal_rodent.csv` file\n" + "- The `PortalData/Rodents/Portal_rodent_species.csv` file contains information about the species\n" + "\n" + "## More complex joins using `dplyr::join_by()`. \n" + "\n" + "**Cross joins** create the full cartesian product of two tables\n" + "\n" + "```{r}\n" + "#| echo: true\n" + "#| output-location: column-fragment\n" + "library(dplyr)\n" + "x <- data.frame(a = 1:3)\n" + "y <- data.frame(b = c(\"x\", \"y\"))\n" + "cross_join(x, y)\n" + "```\n" + "\n" + "<br>\n" + "\n" + "::: {.fragment}\n" + "\n" + "Inequality joins\n" + "\n" + "```r\n" + "left_join(x, y, by = join_by(column_1 >= column_2))\n" + "```\n" + "\n" + ":::\n" + "\n" + "<br>\n" + "\n" + "::: {.fragment}\n" + "\n" + "Rolling joins (inequality joins constrained by `closest()`)\n" + "\n" + "```r\n" + "left_join(\n" + "    x, y, \n" + "    by = join_by(id, closest(capture_date >= survey_start_date))\n" + ")\n" + "```\n" + "\n" + "Rolling joins are good for finding things like \"the most recent rainy day before a survey date\"\n" + "\n" + ":::\n" + "\n" + "\n" + "::: {.notes}\n" + "I haven't found a good reason to use inequality joins, but they are a necessary \n" + "precursor to rolling joins, which are very useful.\n" + ":::\n" + "\n" + "\n" + "## Overlap joins\n" + "\n" + "::: {.columns}\n" + "::: {.column width=\"50%\"}\n" + "\n" + "```r\n" + "between(x, y_1, y_2)\n" + "within(x_1, x_2, y_1, y_2)\n" + "overlaps(x_1, x_2, y_1, y_2)\n" + "```\n" + "\n" + ":::\n" + "::: {.column width=\"50%\"}\n" + "\n" + "```{.plaintext .cell-output-tall}\n" + "between(x, y_1, y_2):\n" + "\n" + "  y_1 [════════════════════] y_2\n" + "         •\n" + "         x\n" + "\n" + "\n" + "within(x_1, x_2, y_1, y_2):\n" + "\n" + "  y_1 [════════════════════] y_2\n" + "         [═════]\n" + "       x_1     x_2\n" + "\n" + "\n" + "overlaps(x_1, x_2, y_1, y_2):\n" + "\n" + "  y_1 [════════════════════] y_2\n" + "                   [═══════════════] \n" + "                 x_1             x_2\n" + "```\n" + ":::\n" + ":::\n" + "\n" + "::: {.resources}\n" + "\n" + "<https://dplyr.tidyverse.org/reference/join_by.html#join-types>\n" + "\n" + ":::\n" + "\n" + "## Your turn\n" + "\n" + "Using the rodent trapping data and the plant census dates data, join the two \n" + "datasets to find out which plant census (year and season) each rodent capture \n" + "is associated with.\n" + "\n" + "Starting code:\n" + "\n" + "```r\n" + "library(dplyr)\n" + "library(readr)\n" + "library(lubridate)\n" + "\n" + "plant_census_dates <- read_csv(\n" + "  \"PortalData/Plants/Portal_plant_census_dates.csv\",\n" + "  na = c(\"unknown\", \"none\")\n" + ")\n" + "\n" + "rodent_trapping <- read_csv(\"PortalData/Rodents/Portal_rodent_trapping.csv\")\n" + "```\n" + "\n" + "* Hint: use an overlap join with `between()`\n" + "\n" + "# Window functions\n" + "\n" + "# Row-wise operations\n" + "\n" + "# `tidyr`\n" + "\n" + "# string manipulation and regular expressions\n" + ""</script>
+<script> window._input_file = "---\n" + "title: \"Advanced Data Manipulation with `dplyr` and `tidyr`\"\n" + "subtitle: \"Parks Canada; Ecological Integrity Monitoring Program\"\n" + "author: \"Andy Teucher\"\n" + "format: revealjs\n" + "knitr:\n" + "  opts_chunk: \n" + "    R.options:\n" + "      width: 110\n" + "      pillar.print_max: 5\n" + "      pillar.print_min: 5\n" + "    echo: true\n" + "---\n" + "\n" + "```{r}\n" + "#| include: false\n" + "penguins <- dplyr::as_tibble(penguins)\n" + "```\n" + "\n" + "## Outline\n" + "\n" + "::: {.columns}\n" + "::: {.column width=\"50%\"}\n" + "\n" + "Today:\n" + "\n" + "- `dplyr` fundamentals review\n" + "- Column-wise operations\n" + "- Two-table verbs (joins)\n" + "- Data reshaping with `tidyr`\n" + "- Window functions?\n" + "\n" + ":::\n" + ":::\n" + "\n" + "## Data\n" + "\n" + "### Using data from the [Portal Project](https://portal.weecology.org/)\n" + "\n" + "Long-term ecological research site studying the dynamics of desert rodents, plants, ants and weather in Arizona.\n" + "\n" + "Data available from the [GitHub repo](https://github.com/weecology/PortalData) via the [`portalr`](https://github.com/weecology/portalr) package.\n" + "\n" + "## Setup\n" + "\n" + "1. Create a new project in Positron\n" + "\n" + "- Either: \n" + "	- Fork and clone the exercises repository:  \n" + "	 `https://github.com/ateucher/pc-data-manipulation/` OR \n" + "	- Run:\n" + "	 ```r\n" + "	 usethis::use_course(\"https://github.com/ateucher/pc-data-manipulation/archive/refs/heads/main.zip\")\n" + "	 ```\n" + "\n" + "2. Open the file: `01-get-data.R`\n" + "\n" + "3. Download the data:\n" + "\n" + "```{r}\n" + "#| eval: false\n" + "install.packages(\"portalr\")\n" + "library(portalr)\n" + "\n" + "download_observations(\".\")\n" + "```\n" + "\n" + "4. Explore the downloaded data in Positron\n" + "\n" + "## Warm-up\n" + "\n" + "Read in the rodent capture data (`PortalData/Rodents/Portal_rodent.csv`). \n" + "\n" + "1. Use `readr::read_csv()` and assign it to a data frame called `rodents`.\n" + "2. Standardize column names to use `snake_case` *(hint: check out the `janitor` package)*\n" + "\n" + "## Review of main `dplyr` operations\n" + "\n" + "- Select columns with `select()`\n" + "- Keep rows based on their values with `filter()`\n" + "- Create new columns with `mutate()`\n" + "- Summarize data with `summarize()`\n" + "- Sort rows based on column values with `arrange()`\n" + "- \"Slice\" rows with `slice()`/`slice_*()`\n" + "\n" + "::: {.fragment}\n" + "- Grouping data with `group_by()` applies `filter()`, `mutate()`, `summarize()`, and `slice()` by group\n" + ":::\n" + "\n" + "## Using `select()`\n" + "\n" + "::: {.columns}\n" + "::: {.column width=\"50%\"}\n" + "\n" + "### Select columns with bare names\n" + "\n" + "```{r}\n" + "#| output-location: fragment\n" + "library(dplyr)\n" + "\n" + "penguins |>\n" + "  select(species, island, body_mass)\n" + "```\n" + "\n" + ":::\n" + "::: {.column width=\"50%\"}\n" + "\n" + "::: {.fragment}\n" + "\n" + "### Use `all_of()` or `any_of()` to select columns from a character vector\n" + "\n" + "- `all_of()`: throws an error if any names are not found\n" + "- `any_of()`: ignores names that are not found\n" + "\n" + "```{r}\n" + "#| output-location: fragment\n" + "cols <- c(\"species\", \"sex\", \"bill_len\", \"bill_dep\")\n" + "select(penguins, all_of(cols))\n" + "```\n" + "\n" + ":::\n" + ":::\n" + ":::\n" + "\n" + "::: {.question .fragment}\n" + "[Your turn:]{.color-yellow} Select record_id, id, and species from rodents\n" + ":::\n" + "\n" + "## selection helpers\n" + "\n" + "::: {.columns}\n" + "::: {.column width=\"50%\"}\n" + "### select _specific columns_:\n" + "\n" + "- `everything()`: Matches all variables.\n" + "- `last_col()`: Select last variable, possibly with an offset.\n" + "- `group_cols()`: Select all grouping columns.\n" + "\n" + ":::\n" + "::: {.column width=\"50%\"}\n" + "\n" + "### select columns based on _name patterns_:\n" + "\n" + "- `starts_with()`: Starts with a prefix.\n" + "- `ends_with()`: Ends with a suffix.\n" + "- `contains()`: Contains a literal string.\n" + "- `matches()`: Matches a regular expression.\n" + "\n" + "### select columns based on _data type_:\n" + "\n" + "- `where()`: Select columns based on a predicate function (a function that returns `TRUE` or `FALSE`).\n" + "\n" + ":::\n" + ":::\n" + "\n" + "See help with `?select`\n" + "\n" + "::: {.notes}\n" + "\n" + "- `everything()` is useful when you want to move a column to the front or back of the data frame.\n" + "- Selection helpers can be combined using `c()`, e.g., `select(df, c(starts_with(\"temp\"), ends_with(\"date\")))`\n" + "\n" + ":::\n" + "\n" + "## Your turn\n" + "\n" + "### Using the `rodents` data.frame:\n" + "\n" + "- Select the `id` column and all of the numeric columns\n" + "\n" + "- Select all columns except the columns starting with `\"note\"`\n" + "\n" + "- Reorder the columns, moving the last column to the first position, without specifying any column names\n" + "\n" + "## Using `filter()`\n" + "\n" + "To retain only a subset of rows:\n" + "```{r}\n" + "filter(penguins, species == \"Adelie\")\n" + "```\n" + "\n" + "## Combine multiple `filter()` conditions with `,` or `&` (AND) and `|` (OR):\n" + "\n" + "```{r}\n" + "filter(penguins, species == \"Adelie\", island == \"Torgersen\")\n" + "```\n" + "\n" + "<br>\n" + "\n" + "```{r}\n" + "filter(penguins, species == \"Adelie\" | (species == \"Gentoo\" & body_mass < 4000))\n" + "```\n" + "\n" + "::: {.notes}\n" + "\n" + "live code these\n" + "\n" + ":::\n" + "\n" + "## Using `mutate()`\n" + "\n" + "Create new columns or modify existing columns:\n" + "```{r}\n" + "mutate(penguins, mass_kg = body_mass / 1000)\n" + "```\n" + "\n" + "::: {.fragment}\n" + "Create multiple columns in one mutate call:\n" + "\n" + "```{r}\n" + "mutate(\n" + "  penguins,\n" + "  mass_kg = body_mass / 1000,\n" + "  bill_ratio = bill_len / bill_dep\n" + ")\n" + "```\n" + ":::\n" + "\n" + "::: {.notes}\n" + "\n" + "live code these\n" + "\n" + ":::\n" + "\n" + "## The pipe ( |> )\n" + "\n" + "The pipe operator (`|>`) passes the output of one function as the first argument to the next function.\n" + "It allows us to chain together multiple operations in a readable way.\n" + "\n" + "::: {.fragment}\n" + "- Helps avoid deeply nested function calls, which are hard to read.\n" + "\n" + "```r\n" + "filter(select(penguins, species, island, body_mass), body_mass > 4000)\n" + "```\n" + ":::\n" + "\n" + "::: {.fragment}\n" + "\n" + "- Helps avoid creating many intermediate variables.\n" + "\n" + "```r\n" + "selected_data <- select(penguins, species, island, body_mass)\n" + "filtered_data <- filter(selected_data, body_mass > 4000)\n" + "```\n" + ":::\n" + "\n" + "::: {.fragment}\n" + "\n" + "Read it out loud as _\"and then\"_\n" + "\n" + "```{r}\n" + "penguins |> # and then\n" + "  select(species, island, body_mass) |> # and then\n" + "  filter(body_mass > 4000)\n" + "```\n" + "\n" + ":::\n" + "\n" + "## Using `group_by()`\n" + "\n" + "Add grouping attributes that tell other `dplyr` functions to operate by group:\n" + "\n" + "```{r}\n" + "penguins |>\n" + "  select(species, island, body_mass) |>\n" + "  filter(body_mass > 4000) |>\n" + "  group_by(species, island)\n" + "```\n" + "\n" + "## Using `summarize()`\n" + "\n" + "Creates one summary row per unique combination of groups:\n" + "\n" + "```{r}\n" + "penguins |>\n" + "  select(species, island, body_mass) |>\n" + "  filter(body_mass > 4000) |>\n" + "  group_by(species, island) |>\n" + "  summarise(sd_mass = sd(body_mass, na.rm = TRUE))\n" + "```\n" + "\n" + "## Your turn - pulling it all together\n" + "\n" + "Using the `rodents` data set find the mean hindfoot length per weight of Merriam's Kangaroo Rats (`\"DM\"`) grouped by `plot` and arranged by thew new hfl per weight column.\n" + "\n" + "## `dplyr` practice\n" + "\n" + "::::: {.columns}\n" + "::: {.column width=\"68%\"}\n" + "\n" + "1. Remove records from invalid sampling periods (when `period` is negative). Re-assign the result to the `rodents` data frame.\n" + "\n" + "2. How many individuals of each species were caught in 1995?\n" + "\n" + "3. What date had the highest number of individual rodents caught?\n" + "\n" + ":::\n" + "\n" + ":::: {.column width=\"30%\"}\n" + "::: {style=\"padding-left: 1em; border-left: 1px solid #ccc;\"}\n" + "\n" + "**Key columns**\n" + "\n" + "- `id` = individual identifier\n" + "- `day`, `month`, `year` = date of capture\n" + "- `period` = sampling period\n" + "- `species` = species code\n" + "- `wgt` = weight (grams)\n" + "- `year` = year of capture\n" + "\n" + ":::\n" + "::::\n" + ":::::\n" + "\n" + "## `dplyr` practice\n" + "\n" + "::::: {.columns}\n" + "::: {.column width=\"68%\"}\n" + "\n" + "4. For each capture record, calculate the percent difference in weight from the average weight of that species.\n" + "\n" + "5. Of all individual Ord's Kangaroo Rats (species code \"DO\") that have been caught more than 5 times, which individual was consistently the biggest? (i.e., has the highest average percent difference in weight from the species' average weight)?\n" + "\n" + ":::\n" + "\n" + ":::: {.column width=\"30%\"}\n" + "::: {style=\"padding-left: 1em; border-left: 1px solid #ccc;\"}\n" + "\n" + "**Key columns**\n" + "\n" + "- `id` = individual identifier\n" + "- `day`, `month`, `year` = date of capture\n" + "- `period` = sampling period\n" + "- `species` = species code\n" + "- `wgt` = weight (grams)\n" + "- `year` = year of capture\n" + "\n" + ":::\n" + "::::\n" + ":::::\n" + "\n" + "## Column-wise operations\n" + "\n" + "<!-- Start here after dplyr fundamentals -->\n" + "\n" + "- Apply one or more functions to a set of columns in a data frame using `across()`\n" + "\n" + "```r\n" + "across(<columns>, <functions>)\n" + "```\n" + "\n" + "- Specify columns using [selection helpers](https://tidyselect.r-lib.org/reference/language.html) (e.g., `starts_with()`, `ends_with()`, `contains()`, `where()`, etc.)\n" + "- Specify function(s) to apply to selected columns\n" + "- Used with `summarize()` & `mutate()`\n" + "\n" + "::: {.fragment}\n" + "\n" + "#### Example: calculate mean of all numeric columns\n" + "\n" + "```{r}\n" + "#| eval: false\n" + "\n" + "library(dplyr)\n" + "\n" + "mtcars |>\n" + "  group_by(cyl) |>\n" + "  summarize(across(where(is.numeric), mean))\n" + "```\n" + "\n" + ":::\n" + "\n" + "::: {.question .fragment}\n" + "[Your turn:]{.color-yellow} Scale all numeric columns (use `across()`) in `rodents` to have mean 0 and standard deviation 1. *(Hint: Check out the `scale()` function)*\n" + ":::\n" + "\n" + "\n" + "::: {.notes}\n" + "Selection syntax is the same as in `select()`, i.e., using the same selection helpers\n" + "\n" + "We are passing the function `mean` to `across()`, not calling it (i.e., no parentheses).\n" + "Functions in R are objects that can be passed around and used later.\n" + ":::\n" + "\n" + "## Column-wise operations\n" + "\n" + "specify multiple functions to apply in a `list()`\n" + "\n" + "<br>\n" + "\n" + "::: {.fragment}\n" + "\n" + "#### Example: calculate mean and sd of all numeric columns\n" + "\n" + "```{r}\n" + "#| output-location: fragment\n" + "library(dplyr)\n" + "mtcars |>\n" + "  group_by(cyl) |>\n" + "  summarize(\n" + "    across(where(is.numeric), list(mean = mean, sd = sd))\n" + "  )\n" + "```\n" + "\n" + ":::\n" + "\n" + "::: {.resources}\n" + "\n" + "<https://tidyselect.r-lib.org/reference/language.html>\n" + "\n" + ":::\n" + "\n" + "## Column-wise operations\n" + "\n" + "Run this in your R session, what do you get?\n" + "```{r}\n" + "#| output-location: fragment\n" + "library(dplyr)\n" + "penguins |>\n" + "  summarize(\n" + "    across(where(is.numeric), list(mean = mean, sd = sd))\n" + "  )\n" + "```\n" + "\n" + "<br>\n" + "\n" + "::: {.fragment}\n" + "\n" + "- When we use a function in `across()` it is called with its default arguments\n" + "	- `mean()` and `sd()` both have an argument `na.rm` that defaults to `FALSE`\n" + "- We can't pass extra arguments to functions inside `across()` directly\n" + "- We need to pass a function with the argument values we want \"baked in\"\n" + "\n" + ":::\n" + "\n" + "::: {.resources}\n" + "\n" + "<https://tidyselect.r-lib.org/reference/language.html>\n" + "\n" + ":::\n" + "\n" + "## Specifying extra arguments\n" + "\n" + "We can define our own helper functions:\n" + "\n" + "```{r}\n" + "#| output-location: fragment\n" + "library(dplyr)\n" + "\n" + "sd_na <- function(x) {\n" + "  sd(x, na.rm = TRUE)\n" + "}\n" + "\n" + "mean_na <- function(x) {\n" + "  mean(x, na.rm = TRUE)\n" + "}\n" + "\n" + "penguins |>\n" + "  summarize(\n" + "    across(where(is.numeric), list(mean = mean_na, sd = sd_na))\n" + "  )\n" + "```\n" + "\n" + "## Specifying extra arguments\n" + "\n" + "But if we're doing this only once we can define them in place with an [anonymous function]{.highlight-term}:\n" + "\n" + "```r\n" + "\(x) function(x, other_args)\n" + "```\n" + "\n" + "- This defines a function \"on the fly\" with the arguments specified how we want\n" + "- The `x` will take the values of each column passed to it by `across()`\n" + "\n" + "```{r}\n" + "#| output-location: fragment\n" + "library(dplyr)\n" + "\n" + "penguins |>\n" + "  summarize(\n" + "    across(\n" + "      where(is.numeric),\n" + "      list(\n" + "        mean = \(x) mean(x, na.rm = TRUE),\n" + "        sd = \(x) sd(x, na.rm = TRUE)\n" + "      )\n" + "    )\n" + "  )\n" + "```\n" + "\n" + "\n" + "## Your turn\n" + "\n" + "1. Calculate the median of hind-foot length (`hfl`) and weight (`wgt`) for each species in `rodents`, ignoring `NA` values.\n" + "\n" + "## Two-table verbs (joins)\n" + "\n" + "::: {.columns}\n" + "::: {.column width=\"50%\"}\n" + "\n" + "![](img/tables-join-1.png){.absolute width=540px left=80px top=225px}\n" + "\n" + ":::\n" + "\n" + "::: {.column width=\"50%\"}\n" + "\n" + "### Mutating joins\n" + "\n" + "- Combine two tables based on common values in one or more columns\n" + "\n" + "### Filtering joins\n" + "\n" + "- Filter rows from one table based on values in another table\n" + "\n" + "::: \n" + ":::\n" + "\n" + "::: {.resources}\n" + "\n" + "<https://r4ds.hadley.nz/joins.html#how-do-joins-work>\n" + "\n" + ":::\n" + "\n" + "## Mutating joins\n" + "\n" + "::: {.columns}\n" + "::: {.column width=\"50%\"}\n" + "\n" + "### `left_join()`\n" + "\n" + "- Keeps all rows in the [left]{.highlight-term} table\n" + "- Drops rows from the [right]{.highlight-term} table that don't match\n" + "- Rows in the [left]{.highlight-term} that don't match get `NA` in the columns from the [right]{.highlight-term} table\n" + "\n" + ":::\n" + "\n" + "::: {.column width=\"50%\"}\n" + "\n" + "![](img/left-join.png)\n" + "\n" + ":::\n" + ":::\n" + "\n" + "::: {.resources}\n" + "\n" + "<https://r4ds.hadley.nz/joins.html#how-do-joins-work>\n" + "\n" + ":::\n" + "\n" + "## Mutating joins\n" + "\n" + "::: {.columns}\n" + "::: {.column width=\"50%\"}\n" + "\n" + "### `right_join()`\n" + "\n" + "- Keeps all rows in the [right]{.highlight-term} table\n" + "- Drops rows from the [left]{.highlight-term} table that don't match\n" + "- Rows in the [right]{.highlight-term} table that don't match get `NA` in the columns from the [left]{.highlight-term} table\n" + "\n" + ":::\n" + "\n" + "::: {.column width=\"50%\"}\n" + "\n" + "![](img/right-join.png)\n" + "\n" + ":::\n" + ":::\n" + "\n" + "::: {.resources}\n" + "\n" + "<https://r4ds.hadley.nz/joins.html#how-do-joins-work>\n" + "\n" + ":::\n" + "\n" + "## Mutating joins\n" + "\n" + "::: {.columns}\n" + "::: {.column width=\"50%\"}\n" + "\n" + "### `inner_join()`\n" + "\n" + "- Keeps all rows in both tables where keys match\n" + "- Rows from either table that don't match are dropped\n" + "\n" + ":::\n" + "::: {.column width=\"50%\"}\n" + "\n" + "![](img/inner-join.png)\n" + "\n" + ":::\n" + ":::\n" + "\n" + "::: {.resources}\n" + "\n" + "<https://r4ds.hadley.nz/joins.html#how-do-joins-work>\n" + "\n" + ":::\n" + "\n" + "## Mutating joins\n" + "\n" + "::: {.columns}\n" + "::: {.column width=\"50%\"}\n" + "\n" + "### `full_join()`\n" + "\n" + "- Keeps all rows in both tables\n" + "- Values in x and y that don't match get `NA` in the result\n" + "\n" + ":::\n" + "::: {.column width=\"50%\"}\n" + "\n" + "![](img/full-join.png)\n" + "\n" + ":::\n" + ":::\n" + "\n" + "::: {.resources}\n" + "\n" + "<https://r4ds.hadley.nz/joins.html#how-do-joins-work>\n" + "\n" + ":::\n" + "\n" + "## Join syntax\n" + "\n" + "If don't specify join columns, will join on all common names\n" + "\n" + "- E.g., both tables have columns year, month, day\n" + "\n" + "```r\n" + "left_join(x, y)\n" + "#> Joining with `by = join_by(year, month, day)`\n" + "```\n" + "\n" + "<br>\n" + "\n" + "Better to specify the join columns explicitly\n" + "\n" + "- Both tables have columns column_1 and column_2\n" + "\n" + "```r\n" + "left_join(x, y, by = c(\"column_1\", \"column_2\"))\n" + "```\n" + "\n" + "\n" + "- If the columns to join on have different names in each table\n" + "\n" + "```r\n" + "left_join(x, y, by = c(\"column_in_x\" = \"column_in_y\"))\n" + "```\n" + "\n" + "## Your turn\n" + "\n" + "Use a join to add location information to the rodent captures data\n" + "\n" + "- The rodent captures data is in the `PortalData/Rodents/Portal_rodent.csv` file.\n" + "\n" + "- The `SiteandMethods/Portal_UTMCoords.csv` file contains information about the location of each plot\n" + "\n" + "## Filtering joins\n" + "\n" + "::: {.columns}\n" + "::: {.column width=\"50%\"}\n" + "\n" + "### `semi_join()`\n" + "\n" + "- Keeps all rows in the [left]{.highlight-term} table where there are matching key values in the [right]{.highlight-term} table\n" + "- Does not add any columns\n" + "\n" + ":::\n" + "\n" + "::: {.column width=\"50%\"}\n" + "\n" + "![](img/semi-join.png)\n" + "\n" + ":::\n" + ":::\n" + "\n" + "\n" + "## Filtering joins\n" + "\n" + "::: {.columns}\n" + "::: {.column width=\"50%\"}\n" + "\n" + "### `anti_join()`\n" + "\n" + "- Keeps all rows in the [left]{.highlight-term} table where there are not matching values in the [right]{.highlight-term} table\n" + "- Does not add any columns\n" + "\n" + ":::\n" + "\n" + "::: {.column width=\"50%\"}\n" + "\n" + "![](img/anti-join.png)\n" + "\n" + ":::\n" + ":::\n" + "\n" + "## Your turn\n" + "\n" + "Use a join to find all the captures where the species is a granivore\n" + "\n" + "- The rodent captures data is in the `PortalData/Rodents/Portal_rodent.csv` file\n" + "- The `PortalData/Rodents/Portal_rodent_species.csv` file contains information about the species\n" + "\n" + "## More complex joins using `dplyr::join_by()`. \n" + "\n" + "**Cross joins** create the full cartesian product of two tables\n" + "\n" + "```{r}\n" + "#| output-location: column-fragment\n" + "library(dplyr)\n" + "x <- data.frame(a = 1:3)\n" + "y <- data.frame(b = c(\"x\", \"y\"))\n" + "cross_join(x, y)\n" + "```\n" + "\n" + "<br>\n" + "\n" + "::: {.fragment}\n" + "\n" + "Inequality joins\n" + "\n" + "```r\n" + "left_join(x, y, by = join_by(column_1 >= column_2))\n" + "```\n" + "\n" + ":::\n" + "\n" + "<br>\n" + "\n" + "::: {.fragment}\n" + "\n" + "Rolling joins (inequality joins constrained by `closest()`)\n" + "\n" + "```r\n" + "left_join(\n" + "    x, y, \n" + "    by = join_by(id, closest(capture_date >= survey_start_date))\n" + ")\n" + "```\n" + "\n" + "Rolling joins are good for finding things like \"the most recent rainy day before a survey date\"\n" + "\n" + ":::\n" + "\n" + "\n" + "::: {.notes}\n" + "I haven't found a good reason to use inequality joins, but they are a necessary \n" + "precursor to rolling joins, which are very useful.\n" + ":::\n" + "\n" + "\n" + "## Overlap joins\n" + "\n" + "::: {.columns}\n" + "::: {.column width=\"50%\"}\n" + "\n" + "```r\n" + "between(x, y_1, y_2)\n" + "within(x_1, x_2, y_1, y_2)\n" + "overlaps(x_1, x_2, y_1, y_2)\n" + "```\n" + "\n" + ":::\n" + "::: {.column width=\"50%\"}\n" + "\n" + "```{.plaintext .cell-output-tall}\n" + "between(x, y_1, y_2):\n" + "\n" + "  y_1 [════════════════════] y_2\n" + "         •\n" + "         x\n" + "\n" + "\n" + "within(x_1, x_2, y_1, y_2):\n" + "\n" + "  y_1 [════════════════════] y_2\n" + "         [═════]\n" + "       x_1     x_2\n" + "\n" + "\n" + "overlaps(x_1, x_2, y_1, y_2):\n" + "\n" + "  y_1 [════════════════════] y_2\n" + "                   [═══════════════] \n" + "                 x_1             x_2\n" + "```\n" + ":::\n" + ":::\n" + "\n" + "::: {.resources}\n" + "\n" + "<https://dplyr.tidyverse.org/reference/join_by.html#join-types>\n" + "\n" + ":::\n" + "\n" + "## Your turn\n" + "\n" + "Using the rodent trapping data and the plant census dates data, join the two \n" + "datasets to find out which plant census (year and season) each rodent capture \n" + "is associated with.\n" + "\n" + "Starting code:\n" + "\n" + "```r\n" + "library(dplyr)\n" + "library(readr)\n" + "library(lubridate)\n" + "\n" + "plant_census_dates <- read_csv(\n" + "  \"PortalData/Plants/Portal_plant_census_dates.csv\",\n" + "  na = c(\"unknown\", \"none\")\n" + ")\n" + "\n" + "rodent_trapping <- read_csv(\"PortalData/Rodents/Portal_rodent_trapping.csv\")\n" + "```\n" + "\n" + "* Hint: use an overlap join with `between()`\n" + "\n" + "# Tidying data with `tidyr`\n" + "\n" + "> “Happy families are all alike; every unhappy family is unhappy in its own way.”\n" + "\n" + "— Leo Tolstoy\n" + "\n" + "<br>\n" + "\n" + "> “Tidy datasets are all alike, but every messy dataset is messy in its own way.”\n" + "\n" + "— Hadley Wickham\n" + "\n" + "## What is tidy data?\n" + "\n" + "1. Each variable is a column; each column is a variable.\n" + "2. Each observation is a row; each row is an observation.\n" + "3. Each value is a cell; each cell is a single value.\n" + "\n" + "![](img/tidy-data-r4ds.png)\n" + "\n" + "## Wide vs. long (tidy) data\n" + "\n" + "- Wide data often has \"data\" stored in the column names\n" + "  - Example: dates, treatment groups, measurement types\n" + "\n" + "::: {.columns}\n" + "::: {.column width=\"49%\"}\n" + "\n" + "```{r}\n" + "#| echo: false\n" + "library(tibble)\n" + "\n" + "knitr::kable(tribble(\n" + "  ~subject, ~treatment_A, ~treatment_B,\n" + "  1,         5,           7,\n" + "  2,         6,           8\n" + "))\n" + "```\n" + "\n" + "<br>\n" + "\n" + "::: {.fragment}\n" + "\n" + "```{r}\n" + "#| echo: false\n" + "knitr::kable(tribble(\n" + "  ~subject , ~treatment , ~value ,\n" + "         1 , \"A\"        ,      5 ,\n" + "         1 , \"B\"        ,      7 ,\n" + "         2 , \"A\"        ,      6 ,\n" + "         2 , \"B\"        ,      8\n" + "))\n" + "```\n" + "\n" + ":::\n" + "::: \n" + "\n" + "\n" + "\n" + "::: {.column width=\"49%\"}\n" + "::: {.fragment}\n" + "\n" + "```{r}\n" + "#| echo: false\n" + "\n" + "knitr::kable(tribble(\n" + "  ~id , ~\"20250101\" , ~\"20250201\" ,\n" + "    1 , 150 ,         165 ,\n" + "    2 , 125 ,         118\n" + "))\n" + "```\n" + "\n" + "- Dates are stored in the column names\n" + "- Values are masses (in grams).\n" + "\n" + ":::\n" + "\n" + "::: {.fragment}\n" + "\n" + "```{r}\n" + "#| echo: false\n" + "#| \n" + "knitr::kable(tribble(\n" + "  ~id, ~date,       ~mass,\n" + "  1,   \"2025-01-01\", 150,\n" + "  1,   \"2025-02-01\", 165,\n" + "  2,   \"2025-01-01\", 125,\n" + "  2,   \"2025-02-01\", 118\n" + "))\n" + "```\n" + "\n" + ":::\n" + ":::\n" + "::::\n" + "\n" + "::: {.notes}\n" + "\n" + "- Each row has more than one observation (more than one time, place, or subject)\n" + "- Variables split across multiple columns\n" + "  - Eg., what if we wanted to the get the mean mass per subject?\n" + "- Second example - we hopefully have metadata that tells us that the values are masses (in grams)\n" + "\n" + ":::\n" + "\n" + "## Example - billboard data\n" + "\n" + "```{r}\n" + "#| \n" + "library(tidyr)\n" + "billboard\n" + "```\n" + "\n" + "::: {.question .fragment}\n" + "How would we plot this data to show how the rank of different songs changed over time?\n" + ":::\n" + "\n" + "::: {.question .fragment}\n" + "What shape would this data have in long format?\n" + ":::\n" + "\n" + "## `tidyr::pivot_longer()`\n" + "\n" + "Reshape data from wide to long format\n" + "\n" + "::: {.columns}\n" + "\n" + "::: {.column}\n" + "\n" + "```{r}\n" + "#| eval: false\n" + "#| code-line-numbers: \"|1,2,3,6,7|13|14\"\n" + "pivot_longer(\n" + "  data,\n" + "  cols,\n" + "  ...,\n" + "  cols_vary = \"fastest\",\n" + "  names_to = \"name\",\n" + "  names_prefix = NULL,\n" + "  names_sep = NULL,\n" + "  names_pattern = NULL,\n" + "  names_ptypes = NULL,\n" + "  names_transform = NULL,\n" + "  names_repair = \"check_unique\",\n" + "  values_to = \"value\",\n" + "  values_drop_na = FALSE,\n" + "  values_ptypes = NULL,\n" + "  values_transform = NULL\n" + ")\n" + "```\n" + "\n" + ":::\n" + "\n" + "::: {.column}\n" + "\n" + "- `cols`: columns to pivot from wide to long. Uses tidyselect syntax.\n" + "- `names_to`: name of new column to create from the column names\n" + "- `values_to`: name of new column to create from the values in the selected columns\n" + "- `values_drop_na`: if `TRUE`, drops rows with `NA` in the values column\n" + "\n" + ":::\n" + "\n" + ":::\n" + "\n" + "::: {.question .fragment}\n" + "\n" + "Let's practice with the billboard data\n" + "\n" + ":::\n" + "\n" + "::: {.notes}\n" + "\n" + "- go to R and do pivot_longer() on billboard data\n" + "\n" + ":::\n" + "\n" + "## Your turn\n" + "\n" + "- Use `SitesandMethods/Portal_plot_treatments.csv` and pivot it to longer so there is a start_date, end_date, and treatment column. See if you can get the dates into proper date format. The `lubridate` package may be helpful.\n" + ""</script>
 <script> window._input_filename = '/home/runner/work/pc-intermediate-r/pc-intermediate-r/data-manipulation.qmd'</script>
-</section>
+</section></section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">
