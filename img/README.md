@@ -1,6 +1,6 @@
 Images in this directory come from various sources:
 
-- Join diagrams are used from the R for Data Science Book by Hadley Wickham, Mine Çetinkaya-Rundel and Garrett Grolemund, published by O'Reilly Media, Inc. These images are licensed under the Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0) license. For more information, see https://creativecommons.org/licenses/by-nc/4.0/.
+- Join diagrams and tidy data diagrams are used from the R for Data Science Book by Hadley Wickham, Mine Çetinkaya-Rundel and Garrett Grolemund, published by O'Reilly Media, Inc. These images are licensed under the Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0) license. For more information, see https://creativecommons.org/licenses/by-nc/4.0/.
 
 - RStudio and Positron layout images are from the Positron documentation site (https://positron.posit.co/) and are available under Creative Commons Attribution ShareAlike (CC BY-SA) license. For more information, see https://creativecommons.org/licenses/by-sa/4.0/.
 
