@@ -1,0 +1,17 @@
+---
+title: "String Manipulation with Regular Expressions"
+subtitle: "Parks Canada; Ecological Integrity Monitoring Program"
+author: "Andy Teucher"
+format: revealjs
+knitr:
+  opts_chunk: 
+    R.options:
+      width: 110
+      pillar.print_max: 5
+      pillar.print_min: 5
+    echo: true
+---
+
+## Finding patterns with regular expressions
+
+## Substituting patterns with regular expressions
