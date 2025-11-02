@@ -350,7 +350,7 @@ Using the `rodents` data set find the mean hindfoot length per weight of Merriam
 across(<columns>, <functions>)
 ```
 
-- Specify columns using [selection helpers](https://tidyselect.r-lib.org/reference/language.html) (e.g., `starts_with()`, `ends_with()`, `contains()`, `where()`, etc.)
+- Specify columns using a _vector of names_ or [selection helpers](https://tidyselect.r-lib.org/reference/language.html) (e.g., `starts_with()`, `ends_with()`, `contains()`, `where()`, etc.)
 - Specify function(s) to apply to selected columns
 - Used with `summarize()` & `mutate()`
 
@@ -370,17 +370,17 @@ mtcars |>
 
 :::
 
-::: {.question .fragment}
-[Your turn:]{.color-yellow} Scale all numeric columns (use `across()`) in `rodents` to have mean 0 and standard deviation 1. *(Hint: Check out the `scale()` function)*
-:::
-
-
 ::: {.notes}
 Selection syntax is the same as in `select()`, i.e., using the same selection helpers
 
 We are passing the function `mean` to `across()`, not calling it (i.e., no parentheses).
 Functions in R are objects that can be passed around and used later.
 :::
+
+## Your turn
+
+- Scale `hfl` and `wgt` (use `across()`) in `rodents` to have mean 0 and standard deviation 1. *(Hint: Check out the `scale()` function)*
+- **Bonus:** Use the `.names` argument to keep the original columns and give the new columns a sensible name
 
 ## Column-wise operations
 
@@ -461,6 +461,12 @@ penguins |>
   )
 ```
 
+::: {.notes}
+
+Live code this
+
+:::
+
 ## Specifying extra arguments
 
 But if we're doing this only once we can define them in place with an [anonymous function]{.highlight-term}:
@@ -488,10 +494,16 @@ penguins |>
   )
 ```
 
+::: {.notes}
+
+Live code this
+
+:::
 
 ## Your turn
 
-1. Calculate the median of hind-foot length (`hfl`) and weight (`wgt`) for each species in `rodents`, ignoring `NA` values.
+1. Calculate maximum of all bill measurements for each species in the built-in penguins dataset
+2. Calculate the median of hind-foot length (`hfl`) and weight (`wgt`) for each species in `rodents`, ignoring `NA` values.
 
 ## Two-table verbs (joins)
 
