@@ -27,14 +27,8 @@ Today:
 - `dplyr` fundamentals review
 - Column-wise operations
 - Two-table verbs (joins)
-
-:::
-::: {.column width="50%"}
-
-Next time:
-
-- Window functions
 - Data reshaping with `tidyr`
+- Window functions?
 
 :::
 :::
