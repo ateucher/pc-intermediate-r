@@ -907,6 +907,21 @@ percent_diff(a, b)
 
 2. Add a warning to `to_z()` if the input vector has fewer than 3 non-NA values, since the standard deviation may not be meaningful in that case.
 
+## Practical use of functions in a project
+
+- Functions can be stored in separate R scripts and sourced into your
+  analysis scripts
+- This keeps your analysis scripts cleaner and more focused on the
+  analysis logic
+- It is best practice to keep your functions in a dedicated folder called `R/`
+- Then in the top of your scripts you can use `source("R/your_function.R")` to load them
+
+## Documenting functions
+
+- Use `roxygen2` style comments to document your functions
+- In Positron - put your cursor on the name of the function and click the 💡 and choose
+  "Generate a Roxygen Template"
+
 ## Summary ☕
 
 -   Writing functions can make you more efficient and make your code
