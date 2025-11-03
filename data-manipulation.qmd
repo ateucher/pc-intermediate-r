@@ -14,7 +14,7 @@ knitr:
 
 ```{r}
 #| include: false
-penguins <- dplyr::as_tibble(penguins)
+penguins <- dplyr::as_tibble(palmerpenguins::penguins)
 ```
 
 ## Schedule
@@ -120,7 +120,7 @@ Read in the rodent capture data (`PortalData/Rodents/Portal_rodent.csv`).
 library(dplyr)
 
 penguins |>
-  select(species, island, body_mass)
+  select(species, island, body_mass_g)
 ```
 
 :::
@@ -135,7 +135,7 @@ penguins |>
 
 ```{r}
 #| output-location: fragment
-cols <- c("species", "sex", "bill_len", "bill_dep")
+cols <- c("species", "sex", "bill_length_mm", "bill_depth_mm")
 select(penguins, all_of(cols))
 ```
 
@@ -209,7 +209,7 @@ filter(penguins, species == "Adelie", island == "Torgersen")
 <br>
 
 ```{r}
-filter(penguins, species == "Adelie" | (species == "Gentoo" & body_mass < 4000))
+filter(penguins, species == "Adelie" | (species == "Gentoo" & body_mass_g < 4000))
 ```
 
 ::: {.notes}
@@ -222,7 +222,7 @@ live code these
 
 Create new columns or modify existing columns:
 ```{r}
-mutate(penguins, mass_kg = body_mass / 1000)
+mutate(penguins, mass_kg = body_mass_g / 1000)
 ```
 
 ::: {.fragment}
@@ -231,8 +231,8 @@ Create multiple columns in one mutate call:
 ```{r}
 mutate(
   penguins,
-  mass_kg = body_mass / 1000,
-  bill_ratio = bill_len / bill_dep
+  mass_kg = body_mass_g / 1000,
+  bill_ratio = bill_length_mm / bill_depth_mm
 )
 ```
 :::
@@ -252,7 +252,7 @@ It allows us to chain together multiple operations in a readable way.
 - Helps avoid deeply nested function calls, which are hard to read.
 
 ```r
-filter(select(penguins, species, island, body_mass), body_mass > 4000)
+filter(select(penguins, species, island, body_mass_g), body_mass_g > 4000)
 ```
 :::
 
@@ -261,8 +261,8 @@ filter(select(penguins, species, island, body_mass), body_mass > 4000)
 - Helps avoid creating many intermediate variables.
 
 ```r
-selected_data <- select(penguins, species, island, body_mass)
-filtered_data <- filter(selected_data, body_mass > 4000)
+selected_data <- select(penguins, species, island, body_mass_g)
+filtered_data <- filter(selected_data, body_mass_g > 4000)
 ```
 :::
 
@@ -272,8 +272,8 @@ Read it out loud as _"and then"_
 
 ```{r}
 penguins |> # and then
-  select(species, island, body_mass) |> # and then
-  filter(body_mass > 4000)
+  select(species, island, body_mass_g) |> # and then
+  filter(body_mass_g > 4000)
 ```
 
 :::
@@ -284,8 +284,8 @@ Add grouping attributes that tell other `dplyr` functions to operate by group:
 
 ```{r}
 penguins |>
-  select(species, island, body_mass) |>
-  filter(body_mass > 4000) |>
+  select(species, island, body_mass_g) |>
+  filter(body_mass_g > 4000) |>
   group_by(species, island)
 ```
 
@@ -295,10 +295,10 @@ Creates one summary row per unique combination of groups:
 
 ```{r}
 penguins |>
-  select(species, island, body_mass) |>
-  filter(body_mass > 4000) |>
+  select(species, island, body_mass_g) |>
+  filter(body_mass_g > 4000) |>
   group_by(species, island) |>
-  summarise(sd_mass = sd(body_mass, na.rm = TRUE))
+  summarise(sd_mass = sd(body_mass_g, na.rm = TRUE))
 ```
 
 ## Your turn - pulling it all together
