@@ -1,0 +1,1547 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-html/tabby.min.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-54c8f25464f32f8783bd446cee98020d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-contrib/fontawesome6-6.7.2/all.min.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/fontawesome6-6.7.2/latex-fontsize.css" rel="stylesheet"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.8.25">
+
+  <meta name="author" content="Andy Teucher">
+  <title>Parks Canada - Intermediate R – Programming with R: Functions</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="site_libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="site_libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #97947a;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #97947a;  padding-left: 4px; }
+    div.sourceCode
+      { color: #f8f8f2; background-color: #2b2b2b; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #f8f8f2; } /* Normal */
+    code span.al { color: #dcc6e0; } /* Alert */
+    code span.an { color: #d4d0ab; } /* Annotation */
+    code span.at { color: #ffd700; } /* Attribute */
+    code span.bn { color: #dcc6e0; } /* BaseN */
+    code span.bu { color: #f5ab35; } /* BuiltIn */
+    code span.cf { color: #ffa07a; } /* ControlFlow */
+    code span.ch { color: #abe338; } /* Char */
+    code span.cn { color: #ffa07a; } /* Constant */
+    code span.co { color: #d4d0ab; } /* Comment */
+    code span.cv { color: #d4d0ab; font-style: italic; } /* CommentVar */
+    code span.do { color: #d4d0ab; font-style: italic; } /* Documentation */
+    code span.dt { color: #dcc6e0; } /* DataType */
+    code span.dv { color: #dcc6e0; } /* DecVal */
+    code span.er { color: #dcc6e0; } /* Error */
+    code span.ex { color: #ffd700; } /* Extension */
+    code span.fl { color: #f5ab35; } /* Float */
+    code span.fu { color: #ffd700; } /* Function */
+    code span.im { } /* Import */
+    code span.in { color: #d4d0ab; } /* Information */
+    code span.kw { color: #ffa07a; } /* Keyword */
+    code span.op { color: #00e0e0; } /* Operator */
+    code span.ot { color: #ffa07a; } /* Other */
+    code span.pp { color: #dcc6e0; } /* Preprocessor */
+    code span.sc { color: #00e0e0; } /* SpecialChar */
+    code span.ss { color: #abe338; } /* SpecialString */
+    code span.st { color: #abe338; } /* String */
+    code span.va { color: #f5ab35; } /* Variable */
+    code span.vs { color: #abe338; } /* VerbatimString */
+    code span.wa { color: #d4d0ab; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-30b736cb7799d7b550ee88759e68d94c.css">
+  <link href="site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+</head>
+<body class="quarto-dark">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="quarto-title-block center">
+  <h1 class="title">Programming with R: Functions</h1>
+  <p class="subtitle">Parks Canada; Ecological Integrity Monitoring Program</p>
+
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Andy Teucher 
+</div>
+</div>
+</div>
+
+</section>
+<section id="outline" class="slide level2">
+<h2>Outline</h2>
+<ul>
+<li>Motivation</li>
+<li>Fundamentals of functions</li>
+</ul>
+</section>
+<section id="learning-objectives" class="slide level2">
+<h2>Learning objectives</h2>
+<ul>
+<li>explain the rationale for writing functions</li>
+<li>write vector functions
+<ul>
+<li>that take a vector as input and output a vector</li>
+<li>that take a vector as input and output a single value</li>
+</ul></li>
+<li>specify defaults for function arguments</li>
+<li>write functions that take dataframes as input and output a dataframe</li>
+</ul>
+</section>
+<section id="why-write-functions" class="slide level2">
+<h2>Why write functions?</h2>
+<ul>
+<li>Make code easier to read and understand</li>
+<li>Make code shorter</li>
+<li>Make code less error-prone</li>
+<li>Make code reusable</li>
+</ul>
+<aside class="notes">
+<p>You can give a function an evocative name that makes your code easier to understand.</p>
+<p>As requirements change, you only need to update code in one place, instead of many.</p>
+<p>You eliminate the chance of making incidental mistakes when you copy and paste (i.e.&nbsp;updating a variable name in one place, but not in another).</p>
+<p>It makes it easier to reuse work from project-to-project, increasing your productivity over time.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="example-penguins" class="slide level2">
+<h2>Example: Penguins</h2>
+<p>We have several measurements:</p>
+<ul>
+<li><code>bill_len</code></li>
+<li><code>bill_dep</code></li>
+<li><code>flipper_len</code></li>
+<li><code>body_mass</code></li>
+</ul>
+<p>These are on very different scales</p>
+</section>
+<section id="section" class="slide level2">
+<h2></h2>
+<div class="cell quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img data-src="programming-functions_files/figure-revealjs/unnamed-chunk-1-1.png" width="960"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img data-src="programming-functions_files/figure-revealjs/unnamed-chunk-1-2.png" width="960"></p>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img data-src="programming-functions_files/figure-revealjs/unnamed-chunk-1-3.png" width="960"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img data-src="programming-functions_files/figure-revealjs/unnamed-chunk-1-4.png" width="960"></p>
+</div>
+</div>
+</div>
+</section>
+<section id="example" class="slide level2">
+<h2>Example</h2>
+<ul>
+<li><p>difficult to plot on same axis or determine what value is large for that variable</p></li>
+<li><p>A common solution is to apply a <span class="math inline">\(z\)</span> score transformation to each variable.</p></li>
+<li><p>Normalises the values to have a mean of 0 and a standard deviation of 1</p></li>
+</ul>
+<p><span class="math display">\[z = \frac{x - \bar{x}}{s.d.}\]</span></p>
+</section>
+<section id="apply-transformation" class="slide level2">
+<h2>Apply transformation</h2>
+<p>We can apply the same transformation to each variable:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a>penguins <span class="ot">&lt;-</span> penguins <span class="sc">|&gt;</span></span>
+<span id="cb1-2"><a></a>  <span class="fu">mutate</span>(</span>
+<span id="cb1-3"><a></a>    <span class="at">z_bill_len =</span> (bill_len <span class="sc">-</span> <span class="fu">mean</span>(bill_len, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">/</span></span>
+<span id="cb1-4"><a></a>      <span class="fu">sd</span>(bill_len, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb1-5"><a></a>    <span class="at">z_bill_dep =</span> (bill_dep <span class="sc">-</span> <span class="fu">mean</span>(bill_len, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">/</span></span>
+<span id="cb1-6"><a></a>      <span class="fu">sd</span>(bill_dep, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb1-7"><a></a>    <span class="at">z_flipper_len =</span> (flipper_len <span class="sc">-</span> <span class="fu">mean</span>(flipper_len, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">/</span></span>
+<span id="cb1-8"><a></a>      <span class="fu">sd</span>(flipper_len, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb1-9"><a></a>    <span class="at">z_body_mass =</span> (body_mass <span class="sc">-</span> <span class="fu">mean</span>(body_mass, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">/</span></span>
+<span id="cb1-10"><a></a>      <span class="fu">sd</span>(body_mass, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb1-11"><a></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="long-unclear" class="slide level2">
+<h2>Long, unclear</h2>
+<p><code>(bill_len - mean(bill_len, na.rm = TRUE)) / sd(bill_len, na.rm = TRUE)</code></p>
+<ul>
+<li>Quite a lot of code</li>
+<li>Difficult to glance at and determine what the transformation is</li>
+</ul>
+<p>How to shorten and make more clear?</p>
+</section>
+<section id="copying-and-pasting" class="slide level2">
+<h2>Copying and pasting</h2>
+<ul>
+<li>Is error prone</li>
+<li>Did anyone catch my mistake in the example?</li>
+</ul>
+</section>
+<section id="what-is-a-function" class="slide level2">
+<h2>What is a function?</h2>
+<p>A named object that:</p>
+<ol type="1">
+<li>Takes inputs (arguments)</li>
+<li>Performs a specific task</li>
+<li>Returns outputs (results)</li>
+</ol>
+</section>
+<section id="vector-functions" class="slide level2">
+<h2>Vector functions</h2>
+<ul>
+<li>take one or more vectors as input</li>
+<li>output same length as input</li>
+<li>work well in <code>mutate()</code></li>
+<li>appropriate for the <em>z</em>-transformation example</li>
+</ul>
+</section>
+<section id="parts-of-a-function" class="slide level2">
+<h2>Parts of a function</h2>
+<p>To turn your code into a function you need:</p>
+<ul>
+<li>a name</li>
+<li>the arguments - (the pieces that vary)</li>
+<li>the body (the code that does the thing)</li>
+</ul>
+<div class="fragment">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a>name <span class="ot">&lt;-</span> <span class="cf">function</span>(arguments) {</span>
+<span id="cb2-2"><a></a>  code body</span>
+<span id="cb2-3"><a></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><img data-src="img/carpentries-f-to-c.png"></p>
+</div>
+</section>
+<section id="function-name" class="slide level2">
+<h2>Function name</h2>
+<ul>
+<li class="fragment">Use a verb or a clear descriptive phrase. Long is ok!</li>
+<li class="fragment">Difficulty in naming? Maybe this should this be two or three functions?</li>
+<li class="fragment">What should we call the function we write to do a <span class="math inline">\(z\)</span> score transformation?</li>
+</ul>
+</section>
+<section id="arguments" class="slide level2">
+<h2>Arguments</h2>
+<ul>
+<li><p>the input vector</p></li>
+<li><p>additional arguments</p></li>
+</ul>
+<p>Naming conventions</p>
+<ul>
+<li>x for the vector input</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a>name <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb3-2"><a></a>  body does things with x</span>
+<span id="cb3-3"><a></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="return-value" class="slide level2">
+<h2>Return value</h2>
+<div class="columns">
+<div class="column" style="width:48%;">
+<ul>
+<li>Output - what the function <em>returns</em> to the user</li>
+<li>By default, the last expression evaluated is returned</li>
+<li>Using explicit <code>return()</code> is optional but not considered best practice in R (though common in other languages).</li>
+</ul>
+</div><div class="column" style="width:2%;">
+
+</div><div class="column" style="width:50%;">
+<h3 id="explicit-return-statement">explicit return statement</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a>fahrenheit_to_celsius <span class="ot">&lt;-</span> <span class="cf">function</span>(f) {</span>
+<span id="cb4-2"><a></a>  celsius <span class="ot">&lt;-</span> (f <span class="sc">-</span> <span class="dv">32</span>) <span class="sc">*</span> <span class="dv">5</span> <span class="sc">/</span> <span class="dv">9</span></span>
+<span id="cb4-3"><a></a>  <span class="fu">return</span>(celsius)</span>
+<span id="cb4-4"><a></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><br>
+</p>
+<h3 id="implicit-return-of-last-named-object">implicit return of last named object</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a>fahrenheit_to_celsius <span class="ot">&lt;-</span> <span class="cf">function</span>(f) {</span>
+<span id="cb5-2"><a></a>  celsius <span class="ot">&lt;-</span> (f <span class="sc">-</span> <span class="dv">32</span>) <span class="sc">*</span> <span class="dv">5</span> <span class="sc">/</span> <span class="dv">9</span></span>
+<span id="cb5-3"><a></a>  celsius</span>
+<span id="cb5-4"><a></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><br>
+</p>
+<h3 id="implicit-return-of-last-expression">implicit return of last expression</h3>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a>fahrenheit_to_celsius <span class="ot">&lt;-</span> <span class="cf">function</span>(f) {</span>
+<span id="cb6-2"><a></a>  (f <span class="sc">-</span> <span class="dv">32</span>) <span class="sc">*</span> <span class="dv">5</span> <span class="sc">/</span> <span class="dv">9</span></span>
+<span id="cb6-3"><a></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div></div>
+<div class="fragment">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a><span class="fu">fahrenheit_to_celsius</span>(<span class="dv">100</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 37.77778</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="example-1" class="slide level2">
+<h2>Example</h2>
+<p><span class="math display">\[z = \frac{x - \bar{x}}{s.d.}\]</span></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a>penguins <span class="ot">&lt;-</span> penguins <span class="sc">|&gt;</span></span>
+<span id="cb9-2"><a></a>  <span class="fu">mutate</span>(</span>
+<span id="cb9-3"><a></a>    <span class="at">z_bill_len =</span> (bill_len <span class="sc">-</span> <span class="fu">mean</span>(bill_len, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">/</span> <span class="fu">sd</span>(bill_len, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb9-4"><a></a>    <span class="at">z_bill_dep =</span> (bill_dep <span class="sc">-</span> <span class="fu">mean</span>(bill_dep, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">/</span> <span class="fu">sd</span>(bill_dep, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb9-5"><a></a>    <span class="at">z_flipper_len =</span> (flipper_len <span class="sc">-</span> <span class="fu">mean</span>(flipper_len, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">/</span> <span class="fu">sd</span>(flipper_len, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb9-6"><a></a>    <span class="at">z_body_mass =</span> (body_mass <span class="sc">-</span> <span class="fu">mean</span>(body_mass, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">/</span> <span class="fu">sd</span>(body_mass, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb9-7"><a></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="example-2" class="slide level2">
+<h2>Example</h2>
+<p>Identify the arguments: the things that vary across calls</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a>(bill_len    <span class="sc">-</span> <span class="fu">mean</span>(bill_len,    <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">/</span> <span class="fu">sd</span>(bill_len,    <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb10-2"><a></a>(bill_dep    <span class="sc">-</span> <span class="fu">mean</span>(bill_dep,    <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">/</span> <span class="fu">sd</span>(bill_dep,    <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb10-3"><a></a>(flipper_len <span class="sc">-</span> <span class="fu">mean</span>(flipper_len, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">/</span> <span class="fu">sd</span>(flipper_len, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb10-4"><a></a>(body_mass   <span class="sc">-</span> <span class="fu">mean</span>(body_mass,   <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">/</span> <span class="fu">sd</span>(body_mass,   <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><br>
+</p>
+<div class="fragment">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a>(🟧 <span class="sc">-</span> <span class="fu">mean</span>(🟧, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">/</span> <span class="fu">sd</span>(🟧, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb11-2"><a></a>(🟧 <span class="sc">-</span> <span class="fu">mean</span>(🟧, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">/</span> <span class="fu">sd</span>(🟧, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb11-3"><a></a>(🟧 <span class="sc">-</span> <span class="fu">mean</span>(🟧, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">/</span> <span class="fu">sd</span>(🟧, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb11-4"><a></a>(🟧 <span class="sc">-</span> <span class="fu">mean</span>(🟧, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">/</span> <span class="fu">sd</span>(🟧, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>🟧 is x</p>
+</div>
+</section>
+<section id="example-3" class="slide level2">
+<h2>Example</h2>
+<p>Put into the template</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a>name <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb12-2"><a></a>  body does things with x</span>
+<span id="cb12-3"><a></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><br>
+</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a>to_z <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb13-2"><a></a>  (x <span class="sc">-</span> <span class="fu">mean</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">/</span> <span class="fu">sd</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb13-3"><a></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="apply" class="slide level2">
+<h2>Apply</h2>
+<p>Rewrite the call to <code>mutate()</code> as:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a></a>penguins <span class="ot">&lt;-</span> penguins <span class="sc">|&gt;</span></span>
+<span id="cb14-2"><a></a>  <span class="fu">mutate</span>(</span>
+<span id="cb14-3"><a></a>    <span class="at">z_bill_len =</span> <span class="fu">to_z</span>(bill_len),</span>
+<span id="cb14-4"><a></a>    <span class="at">z_bill_dep =</span> <span class="fu">to_z</span>(bill_dep),</span>
+<span id="cb14-5"><a></a>    <span class="at">z_flipper_len =</span> <span class="fu">to_z</span>(flipper_len),</span>
+<span id="cb14-6"><a></a>    <span class="at">z_body_mass =</span> <span class="fu">to_z</span>(body_mass)</span>
+<span id="cb14-7"><a></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="fragment">
+<p>Much shorter, much more clear.</p>
+</div>
+</section>
+<section id="a-modification" class="slide level2">
+<h2>A modification</h2>
+<p><code>mean()</code> has a <code>trim</code> argument: <code>mean(x, trim = 0, na.rm = FALSE, ...)</code></p>
+<p><em>the fraction (0 to 0.5) of observations to be trimmed from each end of x before the mean is computed.</em></p>
+<div class="fragment">
+<p>Suppose we want to specify the <em>middle</em> proportion left rather than the proportion trimmed from each end.</p>
+</div>
+</section>
+<section id="a-modification-1" class="slide level2">
+<h2>A modification</h2>
+<ul>
+<li><p>A value of 0.1 for <code>trim</code> trims 0.1 from each end leaving 0.8 in the middle</p></li>
+<li><p>trim = (1 - middle)/2</p></li>
+</ul>
+
+<img data-src="img/vector-functions-trim.png" alt="schematic of trim and middle demonstrating that trim = (1 - middle)/2" class="r-stretch quarto-figure-center"><p class="caption">Trim is the proportion trimmed off each end; middle is what’s left</p></section>
+<section id="add-an-argument" class="slide level2">
+<h2>Add an argument</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a>to_z <span class="ot">&lt;-</span> <span class="cf">function</span>(x, middle) {</span>
+<span id="cb15-2"><a></a>  trim <span class="ot">=</span> (<span class="dv">1</span> <span class="sc">-</span> middle) <span class="sc">/</span> <span class="dv">2</span></span>
+<span id="cb15-3"><a></a>  (x <span class="sc">-</span> <span class="fu">mean</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>, <span class="at">trim =</span> trim)) <span class="sc">/</span> <span class="fu">sd</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb15-4"><a></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="try-it-out" class="slide level2">
+<h2>Try it out</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a></a><span class="fu">to_z</span>(penguins<span class="sc">$</span>bill_len, <span class="at">middle =</span> <span class="fl">0.2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  [1] -0.92838057 -0.85511491 -0.70858359          NA -1.36797452 -0.89174774 -0.96501340 -0.91006415
+  [9] -1.84420131 -0.39720454 -1.16649396 -1.16649396 -0.56205227 -1.01996264 -1.75261923 -1.38629094
+ [17] -1.00164623 -0.30562246 -1.78925206  0.33545205 -1.16649396 -1.18481038 -1.51450584 -1.09322830
+ [25] -0.98332981 -1.62440433 -0.65363435 -0.67195076 -1.14817755 -0.67195076 -0.85511491 -1.27639245
+ [33] -0.85511491 -0.59868510 -1.42292377 -0.91006415 -0.98332981 -0.36057171 -1.20312679 -0.80016566
+ [41] -1.40460735 -0.61700152 -1.49618943 -0.01255983 -1.31302528 -0.83679849 -0.56205227 -1.22144320
+ [49] -1.49618943 -0.34225529 -0.83679849 -0.74521642 -1.67935358 -0.39720454 -1.77093565 -0.50710303
+ [57] -0.94669698 -0.65363435 -1.40460735 -1.20312679 -1.55113867 -0.52541944 -1.20312679 -0.56205227
+ [65] -1.42292377 -0.47047020 -1.58777150 -0.56205227 -1.51450584 -0.43383737 -1.95409980 -0.81848208
+ [73] -0.83679849  0.29881922 -1.58777150 -0.25067322 -0.59868510 -1.27639245 -1.45955660 -0.37888812
+ [81] -1.75261923 -0.23235681 -1.36797452 -1.66103716 -1.25807603 -0.52541944 -1.44124018 -1.33134169
+ [89] -1.07491189 -0.96501340 -1.55113867 -0.56205227 -1.86251772 -0.83679849 -1.45955660 -0.61700152
+ [97] -1.11154472 -0.70858359 -2.02736546 -0.17740756 -1.67935358 -0.58036869 -1.18481038 -1.16649396
+[105] -1.14817755 -0.81848208 -1.01996264 -1.09322830 -1.11154472 -0.17740756 -1.11154472  0.26218639
+[113] -0.81848208 -0.36057171 -0.83679849 -0.26898963 -1.01996264 -1.25807603 -1.55113867 -0.56205227
+[121] -1.45955660 -1.18481038 -0.72690000 -0.50710303 -1.64272075 -0.65363435 -0.98332981 -0.48878661
+[129] -0.94669698 -0.01255983 -1.03827906 -0.19572398 -1.34965811 -1.22144320 -1.11154472 -0.56205227
+[137] -1.56945509 -0.72690000 -1.31302528 -0.81848208 -0.72690000 -0.65363435 -2.21052960 -0.63531793
+[145] -1.25807603 -0.94669698 -0.91006415 -1.38629094 -1.49618943 -1.16649396 -1.49618943 -0.48878661
+[153]  0.35376847  1.06810865  0.82999525  1.06810865  0.62851469  0.42703413  0.22555357  0.46366696
+[161] -0.15909115  0.48198337 -0.59868510  0.88494450  0.24386998  0.77504601  0.29881922  0.93989374
+[169] -0.39720454  0.92157733  0.37208488  0.82999525  1.10474148  0.17060432  0.42703413  0.39040130
+[177] -0.23235681  0.35376847  0.06070583  0.66514752  0.73841318  1.06810865  0.57356545 -0.25067322
+[185]  0.17060432  2.82648447  0.90326091  0.77504601 -0.28730605  0.04238942 -0.03087624  0.82999525
+[193] -0.26898963  0.99484299  0.20723715  0.99484299  1.15969072 -0.10414190  0.24386998  1.15969072
+[201]  0.13397149  0.18892074  0.44535054  0.79336242  0.17060432  1.08642506  0.42703413  0.15228791
+[209] -0.06750907  0.24386998 -0.17740756  1.14137431  0.20723715  0.37208488  0.28050281  1.85571448
+[217]  0.29881922  1.03147582  0.37208488  0.97652657 -0.12245832  1.19632355  0.64683111  0.40871771
+[225]  0.73841318  0.42703413  0.40871771  0.81167884  0.61019828  1.26958921  0.18892074  0.18892074
+[233]  0.90326091  1.52601902  0.59188186  1.06810865  0.13397149  1.21463997 -0.14077473  1.30622204
+[241]  0.61019828  1.45275336  0.61019828  1.47106977  0.24386998  0.97652657  0.06070583  1.21463997
+[249]  0.95821016  0.50029979  0.77504601  1.26958921  0.79336242  2.14877712  0.55524903  0.90326091
+[257]  0.57356545  0.48198337 -0.45215378  1.69086675 -0.15909115  0.72009677  1.15969072  1.03147582
+[265] -0.12245832  1.34285487  0.37208488  2.00224580  0.06070583  0.84831167  0.55524903          NA
+[273]  0.48198337  1.14137431  0.18892074  1.04979223  0.42703413  1.06810865  1.30622204  0.22555357
+[281]  1.56265185  0.18892074  0.35376847  1.30622204  0.33545205  1.30622204  0.44535054  1.37948770
+[289]  0.51861620  1.43443694  0.31713564  1.15969072  1.12305789  2.53342183  0.40871771  0.92157733
+[297] -0.32393888  0.79336242 -0.17740756  1.17800714  0.46366696  1.43443694  1.15969072  0.97652657
+[305]  0.40871771  1.58096826 -0.59868510  1.83739807 -0.30562246  1.25127279  1.01315940  0.61019828
+[313]  0.62851469  1.43443694  0.50029979  1.70918316  0.88494450  0.37208488  1.23295638  0.24386998
+[321]  1.23295638  1.21463997  1.08642506  0.88494450  1.34285487  1.03147582  0.72009677  1.32453845
+[329]  0.28050281  1.19632355 -0.30562246  1.47106977  0.18892074  0.93989374  1.10474148  0.26218639
+[337]  1.41612053  0.48198337  0.28050281  2.13046071 -0.12245832  0.99484299  1.21463997  1.10474148</code></pre>
+</div>
+</div>
+</section>
+<section id="but-what-if-we-forget" class="slide level2">
+<h2>But what if we forget?</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a></a><span class="fu">to_z</span>(penguins<span class="sc">$</span>bill_len)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-error">
+<pre><code>Error in to_z(penguins$bill_len): argument "middle" is missing, with no default</code></pre>
+</div>
+</div>
+</section>
+<section id="give-a-default" class="slide level2">
+<h2>Give a default</h2>
+<p>Give defaults whenever possible:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a></a>to_z <span class="ot">&lt;-</span> <span class="cf">function</span>(x, <span class="at">middle =</span> <span class="dv">1</span>) {</span>
+<span id="cb20-2"><a></a>  trim <span class="ot">=</span> (<span class="dv">1</span> <span class="sc">-</span> middle) <span class="sc">/</span> <span class="dv">2</span></span>
+<span id="cb20-3"><a></a>  (x <span class="sc">-</span> <span class="fu">mean</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>, <span class="at">trim =</span> trim)) <span class="sc">/</span> <span class="fu">sd</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb20-4"><a></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="try-it-out-1" class="slide level2">
+<h2>Try it out</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a></a><span class="fu">to_z</span>(penguins<span class="sc">$</span>bill_len)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  [1] -0.88320467 -0.80993901 -0.66340769          NA -1.32279862 -0.84657184 -0.91983750 -0.86488825
+  [9] -1.79902541 -0.35202864 -1.12131806 -1.12131806 -0.51687637 -0.97478674 -1.70744334 -1.34111504
+ [17] -0.95647033 -0.26044656 -1.74407616  0.38062795 -1.12131806 -1.13963448 -1.46932994 -1.04805240
+ [25] -0.93815391 -1.57922843 -0.60845845 -0.62677486 -1.10300165 -0.62677486 -0.80993901 -1.23121655
+ [33] -0.80993901 -0.55350920 -1.37774787 -0.86488825 -0.93815391 -0.31539581 -1.15795089 -0.75498976
+ [41] -1.35943145 -0.57182562 -1.45101353  0.03261607 -1.26784938 -0.79162259 -0.51687637 -1.17626731
+ [49] -1.45101353 -0.29707939 -0.79162259 -0.70004052 -1.63417768 -0.35202864 -1.72575975 -0.46192713
+ [57] -0.90152108 -0.60845845 -1.35943145 -1.15795089 -1.50596277 -0.48024354 -1.15795089 -0.51687637
+ [65] -1.37774787 -0.42529430 -1.54259560 -0.51687637 -1.46932994 -0.38866147 -1.90892390 -0.77330618
+ [73] -0.79162259  0.34399512 -1.54259560 -0.20549732 -0.55350920 -1.23121655 -1.41438070 -0.33371222
+ [81] -1.70744334 -0.18718091 -1.32279862 -1.61586126 -1.21290014 -0.48024354 -1.39606428 -1.28616579
+ [89] -1.02973599 -0.91983750 -1.50596277 -0.51687637 -1.81734182 -0.79162259 -1.41438070 -0.57182562
+ [97] -1.06636882 -0.66340769 -1.98218956 -0.13223166 -1.63417768 -0.53519279 -1.13963448 -1.12131806
+[105] -1.10300165 -0.77330618 -0.97478674 -1.04805240 -1.06636882 -0.13223166 -1.06636882  0.30736229
+[113] -0.77330618 -0.31539581 -0.79162259 -0.22381374 -0.97478674 -1.21290014 -1.50596277 -0.51687637
+[121] -1.41438070 -1.13963448 -0.68172411 -0.46192713 -1.59754485 -0.60845845 -0.93815391 -0.44361071
+[129] -0.90152108  0.03261607 -0.99310316 -0.15054808 -1.30448221 -1.17626731 -1.06636882 -0.51687637
+[137] -1.52427919 -0.68172411 -1.26784938 -0.77330618 -0.68172411 -0.60845845 -2.16535371 -0.59014203
+[145] -1.21290014 -0.90152108 -0.86488825 -1.34111504 -1.45101353 -1.12131806 -1.45101353 -0.44361071
+[153]  0.39894437  1.11328455  0.87517115  1.11328455  0.67369059  0.47221003  0.27072946  0.50884286
+[161] -0.11391525  0.52715927 -0.55350920  0.93012040  0.28904588  0.82022191  0.34399512  0.98506964
+[169] -0.35202864  0.96675323  0.41726078  0.87517115  1.14991738  0.21578022  0.47221003  0.43557720
+[177] -0.18718091  0.39894437  0.10588173  0.71032342  0.78358908  1.11328455  0.61874135 -0.20549732
+[185]  0.21578022  2.87166037  0.94843681  0.82022191 -0.24213015  0.08756532  0.01429966  0.87517115
+[193] -0.22381374  1.04001889  0.25241305  1.04001889  1.20486662 -0.05896600  0.28904588  1.20486662
+[201]  0.17914739  0.23409663  0.49052644  0.83853832  0.21578022  1.13160096  0.47221003  0.19746381
+[209] -0.02233317  0.28904588 -0.13223166  1.18655021  0.25241305  0.41726078  0.32567871  1.90089038
+[217]  0.34399512  1.07665172  0.41726078  1.02170247 -0.07728242  1.24149945  0.69200701  0.45389361
+[225]  0.78358908  0.47221003  0.45389361  0.85685474  0.65537418  1.31476511  0.23409663  0.23409663
+[233]  0.94843681  1.57119492  0.63705776  1.11328455  0.17914739  1.25981586 -0.09559883  1.35139794
+[241]  0.65537418  1.49792926  0.65537418  1.51624567  0.28904588  1.02170247  0.10588173  1.25981586
+[249]  1.00338606  0.54547569  0.82022191  1.31476511  0.83853832  2.19395302  0.60042493  0.94843681
+[257]  0.61874135  0.52715927 -0.40697788  1.73604265 -0.11391525  0.76527266  1.20486662  1.07665172
+[265] -0.07728242  1.38803077  0.41726078  2.04742170  0.10588173  0.89348757  0.60042493          NA
+[273]  0.52715927  1.18655021  0.23409663  1.09496813  0.47221003  1.11328455  1.35139794  0.27072946
+[281]  1.60782775  0.23409663  0.39894437  1.35139794  0.38062795  1.35139794  0.49052644  1.42466360
+[289]  0.56379210  1.47961284  0.36231154  1.20486662  1.16823379  2.57859773  0.45389361  0.96675323
+[297] -0.27876298  0.83853832 -0.13223166  1.22318303  0.50884286  1.47961284  1.20486662  1.02170247
+[305]  0.45389361  1.62614416 -0.55350920  1.88257397 -0.26044656  1.29644869  1.05833530  0.65537418
+[313]  0.67369059  1.47961284  0.54547569  1.75435906  0.93012040  0.41726078  1.27813228  0.28904588
+[321]  1.27813228  1.25981586  1.13160096  0.93012040  1.38803077  1.07665172  0.76527266  1.36971435
+[329]  0.32567871  1.24149945 -0.26044656  1.51624567  0.23409663  0.98506964  1.14991738  0.30736229
+[337]  1.46129643  0.52715927  0.32567871  2.17563660 -0.07728242  1.04001889  1.25981586  1.14991738</code></pre>
+</div>
+</div>
+</section>
+<section id="your-turn" class="slide level2">
+<h2>Your turn</h2>
+<p>See if you can add another argument to <code>to_z()</code> to allow the user to specify if <code>NA</code> values should be removed or not. Give it a default value.</p>
+</section>
+<section id="your-turn-1" class="slide level2">
+<h2>Your turn</h2>
+<p>Create a function called <code>percent_diff</code> that calculates the percent difference between two (vectors of) values:</p>
+<p><span class="math display">\[\%diff = \frac{|a - b|}{((a + b)/2)} * 100\]</span></p>
+<ul>
+<li>Hint: you can use the <code>abs()</code> function to calculate the absolute value.</li>
+</ul>
+</section>
+<section id="your-turn-2" class="slide level2">
+<h2>Your turn</h2>
+<p>Create a function called <code>is_big()</code> that takes a numeric vector and outputs a logical vector indicating whether each value is larger than a specified quantile threshold.</p>
+<ul>
+<li>The function should have two arguments: the numeric vector and the quantile threshold (default to 0.75).</li>
+</ul>
+</section>
+<section id="types-of-function" class="slide level2">
+<h2>Types of function</h2>
+<ol type="1">
+<li><p>vector functions: one or more vectors as input, one vector as output</p>
+<ol type="i">
+<li>✔️ output same length as input.</li>
+</ol>
+<p><strong>ii. ➡️ summary functions: input is vector, output is a single value</strong></p></li>
+<li><p>data frame functions: df as input and df as output</p></li>
+</ol>
+</section>
+<section id="summary-functions" class="slide level2">
+<h2>Summary functions</h2>
+<ul>
+<li>input is vector</li>
+<li>output is a single value</li>
+<li>could be used in <code>summarise()</code></li>
+</ul>
+</section>
+<section id="example-4" class="slide level2">
+<h2>Example</h2>
+<p>Write a function to compute the standard error of a sample.</p>
+<p><span class="math display">\[s.e. = \frac{s.d.}{\sqrt{n}}\]</span></p>
+</section>
+<section id="example-5" class="slide level2">
+<h2>Example</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a></a>std_error <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb23-2"><a></a>  <span class="fu">sd</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(x)))</span>
+<span id="cb23-3"><a></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="fragment">
+<p>Note: <code>sum(TRUE)</code> = 1 and <code>sum(FALSE)</code> = 0 Thus,<code>sum(!is.na(x))</code> gives you the number of <code>TRUE</code> (i.e., the number of non-NA values) and is a bit shorter than <code>length(x[!is.na(x)])</code></p>
+</div>
+</section>
+<section id="try-it-out-2" class="slide level2">
+<h2>Try it out</h2>
+<p>Call the function on <code>penguins$bill_len</code></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a></a><span class="fu">std_error</span>(penguins<span class="sc">$</span>bill_len)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.2952205</code></pre>
+</div>
+</div>
+<div class="fragment">
+<p>Or in a pipeline</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a></a>penguins <span class="sc">|&gt;</span></span>
+<span id="cb26-2"><a></a>  <span class="fu">group_by</span>(species) <span class="sc">|&gt;</span></span>
+<span id="cb26-3"><a></a>  <span class="fu">summarise</span>(<span class="at">se =</span> <span class="fu">std_error</span>(bill_len))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 2
+  species      se
+  &lt;fct&gt;     &lt;dbl&gt;
+1 Adelie    0.217
+2 Chinstrap 0.405
+3 Gentoo    0.278</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="your-turn-3" class="slide level2">
+<h2>Your turn</h2>
+<p>Write a function to compute the sums of squares (sum of the squared deviations from the mean). This can be calculated with either:</p>
+<p><span class="math display">\[SS(x) = \sum{(x - \bar{x})^2}\]</span></p>
+<p>or</p>
+<p><span class="math display">\[SS(x) = s^2 * (n-1)\]</span></p>
+</section>
+<section id="a-solution---one-option" class="slide level2">
+<h2>A solution - one option</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a></a>sum_sq <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb28-2"><a></a>  <span class="fu">sum</span>((x <span class="sc">-</span> <span class="fu">mean</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))<span class="sc">^</span><span class="dv">2</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb28-3"><a></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>OR</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a></a>sum_sq2 <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb29-2"><a></a>  var_x <span class="ot">&lt;-</span> <span class="fu">var</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb29-3"><a></a>  n <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(x))</span>
+<span id="cb29-4"><a></a>  var_x <span class="sc">*</span> (n <span class="sc">-</span> <span class="dv">1</span>)</span>
+<span id="cb29-5"><a></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="fragment">
+<p>Try it out</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a></a><span class="fu">sum_sq</span>(penguins<span class="sc">$</span>bill_len)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 10164.21</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a></a><span class="fu">sum_sq2</span>(penguins<span class="sc">$</span>bill_len)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 10164.21</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="types-of-function-1" class="slide level2">
+<h2>Types of function</h2>
+<p>We will cover two types of function</p>
+<ol type="1">
+<li><p>vector functions: one or more vectors as input, one vector as output</p>
+<ol type="i">
+<li><p>✔️ output same length as input.</p></li>
+<li><p>✔️ summary functions: input is vector, output is a single value</p></li>
+</ol></li>
+</ol>
+<p><strong>2. ➡️ data frame functions: df as input and df as output</strong></p>
+</section>
+<section id="dataframe-functions" class="slide level2">
+<h2>Dataframe functions</h2>
+<p>Dataframe as input and Dataframe as output</p>
+<div class="fragment">
+<p>For example, we might summarise one of our columns like this:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a></a>penguins <span class="sc">|&gt;</span></span>
+<span id="cb34-2"><a></a>  <span class="fu">summarise</span>(</span>
+<span id="cb34-3"><a></a>    <span class="at">mean =</span> <span class="fu">mean</span>(bill_len, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb34-4"><a></a>    <span class="at">n =</span> <span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(bill_len)),</span>
+<span id="cb34-5"><a></a>    <span class="at">sd =</span> <span class="fu">sd</span>(bill_len, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb34-6"><a></a>    <span class="at">se =</span> <span class="fu">std_error</span>(bill_len)</span>
+<span id="cb34-7"><a></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      mean   n       sd        se
+1 43.92193 342 5.459584 0.2952205</code></pre>
+</div>
+</div>
+<p>Output is a dataframe</p>
+</div>
+</section>
+<section id="dataframe-functions-1" class="slide level2">
+<h2>Dataframe functions</h2>
+<p>Good candidate for a function to avoid repetitive code: <code>my_summary()</code></p>
+</section>
+<section id="define-my_summary-function" class="slide level2">
+<h2>Define <code>my_summary()</code> function</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a></a>my_summary <span class="ot">&lt;-</span> <span class="cf">function</span>(df, column) {</span>
+<span id="cb36-2"><a></a>  df <span class="sc">|&gt;</span></span>
+<span id="cb36-3"><a></a>    <span class="fu">summarise</span>(</span>
+<span id="cb36-4"><a></a>      <span class="at">mean =</span> <span class="fu">mean</span>(column, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb36-5"><a></a>      <span class="at">n =</span> <span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(column)),</span>
+<span id="cb36-6"><a></a>      <span class="at">sd =</span> <span class="fu">sd</span>(column, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb36-7"><a></a>      <span class="at">se =</span> <span class="fu">std_error</span>(column)</span>
+<span id="cb36-8"><a></a>    )</span>
+<span id="cb36-9"><a></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="use-function" class="slide level2">
+<h2>Use function</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a></a><span class="fu">my_summary</span>(penguins, bill_len)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-error">
+<pre><code>Error in `summarise()`:
+ℹ In argument: `mean = mean(column, na.rm = TRUE)`.
+Caused by error:
+! object 'bill_len' not found</code></pre>
+</div>
+</div>
+<p>😕</p>
+</section>
+<section id="tidy-evaluation" class="slide level2">
+<h2>Tidy evaluation</h2>
+<p><code>tidyverse</code> functions like <code>dplyr::summarise()</code> use “tidy evaluation” so you can refer to the names of variables inside dataframes. For example, you can use:</p>
+<p>either</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a></a>penguins <span class="sc">|&gt;</span> <span class="fu">summarise</span>(<span class="at">mean =</span> <span class="fu">mean</span>(bill_dep))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Or</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a></a><span class="fu">summarise</span>(penguins, <span class="at">mean =</span> <span class="fu">mean</span>(bill_dep))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="tidy-evaluation-1" class="slide level2">
+<h2>Tidy evaluation</h2>
+<p>This is instead of having to use the full dataframe name with <code>$</code>, e.g.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a></a><span class="fu">summarise</span>(penguins, <span class="at">mean =</span> <span class="fu">mean</span>(penguins<span class="sc">$</span>bill_dep))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment">
+<p>This is known as data-masking: the dataframe environment <em>masks</em> the user environment by giving priority to the dataframe.</p>
+</div>
+</section>
+<section id="data-masking-is-great." class="slide level2">
+<h2>Data masking is great….</h2>
+<p>and makes life easier when working interactively</p>
+<p><br>
+</p>
+<div class="fragment">
+<p>But kind of annoying in functions</p>
+<p><br>
+</p>
+<div class="columns">
+<div class="column" style="width:49%;">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a></a>my_summary <span class="ot">&lt;-</span> <span class="cf">function</span>(df, column) {</span>
+<span id="cb42-2"><a></a>  df <span class="sc">|&gt;</span></span>
+<span id="cb42-3"><a></a>    <span class="fu">summarise</span>(</span>
+<span id="cb42-4"><a></a>      <span class="at">mean =</span> <span class="fu">mean</span>(column, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb42-5"><a></a>      <span class="at">n =</span> <span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(column)),</span>
+<span id="cb42-6"><a></a>      <span class="at">sd =</span> <span class="fu">sd</span>(column, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb42-7"><a></a>      <span class="at">se =</span> <span class="fu">std_error</span>(column)</span>
+<span id="cb42-8"><a></a>    )</span>
+<span id="cb42-9"><a></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div><div class="column" style="width:2%;">
+
+</div><div class="column" style="width:49%;">
+<p>Because of data-masking, <code>summarise()</code> in <code>my_summary()</code> is looking for a column <em>literally</em> called <code>column</code> in the dataframe that has been passed in. It is not looking <em>inside</em> the variable <code>column</code> for the name of column you want to give it.</p>
+</div></div>
+</div>
+<div class="fragment">
+<p>Read more: <a href="https://dplyr.tidyverse.org/articles/programming.html">Programming with dplyr</a></p>
+</div>
+</section>
+<section id="fix-my_summary-function" class="slide level2">
+<h2>Fix <code>my_summary()</code> function</h2>
+<p>The solution is to use embracing: <code>{{ var }}</code></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a></a>my_summary <span class="ot">&lt;-</span> <span class="cf">function</span>(df, column) {</span>
+<span id="cb43-2"><a></a>  df <span class="sc">|&gt;</span></span>
+<span id="cb43-3"><a></a>    <span class="fu">summarise</span>(</span>
+<span id="cb43-4"><a></a>      <span class="at">mean =</span> <span class="fu">mean</span>({{ column }}, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb43-5"><a></a>      <span class="at">n =</span> <span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>({{ column }})),</span>
+<span id="cb43-6"><a></a>      <span class="at">sd =</span> <span class="fu">sd</span>({{ column }}, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb43-7"><a></a>      <span class="at">se =</span> <span class="fu">std_error</span>({{ column }})</span>
+<span id="cb43-8"><a></a>    )</span>
+<span id="cb43-9"><a></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="fragment">
+<ul>
+<li>tells <code>summarize()</code> to look inside <code>column</code> variable to get the column name</li>
+<li>style with spaces</li>
+<li><code>.groups = "drop"</code> to avoid message and leave the data in an ungrouped state</li>
+</ul>
+</div>
+</section>
+<section id="use-function-1" class="slide level2">
+<h2>Use function</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a></a><span class="fu">my_summary</span>(penguins, bill_len)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      mean   n       sd        se
+1 43.92193 342 5.459584 0.2952205</code></pre>
+</div>
+</div>
+<p>🎉</p>
+</section>
+<section id="when-to-embrace" class="slide level2">
+<h2>When to embrace?</h2>
+<p>When tidy evaluation is used</p>
+</section>
+<section id="your-turn-4" class="slide level2">
+<h2>Your turn</h2>
+<p>Write a new summary function which calculates the median, maximum and minimum values of a variable in a dataset. Incorporate an argument to allow the summary to be performed grouped by another variable.</p>
+</section>
+<section id="your-turn-5" class="slide level2">
+<h2>Your turn</h2>
+<p>Try it out</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a></a><span class="fu">my_summary</span>(penguins, bill_len, species)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 4
+  species   median minimum maximum
+  &lt;fct&gt;      &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
+1 Adelie      38.8    32.1    46  
+2 Chinstrap   49.6    40.9    58  
+3 Gentoo      47.3    40.9    59.6</code></pre>
+</div>
+</div>
+</section>
+<section id="your-turn-6" class="slide level2">
+<h2>Your turn</h2>
+<p>Improvement: Have a default of <code>NULL</code> for the grouping variable. Why?</p>
+</section>
+<section id="your-turn-7" class="slide level2">
+<h2>Your turn</h2>
+<p>Try it out</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a></a><span class="fu">my_summary</span>(penguins, bill_len)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 3
+  median minimum maximum
+   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
+1   44.4    32.1    59.6</code></pre>
+</div>
+</div>
+</section>
+<section id="your-turn-8" class="slide level2">
+<h2>Your turn</h2>
+<p>Try it out with more than one group</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb50"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a></a><span class="fu">my_summary</span>(penguins, bill_len, <span class="fu">c</span>(species, island))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-error">
+<pre><code>Error in `group_by()`:
+ℹ In argument: `c(species, island)`.
+Caused by error:
+! `c(species, island)` must be size 344 or 1, not 688.</code></pre>
+</div>
+</div>
+<div class="fragment">
+<p>😕</p>
+<aside class="notes">
+<p>By using embracing in this way, it is actually trying to group by the contents of the two columns concatenated, not the two columns separately.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</div>
+</section>
+<section id="a-solution" class="slide level2">
+<h2>A solution</h2>
+<p>Use <code>pick()</code> which allows you to select a subset of columns inside a data masking function:</p>
+<div class="fragment">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb52" data-code-line-numbers="|3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a></a>my_summary <span class="ot">&lt;-</span> <span class="cf">function</span>(df, summary_var, <span class="at">group_var =</span> <span class="cn">NULL</span>) {</span>
+<span id="cb52-2"><a></a>  df <span class="sc">|&gt;</span></span>
+<span id="cb52-3"><a></a>    <span class="fu">group_by</span>(<span class="fu">pick</span>({{ group_var }})) <span class="sc">|&gt;</span></span>
+<span id="cb52-4"><a></a>    <span class="fu">summarise</span>(</span>
+<span id="cb52-5"><a></a>      <span class="at">median =</span> <span class="fu">median</span>({{ summary_var }}, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb52-6"><a></a>      <span class="at">minimum =</span> <span class="fu">min</span>({{ summary_var }}, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb52-7"><a></a>      <span class="at">maximum =</span> <span class="fu">max</span>({{ summary_var }}, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb52-8"><a></a>      <span class="at">.groups =</span> <span class="st">"drop"</span></span>
+<span id="cb52-9"><a></a>    )</span>
+<span id="cb52-10"><a></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</section>
+<section id="section-1" class="slide level2">
+<h2></h2>
+<p>Try it out with more than one group</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb53"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a></a><span class="fu">my_summary</span>(penguins, bill_len, <span class="fu">c</span>(species, island))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 5
+  species   island    median minimum maximum
+  &lt;fct&gt;     &lt;fct&gt;      &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
+1 Adelie    Biscoe      38.7    34.5    45.6
+2 Adelie    Dream       38.6    32.1    44.1
+3 Adelie    Torgersen   38.9    33.5    46  
+4 Chinstrap Dream       49.6    40.9    58  
+5 Gentoo    Biscoe      47.3    40.9    59.6</code></pre>
+</div>
+</div>
+</section>
+<section id="functions-should-be-pure" class="slide level2">
+<h2>Functions should be <strong>“pure”</strong></h2>
+<ul>
+<li>Should not depend on external state (e.g., global variables)</li>
+<li>Should not have side effects (e.g., modifying global variables, printing to console, plotting, etc.)</li>
+<li>Given the same inputs, should always return the same outputs</li>
+</ul>
+<div class="columns">
+<div class="column" style="width:49%;">
+<h3 id="pure">Pure</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb55"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a></a>add_one <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb55-2"><a></a>  x <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb55-3"><a></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div><div class="column" style="width:2%;">
+
+</div><div class="column" style="width:49%;">
+<h3 id="impure">Impure</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb56"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a></a>y <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb56-2"><a></a></span>
+<span id="cb56-3"><a></a>add_y <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb56-4"><a></a>  x <span class="sc">+</span> y</span>
+<span id="cb56-5"><a></a>}</span>
+<span id="cb56-6"><a></a></span>
+<span id="cb56-7"><a></a>add_to_global <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb56-8"><a></a>  y <span class="ot">&lt;&lt;-</span> x <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb56-9"><a></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div></div>
+</section>
+<section id="functions---data-validation-and-error-handling" class="slide level2">
+<h2>Functions - data validation and error handling</h2>
+<p>It’s good practice to include data validation and error handling in your functions to ensure they behave as expected when given incorrect or unexpected inputs.</p>
+<ul>
+<li>Use <code>if</code> statements to check that inputs meet certain criteria or if specific conditions are met.</li>
+<li>Use <code>stop()</code> to throw an <strong><code>Error</code></strong> if issues are serious enough that it should not proceed.</li>
+<li>Use <code>warning()</code> to issue a <strong><code>Warning</code></strong> for non-critical issues.</li>
+</ul>
+<div class="columns">
+<div class="column">
+<h3 id="errors">Errors</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb57"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a></a><span class="cf">if</span> (some_condition_not_met) {</span>
+<span id="cb57-2"><a></a>  <span class="fu">stop</span>(<span class="st">"Descriptive error message."</span>)</span>
+<span id="cb57-3"><a></a>  <span class="co"># Function exits and does not return a result</span></span>
+<span id="cb57-4"><a></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div><div class="column">
+<div class="fragment">
+<h3 id="warnings">Warnings</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb58"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a></a><span class="cf">if</span> (some_non_critical_condition) {</span>
+<span id="cb58-2"><a></a>  <span class="fu">warning</span>(<span class="st">"Descriptive warning message."</span>)</span>
+<span id="cb58-3"><a></a>  <span class="co"># Function continues executing and returns a result</span></span>
+<span id="cb58-4"><a></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div></div>
+<div class="fragment">
+<ul>
+<li>Warnings are often used later in the execution if the result to be returned is cause for concern. (e.g., result is all <code>NA</code>). It is a signal to the user to check the results carefully.</li>
+</ul>
+</div>
+</section>
+<section id="example-6" class="slide level2">
+<h2>Example</h2>
+<p>If a function expects two numeric vectors of the same length, you should check and stop the if they are not.</p>
+<div class="columns">
+<div class="column">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb59"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a></a>percent_diff <span class="ot">&lt;-</span> <span class="cf">function</span>(x, y) {</span>
+<span id="cb59-2"><a></a>  (<span class="fu">abs</span>(x <span class="sc">-</span> y) <span class="sc">/</span></span>
+<span id="cb59-3"><a></a>    ((x <span class="sc">+</span> y) <span class="sc">/</span> <span class="dv">2</span>)) <span class="sc">*</span></span>
+<span id="cb59-4"><a></a>    <span class="dv">100</span></span>
+<span id="cb59-5"><a></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div><div class="column">
+<div class="fragment">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb60"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a></a>percent_diff <span class="ot">&lt;-</span> <span class="cf">function</span>(x, y) {</span>
+<span id="cb60-2"><a></a>  <span class="cf">if</span> (<span class="fu">length</span>(x) <span class="sc">!=</span> <span class="fu">length</span>(y)) {</span>
+<span id="cb60-3"><a></a>    <span class="fu">stop</span>(<span class="st">"Input vectors must be of the same length."</span>)</span>
+<span id="cb60-4"><a></a>  }</span>
+<span id="cb60-5"><a></a></span>
+<span id="cb60-6"><a></a>  (<span class="fu">abs</span>(x <span class="sc">-</span> y) <span class="sc">/</span></span>
+<span id="cb60-7"><a></a>    ((x <span class="sc">+</span> y) <span class="sc">/</span> <span class="dv">2</span>)) <span class="sc">*</span></span>
+<span id="cb60-8"><a></a>    <span class="dv">100</span></span>
+<span id="cb60-9"><a></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+<p><br>
+</p>
+<div class="fragment">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb61"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a></a>a <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)</span>
+<span id="cb61-2"><a></a>b <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">5</span>)</span>
+<span id="cb61-3"><a></a></span>
+<span id="cb61-4"><a></a><span class="fu">percent_diff</span>(a, b)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-error">
+<pre><code>Error in percent_diff(a, b): Input vectors must be of the same length.</code></pre>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="your-turn-9" class="slide level2">
+<h2>Your turn</h2>
+<ol type="1">
+<li><p>Add a check to <code>my_summary()</code> to ensure that the <code>summary_var</code> is numeric. If not, throw an error.</p></li>
+<li><p>Add a warning to <code>to_z()</code> if the input vector has fewer than 3 non-NA values, since the standard deviation may not be meaningful in that case.</p></li>
+</ol>
+</section>
+<section id="summary" class="slide level2">
+<h2>Summary ☕</h2>
+<ul>
+<li><p>Writing functions can make you more efficient and make your code more readable. This can be just for your benefit.</p></li>
+<li><p>Vector functions take one or more vectors as input; their output can be a vector (useful in <code>mutate()</code> and <code>filter()</code>) or a single value (useful in <code>summarise()</code>).</p></li>
+<li><p>Dataframe functions take a dataframe as input and give a dataframe as output</p></li>
+<li><p>Give arguments a default where possible</p></li>
+<li><p>We use <code>{ var }</code> embracing to manage data masking</p></li>
+<li><p>We use <code>pick({{ vars }})</code> to select more than one variable</p></li>
+<li><p>Include data validation and error handling in your functions</p></li>
+</ul>
+
+
+<script> window._input_file = "---\n" + "title: \"Programming with R: Functions\"\n" + "subtitle: \"Parks Canada; Ecological Integrity Monitoring Program\"\n" + "author: \"Andy Teucher\"\n" + "format: revealjs\n" + "knitr:\n" + "  opts_chunk: \n" + "    R.options:\n" + "      width: 110\n" + "      pillar.print_max: 5\n" + "      pillar.print_min: 5\n" + "    echo: true\n" + "---\n" + "\n" + "```{r setup, include=FALSE}\n" + "library(tidyverse)\n" + "```\n" + "\n" + "## Outline\n" + "\n" + "- Motivation\n" + "- Fundamentals of functions\n" + "\n" + "## Learning objectives\n" + "\n" + "-   explain the rationale for writing functions\n" + "-   write vector functions\n" + "    -   that take a vector as input and output a vector\n" + "    -   that take a vector as input and output a single value\n" + "-   specify defaults for function arguments\n" + "-   write functions that take dataframes as input and output a dataframe\n" + "\n" + "## Why write functions?\n" + "\n" + "- Make code easier to read and understand\n" + "- Make code shorter\n" + "- Make code less error-prone\n" + "- Make code reusable\n" + "\n" + "::: {.notes}\n" + "\n" + "You can give a function an evocative name that makes your code easier to understand.\n" + "\n" + "As requirements change, you only need to update code in one place, instead of many.\n" + "\n" + "You eliminate the chance of making incidental mistakes when you copy and paste (i.e. updating a variable name in one place, but not in another).\n" + "\n" + "It makes it easier to reuse work from project-to-project, increasing your productivity over time.\n" + "\n" + ":::\n" + "\n" + "## Example: Penguins\n" + "\n" + "We have several measurements:\n" + "\n" + "-   `bill_len`\n" + "-   `bill_dep`\n" + "-   `flipper_len`\n" + "-   `body_mass`\n" + "\n" + "These are on very different scales\n" + "\n" + "## \n" + "\n" + "```{r}\n" + "#| echo: false\n" + "#| layout-ncol: 2\n" + "penguins |>\n" + "  ggplot(aes(x = bill_len)) +\n" + "  geom_histogram(bins = 20) +\n" + "  theme_gray(base_size = 22)\n" + "penguins |>\n" + "  ggplot(aes(x = bill_dep)) +\n" + "  geom_histogram(bins = 20) +\n" + "  theme_gray(base_size = 22)\n" + "penguins |>\n" + "  ggplot(aes(x = flipper_len)) +\n" + "  geom_histogram(bins = 20) +\n" + "  theme_gray(base_size = 22)\n" + "penguins |>\n" + "  ggplot(aes(x = body_mass)) +\n" + "  geom_histogram(bins = 20) +\n" + "  theme_gray(base_size = 22)\n" + "```\n" + "\n" + "## Example\n" + "\n" + "-   difficult to plot on same axis or determine what value is large for\n" + "		that variable\n" + "\n" + "-   A common solution is to apply a $z$ score transformation to each\n" + "		variable.\n" + "\n" + "-   Normalises the values to have a mean of 0 and a standard deviation\n" + "		of 1\n" + "\n" + "$$z = \frac{x - \bar{x}}{s.d.}$$\n" + "\n" + "## Apply transformation\n" + "\n" + "We can apply the same transformation to each variable:\n" + "\n" + "```{r}\n" + "penguins <- penguins |>\n" + "  mutate(\n" + "    z_bill_len = (bill_len - mean(bill_len, na.rm = TRUE)) /\n" + "      sd(bill_len, na.rm = TRUE),\n" + "    z_bill_dep = (bill_dep - mean(bill_len, na.rm = TRUE)) /\n" + "      sd(bill_dep, na.rm = TRUE),\n" + "    z_flipper_len = (flipper_len - mean(flipper_len, na.rm = TRUE)) /\n" + "      sd(flipper_len, na.rm = TRUE),\n" + "    z_body_mass = (body_mass - mean(body_mass, na.rm = TRUE)) /\n" + "      sd(body_mass, na.rm = TRUE)\n" + "  )\n" + "```\n" + "\n" + "## Long, unclear\n" + "\n" + "`(bill_len - mean(bill_len, na.rm = TRUE)) / sd(bill_len, na.rm = TRUE)`\n" + "\n" + "-   Quite a lot of code\n" + "-   Difficult to glance at and determine what the transformation is\n" + "\n" + "How to shorten and make more clear?\n" + "\n" + "## Copying and pasting\n" + "\n" + "-   Is error prone\n" + "-   Did anyone catch my mistake in the example?\n" + "\n" + "## What is a function?\n" + "\n" + "A named object that:\n" + "\n" + "1. Takes inputs (arguments)\n" + "2. Performs a specific task\n" + "3. Returns outputs (results)\n" + "\n" + "## Vector functions\n" + "\n" + "-   take one or more vectors as input\n" + "-   output same length as input\n" + "-   work well in `mutate()`\n" + "-   appropriate for the *z*-transformation example\n" + "\n" + "## Parts of a function\n" + "\n" + "To turn your code into a function you need:\n" + "\n" + "-   a name\n" + "-   the arguments - (the pieces that vary)\n" + "-   the body (the code that does the thing)\n" + "\n" + ". . .\n" + "\n" + "```r\n" + "name <- function(arguments) {\n" + "  code body\n" + "}\n" + "```\n" + "\n" + "![](img/carpentries-f-to-c.png)\n" + "\n" + "## Function name\n" + "\n" + "::: {.incremental}\n" + "- Use a verb or a clear descriptive phrase. Long is ok!\n" + "- Difficulty in naming? Maybe this should this be two or three functions?\n" + "- What should we call the function we write to do a $z$ score transformation?\n" + ":::\n" + "\n" + "## Arguments\n" + "\n" + "-   the input vector\n" + "\n" + "-   additional arguments\n" + "\n" + "Naming conventions\n" + "\n" + "-   x for the vector input\n" + "\n" + "``` r\n" + "name <- function(x) {\n" + "  body does things with x\n" + "}\n" + "```\n" + "\n" + "## Return value\n" + "\n" + "::: {.columns}\n" + "\n" + "::: {.column width=\"48%\"}\n" + "\n" + "- Output - what the function _returns_ to the user\n" + "- By default, the last expression evaluated is returned\n" + "- Using explicit `return()` is optional but not considered best practice in R (though common in other languages).\n" + "\n" + ":::\n" + "\n" + "::: {.column width=\"2%\"}\n" + ":::\n" + "\n" + "::: {.column width=\"50%\"}\n" + "\n" + "### explicit return statement\n" + "\n" + "```r\n" + "fahrenheit_to_celsius <- function(f) {\n" + "  celsius <- (f - 32) * 5 / 9\n" + "  return(celsius)\n" + "}\n" + "```\n" + "\\n" + "\n" + "### implicit return of last named object\n" + "\n" + "```r\n" + "fahrenheit_to_celsius <- function(f) {\n" + "  celsius <- (f - 32) * 5 / 9\n" + "  celsius\n" + "}\n" + "```\n" + "\\n" + "\n" + "### implicit return of last expression\n" + "\n" + "```{r}\n" + "fahrenheit_to_celsius <- function(f) {\n" + "  (f - 32) * 5 / 9\n" + "}\n" + "```\n" + "\n" + "\n" + ":::\n" + "\n" + ":::\n" + "\n" + "::: {.fragment}\n" + "\n" + "```{r}\n" + "fahrenheit_to_celsius(100)\n" + "```\n" + "\n" + ":::\n" + "\n" + "## Example\n" + "\n" + "$$z = \frac{x - \bar{x}}{s.d.}$$\n" + "\n" + "``` r\n" + "penguins <- penguins |>\n" + "  mutate(\n" + "    z_bill_len = (bill_len - mean(bill_len, na.rm = TRUE)) / sd(bill_len, na.rm = TRUE),\n" + "    z_bill_dep = (bill_dep - mean(bill_dep, na.rm = TRUE)) / sd(bill_dep, na.rm = TRUE),\n" + "    z_flipper_len = (flipper_len - mean(flipper_len, na.rm = TRUE)) / sd(flipper_len, na.rm = TRUE),\n" + "    z_body_mass = (body_mass - mean(body_mass, na.rm = TRUE)) / sd(body_mass, na.rm = TRUE)\n" + "  )\n" + "```\n" + "\n" + "## Example\n" + "\n" + "Identify the arguments: the things that vary across calls\n" + "\n" + "``` r\n" + "(bill_len    - mean(bill_len,    na.rm = TRUE)) / sd(bill_len,    na.rm = TRUE)\n" + "(bill_dep    - mean(bill_dep,    na.rm = TRUE)) / sd(bill_dep,    na.rm = TRUE)\n" + "(flipper_len - mean(flipper_len, na.rm = TRUE)) / sd(flipper_len, na.rm = TRUE)\n" + "(body_mass   - mean(body_mass,   na.rm = TRUE)) / sd(body_mass,   na.rm = TRUE)\n" + "```\n" + "\n" + "\\n" + "\n" + ". . .\n" + "\n" + "``` r\n" + "(🟧 - mean(🟧, na.rm = TRUE)) / sd(🟧, na.rm = TRUE)\n" + "(🟧 - mean(🟧, na.rm = TRUE)) / sd(🟧, na.rm = TRUE)\n" + "(🟧 - mean(🟧, na.rm = TRUE)) / sd(🟧, na.rm = TRUE)\n" + "(🟧 - mean(🟧, na.rm = TRUE)) / sd(🟧, na.rm = TRUE)\n" + "```\n" + "\n" + "🟧 is x\n" + "\n" + "## Example\n" + "\n" + "Put into the template\n" + "\n" + "``` r\n" + "name <- function(x) {\n" + "  body does things with x\n" + "}\n" + "```\n" + "\n" + "\\n" + "\n" + "```{r}\n" + "to_z <- function(x) {\n" + "  (x - mean(x, na.rm = TRUE)) / sd(x, na.rm = TRUE)\n" + "}\n" + "```\n" + "\n" + "## Apply\n" + "\n" + "Rewrite the call to `mutate()` as:\n" + "\n" + "```{r}\n" + "penguins <- penguins |>\n" + "  mutate(\n" + "    z_bill_len = to_z(bill_len),\n" + "    z_bill_dep = to_z(bill_dep),\n" + "    z_flipper_len = to_z(flipper_len),\n" + "    z_body_mass = to_z(body_mass)\n" + "  )\n" + "```\n" + "\n" + ". . .\n" + "\n" + "Much shorter, much more clear.\n" + "\n" + "## A modification\n" + "\n" + "`mean()` has a `trim` argument: `mean(x, trim = 0, na.rm = FALSE, ...)`\n" + "\n" + "*the fraction (0 to 0.5) of observations to be trimmed from each end of\n" + "x before the mean is computed.*\n" + "\n" + ". . .\n" + "\n" + "Suppose we want to specify the *middle* proportion left rather than the\n" + "proportion trimmed from each end.\n" + "\n" + "## A modification\n" + "\n" + "-   A value of 0.1 for `trim` trims 0.1 from each end leaving 0.8 in the\n" + "    middle\n" + "\n" + "-   trim = (1 - middle)/2\n" + "\n" + "![Trim is the proportion trimmed off each end; middle is what's \n" + "left](img/vector-functions-trim.png){fig-alt=\"schematic of trim and middle demonstrating that trim = (1 - middle)/2\"}\n" + "\n" + "## Add an argument\n" + "\n" + "```{r}\n" + "to_z <- function(x, middle) {\n" + "  trim = (1 - middle) / 2\n" + "  (x - mean(x, na.rm = TRUE, trim = trim)) / sd(x, na.rm = TRUE)\n" + "}\n" + "```\n" + "\n" + "## Try it out\n" + "\n" + "```{r}\n" + "to_z(penguins$bill_len, middle = 0.2)\n" + "\n" + "```\n" + "\n" + "## But what if we forget?\n" + "\n" + "```{r}\n" + "#| error: true\n" + "to_z(penguins$bill_len)\n" + "```\n" + "\n" + "## Give a default\n" + "\n" + "Give defaults whenever possible:\n" + "\n" + "```{r}\n" + "to_z <- function(x, middle = 1) {\n" + "  trim = (1 - middle) / 2\n" + "  (x - mean(x, na.rm = TRUE, trim = trim)) / sd(x, na.rm = TRUE)\n" + "}\n" + "```\n" + "\n" + "## Try it out\n" + "\n" + "```{r}\n" + "to_z(penguins$bill_len)\n" + "```\n" + "\n" + "## Your turn\n" + "\n" + "See if you can add another argument to `to_z()` to allow the user to specify\n" + "if `NA` values should be removed or not. Give it a default value.\n" + "\n" + "## Your turn\n" + "\n" + "Create a function called `percent_diff` that calculates the percent difference between two (vectors of)\n" + "values:\n" + "\n" + "$$\%diff = \frac{|a - b|}{((a + b)/2)} * 100$$\n" + "\n" + "* Hint: you can use the `abs()` function to calculate the absolute value.\n" + "\n" + "## Your turn\n" + "\n" + "Create a function called `is_big()` that takes a numeric vector and outputs a logical vector indicating whether each value is larger than a specified quantile threshold.\n" + "\n" + "- The function should have two arguments: the numeric vector and the quantile threshold (default to 0.75).\n" + "\n" + "## Types of function\n" + "\n" + "1.  vector functions: one or more vectors as input, one vector as output\n" + "\n" + "    i.  ✔️ output same length as input.\n" + "\n" + "    **ii. ➡️ summary functions: input is vector, output is a single\n" + "    value**\n" + "\n" + "2.  data frame functions: df as input and df as output\n" + "\n" + "## Summary functions\n" + "\n" + "-   input is vector\n" + "-   output is a single value\n" + "-   could be used in `summarise()`\n" + "\n" + "## Example\n" + "\n" + "Write a function to compute the standard error of a sample.\n" + "\n" + "$$s.e. = \frac{s.d.}{\sqrt{n}}$$\n" + "\n" + "## Example\n" + "\n" + "```{r}\n" + "std_error <- function(x) {\n" + "  sd(x, na.rm = TRUE) / sqrt(sum(!is.na(x)))\n" + "}\n" + "```\n" + "\n" + ". . .\n" + "\n" + "Note: `sum(TRUE)` = 1 and `sum(FALSE)` = 0 Thus,`sum(!is.na(x))` gives\n" + "you the number of `TRUE` (i.e., the number of non-NA values) and is a\n" + "bit shorter than `length(x[!is.na(x)])`\n" + "\n" + "## Try it out\n" + "\n" + "Call the function on `penguins$bill_len`\n" + "\n" + "```{r}\n" + "std_error(penguins$bill_len)\n" + "```\n" + "\n" + ". . .\n" + "\n" + "Or in a pipeline\n" + "\n" + "```{r}\n" + "penguins |>\n" + "  group_by(species) |>\n" + "  summarise(se = std_error(bill_len))\n" + "```\n" + "\n" + "## Your turn\n" + "\n" + "Write a function to compute the sums of squares (sum of the squared\n" + "deviations from the mean). This can be calculated with either:\n" + "\n" + "$$SS(x) = \sum{(x - \bar{x})^2}$$\n" + "\n" + "or\n" + "\n" + "$$SS(x) = s^2 * (n-1)$$\n" + "\n" + "## A solution - one option\n" + "\n" + "```{r}\n" + "sum_sq <- function(x) {\n" + "  sum((x - mean(x, na.rm = TRUE))^2, na.rm = TRUE)\n" + "}\n" + "```\n" + "\n" + "OR\n" + "\n" + "```{r}\n" + "sum_sq2 <- function(x) {\n" + "  var_x <- var(x, na.rm = TRUE)\n" + "  n <- sum(!is.na(x))\n" + "  var_x * (n - 1)\n" + "}\n" + "```\n" + "\n" + ". . .\n" + "\n" + "Try it out\n" + "\n" + "```{r}\n" + "sum_sq(penguins$bill_len)\n" + "\n" + "sum_sq2(penguins$bill_len)\n" + "```\n" + "\n" + "## Types of function\n" + "\n" + "We will cover two types of function\n" + "\n" + "1.  vector functions: one or more vectors as input, one vector as output\n" + "\n" + "    i.  ✔️ output same length as input.\n" + "\n" + "    ii. ✔️ summary functions: input is vector, output is a single value\n" + "\n" + "**2. ➡️ data frame functions: df as input and df as output**\n" + "\n" + "## Dataframe functions\n" + "\n" + "Dataframe as input and Dataframe as output\n" + "\n" + ". . .\n" + "\n" + "For example, we might summarise one of our columns like this:\n" + "\n" + "```{r}\n" + "penguins |>\n" + "  summarise(\n" + "    mean = mean(bill_len, na.rm = TRUE),\n" + "    n = sum(!is.na(bill_len)),\n" + "    sd = sd(bill_len, na.rm = TRUE),\n" + "    se = std_error(bill_len)\n" + "  )\n" + "```\n" + "\n" + "Output is a dataframe\n" + "\n" + "## Dataframe functions\n" + "\n" + "Good candidate for a function to avoid repetitive code: `my_summary()`\n" + "\n" + "## Define `my_summary()` function\n" + "\n" + "```{r}\n" + "my_summary <- function(df, column) {\n" + "  df |>\n" + "    summarise(\n" + "      mean = mean(column, na.rm = TRUE),\n" + "      n = sum(!is.na(column)),\n" + "      sd = sd(column, na.rm = TRUE),\n" + "      se = std_error(column)\n" + "    )\n" + "}\n" + "```\n" + "\n" + "## Use function\n" + "\n" + "```{r}\n" + "#| error: true\n" + "my_summary(penguins, bill_len)\n" + "```\n" + "\n" + "😕\n" + "\n" + "## Tidy evaluation\n" + "\n" + "`tidyverse` functions like `dplyr::summarise()` use \"tidy evaluation\" so\n" + "you can refer to the names of variables inside dataframes. For example,\n" + "you can use:\n" + "\n" + "either\n" + "\n" + "``` r\n" + "penguins |> summarise(mean = mean(bill_dep))\n" + "```\n" + "\n" + "Or\n" + "\n" + "``` r\n" + "summarise(penguins, mean = mean(bill_dep))\n" + "```\n" + "\n" + "## Tidy evaluation\n" + "\n" + "This is instead of having to use the full dataframe name with `$`, e.g.\n" + "\n" + "``` r\n" + "summarise(penguins, mean = mean(penguins$bill_dep))\n" + "```\n" + "\n" + ". . .\n" + "\n" + "This is known as data-masking: the dataframe environment *masks* the\n" + "user environment by giving priority to the dataframe.\n" + "\n" + "## Data masking is great....\n" + "\n" + "and makes life easier when working interactively\n" + "\n" + "\\n" + "\n" + ". . .\n" + "\n" + "But kind of annoying in functions\n" + "\n" + "\\n" + "\n" + "::: {.columns}\n" + "\n" + "::: {.column width=\"49%\"}\n" + "\n" + "```r\n" + "my_summary <- function(df, column) {\n" + "  df |>\n" + "    summarise(\n" + "      mean = mean(column, na.rm = TRUE),\n" + "      n = sum(!is.na(column)),\n" + "      sd = sd(column, na.rm = TRUE),\n" + "      se = std_error(column)\n" + "    )\n" + "}\n" + "```\n" + "\n" + ":::\n" + "\n" + "::: {.column width=\"2%\"}\n" + ":::\n" + "\n" + "::: {.column width=\"49%\"}\n" + "\n" + "Because of data-masking, `summarise()` in `my_summary()` is looking for\n" + "a column *literally* called `column` in the dataframe that has been\n" + "passed in. It is not looking *inside* the variable `column` for the name\n" + "of column you want to give it.\n" + "\n" + "::: \n" + "\n" + ":::\n" + "\n" + ". . .\n" + "\n" + "Read more: [Programming with\n" + "dplyr](https://dplyr.tidyverse.org/articles/programming.html)\n" + "\n" + "## Fix `my_summary()` function\n" + "\n" + "The solution is to use embracing: `{{{ var }}}`\n" + "\n" + "```{r}\n" + "my_summary <- function(df, column) {\n" + "  df |>\n" + "    summarise(\n" + "      mean = mean({{ column }}, na.rm = TRUE),\n" + "      n = sum(!is.na({{ column }})),\n" + "      sd = sd({{ column }}, na.rm = TRUE),\n" + "      se = std_error({{ column }})\n" + "    )\n" + "}\n" + "```\n" + "\n" + ". . .\n" + "\n" + "-   tells `summarize()` to look inside `column` variable to get the column name\n" + "-   style with spaces\n" + "-   `.groups = \"drop\"` to avoid message and leave the data in an\n" + "    ungrouped state\n" + "\n" + "## Use function\n" + "\n" + "```{r}\n" + "my_summary(penguins, bill_len)\n" + "```\n" + "\n" + "🎉\n" + "\n" + "## When to embrace?\n" + "\n" + "When tidy evaluation is used\n" + "\n" + "## Your turn\n" + "\n" + "Write a new summary function which calculates the median, maximum and\n" + "minimum values of a variable in a dataset. Incorporate an argument to allow the\n" + "summary to be performed grouped by another variable.\n" + "\n" + "## Your turn\n" + "\n" + "Try it out\n" + "\n" + "```{r}\n" + "#| include: false\n" + "my_summary <- function(df, summary_var, group_var = NULL) {\n" + "  df |>\n" + "    group_by({{ group_var }}) |>\n" + "    summarise(\n" + "      median = median({{ summary_var }}, na.rm = TRUE),\n" + "      minimum = min({{ summary_var }}, na.rm = TRUE),\n" + "      maximum = max({{ summary_var }}, na.rm = TRUE),\n" + "      .groups = \"drop\"\n" + "    )\n" + "}\n" + "```\n" + "\n" + "```{r}\n" + "my_summary(penguins, bill_len, species)\n" + "```\n" + "\n" + "## Your turn\n" + "\n" + "Improvement: Have a default of `NULL` for the grouping variable. Why?\n" + "\n" + "## Your turn\n" + "\n" + "Try it out\n" + "\n" + "```{r}\n" + "my_summary(penguins, bill_len)\n" + "```\n" + "\n" + "## Your turn\n" + "\n" + "Try it out with more than one group\n" + "\n" + "```{r}\n" + "#| error: true\n" + "#| output-location: fragment\n" + "my_summary(penguins, bill_len, c(species, island))\n" + "```\n" + "\n" + ". . . \n" + "\n" + "😕\n" + "\n" + "::: {.notes}\n" + "By using embracing in this way, it is actually trying to group by the contents of the two columns concatenated, not the two columns separately.\n" + ":::\n" + "\n" + "## A solution\n" + "\n" + "Use `pick()` which allows you to select a subset of columns inside a\n" + "data masking function:\n" + "\n" + ". . .\n" + "\n" + "```{r}\n" + "#| code-line-numbers: \"|3\"\n" + "my_summary <- function(df, summary_var, group_var = NULL) {\n" + "  df |>\n" + "    group_by(pick({{ group_var }})) |>\n" + "    summarise(\n" + "      median = median({{ summary_var }}, na.rm = TRUE),\n" + "      minimum = min({{ summary_var }}, na.rm = TRUE),\n" + "      maximum = max({{ summary_var }}, na.rm = TRUE),\n" + "      .groups = \"drop\"\n" + "    )\n" + "}\n" + "```\n" + "\n" + "## \n" + "\n" + "Try it out with more than one group\n" + "\n" + "```{r}\n" + "my_summary(penguins, bill_len, c(species, island))\n" + "```\n" + "\n" + "## Functions should be **\"pure\"**\n" + "\n" + "-   Should not depend on external state (e.g., global variables)\n" + "-   Should not have side effects (e.g., modifying global variables, printing to console, plotting, etc.)\n" + "-   Given the same inputs, should always return the same outputs\n" + "\n" + "::: {.columns}\n" + "::: {.column width=\"49%\"}\n" + "\n" + "### Pure\n" + "\n" + "``` r\n" + "add_one <- function(x) {\n" + "  x + 1\n" + "}\n" + "```\n" + "\n" + ":::\n" + "\n" + "::: {.column width=\"2%\"}\n" + ":::\n" + "\n" + "::: {.column width=\"49%\"}\n" + "\n" + "### Impure\n" + "\n" + "```r\n" + "y <- 10\n" + "\n" + "add_y <- function(x) {\n" + "  x + y\n" + "}\n" + "\n" + "add_to_global <- function(x) {\n" + "  y <<- x + 1\n" + "}\n" + "```\n" + "\n" + ":::\n" + ":::\n" + "\n" + "## Functions - data validation and error handling\n" + "\n" + "It's good practice to include data validation and error handling in your functions to ensure they behave as expected when given incorrect or unexpected inputs.\n" + "\n" + "- Use `if` statements to check that inputs meet certain criteria or if specific conditions are met.\n" + "- Use `stop()` to throw an **`Error`** if issues are serious enough that it should not proceed.\n" + "- Use `warning()` to issue a **`Warning`** for non-critical issues.\n" + "\n" + "::: {.columns}\n" + "\n" + "::: {.column}\n" + "\n" + "### Errors\n" + "\n" + "```r\n" + "if (some_condition_not_met) {\n" + "  stop(\"Descriptive error message.\")\n" + "  # Function exits and does not return a result\n" + "}\n" + "```\n" + "\n" + "::: \n" + "\n" + "::: {.column}\n" + "\n" + "::: {.fragment}\n" + "\n" + "### Warnings\n" + "\n" + "```r\n" + "if (some_non_critical_condition) {\n" + "  warning(\"Descriptive warning message.\")\n" + "  # Function continues executing and returns a result\n" + "}\n" + "```\n" + "\n" + "\n" + ":::\n" + "\n" + "::: \n" + "\n" + ":::\n" + "\n" + "::: {.fragment}\n" + "\n" + "- Warnings are often used later in the execution if the result to be returned is cause for concern. (e.g., result is all `NA`). It is a signal to the user to check the results carefully.\n" + "\n" + ":::\n" + "\n" + "## Example\n" + "\n" + "If a function expects two numeric vectors of the same length, you should check\n" + "and stop the if they are not.\n" + "\n" + "::: {.columns}\n" + "\n" + "::: {.column}\n" + "\n" + "```{r}\n" + "#| eval: false\n" + "\n" + "percent_diff <- function(x, y) {\n" + "  (abs(x - y) /\n" + "    ((x + y) / 2)) *\n" + "    100\n" + "}\n" + "```\n" + "\n" + ":::\n" + "\n" + "::: {.column}\n" + "\n" + "::: {.fragment}\n" + "\n" + "```{r}\n" + "percent_diff <- function(x, y) {\n" + "  if (length(x) != length(y)) {\n" + "    stop(\"Input vectors must be of the same length.\")\n" + "  }\n" + "\n" + "  (abs(x - y) /\n" + "    ((x + y) / 2)) *\n" + "    100\n" + "}\n" + "```\n" + "\n" + ":::\n" + "\n" + "\\n" + "\n" + "::: {.fragment}\n" + "\n" + "```{r}\n" + "#| error: true\n" + "#| output-location: fragment\n" + "\n" + "a <- c(1, 2, 3)\n" + "b <- c(4, 5)\n" + "\n" + "percent_diff(a, b)\n" + "```\n" + "\n" + ":::\n" + ":::\n" + ":::\n" + "\n" + "## Your turn\n" + "\n" + "1. Add a check to `my_summary()` to ensure that the `summary_var` is numeric. If not, throw an error.\n" + "\n" + "2. Add a warning to `to_z()` if the input vector has fewer than 3 non-NA values, since the standard deviation may not be meaningful in that case.\n" + "\n" + "## Summary ☕\n" + "\n" + "-   Writing functions can make you more efficient and make your code\n" + "    more readable. This can be just for your benefit.\n" + "\n" + "-   Vector functions take one or more vectors as input; their output can\n" + "    be a vector (useful in `mutate()` and `filter()`) or a single value\n" + "    (useful in `summarise()`).\n" + "\n" + "-   Dataframe functions take a dataframe as input and give a dataframe\n" + "    as output\n" + "\n" + "-   Give arguments a default where possible\n" + "\n" + "-   We use `{{ var }}` embracing to manage data masking\n" + "\n" + "-   We use `pick({{ vars }})` to select more than one variable\n" + "\n" + "-   Include data validation and error handling in your functions\n" + ""</script>
+<script> window._input_filename = '/home/runner/work/pc-intermediate-r/pc-intermediate-r/programming-functions.qmd'</script>
+</section>
+    </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<div class="footer footer-default">
+<p><a href="./index.html"><i class="fa-solid fa-house" aria-label="house"></i></a></p>
+</div>
+</div></div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="site_libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="site_libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="site_libs/revealjs/plugin/revealeditable/editable.js"></script>
+  <script src="site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="site_libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="site_libs/revealjs/plugin/search/search.js"></script>
+  <script src="site_libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="site_libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'chalkboard': {"buttons":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'none',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1600,
+
+        height: 900,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, Revealeditable, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        // dispatch for htmlwidgets
+        function fireSlideEnter() {
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+        }
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+          fireSlideEnter();
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
+    <script id="quarto-html-after-body" type="application/javascript">
+      window.document.addEventListener("DOMContentLoaded", function (event) {
+        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+        tabsets.forEach(function(tabset) {
+          const tabby = new Tabby('#' + tabset.id);
+        });
+        const isCodeAnnotation = (el) => {
+          for (const clz of el.classList) {
+            if (clz.startsWith('code-annotation-')) {                     
+              return true;
+            }
+          }
+          return false;
+        }
+        const onCopySuccess = function(e) {
+          // button target
+          const button = e.trigger;
+          // don't keep focus
+          button.blur();
+          // flash "checked"
+          button.classList.add('code-copy-button-checked');
+          var currentTitle = button.getAttribute("title");
+          button.setAttribute("title", "Copied!");
+          let tooltip;
+          if (window.bootstrap) {
+            button.setAttribute("data-bs-toggle", "tooltip");
+            button.setAttribute("data-bs-placement", "left");
+            button.setAttribute("data-bs-title", "Copied!");
+            tooltip = new bootstrap.Tooltip(button, 
+              { trigger: "manual", 
+                customClass: "code-copy-button-tooltip",
+                offset: [0, -8]});
+            tooltip.show();    
+          }
+          setTimeout(function() {
+            if (tooltip) {
+              tooltip.hide();
+              button.removeAttribute("data-bs-title");
+              button.removeAttribute("data-bs-toggle");
+              button.removeAttribute("data-bs-placement");
+            }
+            button.setAttribute("title", currentTitle);
+            button.classList.remove('code-copy-button-checked');
+          }, 1000);
+          // clear code selection
+          e.clearSelection();
+        }
+        const getTextToCopy = function(trigger) {
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+        }
+        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+          text: getTextToCopy
+        });
+        clipboard.on('success', onCopySuccess);
+        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+            text: getTextToCopy,
+            container: window.document.getElementById('quarto-embedded-source-code-modal')
+          });
+          clipboardModal.on('success', onCopySuccess);
+        }
+          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var mailtoRegex = new RegExp(/^mailto:/);
+            var filterRegex = new RegExp("https:\/\/ateucher\.github\.io\/pc-intermediate-r\/");
+          var isInternal = (href) => {
+              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          }
+          // Inspect non-navigation links and adorn them if external
+         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          for (var i=0; i<links.length; i++) {
+            const link = links[i];
+            if (!isInternal(link.href)) {
+              // undo the damage that might have been done by quarto-nav.js in the case of
+              // links that we want to consider external
+              if (link.dataset.originalHref !== undefined) {
+                link.href = link.dataset.originalHref;
+              }
+            }
+          }
+        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+          const config = {
+            allowHTML: true,
+            maxWidth: 500,
+            delay: 100,
+            arrow: false,
+            appendTo: function(el) {
+                return el.closest('section.slide') || el.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'light-border',
+            placement: 'bottom-start',
+          };
+          if (contentFn) {
+            config.content = contentFn;
+          }
+          if (onTriggerFn) {
+            config.onTrigger = onTriggerFn;
+          }
+          if (onUntriggerFn) {
+            config.onUntrigger = onUntriggerFn;
+          }
+            config['offset'] = [0,0];
+            config['maxWidth'] = 700;
+          window.tippy(el, config); 
+        }
+        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+        for (var i=0; i<noterefs.length; i++) {
+          const ref = noterefs[i];
+          tippyHover(ref, function() {
+            // use id or data attribute instead here
+            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+            try { href = new URL(href).hash; } catch {}
+            const id = href.replace(/^#\/?/, "");
+            const note = window.document.getElementById(id);
+            if (note) {
+              return note.innerHTML;
+            } else {
+              return "";
+            }
+          });
+        }
+        const findCites = (el) => {
+          const parentEl = el.parentElement;
+          if (parentEl) {
+            const cites = parentEl.dataset.cites;
+            if (cites) {
+              return {
+                el,
+                cites: cites.split(' ')
+              };
+            } else {
+              return findCites(el.parentElement)
+            }
+          } else {
+            return undefined;
+          }
+        };
+        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+        for (var i=0; i<bibliorefs.length; i++) {
+          const ref = bibliorefs[i];
+          const citeInfo = findCites(ref);
+          if (citeInfo) {
+            tippyHover(citeInfo.el, function() {
+              var popup = window.document.createElement('div');
+              citeInfo.cites.forEach(function(cite) {
+                var citeDiv = window.document.createElement('div');
+                citeDiv.classList.add('hanging-indent');
+                citeDiv.classList.add('csl-entry');
+                var biblioDiv = window.document.getElementById('ref-' + cite);
+                if (biblioDiv) {
+                  citeDiv.innerHTML = biblioDiv.innerHTML;
+                }
+                popup.appendChild(citeDiv);
+              });
+              return popup.innerHTML;
+            });
+          }
+        }
+      });
+      </script>
+    
+
+</body></html>

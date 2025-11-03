@@ -511,340 +511,410 @@
     "text": "Use Positron or RStudio more efficiently\n\n\nuse keyboard shortcuts\nuse the command palette\nuse Air"
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Parks Canada - Intermediate R",
-    "section": "",
-    "text": "This website contains the materials for the Parks Canada Intermediate R workshop. The workshop is designed to help participants improve their R programming skills, focusing on efficient workflows, , and reproducible research practices."
-  },
-  {
-    "objectID": "index.html#workshop-overview",
-    "href": "index.html#workshop-overview",
-    "title": "Parks Canada - Intermediate R",
-    "section": "Workshop Overview:",
-    "text": "Workshop Overview:\nThis intermediate R workshop is designed for data professionals and scientists who have basic R experience and want to advance their skills in data analysis and programming.\nThis will be an online, interactive workshop delivered virtually."
-  },
-  {
-    "objectID": "index.html#modules",
-    "href": "index.html#modules",
-    "title": "Parks Canada - Intermediate R",
-    "section": "Modules",
-    "text": "Modules\n\n1. Project-oriented workflows and effective use of your IDE (RStudio/Positron)\n\n\n2. Version control and Collaboration with Git and GitHub\n\n\n3. Advanced data manipulation with dplyr and tidyr\n\n\n4. Programming with R - functions, functional programming, and iteration\n\n\n5. Reproducible reporting with Quarto"
-  },
-  {
-    "objectID": "index.html#exercises",
-    "href": "index.html#exercises",
-    "title": "Parks Canada - Intermediate R",
-    "section": "Exercises",
-    "text": "Exercises\n\nExercises for the data manipulation module can be found here."
-  },
-  {
-    "objectID": "index.html#prework",
-    "href": "index.html#prework",
-    "title": "Parks Canada - Intermediate R",
-    "section": "Prework",
-    "text": "Prework\nPlease ensure you have completed the steps in System Setup."
-  },
-  {
-    "objectID": "index.html#instructor",
-    "href": "index.html#instructor",
-    "title": "Parks Canada - Intermediate R",
-    "section": "Instructor:",
-    "text": "Instructor:\nAndy Teucher is a freelance data scientist and package developer with a passion for teaching others how to use data science tools to make their work more efficient and reproducible. His background is in conservation biology, with an MSc in Ecology from the University of Calgary. He has spent much of his career as a data scientist in government, where he made it his mission to promote and teach open, reproducible data science practices. He has written many R packages for internal use in his teams as well as for a broader audience, with several hosted on CRAN. Andy is a certified Software Carpentry and Data Carpentry instructor, and has led many workshops teaching programming skills to scientists and data professionals."
-  },
-  {
-    "objectID": "data-manipulation.html#outline",
-    "href": "data-manipulation.html#outline",
-    "title": "Advanced Data Manipulation with dplyr and tidyr",
+    "objectID": "programming-functions.html#outline",
+    "href": "programming-functions.html#outline",
+    "title": "Programming with R: Functions",
     "section": "Outline",
-    "text": "Outline\n\n\nToday:\n\ndplyr fundamentals review\nColumn-wise operations\nTwo-table verbs (joins)\nData reshaping with tidyr\nWindow functions?"
+    "text": "Outline\n\nMotivation\nFundamentals of functions"
   },
   {
-    "objectID": "data-manipulation.html#data",
-    "href": "data-manipulation.html#data",
-    "title": "Advanced Data Manipulation with dplyr and tidyr",
-    "section": "Data",
-    "text": "Data\nUsing data from the Portal Project\nLong-term ecological research site studying the dynamics of desert rodents, plants, ants and weather in Arizona.\nData available from the GitHub repo via the portalr package."
+    "objectID": "programming-functions.html#learning-objectives",
+    "href": "programming-functions.html#learning-objectives",
+    "title": "Programming with R: Functions",
+    "section": "Learning objectives",
+    "text": "Learning objectives\n\nexplain the rationale for writing functions\nwrite vector functions\n\nthat take a vector as input and output a vector\nthat take a vector as input and output a single value\n\nspecify defaults for function arguments\nwrite functions that take dataframes as input and output a dataframe"
   },
   {
-    "objectID": "data-manipulation.html#setup",
-    "href": "data-manipulation.html#setup",
-    "title": "Advanced Data Manipulation with dplyr and tidyr",
-    "section": "Setup",
-    "text": "Setup\n\nCreate a new project in Positron\n\n\nEither:\n\nFork and clone the exercises repository:\nhttps://github.com/ateucher/pc-data-manipulation/ OR\nRun:\n\nusethis::use_course(\"https://github.com/ateucher/pc-data-manipulation/archive/refs/heads/main.zip\")\n\n\nOpen the file: 01-get-data.R\nDownload the data:\n\n\ninstall.packages(\"portalr\")\nlibrary(portalr)\n\ndownload_observations(\".\")\n\n\nExplore the downloaded data in Positron"
+    "objectID": "programming-functions.html#why-write-functions",
+    "href": "programming-functions.html#why-write-functions",
+    "title": "Programming with R: Functions",
+    "section": "Why write functions?",
+    "text": "Why write functions?\n\nMake code easier to read and understand\nMake code shorter\nMake code less error-prone\nMake code reusable\n\n\nYou can give a function an evocative name that makes your code easier to understand.\nAs requirements change, you only need to update code in one place, instead of many.\nYou eliminate the chance of making incidental mistakes when you copy and paste (i.e. updating a variable name in one place, but not in another).\nIt makes it easier to reuse work from project-to-project, increasing your productivity over time."
   },
   {
-    "objectID": "data-manipulation.html#warm-up",
-    "href": "data-manipulation.html#warm-up",
-    "title": "Advanced Data Manipulation with dplyr and tidyr",
-    "section": "Warm-up",
-    "text": "Warm-up\nRead in the rodent capture data (PortalData/Rodents/Portal_rodent.csv).\n\nUse readr::read_csv() and assign it to a data frame called rodents.\nStandardize column names to use snake_case (hint: check out the janitor package)"
+    "objectID": "programming-functions.html#example-penguins",
+    "href": "programming-functions.html#example-penguins",
+    "title": "Programming with R: Functions",
+    "section": "Example: Penguins",
+    "text": "Example: Penguins\nWe have several measurements:\n\nbill_len\nbill_dep\nflipper_len\nbody_mass\n\nThese are on very different scales"
   },
   {
-    "objectID": "data-manipulation.html#review-of-main-dplyr-operations",
-    "href": "data-manipulation.html#review-of-main-dplyr-operations",
-    "title": "Advanced Data Manipulation with dplyr and tidyr",
-    "section": "Review of main dplyr operations",
-    "text": "Review of main dplyr operations\n\nSelect columns with select()\nKeep rows based on their values with filter()\nCreate new columns with mutate()\nSummarize data with summarize()\nSort rows based on column values with arrange()\n“Slice” rows with slice()/slice_*()\n\n\n\nGrouping data with group_by() applies filter(), mutate(), summarize(), and slice() by group"
+    "objectID": "programming-functions.html#example",
+    "href": "programming-functions.html#example",
+    "title": "Programming with R: Functions",
+    "section": "Example",
+    "text": "Example\n\ndifficult to plot on same axis or determine what value is large for that variable\nA common solution is to apply a \\(z\\) score transformation to each variable.\nNormalises the values to have a mean of 0 and a standard deviation of 1\n\n\\[z = \\frac{x - \\bar{x}}{s.d.}\\]"
   },
   {
-    "objectID": "data-manipulation.html#using-select",
-    "href": "data-manipulation.html#using-select",
-    "title": "Advanced Data Manipulation with dplyr and tidyr",
-    "section": "Using select()",
-    "text": "Using select()\n\n\nSelect columns with bare names\n\nlibrary(dplyr)\n\npenguins |&gt;\n  select(species, island, body_mass)\n\n\n\n# A tibble: 344 × 3\n  species island    body_mass\n  &lt;fct&gt;   &lt;fct&gt;         &lt;int&gt;\n1 Adelie  Torgersen      3750\n2 Adelie  Torgersen      3800\n3 Adelie  Torgersen      3250\n4 Adelie  Torgersen        NA\n5 Adelie  Torgersen      3450\n# ℹ 339 more rows\n\n\n\n\nUse all_of() or any_of() to select columns from a character vector\n\nall_of(): throws an error if any names are not found\nany_of(): ignores names that are not found\n\n\ncols &lt;- c(\"species\", \"sex\", \"bill_len\", \"bill_dep\")\nselect(penguins, all_of(cols))\n\n\n\n# A tibble: 344 × 4\n  species sex    bill_len bill_dep\n  &lt;fct&gt;   &lt;fct&gt;     &lt;dbl&gt;    &lt;dbl&gt;\n1 Adelie  male       39.1     18.7\n2 Adelie  female     39.5     17.4\n3 Adelie  female     40.3     18  \n4 Adelie  &lt;NA&gt;       NA       NA  \n5 Adelie  female     36.7     19.3\n# ℹ 339 more rows\n\n\n\n\n\nYour turn: Select record_id, id, and species from rodents"
+    "objectID": "programming-functions.html#apply-transformation",
+    "href": "programming-functions.html#apply-transformation",
+    "title": "Programming with R: Functions",
+    "section": "Apply transformation",
+    "text": "Apply transformation\nWe can apply the same transformation to each variable:\n\npenguins &lt;- penguins |&gt;\n  mutate(\n    z_bill_len = (bill_len - mean(bill_len, na.rm = TRUE)) /\n      sd(bill_len, na.rm = TRUE),\n    z_bill_dep = (bill_dep - mean(bill_len, na.rm = TRUE)) /\n      sd(bill_dep, na.rm = TRUE),\n    z_flipper_len = (flipper_len - mean(flipper_len, na.rm = TRUE)) /\n      sd(flipper_len, na.rm = TRUE),\n    z_body_mass = (body_mass - mean(body_mass, na.rm = TRUE)) /\n      sd(body_mass, na.rm = TRUE)\n  )"
   },
   {
-    "objectID": "data-manipulation.html#selection-helpers",
-    "href": "data-manipulation.html#selection-helpers",
-    "title": "Advanced Data Manipulation with dplyr and tidyr",
-    "section": "selection helpers",
-    "text": "selection helpers\n\n\nselect specific columns:\n\neverything(): Matches all variables.\nlast_col(): Select last variable, possibly with an offset.\ngroup_cols(): Select all grouping columns.\n\n\nselect columns based on name patterns:\n\nstarts_with(): Starts with a prefix.\nends_with(): Ends with a suffix.\ncontains(): Contains a literal string.\nmatches(): Matches a regular expression.\n\nselect columns based on data type:\n\nwhere(): Select columns based on a predicate function (a function that returns TRUE or FALSE).\n\n\nSee help with ?select\n\n\neverything() is useful when you want to move a column to the front or back of the data frame.\nSelection helpers can be combined using c(), e.g., select(df, c(starts_with(\"temp\"), ends_with(\"date\")))"
+    "objectID": "programming-functions.html#long-unclear",
+    "href": "programming-functions.html#long-unclear",
+    "title": "Programming with R: Functions",
+    "section": "Long, unclear",
+    "text": "Long, unclear\n(bill_len - mean(bill_len, na.rm = TRUE)) / sd(bill_len, na.rm = TRUE)\n\nQuite a lot of code\nDifficult to glance at and determine what the transformation is\n\nHow to shorten and make more clear?"
   },
   {
-    "objectID": "data-manipulation.html#your-turn",
-    "href": "data-manipulation.html#your-turn",
-    "title": "Advanced Data Manipulation with dplyr and tidyr",
+    "objectID": "programming-functions.html#copying-and-pasting",
+    "href": "programming-functions.html#copying-and-pasting",
+    "title": "Programming with R: Functions",
+    "section": "Copying and pasting",
+    "text": "Copying and pasting\n\nIs error prone\nDid anyone catch my mistake in the example?"
+  },
+  {
+    "objectID": "programming-functions.html#what-is-a-function",
+    "href": "programming-functions.html#what-is-a-function",
+    "title": "Programming with R: Functions",
+    "section": "What is a function?",
+    "text": "What is a function?\nA named object that:\n\nTakes inputs (arguments)\nPerforms a specific task\nReturns outputs (results)"
+  },
+  {
+    "objectID": "programming-functions.html#vector-functions",
+    "href": "programming-functions.html#vector-functions",
+    "title": "Programming with R: Functions",
+    "section": "Vector functions",
+    "text": "Vector functions\n\ntake one or more vectors as input\noutput same length as input\nwork well in mutate()\nappropriate for the z-transformation example"
+  },
+  {
+    "objectID": "programming-functions.html#parts-of-a-function",
+    "href": "programming-functions.html#parts-of-a-function",
+    "title": "Programming with R: Functions",
+    "section": "Parts of a function",
+    "text": "Parts of a function\nTo turn your code into a function you need:\n\na name\nthe arguments - (the pieces that vary)\nthe body (the code that does the thing)\n\n\nname &lt;- function(arguments) {\n  code body\n}"
+  },
+  {
+    "objectID": "programming-functions.html#function-name",
+    "href": "programming-functions.html#function-name",
+    "title": "Programming with R: Functions",
+    "section": "Function name",
+    "text": "Function name\n\nUse a verb or a clear descriptive phrase. Long is ok!\nDifficulty in naming? Maybe this should this be two or three functions?\nWhat should we call the function we write to do a \\(z\\) score transformation?"
+  },
+  {
+    "objectID": "programming-functions.html#arguments",
+    "href": "programming-functions.html#arguments",
+    "title": "Programming with R: Functions",
+    "section": "Arguments",
+    "text": "Arguments\n\nthe input vector\nadditional arguments\n\nNaming conventions\n\nx for the vector input\n\nname &lt;- function(x) {\n  body does things with x\n}"
+  },
+  {
+    "objectID": "programming-functions.html#return-value",
+    "href": "programming-functions.html#return-value",
+    "title": "Programming with R: Functions",
+    "section": "Return value",
+    "text": "Return value\n\n\n\nOutput - what the function returns to the user\nBy default, the last expression evaluated is returned\nUsing explicit return() is optional but not considered best practice in R (though common in other languages).\n\n\n\n\nexplicit return statement\nfahrenheit_to_celsius &lt;- function(f) {\n  celsius &lt;- (f - 32) * 5 / 9\n  return(celsius)\n}\n\n\nimplicit return of last named object\nfahrenheit_to_celsius &lt;- function(f) {\n  celsius &lt;- (f - 32) * 5 / 9\n  celsius\n}\n\n\nimplicit return of last expression\n\nfahrenheit_to_celsius &lt;- function(f) {\n  (f - 32) * 5 / 9\n}\n\n\n\n\nfahrenheit_to_celsius(100)\n\n[1] 37.77778"
+  },
+  {
+    "objectID": "programming-functions.html#example-1",
+    "href": "programming-functions.html#example-1",
+    "title": "Programming with R: Functions",
+    "section": "Example",
+    "text": "Example\n\\[z = \\frac{x - \\bar{x}}{s.d.}\\]\npenguins &lt;- penguins |&gt;\n  mutate(\n    z_bill_len = (bill_len - mean(bill_len, na.rm = TRUE)) / sd(bill_len, na.rm = TRUE),\n    z_bill_dep = (bill_dep - mean(bill_dep, na.rm = TRUE)) / sd(bill_dep, na.rm = TRUE),\n    z_flipper_len = (flipper_len - mean(flipper_len, na.rm = TRUE)) / sd(flipper_len, na.rm = TRUE),\n    z_body_mass = (body_mass - mean(body_mass, na.rm = TRUE)) / sd(body_mass, na.rm = TRUE)\n  )"
+  },
+  {
+    "objectID": "programming-functions.html#example-2",
+    "href": "programming-functions.html#example-2",
+    "title": "Programming with R: Functions",
+    "section": "Example",
+    "text": "Example\nIdentify the arguments: the things that vary across calls\n(bill_len    - mean(bill_len,    na.rm = TRUE)) / sd(bill_len,    na.rm = TRUE)\n(bill_dep    - mean(bill_dep,    na.rm = TRUE)) / sd(bill_dep,    na.rm = TRUE)\n(flipper_len - mean(flipper_len, na.rm = TRUE)) / sd(flipper_len, na.rm = TRUE)\n(body_mass   - mean(body_mass,   na.rm = TRUE)) / sd(body_mass,   na.rm = TRUE)\n\n\n\n(🟧 - mean(🟧, na.rm = TRUE)) / sd(🟧, na.rm = TRUE)\n(🟧 - mean(🟧, na.rm = TRUE)) / sd(🟧, na.rm = TRUE)\n(🟧 - mean(🟧, na.rm = TRUE)) / sd(🟧, na.rm = TRUE)\n(🟧 - mean(🟧, na.rm = TRUE)) / sd(🟧, na.rm = TRUE)\n🟧 is x"
+  },
+  {
+    "objectID": "programming-functions.html#example-3",
+    "href": "programming-functions.html#example-3",
+    "title": "Programming with R: Functions",
+    "section": "Example",
+    "text": "Example\nPut into the template\nname &lt;- function(x) {\n  body does things with x\n}\n\n\n\nto_z &lt;- function(x) {\n  (x - mean(x, na.rm = TRUE)) / sd(x, na.rm = TRUE)\n}"
+  },
+  {
+    "objectID": "programming-functions.html#apply",
+    "href": "programming-functions.html#apply",
+    "title": "Programming with R: Functions",
+    "section": "Apply",
+    "text": "Apply\nRewrite the call to mutate() as:\n\npenguins &lt;- penguins |&gt;\n  mutate(\n    z_bill_len = to_z(bill_len),\n    z_bill_dep = to_z(bill_dep),\n    z_flipper_len = to_z(flipper_len),\n    z_body_mass = to_z(body_mass)\n  )\n\n\nMuch shorter, much more clear."
+  },
+  {
+    "objectID": "programming-functions.html#a-modification",
+    "href": "programming-functions.html#a-modification",
+    "title": "Programming with R: Functions",
+    "section": "A modification",
+    "text": "A modification\nmean() has a trim argument: mean(x, trim = 0, na.rm = FALSE, ...)\nthe fraction (0 to 0.5) of observations to be trimmed from each end of x before the mean is computed.\n\nSuppose we want to specify the middle proportion left rather than the proportion trimmed from each end."
+  },
+  {
+    "objectID": "programming-functions.html#a-modification-1",
+    "href": "programming-functions.html#a-modification-1",
+    "title": "Programming with R: Functions",
+    "section": "A modification",
+    "text": "A modification\n\nA value of 0.1 for trim trims 0.1 from each end leaving 0.8 in the middle\ntrim = (1 - middle)/2\n\n\nTrim is the proportion trimmed off each end; middle is what’s left"
+  },
+  {
+    "objectID": "programming-functions.html#add-an-argument",
+    "href": "programming-functions.html#add-an-argument",
+    "title": "Programming with R: Functions",
+    "section": "Add an argument",
+    "text": "Add an argument\n\nto_z &lt;- function(x, middle) {\n  trim = (1 - middle) / 2\n  (x - mean(x, na.rm = TRUE, trim = trim)) / sd(x, na.rm = TRUE)\n}"
+  },
+  {
+    "objectID": "programming-functions.html#try-it-out",
+    "href": "programming-functions.html#try-it-out",
+    "title": "Programming with R: Functions",
+    "section": "Try it out",
+    "text": "Try it out\n\nto_z(penguins$bill_len, middle = 0.2)\n\n  [1] -0.92838057 -0.85511491 -0.70858359          NA -1.36797452 -0.89174774 -0.96501340 -0.91006415\n  [9] -1.84420131 -0.39720454 -1.16649396 -1.16649396 -0.56205227 -1.01996264 -1.75261923 -1.38629094\n [17] -1.00164623 -0.30562246 -1.78925206  0.33545205 -1.16649396 -1.18481038 -1.51450584 -1.09322830\n [25] -0.98332981 -1.62440433 -0.65363435 -0.67195076 -1.14817755 -0.67195076 -0.85511491 -1.27639245\n [33] -0.85511491 -0.59868510 -1.42292377 -0.91006415 -0.98332981 -0.36057171 -1.20312679 -0.80016566\n [41] -1.40460735 -0.61700152 -1.49618943 -0.01255983 -1.31302528 -0.83679849 -0.56205227 -1.22144320\n [49] -1.49618943 -0.34225529 -0.83679849 -0.74521642 -1.67935358 -0.39720454 -1.77093565 -0.50710303\n [57] -0.94669698 -0.65363435 -1.40460735 -1.20312679 -1.55113867 -0.52541944 -1.20312679 -0.56205227\n [65] -1.42292377 -0.47047020 -1.58777150 -0.56205227 -1.51450584 -0.43383737 -1.95409980 -0.81848208\n [73] -0.83679849  0.29881922 -1.58777150 -0.25067322 -0.59868510 -1.27639245 -1.45955660 -0.37888812\n [81] -1.75261923 -0.23235681 -1.36797452 -1.66103716 -1.25807603 -0.52541944 -1.44124018 -1.33134169\n [89] -1.07491189 -0.96501340 -1.55113867 -0.56205227 -1.86251772 -0.83679849 -1.45955660 -0.61700152\n [97] -1.11154472 -0.70858359 -2.02736546 -0.17740756 -1.67935358 -0.58036869 -1.18481038 -1.16649396\n[105] -1.14817755 -0.81848208 -1.01996264 -1.09322830 -1.11154472 -0.17740756 -1.11154472  0.26218639\n[113] -0.81848208 -0.36057171 -0.83679849 -0.26898963 -1.01996264 -1.25807603 -1.55113867 -0.56205227\n[121] -1.45955660 -1.18481038 -0.72690000 -0.50710303 -1.64272075 -0.65363435 -0.98332981 -0.48878661\n[129] -0.94669698 -0.01255983 -1.03827906 -0.19572398 -1.34965811 -1.22144320 -1.11154472 -0.56205227\n[137] -1.56945509 -0.72690000 -1.31302528 -0.81848208 -0.72690000 -0.65363435 -2.21052960 -0.63531793\n[145] -1.25807603 -0.94669698 -0.91006415 -1.38629094 -1.49618943 -1.16649396 -1.49618943 -0.48878661\n[153]  0.35376847  1.06810865  0.82999525  1.06810865  0.62851469  0.42703413  0.22555357  0.46366696\n[161] -0.15909115  0.48198337 -0.59868510  0.88494450  0.24386998  0.77504601  0.29881922  0.93989374\n[169] -0.39720454  0.92157733  0.37208488  0.82999525  1.10474148  0.17060432  0.42703413  0.39040130\n[177] -0.23235681  0.35376847  0.06070583  0.66514752  0.73841318  1.06810865  0.57356545 -0.25067322\n[185]  0.17060432  2.82648447  0.90326091  0.77504601 -0.28730605  0.04238942 -0.03087624  0.82999525\n[193] -0.26898963  0.99484299  0.20723715  0.99484299  1.15969072 -0.10414190  0.24386998  1.15969072\n[201]  0.13397149  0.18892074  0.44535054  0.79336242  0.17060432  1.08642506  0.42703413  0.15228791\n[209] -0.06750907  0.24386998 -0.17740756  1.14137431  0.20723715  0.37208488  0.28050281  1.85571448\n[217]  0.29881922  1.03147582  0.37208488  0.97652657 -0.12245832  1.19632355  0.64683111  0.40871771\n[225]  0.73841318  0.42703413  0.40871771  0.81167884  0.61019828  1.26958921  0.18892074  0.18892074\n[233]  0.90326091  1.52601902  0.59188186  1.06810865  0.13397149  1.21463997 -0.14077473  1.30622204\n[241]  0.61019828  1.45275336  0.61019828  1.47106977  0.24386998  0.97652657  0.06070583  1.21463997\n[249]  0.95821016  0.50029979  0.77504601  1.26958921  0.79336242  2.14877712  0.55524903  0.90326091\n[257]  0.57356545  0.48198337 -0.45215378  1.69086675 -0.15909115  0.72009677  1.15969072  1.03147582\n[265] -0.12245832  1.34285487  0.37208488  2.00224580  0.06070583  0.84831167  0.55524903          NA\n[273]  0.48198337  1.14137431  0.18892074  1.04979223  0.42703413  1.06810865  1.30622204  0.22555357\n[281]  1.56265185  0.18892074  0.35376847  1.30622204  0.33545205  1.30622204  0.44535054  1.37948770\n[289]  0.51861620  1.43443694  0.31713564  1.15969072  1.12305789  2.53342183  0.40871771  0.92157733\n[297] -0.32393888  0.79336242 -0.17740756  1.17800714  0.46366696  1.43443694  1.15969072  0.97652657\n[305]  0.40871771  1.58096826 -0.59868510  1.83739807 -0.30562246  1.25127279  1.01315940  0.61019828\n[313]  0.62851469  1.43443694  0.50029979  1.70918316  0.88494450  0.37208488  1.23295638  0.24386998\n[321]  1.23295638  1.21463997  1.08642506  0.88494450  1.34285487  1.03147582  0.72009677  1.32453845\n[329]  0.28050281  1.19632355 -0.30562246  1.47106977  0.18892074  0.93989374  1.10474148  0.26218639\n[337]  1.41612053  0.48198337  0.28050281  2.13046071 -0.12245832  0.99484299  1.21463997  1.10474148"
+  },
+  {
+    "objectID": "programming-functions.html#but-what-if-we-forget",
+    "href": "programming-functions.html#but-what-if-we-forget",
+    "title": "Programming with R: Functions",
+    "section": "But what if we forget?",
+    "text": "But what if we forget?\n\nto_z(penguins$bill_len)\n\nError in to_z(penguins$bill_len): argument \"middle\" is missing, with no default"
+  },
+  {
+    "objectID": "programming-functions.html#give-a-default",
+    "href": "programming-functions.html#give-a-default",
+    "title": "Programming with R: Functions",
+    "section": "Give a default",
+    "text": "Give a default\nGive defaults whenever possible:\n\nto_z &lt;- function(x, middle = 1) {\n  trim = (1 - middle) / 2\n  (x - mean(x, na.rm = TRUE, trim = trim)) / sd(x, na.rm = TRUE)\n}"
+  },
+  {
+    "objectID": "programming-functions.html#try-it-out-1",
+    "href": "programming-functions.html#try-it-out-1",
+    "title": "Programming with R: Functions",
+    "section": "Try it out",
+    "text": "Try it out\n\nto_z(penguins$bill_len)\n\n  [1] -0.88320467 -0.80993901 -0.66340769          NA -1.32279862 -0.84657184 -0.91983750 -0.86488825\n  [9] -1.79902541 -0.35202864 -1.12131806 -1.12131806 -0.51687637 -0.97478674 -1.70744334 -1.34111504\n [17] -0.95647033 -0.26044656 -1.74407616  0.38062795 -1.12131806 -1.13963448 -1.46932994 -1.04805240\n [25] -0.93815391 -1.57922843 -0.60845845 -0.62677486 -1.10300165 -0.62677486 -0.80993901 -1.23121655\n [33] -0.80993901 -0.55350920 -1.37774787 -0.86488825 -0.93815391 -0.31539581 -1.15795089 -0.75498976\n [41] -1.35943145 -0.57182562 -1.45101353  0.03261607 -1.26784938 -0.79162259 -0.51687637 -1.17626731\n [49] -1.45101353 -0.29707939 -0.79162259 -0.70004052 -1.63417768 -0.35202864 -1.72575975 -0.46192713\n [57] -0.90152108 -0.60845845 -1.35943145 -1.15795089 -1.50596277 -0.48024354 -1.15795089 -0.51687637\n [65] -1.37774787 -0.42529430 -1.54259560 -0.51687637 -1.46932994 -0.38866147 -1.90892390 -0.77330618\n [73] -0.79162259  0.34399512 -1.54259560 -0.20549732 -0.55350920 -1.23121655 -1.41438070 -0.33371222\n [81] -1.70744334 -0.18718091 -1.32279862 -1.61586126 -1.21290014 -0.48024354 -1.39606428 -1.28616579\n [89] -1.02973599 -0.91983750 -1.50596277 -0.51687637 -1.81734182 -0.79162259 -1.41438070 -0.57182562\n [97] -1.06636882 -0.66340769 -1.98218956 -0.13223166 -1.63417768 -0.53519279 -1.13963448 -1.12131806\n[105] -1.10300165 -0.77330618 -0.97478674 -1.04805240 -1.06636882 -0.13223166 -1.06636882  0.30736229\n[113] -0.77330618 -0.31539581 -0.79162259 -0.22381374 -0.97478674 -1.21290014 -1.50596277 -0.51687637\n[121] -1.41438070 -1.13963448 -0.68172411 -0.46192713 -1.59754485 -0.60845845 -0.93815391 -0.44361071\n[129] -0.90152108  0.03261607 -0.99310316 -0.15054808 -1.30448221 -1.17626731 -1.06636882 -0.51687637\n[137] -1.52427919 -0.68172411 -1.26784938 -0.77330618 -0.68172411 -0.60845845 -2.16535371 -0.59014203\n[145] -1.21290014 -0.90152108 -0.86488825 -1.34111504 -1.45101353 -1.12131806 -1.45101353 -0.44361071\n[153]  0.39894437  1.11328455  0.87517115  1.11328455  0.67369059  0.47221003  0.27072946  0.50884286\n[161] -0.11391525  0.52715927 -0.55350920  0.93012040  0.28904588  0.82022191  0.34399512  0.98506964\n[169] -0.35202864  0.96675323  0.41726078  0.87517115  1.14991738  0.21578022  0.47221003  0.43557720\n[177] -0.18718091  0.39894437  0.10588173  0.71032342  0.78358908  1.11328455  0.61874135 -0.20549732\n[185]  0.21578022  2.87166037  0.94843681  0.82022191 -0.24213015  0.08756532  0.01429966  0.87517115\n[193] -0.22381374  1.04001889  0.25241305  1.04001889  1.20486662 -0.05896600  0.28904588  1.20486662\n[201]  0.17914739  0.23409663  0.49052644  0.83853832  0.21578022  1.13160096  0.47221003  0.19746381\n[209] -0.02233317  0.28904588 -0.13223166  1.18655021  0.25241305  0.41726078  0.32567871  1.90089038\n[217]  0.34399512  1.07665172  0.41726078  1.02170247 -0.07728242  1.24149945  0.69200701  0.45389361\n[225]  0.78358908  0.47221003  0.45389361  0.85685474  0.65537418  1.31476511  0.23409663  0.23409663\n[233]  0.94843681  1.57119492  0.63705776  1.11328455  0.17914739  1.25981586 -0.09559883  1.35139794\n[241]  0.65537418  1.49792926  0.65537418  1.51624567  0.28904588  1.02170247  0.10588173  1.25981586\n[249]  1.00338606  0.54547569  0.82022191  1.31476511  0.83853832  2.19395302  0.60042493  0.94843681\n[257]  0.61874135  0.52715927 -0.40697788  1.73604265 -0.11391525  0.76527266  1.20486662  1.07665172\n[265] -0.07728242  1.38803077  0.41726078  2.04742170  0.10588173  0.89348757  0.60042493          NA\n[273]  0.52715927  1.18655021  0.23409663  1.09496813  0.47221003  1.11328455  1.35139794  0.27072946\n[281]  1.60782775  0.23409663  0.39894437  1.35139794  0.38062795  1.35139794  0.49052644  1.42466360\n[289]  0.56379210  1.47961284  0.36231154  1.20486662  1.16823379  2.57859773  0.45389361  0.96675323\n[297] -0.27876298  0.83853832 -0.13223166  1.22318303  0.50884286  1.47961284  1.20486662  1.02170247\n[305]  0.45389361  1.62614416 -0.55350920  1.88257397 -0.26044656  1.29644869  1.05833530  0.65537418\n[313]  0.67369059  1.47961284  0.54547569  1.75435906  0.93012040  0.41726078  1.27813228  0.28904588\n[321]  1.27813228  1.25981586  1.13160096  0.93012040  1.38803077  1.07665172  0.76527266  1.36971435\n[329]  0.32567871  1.24149945 -0.26044656  1.51624567  0.23409663  0.98506964  1.14991738  0.30736229\n[337]  1.46129643  0.52715927  0.32567871  2.17563660 -0.07728242  1.04001889  1.25981586  1.14991738"
+  },
+  {
+    "objectID": "programming-functions.html#your-turn",
+    "href": "programming-functions.html#your-turn",
+    "title": "Programming with R: Functions",
     "section": "Your turn",
-    "text": "Your turn\nUsing the rodents data.frame:\n\nSelect the id column and all of the numeric columns\nSelect all columns except the columns starting with \"note\"\nReorder the columns, moving the last column to the first position, without specifying any column names"
+    "text": "Your turn\nSee if you can add another argument to to_z() to allow the user to specify if NA values should be removed or not. Give it a default value."
   },
   {
-    "objectID": "data-manipulation.html#using-filter",
-    "href": "data-manipulation.html#using-filter",
-    "title": "Advanced Data Manipulation with dplyr and tidyr",
-    "section": "Using filter()",
-    "text": "Using filter()\nTo retain only a subset of rows:\n\nfilter(penguins, species == \"Adelie\")\n\n# A tibble: 152 × 8\n  species island    bill_len bill_dep flipper_len body_mass sex     year\n  &lt;fct&gt;   &lt;fct&gt;        &lt;dbl&gt;    &lt;dbl&gt;       &lt;int&gt;     &lt;int&gt; &lt;fct&gt;  &lt;int&gt;\n1 Adelie  Torgersen     39.1     18.7         181      3750 male    2007\n2 Adelie  Torgersen     39.5     17.4         186      3800 female  2007\n3 Adelie  Torgersen     40.3     18           195      3250 female  2007\n4 Adelie  Torgersen     NA       NA            NA        NA &lt;NA&gt;    2007\n5 Adelie  Torgersen     36.7     19.3         193      3450 female  2007\n# ℹ 147 more rows"
-  },
-  {
-    "objectID": "data-manipulation.html#combine-multiple-filter-conditions-with-or-and-and-or",
-    "href": "data-manipulation.html#combine-multiple-filter-conditions-with-or-and-and-or",
-    "title": "Advanced Data Manipulation with dplyr and tidyr",
-    "section": "Combine multiple filter() conditions with , or & (AND) and | (OR):",
-    "text": "Combine multiple filter() conditions with , or & (AND) and | (OR):\n\nfilter(penguins, species == \"Adelie\", island == \"Torgersen\")\n\n# A tibble: 52 × 8\n  species island    bill_len bill_dep flipper_len body_mass sex     year\n  &lt;fct&gt;   &lt;fct&gt;        &lt;dbl&gt;    &lt;dbl&gt;       &lt;int&gt;     &lt;int&gt; &lt;fct&gt;  &lt;int&gt;\n1 Adelie  Torgersen     39.1     18.7         181      3750 male    2007\n2 Adelie  Torgersen     39.5     17.4         186      3800 female  2007\n3 Adelie  Torgersen     40.3     18           195      3250 female  2007\n4 Adelie  Torgersen     NA       NA            NA        NA &lt;NA&gt;    2007\n5 Adelie  Torgersen     36.7     19.3         193      3450 female  2007\n# ℹ 47 more rows\n\n\n\n\nfilter(penguins, species == \"Adelie\" | (species == \"Gentoo\" & body_mass &lt; 4000))\n\n# A tibble: 153 × 8\n  species island    bill_len bill_dep flipper_len body_mass sex     year\n  &lt;fct&gt;   &lt;fct&gt;        &lt;dbl&gt;    &lt;dbl&gt;       &lt;int&gt;     &lt;int&gt; &lt;fct&gt;  &lt;int&gt;\n1 Adelie  Torgersen     39.1     18.7         181      3750 male    2007\n2 Adelie  Torgersen     39.5     17.4         186      3800 female  2007\n3 Adelie  Torgersen     40.3     18           195      3250 female  2007\n4 Adelie  Torgersen     NA       NA            NA        NA &lt;NA&gt;    2007\n5 Adelie  Torgersen     36.7     19.3         193      3450 female  2007\n# ℹ 148 more rows\n\n\n\nlive code these"
-  },
-  {
-    "objectID": "data-manipulation.html#using-mutate",
-    "href": "data-manipulation.html#using-mutate",
-    "title": "Advanced Data Manipulation with dplyr and tidyr",
-    "section": "Using mutate()",
-    "text": "Using mutate()\nCreate new columns or modify existing columns:\n\nmutate(penguins, mass_kg = body_mass / 1000)\n\n# A tibble: 344 × 9\n  species island    bill_len bill_dep flipper_len body_mass sex     year mass_kg\n  &lt;fct&gt;   &lt;fct&gt;        &lt;dbl&gt;    &lt;dbl&gt;       &lt;int&gt;     &lt;int&gt; &lt;fct&gt;  &lt;int&gt;   &lt;dbl&gt;\n1 Adelie  Torgersen     39.1     18.7         181      3750 male    2007    3.75\n2 Adelie  Torgersen     39.5     17.4         186      3800 female  2007    3.8 \n3 Adelie  Torgersen     40.3     18           195      3250 female  2007    3.25\n4 Adelie  Torgersen     NA       NA            NA        NA &lt;NA&gt;    2007   NA   \n5 Adelie  Torgersen     36.7     19.3         193      3450 female  2007    3.45\n# ℹ 339 more rows\n\n\n\nCreate multiple columns in one mutate call:\n\nmutate(\n  penguins,\n  mass_kg = body_mass / 1000,\n  bill_ratio = bill_len / bill_dep\n)\n\n# A tibble: 344 × 10\n  species island    bill_len bill_dep flipper_len body_mass sex     year mass_kg bill_ratio\n  &lt;fct&gt;   &lt;fct&gt;        &lt;dbl&gt;    &lt;dbl&gt;       &lt;int&gt;     &lt;int&gt; &lt;fct&gt;  &lt;int&gt;   &lt;dbl&gt;      &lt;dbl&gt;\n1 Adelie  Torgersen     39.1     18.7         181      3750 male    2007    3.75       2.09\n2 Adelie  Torgersen     39.5     17.4         186      3800 female  2007    3.8        2.27\n3 Adelie  Torgersen     40.3     18           195      3250 female  2007    3.25       2.24\n4 Adelie  Torgersen     NA       NA            NA        NA &lt;NA&gt;    2007   NA         NA   \n5 Adelie  Torgersen     36.7     19.3         193      3450 female  2007    3.45       1.90\n# ℹ 339 more rows\n\n\n\n\nlive code these"
-  },
-  {
-    "objectID": "data-manipulation.html#the-pipe",
-    "href": "data-manipulation.html#the-pipe",
-    "title": "Advanced Data Manipulation with dplyr and tidyr",
-    "section": "The pipe ( |> )",
-    "text": "The pipe ( |&gt; )\nThe pipe operator (|&gt;) passes the output of one function as the first argument to the next function. It allows us to chain together multiple operations in a readable way.\n\n\nHelps avoid deeply nested function calls, which are hard to read.\n\nfilter(select(penguins, species, island, body_mass), body_mass &gt; 4000)\n\n\n\nHelps avoid creating many intermediate variables.\n\nselected_data &lt;- select(penguins, species, island, body_mass)\nfiltered_data &lt;- filter(selected_data, body_mass &gt; 4000)\n\n\nRead it out loud as “and then”\n\npenguins |&gt; # and then\n  select(species, island, body_mass) |&gt; # and then\n  filter(body_mass &gt; 4000)\n\n# A tibble: 172 × 3\n  species island    body_mass\n  &lt;fct&gt;   &lt;fct&gt;         &lt;int&gt;\n1 Adelie  Torgersen      4675\n2 Adelie  Torgersen      4250\n3 Adelie  Torgersen      4400\n4 Adelie  Torgersen      4500\n5 Adelie  Torgersen      4200\n# ℹ 167 more rows"
-  },
-  {
-    "objectID": "data-manipulation.html#using-group_by",
-    "href": "data-manipulation.html#using-group_by",
-    "title": "Advanced Data Manipulation with dplyr and tidyr",
-    "section": "Using group_by()",
-    "text": "Using group_by()\nAdd grouping attributes that tell other dplyr functions to operate by group:\n\npenguins |&gt;\n  select(species, island, body_mass) |&gt;\n  filter(body_mass &gt; 4000) |&gt;\n  group_by(species, island)\n\n# A tibble: 172 × 3\n# Groups:   species, island [5]\n  species island    body_mass\n  &lt;fct&gt;   &lt;fct&gt;         &lt;int&gt;\n1 Adelie  Torgersen      4675\n2 Adelie  Torgersen      4250\n3 Adelie  Torgersen      4400\n4 Adelie  Torgersen      4500\n5 Adelie  Torgersen      4200\n# ℹ 167 more rows"
-  },
-  {
-    "objectID": "data-manipulation.html#using-summarize",
-    "href": "data-manipulation.html#using-summarize",
-    "title": "Advanced Data Manipulation with dplyr and tidyr",
-    "section": "Using summarize()",
-    "text": "Using summarize()\nCreates one summary row per unique combination of groups:\n\npenguins |&gt;\n  select(species, island, body_mass) |&gt;\n  filter(body_mass &gt; 4000) |&gt;\n  group_by(species, island) |&gt;\n  summarise(sd_mass = sd(body_mass, na.rm = TRUE))\n\n# A tibble: 5 × 3\n# Groups:   species [3]\n  species   island    sd_mass\n  &lt;fct&gt;     &lt;fct&gt;       &lt;dbl&gt;\n1 Adelie    Biscoe       268.\n2 Adelie    Dream        170.\n3 Adelie    Torgersen    191.\n4 Chinstrap Dream        230.\n5 Gentoo    Biscoe       496."
-  },
-  {
-    "objectID": "data-manipulation.html#your-turn---pulling-it-all-together",
-    "href": "data-manipulation.html#your-turn---pulling-it-all-together",
-    "title": "Advanced Data Manipulation with dplyr and tidyr",
-    "section": "Your turn - pulling it all together",
-    "text": "Your turn - pulling it all together\nUsing the rodents data set find the mean hindfoot length per weight of Merriam’s Kangaroo Rats (\"DM\") grouped by plot and arranged by thew new hfl per weight column."
-  },
-  {
-    "objectID": "data-manipulation.html#dplyr-practice",
-    "href": "data-manipulation.html#dplyr-practice",
-    "title": "Advanced Data Manipulation with dplyr and tidyr",
-    "section": "dplyr practice",
-    "text": "dplyr practice\n\n\n\nRemove records from invalid sampling periods (when period is negative). Re-assign the result to the rodents data frame.\nHow many individuals of each species were caught in 1995?\nWhat date had the highest number of individual rodents caught?\n\n\n\nKey columns\n\nid = individual identifier\nday, month, year = date of capture\nperiod = sampling period\nspecies = species code\nwgt = weight (grams)\nyear = year of capture"
-  },
-  {
-    "objectID": "data-manipulation.html#dplyr-practice-1",
-    "href": "data-manipulation.html#dplyr-practice-1",
-    "title": "Advanced Data Manipulation with dplyr and tidyr",
-    "section": "dplyr practice",
-    "text": "dplyr practice\n\n\n\nFor each capture record, calculate the percent difference in weight from the average weight of that species.\nOf all individual Ord’s Kangaroo Rats (species code “DO”) that have been caught more than 5 times, which individual was consistently the biggest? (i.e., has the highest average percent difference in weight from the species’ average weight)?\n\n\n\nKey columns\n\nid = individual identifier\nday, month, year = date of capture\nperiod = sampling period\nspecies = species code\nwgt = weight (grams)\nyear = year of capture"
-  },
-  {
-    "objectID": "data-manipulation.html#column-wise-operations",
-    "href": "data-manipulation.html#column-wise-operations",
-    "title": "Advanced Data Manipulation with dplyr and tidyr",
-    "section": "Column-wise operations",
-    "text": "Column-wise operations\n\n\nApply one or more functions to a set of columns in a data frame using across()\n\nacross(&lt;columns&gt;, &lt;functions&gt;)\n\nSpecify columns using a vector of names or selection helpers (e.g., starts_with(), ends_with(), contains(), where(), etc.)\nSpecify function(s) to apply to selected columns\nUsed with summarize() & mutate()\n\n\nExample: calculate mean of all numeric columns\n\nlibrary(dplyr)\n\nmtcars |&gt;\n  group_by(cyl) |&gt;\n  summarize(across(where(is.numeric), mean))\n\n\n\nSelection syntax is the same as in select(), i.e., using the same selection helpers\nWe are passing the function mean to across(), not calling it (i.e., no parentheses). Functions in R are objects that can be passed around and used later."
-  },
-  {
-    "objectID": "data-manipulation.html#your-turn-1",
-    "href": "data-manipulation.html#your-turn-1",
-    "title": "Advanced Data Manipulation with dplyr and tidyr",
+    "objectID": "programming-functions.html#your-turn-1",
+    "href": "programming-functions.html#your-turn-1",
+    "title": "Programming with R: Functions",
     "section": "Your turn",
-    "text": "Your turn\n\nScale hfl and wgt (use across()) in rodents to have mean 0 and standard deviation 1. (Hint: Check out the scale() function)\nBonus: Use the .names argument to keep the original columns and give the new columns a sensible name"
+    "text": "Your turn\nCreate a function called percent_diff that calculates the percent difference between two (vectors of) values:\n\\[\\%diff = \\frac{|a - b|}{((a + b)/2)} * 100\\]\n\nHint: you can use the abs() function to calculate the absolute value."
   },
   {
-    "objectID": "data-manipulation.html#column-wise-operations-1",
-    "href": "data-manipulation.html#column-wise-operations-1",
-    "title": "Advanced Data Manipulation with dplyr and tidyr",
-    "section": "Column-wise operations",
-    "text": "Column-wise operations\nspecify multiple functions to apply in a list()\n\n\nExample: calculate mean and sd of all numeric columns\n\nlibrary(dplyr)\nmtcars |&gt;\n  group_by(cyl) |&gt;\n  summarize(\n    across(where(is.numeric), list(mean = mean, sd = sd))\n  )\n\n\n\n# A tibble: 3 × 21\n    cyl mpg_mean mpg_sd disp_mean disp_sd hp_mean hp_sd drat_mean drat_sd wt_mean wt_sd qsec_mean qsec_sd\n  &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;\n1     4     26.7   4.51      105.    26.9    82.6  20.9      4.07   0.365    2.29 0.570      19.1    1.68\n2     6     19.7   1.45      183.    41.6   122.   24.3      3.59   0.476    3.12 0.356      18.0    1.71\n3     8     15.1   2.56      353.    67.8   209.   51.0      3.23   0.372    4.00 0.759      16.8    1.20\n# ℹ 8 more variables: vs_mean &lt;dbl&gt;, vs_sd &lt;dbl&gt;, am_mean &lt;dbl&gt;, am_sd &lt;dbl&gt;, gear_mean &lt;dbl&gt;, gear_sd &lt;dbl&gt;,\n#   carb_mean &lt;dbl&gt;, carb_sd &lt;dbl&gt;\n\n\n\n\nhttps://tidyselect.r-lib.org/reference/language.html"
-  },
-  {
-    "objectID": "data-manipulation.html#column-wise-operations-2",
-    "href": "data-manipulation.html#column-wise-operations-2",
-    "title": "Advanced Data Manipulation with dplyr and tidyr",
-    "section": "Column-wise operations",
-    "text": "Column-wise operations\nRun this in your R session, what do you get?\n\nlibrary(dplyr)\npenguins |&gt;\n  summarize(\n    across(where(is.numeric), list(mean = mean, sd = sd))\n  )\n\n\n\n# A tibble: 1 × 10\n  bill_len_mean bill_len_sd bill_dep_mean bill_dep_sd flipper_len_mean flipper_len_sd body_mass_mean\n          &lt;dbl&gt;       &lt;dbl&gt;         &lt;dbl&gt;       &lt;dbl&gt;            &lt;dbl&gt;          &lt;dbl&gt;          &lt;dbl&gt;\n1            NA          NA            NA          NA               NA             NA             NA\n# ℹ 3 more variables: body_mass_sd &lt;dbl&gt;, year_mean &lt;dbl&gt;, year_sd &lt;dbl&gt;\n\n\n\n\n\nWhen we use a function in across() it is called with its default arguments\n\nmean() and sd() both have an argument na.rm that defaults to FALSE\n\nWe can’t pass extra arguments to functions inside across() directly\nWe need to pass a function with the argument values we want “baked in”\n\n\n\nhttps://tidyselect.r-lib.org/reference/language.html"
-  },
-  {
-    "objectID": "data-manipulation.html#specifying-extra-arguments",
-    "href": "data-manipulation.html#specifying-extra-arguments",
-    "title": "Advanced Data Manipulation with dplyr and tidyr",
-    "section": "Specifying extra arguments",
-    "text": "Specifying extra arguments\nWe can define our own helper functions:\n\nlibrary(dplyr)\n\nsd_na &lt;- function(x) {\n  sd(x, na.rm = TRUE)\n}\n\nmean_na &lt;- function(x) {\n  mean(x, na.rm = TRUE)\n}\n\npenguins |&gt;\n  summarize(\n    across(where(is.numeric), list(mean = mean_na, sd = sd_na))\n  )\n\n\n\n# A tibble: 1 × 10\n  bill_len_mean bill_len_sd bill_dep_mean bill_dep_sd flipper_len_mean flipper_len_sd body_mass_mean\n          &lt;dbl&gt;       &lt;dbl&gt;         &lt;dbl&gt;       &lt;dbl&gt;            &lt;dbl&gt;          &lt;dbl&gt;          &lt;dbl&gt;\n1          43.9        5.46          17.2        1.97             201.           14.1          4202.\n# ℹ 3 more variables: body_mass_sd &lt;dbl&gt;, year_mean &lt;dbl&gt;, year_sd &lt;dbl&gt;\n\n\n\nLive code this"
-  },
-  {
-    "objectID": "data-manipulation.html#specifying-extra-arguments-1",
-    "href": "data-manipulation.html#specifying-extra-arguments-1",
-    "title": "Advanced Data Manipulation with dplyr and tidyr",
-    "section": "Specifying extra arguments",
-    "text": "Specifying extra arguments\nBut if we’re doing this only once we can define them in place with an anonymous function:\n\\(x) function(x, other_args)\n\nThis defines a function “on the fly” with the arguments specified how we want\nThe x will take the values of each column passed to it by across()\n\n\nlibrary(dplyr)\n\npenguins |&gt;\n  summarize(\n    across(\n      where(is.numeric),\n      list(\n        mean = \\(x) mean(x, na.rm = TRUE),\n        sd = \\(x) sd(x, na.rm = TRUE)\n      )\n    )\n  )\n\n\n\n# A tibble: 1 × 10\n  bill_len_mean bill_len_sd bill_dep_mean bill_dep_sd flipper_len_mean flipper_len_sd body_mass_mean\n          &lt;dbl&gt;       &lt;dbl&gt;         &lt;dbl&gt;       &lt;dbl&gt;            &lt;dbl&gt;          &lt;dbl&gt;          &lt;dbl&gt;\n1          43.9        5.46          17.2        1.97             201.           14.1          4202.\n# ℹ 3 more variables: body_mass_sd &lt;dbl&gt;, year_mean &lt;dbl&gt;, year_sd &lt;dbl&gt;\n\n\n\nLive code this"
-  },
-  {
-    "objectID": "data-manipulation.html#your-turn-2",
-    "href": "data-manipulation.html#your-turn-2",
-    "title": "Advanced Data Manipulation with dplyr and tidyr",
+    "objectID": "programming-functions.html#your-turn-2",
+    "href": "programming-functions.html#your-turn-2",
+    "title": "Programming with R: Functions",
     "section": "Your turn",
-    "text": "Your turn\n\nCalculate maximum of all bill measurements for each species in the built-in penguins dataset\nCalculate the median of hind-foot length (hfl) and weight (wgt) for each species in rodents, ignoring NA values."
+    "text": "Your turn\nCreate a function called is_big() that takes a numeric vector and outputs a logical vector indicating whether each value is larger than a specified quantile threshold.\n\nThe function should have two arguments: the numeric vector and the quantile threshold (default to 0.75)."
   },
   {
-    "objectID": "data-manipulation.html#two-table-verbs-joins",
-    "href": "data-manipulation.html#two-table-verbs-joins",
-    "title": "Advanced Data Manipulation with dplyr and tidyr",
-    "section": "Two-table verbs (joins)",
-    "text": "Two-table verbs (joins)\n\n\n\n\nMutating joins\n\nCombine two tables based on common values in one or more columns\n\nFiltering joins\n\nFilter rows from one table based on values in another table\n\n\n\nhttps://r4ds.hadley.nz/joins.html#how-do-joins-work"
+    "objectID": "programming-functions.html#types-of-function",
+    "href": "programming-functions.html#types-of-function",
+    "title": "Programming with R: Functions",
+    "section": "Types of function",
+    "text": "Types of function\n\nvector functions: one or more vectors as input, one vector as output\n\n✔️ output same length as input.\n\nii. ➡️ summary functions: input is vector, output is a single value\ndata frame functions: df as input and df as output"
   },
   {
-    "objectID": "data-manipulation.html#mutating-joins-1",
-    "href": "data-manipulation.html#mutating-joins-1",
-    "title": "Advanced Data Manipulation with dplyr and tidyr",
-    "section": "Mutating joins",
-    "text": "Mutating joins\n\n\nleft_join()\n\nKeeps all rows in the left table\nDrops rows from the right table that don’t match\nRows in the left that don’t match get NA in the columns from the right table\n\n\n\n\n\nhttps://r4ds.hadley.nz/joins.html#how-do-joins-work"
+    "objectID": "programming-functions.html#summary-functions",
+    "href": "programming-functions.html#summary-functions",
+    "title": "Programming with R: Functions",
+    "section": "Summary functions",
+    "text": "Summary functions\n\ninput is vector\noutput is a single value\ncould be used in summarise()"
   },
   {
-    "objectID": "data-manipulation.html#mutating-joins-2",
-    "href": "data-manipulation.html#mutating-joins-2",
-    "title": "Advanced Data Manipulation with dplyr and tidyr",
-    "section": "Mutating joins",
-    "text": "Mutating joins\n\n\nright_join()\n\nKeeps all rows in the right table\nDrops rows from the left table that don’t match\nRows in the right table that don’t match get NA in the columns from the left table\n\n\n\n\n\nhttps://r4ds.hadley.nz/joins.html#how-do-joins-work"
+    "objectID": "programming-functions.html#example-4",
+    "href": "programming-functions.html#example-4",
+    "title": "Programming with R: Functions",
+    "section": "Example",
+    "text": "Example\nWrite a function to compute the standard error of a sample.\n\\[s.e. = \\frac{s.d.}{\\sqrt{n}}\\]"
   },
   {
-    "objectID": "data-manipulation.html#mutating-joins-3",
-    "href": "data-manipulation.html#mutating-joins-3",
-    "title": "Advanced Data Manipulation with dplyr and tidyr",
-    "section": "Mutating joins",
-    "text": "Mutating joins\n\n\ninner_join()\n\nKeeps all rows in both tables where keys match\nRows from either table that don’t match are dropped\n\n\n\n\n\nhttps://r4ds.hadley.nz/joins.html#how-do-joins-work"
+    "objectID": "programming-functions.html#example-5",
+    "href": "programming-functions.html#example-5",
+    "title": "Programming with R: Functions",
+    "section": "Example",
+    "text": "Example\n\nstd_error &lt;- function(x) {\n  sd(x, na.rm = TRUE) / sqrt(sum(!is.na(x)))\n}\n\n\nNote: sum(TRUE) = 1 and sum(FALSE) = 0 Thus,sum(!is.na(x)) gives you the number of TRUE (i.e., the number of non-NA values) and is a bit shorter than length(x[!is.na(x)])"
   },
   {
-    "objectID": "data-manipulation.html#mutating-joins-4",
-    "href": "data-manipulation.html#mutating-joins-4",
-    "title": "Advanced Data Manipulation with dplyr and tidyr",
-    "section": "Mutating joins",
-    "text": "Mutating joins\n\n\nfull_join()\n\nKeeps all rows in both tables\nValues in x and y that don’t match get NA in the result\n\n\n\n\n\nhttps://r4ds.hadley.nz/joins.html#how-do-joins-work"
+    "objectID": "programming-functions.html#try-it-out-2",
+    "href": "programming-functions.html#try-it-out-2",
+    "title": "Programming with R: Functions",
+    "section": "Try it out",
+    "text": "Try it out\nCall the function on penguins$bill_len\n\nstd_error(penguins$bill_len)\n\n[1] 0.2952205\n\n\n\nOr in a pipeline\n\npenguins |&gt;\n  group_by(species) |&gt;\n  summarise(se = std_error(bill_len))\n\n# A tibble: 3 × 2\n  species      se\n  &lt;fct&gt;     &lt;dbl&gt;\n1 Adelie    0.217\n2 Chinstrap 0.405\n3 Gentoo    0.278"
   },
   {
-    "objectID": "data-manipulation.html#join-syntax",
-    "href": "data-manipulation.html#join-syntax",
-    "title": "Advanced Data Manipulation with dplyr and tidyr",
-    "section": "Join syntax",
-    "text": "Join syntax\nIf don’t specify join columns, will join on all common names\n\nE.g., both tables have columns year, month, day\n\nleft_join(x, y)\n#&gt; Joining with `by = join_by(year, month, day)`\n\nBetter to specify the join columns explicitly\n\nBoth tables have columns column_1 and column_2\n\nleft_join(x, y, by = c(\"column_1\", \"column_2\"))\n\nIf the columns to join on have different names in each table\n\nleft_join(x, y, by = c(\"column_in_x\" = \"column_in_y\"))"
-  },
-  {
-    "objectID": "data-manipulation.html#your-turn-3",
-    "href": "data-manipulation.html#your-turn-3",
-    "title": "Advanced Data Manipulation with dplyr and tidyr",
+    "objectID": "programming-functions.html#your-turn-3",
+    "href": "programming-functions.html#your-turn-3",
+    "title": "Programming with R: Functions",
     "section": "Your turn",
-    "text": "Your turn\nUse a join to add location information to the rodent captures data\n\nThe rodent captures data is in the PortalData/Rodents/Portal_rodent.csv file.\nThe SiteandMethods/Portal_UTMCoords.csv file contains information about the location of each plot"
+    "text": "Your turn\nWrite a function to compute the sums of squares (sum of the squared deviations from the mean). This can be calculated with either:\n\\[SS(x) = \\sum{(x - \\bar{x})^2}\\]\nor\n\\[SS(x) = s^2 * (n-1)\\]"
   },
   {
-    "objectID": "data-manipulation.html#filtering-joins-1",
-    "href": "data-manipulation.html#filtering-joins-1",
-    "title": "Advanced Data Manipulation with dplyr and tidyr",
-    "section": "Filtering joins",
-    "text": "Filtering joins\n\n\nsemi_join()\n\nKeeps all rows in the left table where there are matching key values in the right table\nDoes not add any columns"
+    "objectID": "programming-functions.html#a-solution---one-option",
+    "href": "programming-functions.html#a-solution---one-option",
+    "title": "Programming with R: Functions",
+    "section": "A solution - one option",
+    "text": "A solution - one option\n\nsum_sq &lt;- function(x) {\n  sum((x - mean(x, na.rm = TRUE))^2, na.rm = TRUE)\n}\n\nOR\n\nsum_sq2 &lt;- function(x) {\n  var_x &lt;- var(x, na.rm = TRUE)\n  n &lt;- sum(!is.na(x))\n  var_x * (n - 1)\n}\n\n\nTry it out\n\nsum_sq(penguins$bill_len)\n\n[1] 10164.21\n\nsum_sq2(penguins$bill_len)\n\n[1] 10164.21"
   },
   {
-    "objectID": "data-manipulation.html#filtering-joins-2",
-    "href": "data-manipulation.html#filtering-joins-2",
-    "title": "Advanced Data Manipulation with dplyr and tidyr",
-    "section": "Filtering joins",
-    "text": "Filtering joins\n\n\nanti_join()\n\nKeeps all rows in the left table where there are not matching values in the right table\nDoes not add any columns"
+    "objectID": "programming-functions.html#types-of-function-1",
+    "href": "programming-functions.html#types-of-function-1",
+    "title": "Programming with R: Functions",
+    "section": "Types of function",
+    "text": "Types of function\nWe will cover two types of function\n\nvector functions: one or more vectors as input, one vector as output\n\n✔️ output same length as input.\n✔️ summary functions: input is vector, output is a single value\n\n\n2. ➡️ data frame functions: df as input and df as output"
   },
   {
-    "objectID": "data-manipulation.html#your-turn-4",
-    "href": "data-manipulation.html#your-turn-4",
-    "title": "Advanced Data Manipulation with dplyr and tidyr",
+    "objectID": "programming-functions.html#dataframe-functions",
+    "href": "programming-functions.html#dataframe-functions",
+    "title": "Programming with R: Functions",
+    "section": "Dataframe functions",
+    "text": "Dataframe functions\nDataframe as input and Dataframe as output\n\nFor example, we might summarise one of our columns like this:\n\npenguins |&gt;\n  summarise(\n    mean = mean(bill_len, na.rm = TRUE),\n    n = sum(!is.na(bill_len)),\n    sd = sd(bill_len, na.rm = TRUE),\n    se = std_error(bill_len)\n  )\n\n      mean   n       sd        se\n1 43.92193 342 5.459584 0.2952205\n\n\nOutput is a dataframe"
+  },
+  {
+    "objectID": "programming-functions.html#dataframe-functions-1",
+    "href": "programming-functions.html#dataframe-functions-1",
+    "title": "Programming with R: Functions",
+    "section": "Dataframe functions",
+    "text": "Dataframe functions\nGood candidate for a function to avoid repetitive code: my_summary()"
+  },
+  {
+    "objectID": "programming-functions.html#define-my_summary-function",
+    "href": "programming-functions.html#define-my_summary-function",
+    "title": "Programming with R: Functions",
+    "section": "Define my_summary() function",
+    "text": "Define my_summary() function\n\nmy_summary &lt;- function(df, column) {\n  df |&gt;\n    summarise(\n      mean = mean(column, na.rm = TRUE),\n      n = sum(!is.na(column)),\n      sd = sd(column, na.rm = TRUE),\n      se = std_error(column)\n    )\n}"
+  },
+  {
+    "objectID": "programming-functions.html#use-function",
+    "href": "programming-functions.html#use-function",
+    "title": "Programming with R: Functions",
+    "section": "Use function",
+    "text": "Use function\n\nmy_summary(penguins, bill_len)\n\nError in `summarise()`:\nℹ In argument: `mean = mean(column, na.rm = TRUE)`.\nCaused by error:\n! object 'bill_len' not found\n\n\n😕"
+  },
+  {
+    "objectID": "programming-functions.html#tidy-evaluation",
+    "href": "programming-functions.html#tidy-evaluation",
+    "title": "Programming with R: Functions",
+    "section": "Tidy evaluation",
+    "text": "Tidy evaluation\ntidyverse functions like dplyr::summarise() use “tidy evaluation” so you can refer to the names of variables inside dataframes. For example, you can use:\neither\npenguins |&gt; summarise(mean = mean(bill_dep))\nOr\nsummarise(penguins, mean = mean(bill_dep))"
+  },
+  {
+    "objectID": "programming-functions.html#tidy-evaluation-1",
+    "href": "programming-functions.html#tidy-evaluation-1",
+    "title": "Programming with R: Functions",
+    "section": "Tidy evaluation",
+    "text": "Tidy evaluation\nThis is instead of having to use the full dataframe name with $, e.g.\nsummarise(penguins, mean = mean(penguins$bill_dep))\n\nThis is known as data-masking: the dataframe environment masks the user environment by giving priority to the dataframe."
+  },
+  {
+    "objectID": "programming-functions.html#data-masking-is-great.",
+    "href": "programming-functions.html#data-masking-is-great.",
+    "title": "Programming with R: Functions",
+    "section": "Data masking is great….",
+    "text": "Data masking is great….\nand makes life easier when working interactively\n\n\n\nBut kind of annoying in functions\n\n\n\n\nmy_summary &lt;- function(df, column) {\n  df |&gt;\n    summarise(\n      mean = mean(column, na.rm = TRUE),\n      n = sum(!is.na(column)),\n      sd = sd(column, na.rm = TRUE),\n      se = std_error(column)\n    )\n}\n\n\n\nBecause of data-masking, summarise() in my_summary() is looking for a column literally called column in the dataframe that has been passed in. It is not looking inside the variable column for the name of column you want to give it.\n\n\n\nRead more: Programming with dplyr"
+  },
+  {
+    "objectID": "programming-functions.html#fix-my_summary-function",
+    "href": "programming-functions.html#fix-my_summary-function",
+    "title": "Programming with R: Functions",
+    "section": "Fix my_summary() function",
+    "text": "Fix my_summary() function\nThe solution is to use embracing: {{ var }}\n\nmy_summary &lt;- function(df, column) {\n  df |&gt;\n    summarise(\n      mean = mean({{ column }}, na.rm = TRUE),\n      n = sum(!is.na({{ column }})),\n      sd = sd({{ column }}, na.rm = TRUE),\n      se = std_error({{ column }})\n    )\n}\n\n\n\ntells summarize() to look inside column variable to get the column name\nstyle with spaces\n.groups = \"drop\" to avoid message and leave the data in an ungrouped state"
+  },
+  {
+    "objectID": "programming-functions.html#use-function-1",
+    "href": "programming-functions.html#use-function-1",
+    "title": "Programming with R: Functions",
+    "section": "Use function",
+    "text": "Use function\n\nmy_summary(penguins, bill_len)\n\n      mean   n       sd        se\n1 43.92193 342 5.459584 0.2952205\n\n\n🎉"
+  },
+  {
+    "objectID": "programming-functions.html#when-to-embrace",
+    "href": "programming-functions.html#when-to-embrace",
+    "title": "Programming with R: Functions",
+    "section": "When to embrace?",
+    "text": "When to embrace?\nWhen tidy evaluation is used"
+  },
+  {
+    "objectID": "programming-functions.html#your-turn-4",
+    "href": "programming-functions.html#your-turn-4",
+    "title": "Programming with R: Functions",
     "section": "Your turn",
-    "text": "Your turn\nUse a join to find all the captures where the species is a granivore\n\nThe rodent captures data is in the PortalData/Rodents/Portal_rodent.csv file\nThe PortalData/Rodents/Portal_rodent_species.csv file contains information about the species"
+    "text": "Your turn\nWrite a new summary function which calculates the median, maximum and minimum values of a variable in a dataset. Incorporate an argument to allow the summary to be performed grouped by another variable."
   },
   {
-    "objectID": "data-manipulation.html#more-complex-joins-using-dplyrjoin_by.",
-    "href": "data-manipulation.html#more-complex-joins-using-dplyrjoin_by.",
-    "title": "Advanced Data Manipulation with dplyr and tidyr",
-    "section": "More complex joins using dplyr::join_by().",
-    "text": "More complex joins using dplyr::join_by().\nCross joins create the full cartesian product of two tables\n\n\nlibrary(dplyr)\nx &lt;- data.frame(a = 1:3)\ny &lt;- data.frame(b = c(\"x\", \"y\"))\ncross_join(x, y)\n\n\n  a b\n1 1 x\n2 1 y\n3 2 x\n4 2 y\n5 3 x\n6 3 y\n\n\n\n\nInequality joins\nleft_join(x, y, by = join_by(column_1 &gt;= column_2))\n\n\n\nRolling joins (inequality joins constrained by closest())\nleft_join(\n    x, y, \n    by = join_by(id, closest(capture_date &gt;= survey_start_date))\n)\nRolling joins are good for finding things like “the most recent rainy day before a survey date”\n\n\nI haven’t found a good reason to use inequality joins, but they are a necessary precursor to rolling joins, which are very useful."
-  },
-  {
-    "objectID": "data-manipulation.html#overlap-joins",
-    "href": "data-manipulation.html#overlap-joins",
-    "title": "Advanced Data Manipulation with dplyr and tidyr",
-    "section": "Overlap joins",
-    "text": "Overlap joins\n\n\nbetween(x, y_1, y_2)\nwithin(x_1, x_2, y_1, y_2)\noverlaps(x_1, x_2, y_1, y_2)\n\nbetween(x, y_1, y_2):\n\n  y_1 [════════════════════] y_2\n         •\n         x\n\n\nwithin(x_1, x_2, y_1, y_2):\n\n  y_1 [════════════════════] y_2\n         [═════]\n       x_1     x_2\n\n\noverlaps(x_1, x_2, y_1, y_2):\n\n  y_1 [════════════════════] y_2\n                   [═══════════════] \n                 x_1             x_2\n\n\nhttps://dplyr.tidyverse.org/reference/join_by.html#join-types"
-  },
-  {
-    "objectID": "data-manipulation.html#your-turn-5",
-    "href": "data-manipulation.html#your-turn-5",
-    "title": "Advanced Data Manipulation with dplyr and tidyr",
+    "objectID": "programming-functions.html#your-turn-5",
+    "href": "programming-functions.html#your-turn-5",
+    "title": "Programming with R: Functions",
     "section": "Your turn",
-    "text": "Your turn\nUsing the rodent trapping data and the plant census dates data, join the two datasets to find out which plant census (year and season) each rodent capture is associated with.\nStarting code:\nlibrary(dplyr)\nlibrary(readr)\nlibrary(lubridate)\n\nplant_census_dates &lt;- read_csv(\n  \"PortalData/Plants/Portal_plant_census_dates.csv\",\n  na = c(\"unknown\", \"none\")\n)\n\nrodent_trapping &lt;- read_csv(\"PortalData/Rodents/Portal_rodent_trapping.csv\")\n\nHint: use an overlap join with between()"
+    "text": "Your turn\nTry it out\n\nmy_summary(penguins, bill_len, species)\n\n# A tibble: 3 × 4\n  species   median minimum maximum\n  &lt;fct&gt;      &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;\n1 Adelie      38.8    32.1    46  \n2 Chinstrap   49.6    40.9    58  \n3 Gentoo      47.3    40.9    59.6"
   },
   {
-    "objectID": "data-manipulation.html#what-is-tidy-data",
-    "href": "data-manipulation.html#what-is-tidy-data",
-    "title": "Advanced Data Manipulation with dplyr and tidyr",
-    "section": "What is tidy data?",
-    "text": "What is tidy data?\n\nEach variable is a column; each column is a variable.\nEach observation is a row; each row is an observation.\nEach value is a cell; each cell is a single value."
-  },
-  {
-    "objectID": "data-manipulation.html#wide-vs.-long-tidy-data",
-    "href": "data-manipulation.html#wide-vs.-long-tidy-data",
-    "title": "Advanced Data Manipulation with dplyr and tidyr",
-    "section": "Wide vs. long (tidy) data",
-    "text": "Wide vs. long (tidy) data\n\nWide data often has “data” stored in the column names\n\nExample: dates, treatment groups, measurement types\n\n\n\n\n\n\n\n\n\nsubject\ntreatment_A\ntreatment_B\n\n\n\n\n1\n5\n7\n\n\n2\n6\n8\n\n\n\n\n\n\n\n\n\n\n\n\nsubject\ntreatment\nvalue\n\n\n\n\n1\nA\n5\n\n\n1\nB\n7\n\n\n2\nA\n6\n\n\n2\nB\n8\n\n\n\n\n\n\n\n\n\n\n\n\n\nid\n20250101\n20250201\n\n\n\n\n1\n150\n165\n\n\n2\n125\n118\n\n\n\n\n\n\nDates are stored in the column names\nValues are masses (in grams).\n\n\n\n\n\n\n\n\nid\ndate\nmass\n\n\n\n\n1\n2025-01-01\n150\n\n\n1\n2025-02-01\n165\n\n\n2\n2025-01-01\n125\n\n\n2\n2025-02-01\n118\n\n\n\n\n\n\n\n\n\nEach row has more than one observation (more than one time, place, or subject)\nVariables split across multiple columns\n\nEg., what if we wanted to the get the mean mass per subject?\n\nSecond example - we hopefully have metadata that tells us that the values are masses (in grams)"
-  },
-  {
-    "objectID": "data-manipulation.html#example---billboard-data",
-    "href": "data-manipulation.html#example---billboard-data",
-    "title": "Advanced Data Manipulation with dplyr and tidyr",
-    "section": "Example - billboard data",
-    "text": "Example - billboard data\n\nlibrary(tidyr)\nbillboard\n\n# A tibble: 317 × 79\n  artist      track date.entered   wk1   wk2   wk3   wk4   wk5   wk6   wk7   wk8   wk9  wk10  wk11  wk12  wk13\n  &lt;chr&gt;       &lt;chr&gt; &lt;date&gt;       &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;\n1 2 Pac       Baby… 2000-02-26      87    82    72    77    87    94    99    NA    NA    NA    NA    NA    NA\n2 2Ge+her     The … 2000-09-02      91    87    92    NA    NA    NA    NA    NA    NA    NA    NA    NA    NA\n3 3 Doors Do… Kryp… 2000-04-08      81    70    68    67    66    57    54    53    51    51    51    51    47\n4 3 Doors Do… Loser 2000-10-21      76    76    72    69    67    65    55    59    62    61    61    59    61\n5 504 Boyz    Wobb… 2000-04-15      57    34    25    17    17    31    36    49    53    57    64    70    75\n# ℹ 312 more rows\n# ℹ 63 more variables: wk14 &lt;dbl&gt;, wk15 &lt;dbl&gt;, wk16 &lt;dbl&gt;, wk17 &lt;dbl&gt;, wk18 &lt;dbl&gt;, wk19 &lt;dbl&gt;, wk20 &lt;dbl&gt;,\n#   wk21 &lt;dbl&gt;, wk22 &lt;dbl&gt;, wk23 &lt;dbl&gt;, wk24 &lt;dbl&gt;, wk25 &lt;dbl&gt;, wk26 &lt;dbl&gt;, wk27 &lt;dbl&gt;, wk28 &lt;dbl&gt;,\n#   wk29 &lt;dbl&gt;, wk30 &lt;dbl&gt;, wk31 &lt;dbl&gt;, wk32 &lt;dbl&gt;, wk33 &lt;dbl&gt;, wk34 &lt;dbl&gt;, wk35 &lt;dbl&gt;, wk36 &lt;dbl&gt;,\n#   wk37 &lt;dbl&gt;, wk38 &lt;dbl&gt;, wk39 &lt;dbl&gt;, wk40 &lt;dbl&gt;, wk41 &lt;dbl&gt;, wk42 &lt;dbl&gt;, wk43 &lt;dbl&gt;, wk44 &lt;dbl&gt;,\n#   wk45 &lt;dbl&gt;, wk46 &lt;dbl&gt;, wk47 &lt;dbl&gt;, wk48 &lt;dbl&gt;, wk49 &lt;dbl&gt;, wk50 &lt;dbl&gt;, wk51 &lt;dbl&gt;, wk52 &lt;dbl&gt;,\n#   wk53 &lt;dbl&gt;, wk54 &lt;dbl&gt;, wk55 &lt;dbl&gt;, wk56 &lt;dbl&gt;, wk57 &lt;dbl&gt;, wk58 &lt;dbl&gt;, wk59 &lt;dbl&gt;, wk60 &lt;dbl&gt;, …\n\n\n\nHow would we plot this data to show how the rank of different songs changed over time?\n\n\nWhat shape would this data have in long format?"
-  },
-  {
-    "objectID": "data-manipulation.html#tidyrpivot_longer",
-    "href": "data-manipulation.html#tidyrpivot_longer",
-    "title": "Advanced Data Manipulation with dplyr and tidyr",
-    "section": "tidyr::pivot_longer()",
-    "text": "tidyr::pivot_longer()\nReshape data from wide to long format\n\n\n\npivot_longer(\n  data,\n  cols,\n  ...,\n  cols_vary = \"fastest\",\n  names_to = \"name\",\n  names_prefix = NULL,\n  names_sep = NULL,\n  names_pattern = NULL,\n  names_ptypes = NULL,\n  names_transform = NULL,\n  names_repair = \"check_unique\",\n  values_to = \"value\",\n  values_drop_na = FALSE,\n  values_ptypes = NULL,\n  values_transform = NULL\n)\n\n\n\ncols: columns to pivot from wide to long. Uses tidyselect syntax.\nnames_to: name of new column to create from the column names\nvalues_to: name of new column to create from the values in the selected columns\nvalues_drop_na: if TRUE, drops rows with NA in the values column\n\n\n\nLet’s practice with the billboard data\n\n\n\ngo to R and do pivot_longer() on billboard data"
-  },
-  {
-    "objectID": "data-manipulation.html#your-turn-6",
-    "href": "data-manipulation.html#your-turn-6",
-    "title": "Advanced Data Manipulation with dplyr and tidyr",
+    "objectID": "programming-functions.html#your-turn-6",
+    "href": "programming-functions.html#your-turn-6",
+    "title": "Programming with R: Functions",
     "section": "Your turn",
-    "text": "Your turn\n\nUse SitesandMethods/Portal_plot_treatments.csv and pivot it to longer so there is a start_date, end_date, and treatment column. See if you can get the dates into proper date format. The lubridate package may be helpful."
+    "text": "Your turn\nImprovement: Have a default of NULL for the grouping variable. Why?"
+  },
+  {
+    "objectID": "programming-functions.html#your-turn-7",
+    "href": "programming-functions.html#your-turn-7",
+    "title": "Programming with R: Functions",
+    "section": "Your turn",
+    "text": "Your turn\nTry it out\n\nmy_summary(penguins, bill_len)\n\n# A tibble: 1 × 3\n  median minimum maximum\n   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;\n1   44.4    32.1    59.6"
+  },
+  {
+    "objectID": "programming-functions.html#your-turn-8",
+    "href": "programming-functions.html#your-turn-8",
+    "title": "Programming with R: Functions",
+    "section": "Your turn",
+    "text": "Your turn\nTry it out with more than one group\n\nmy_summary(penguins, bill_len, c(species, island))\n\n\n\nError in `group_by()`:\nℹ In argument: `c(species, island)`.\nCaused by error:\n! `c(species, island)` must be size 344 or 1, not 688.\n\n\n\n😕\n\nBy using embracing in this way, it is actually trying to group by the contents of the two columns concatenated, not the two columns separately."
+  },
+  {
+    "objectID": "programming-functions.html#a-solution",
+    "href": "programming-functions.html#a-solution",
+    "title": "Programming with R: Functions",
+    "section": "A solution",
+    "text": "A solution\nUse pick() which allows you to select a subset of columns inside a data masking function:\n\n\nmy_summary &lt;- function(df, summary_var, group_var = NULL) {\n  df |&gt;\n    group_by(pick({{ group_var }})) |&gt;\n    summarise(\n      median = median({{ summary_var }}, na.rm = TRUE),\n      minimum = min({{ summary_var }}, na.rm = TRUE),\n      maximum = max({{ summary_var }}, na.rm = TRUE),\n      .groups = \"drop\"\n    )\n}"
+  },
+  {
+    "objectID": "programming-functions.html#section-1",
+    "href": "programming-functions.html#section-1",
+    "title": "Programming with R: Functions",
+    "section": "",
+    "text": "Try it out with more than one group\n\nmy_summary(penguins, bill_len, c(species, island))\n\n# A tibble: 5 × 5\n  species   island    median minimum maximum\n  &lt;fct&gt;     &lt;fct&gt;      &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;\n1 Adelie    Biscoe      38.7    34.5    45.6\n2 Adelie    Dream       38.6    32.1    44.1\n3 Adelie    Torgersen   38.9    33.5    46  \n4 Chinstrap Dream       49.6    40.9    58  \n5 Gentoo    Biscoe      47.3    40.9    59.6"
+  },
+  {
+    "objectID": "programming-functions.html#functions-should-be-pure",
+    "href": "programming-functions.html#functions-should-be-pure",
+    "title": "Programming with R: Functions",
+    "section": "Functions should be “pure”",
+    "text": "Functions should be “pure”\n\nShould not depend on external state (e.g., global variables)\nShould not have side effects (e.g., modifying global variables, printing to console, plotting, etc.)\nGiven the same inputs, should always return the same outputs\n\n\n\nPure\nadd_one &lt;- function(x) {\n  x + 1\n}\n\n\n\nImpure\ny &lt;- 10\n\nadd_y &lt;- function(x) {\n  x + y\n}\n\nadd_to_global &lt;- function(x) {\n  y &lt;&lt;- x + 1\n}"
+  },
+  {
+    "objectID": "programming-functions.html#functions---data-validation-and-error-handling",
+    "href": "programming-functions.html#functions---data-validation-and-error-handling",
+    "title": "Programming with R: Functions",
+    "section": "Functions - data validation and error handling",
+    "text": "Functions - data validation and error handling\nIt’s good practice to include data validation and error handling in your functions to ensure they behave as expected when given incorrect or unexpected inputs.\n\nUse if statements to check that inputs meet certain criteria or if specific conditions are met.\nUse stop() to throw an Error if issues are serious enough that it should not proceed.\nUse warning() to issue a Warning for non-critical issues.\n\n\n\nErrors\nif (some_condition_not_met) {\n  stop(\"Descriptive error message.\")\n  # Function exits and does not return a result\n}\n\n\nWarnings\nif (some_non_critical_condition) {\n  warning(\"Descriptive warning message.\")\n  # Function continues executing and returns a result\n}\n\n\n\n\nWarnings are often used later in the execution if the result to be returned is cause for concern. (e.g., result is all NA). It is a signal to the user to check the results carefully."
+  },
+  {
+    "objectID": "programming-functions.html#example-6",
+    "href": "programming-functions.html#example-6",
+    "title": "Programming with R: Functions",
+    "section": "Example",
+    "text": "Example\nIf a function expects two numeric vectors of the same length, you should check and stop the if they are not.\n\n\n\npercent_diff &lt;- function(x, y) {\n  (abs(x - y) /\n    ((x + y) / 2)) *\n    100\n}\n\n\n\n\npercent_diff &lt;- function(x, y) {\n  if (length(x) != length(y)) {\n    stop(\"Input vectors must be of the same length.\")\n  }\n\n  (abs(x - y) /\n    ((x + y) / 2)) *\n    100\n}\n\n\n\n\n\n\na &lt;- c(1, 2, 3)\nb &lt;- c(4, 5)\n\npercent_diff(a, b)\n\n\n\nError in percent_diff(a, b): Input vectors must be of the same length."
+  },
+  {
+    "objectID": "programming-functions.html#your-turn-9",
+    "href": "programming-functions.html#your-turn-9",
+    "title": "Programming with R: Functions",
+    "section": "Your turn",
+    "text": "Your turn\n\nAdd a check to my_summary() to ensure that the summary_var is numeric. If not, throw an error.\nAdd a warning to to_z() if the input vector has fewer than 3 non-NA values, since the standard deviation may not be meaningful in that case."
+  },
+  {
+    "objectID": "programming-functions.html#summary",
+    "href": "programming-functions.html#summary",
+    "title": "Programming with R: Functions",
+    "section": "Summary ☕",
+    "text": "Summary ☕\n\nWriting functions can make you more efficient and make your code more readable. This can be just for your benefit.\nVector functions take one or more vectors as input; their output can be a vector (useful in mutate() and filter()) or a single value (useful in summarise()).\nDataframe functions take a dataframe as input and give a dataframe as output\nGive arguments a default where possible\nWe use { var } embracing to manage data masking\nWe use pick({{ vars }}) to select more than one variable\nInclude data validation and error handling in your functions"
   },
   {
     "objectID": "git-github.html#schedule",
@@ -1041,6 +1111,349 @@
     "title": "Version Control with Git and Collaboration with GitHub",
     "section": "Your turn",
     "text": "Your turn\nAdd a license to your repo via a pull request"
+  },
+  {
+    "objectID": "data-manipulation.html#outline",
+    "href": "data-manipulation.html#outline",
+    "title": "Advanced Data Manipulation with dplyr and tidyr",
+    "section": "Outline",
+    "text": "Outline\n\n\nToday:\n\ndplyr fundamentals review\nColumn-wise operations\nTwo-table verbs (joins)\nData reshaping with tidyr\nWindow functions?"
+  },
+  {
+    "objectID": "data-manipulation.html#data",
+    "href": "data-manipulation.html#data",
+    "title": "Advanced Data Manipulation with dplyr and tidyr",
+    "section": "Data",
+    "text": "Data\nUsing data from the Portal Project\nLong-term ecological research site studying the dynamics of desert rodents, plants, ants and weather in Arizona.\nData available from the GitHub repo via the portalr package."
+  },
+  {
+    "objectID": "data-manipulation.html#setup",
+    "href": "data-manipulation.html#setup",
+    "title": "Advanced Data Manipulation with dplyr and tidyr",
+    "section": "Setup",
+    "text": "Setup\n\nCreate a new project in Positron\n\n\nEither:\n\nFork and clone the exercises repository:\nhttps://github.com/ateucher/pc-data-manipulation/ OR\nRun:\n\nusethis::use_course(\"https://github.com/ateucher/pc-data-manipulation/archive/refs/heads/main.zip\")\n\n\nOpen the file: 01-get-data.R\nDownload the data:\n\n\ninstall.packages(\"portalr\")\nlibrary(portalr)\n\ndownload_observations(\".\")\n\n\nExplore the downloaded data in Positron"
+  },
+  {
+    "objectID": "data-manipulation.html#warm-up",
+    "href": "data-manipulation.html#warm-up",
+    "title": "Advanced Data Manipulation with dplyr and tidyr",
+    "section": "Warm-up",
+    "text": "Warm-up\nRead in the rodent capture data (PortalData/Rodents/Portal_rodent.csv).\n\nUse readr::read_csv() and assign it to a data frame called rodents.\nStandardize column names to use snake_case (hint: check out the janitor package)"
+  },
+  {
+    "objectID": "data-manipulation.html#review-of-main-dplyr-operations",
+    "href": "data-manipulation.html#review-of-main-dplyr-operations",
+    "title": "Advanced Data Manipulation with dplyr and tidyr",
+    "section": "Review of main dplyr operations",
+    "text": "Review of main dplyr operations\n\nSelect columns with select()\nKeep rows based on their values with filter()\nCreate new columns with mutate()\nSummarize data with summarize()\nSort rows based on column values with arrange()\n“Slice” rows with slice()/slice_*()\n\n\n\nGrouping data with group_by() applies filter(), mutate(), summarize(), and slice() by group"
+  },
+  {
+    "objectID": "data-manipulation.html#using-select",
+    "href": "data-manipulation.html#using-select",
+    "title": "Advanced Data Manipulation with dplyr and tidyr",
+    "section": "Using select()",
+    "text": "Using select()\n\n\nSelect columns with bare names\n\nlibrary(dplyr)\n\npenguins |&gt;\n  select(species, island, body_mass)\n\n\n\n# A tibble: 344 × 3\n  species island    body_mass\n  &lt;fct&gt;   &lt;fct&gt;         &lt;int&gt;\n1 Adelie  Torgersen      3750\n2 Adelie  Torgersen      3800\n3 Adelie  Torgersen      3250\n4 Adelie  Torgersen        NA\n5 Adelie  Torgersen      3450\n# ℹ 339 more rows\n\n\n\n\nUse all_of() or any_of() to select columns from a character vector\n\nall_of(): throws an error if any names are not found\nany_of(): ignores names that are not found\n\n\ncols &lt;- c(\"species\", \"sex\", \"bill_len\", \"bill_dep\")\nselect(penguins, all_of(cols))\n\n\n\n# A tibble: 344 × 4\n  species sex    bill_len bill_dep\n  &lt;fct&gt;   &lt;fct&gt;     &lt;dbl&gt;    &lt;dbl&gt;\n1 Adelie  male       39.1     18.7\n2 Adelie  female     39.5     17.4\n3 Adelie  female     40.3     18  \n4 Adelie  &lt;NA&gt;       NA       NA  \n5 Adelie  female     36.7     19.3\n# ℹ 339 more rows\n\n\n\n\n\nYour turn: Select record_id, id, and species from rodents"
+  },
+  {
+    "objectID": "data-manipulation.html#selection-helpers",
+    "href": "data-manipulation.html#selection-helpers",
+    "title": "Advanced Data Manipulation with dplyr and tidyr",
+    "section": "selection helpers",
+    "text": "selection helpers\n\n\nselect specific columns:\n\neverything(): Matches all variables.\nlast_col(): Select last variable, possibly with an offset.\ngroup_cols(): Select all grouping columns.\n\n\nselect columns based on name patterns:\n\nstarts_with(): Starts with a prefix.\nends_with(): Ends with a suffix.\ncontains(): Contains a literal string.\nmatches(): Matches a regular expression.\n\nselect columns based on data type:\n\nwhere(): Select columns based on a predicate function (a function that returns TRUE or FALSE).\n\n\nSee help with ?select\n\n\neverything() is useful when you want to move a column to the front or back of the data frame.\nSelection helpers can be combined using c(), e.g., select(df, c(starts_with(\"temp\"), ends_with(\"date\")))"
+  },
+  {
+    "objectID": "data-manipulation.html#your-turn",
+    "href": "data-manipulation.html#your-turn",
+    "title": "Advanced Data Manipulation with dplyr and tidyr",
+    "section": "Your turn",
+    "text": "Your turn\nUsing the rodents data.frame:\n\nSelect the id column and all of the numeric columns\nSelect all columns except the columns starting with \"note\"\nReorder the columns, moving the last column to the first position, without specifying any column names"
+  },
+  {
+    "objectID": "data-manipulation.html#using-filter",
+    "href": "data-manipulation.html#using-filter",
+    "title": "Advanced Data Manipulation with dplyr and tidyr",
+    "section": "Using filter()",
+    "text": "Using filter()\nTo retain only a subset of rows:\n\nfilter(penguins, species == \"Adelie\")\n\n# A tibble: 152 × 8\n  species island    bill_len bill_dep flipper_len body_mass sex     year\n  &lt;fct&gt;   &lt;fct&gt;        &lt;dbl&gt;    &lt;dbl&gt;       &lt;int&gt;     &lt;int&gt; &lt;fct&gt;  &lt;int&gt;\n1 Adelie  Torgersen     39.1     18.7         181      3750 male    2007\n2 Adelie  Torgersen     39.5     17.4         186      3800 female  2007\n3 Adelie  Torgersen     40.3     18           195      3250 female  2007\n4 Adelie  Torgersen     NA       NA            NA        NA &lt;NA&gt;    2007\n5 Adelie  Torgersen     36.7     19.3         193      3450 female  2007\n# ℹ 147 more rows"
+  },
+  {
+    "objectID": "data-manipulation.html#combine-multiple-filter-conditions-with-or-and-and-or",
+    "href": "data-manipulation.html#combine-multiple-filter-conditions-with-or-and-and-or",
+    "title": "Advanced Data Manipulation with dplyr and tidyr",
+    "section": "Combine multiple filter() conditions with , or & (AND) and | (OR):",
+    "text": "Combine multiple filter() conditions with , or & (AND) and | (OR):\n\nfilter(penguins, species == \"Adelie\", island == \"Torgersen\")\n\n# A tibble: 52 × 8\n  species island    bill_len bill_dep flipper_len body_mass sex     year\n  &lt;fct&gt;   &lt;fct&gt;        &lt;dbl&gt;    &lt;dbl&gt;       &lt;int&gt;     &lt;int&gt; &lt;fct&gt;  &lt;int&gt;\n1 Adelie  Torgersen     39.1     18.7         181      3750 male    2007\n2 Adelie  Torgersen     39.5     17.4         186      3800 female  2007\n3 Adelie  Torgersen     40.3     18           195      3250 female  2007\n4 Adelie  Torgersen     NA       NA            NA        NA &lt;NA&gt;    2007\n5 Adelie  Torgersen     36.7     19.3         193      3450 female  2007\n# ℹ 47 more rows\n\n\n\n\nfilter(penguins, species == \"Adelie\" | (species == \"Gentoo\" & body_mass &lt; 4000))\n\n# A tibble: 153 × 8\n  species island    bill_len bill_dep flipper_len body_mass sex     year\n  &lt;fct&gt;   &lt;fct&gt;        &lt;dbl&gt;    &lt;dbl&gt;       &lt;int&gt;     &lt;int&gt; &lt;fct&gt;  &lt;int&gt;\n1 Adelie  Torgersen     39.1     18.7         181      3750 male    2007\n2 Adelie  Torgersen     39.5     17.4         186      3800 female  2007\n3 Adelie  Torgersen     40.3     18           195      3250 female  2007\n4 Adelie  Torgersen     NA       NA            NA        NA &lt;NA&gt;    2007\n5 Adelie  Torgersen     36.7     19.3         193      3450 female  2007\n# ℹ 148 more rows\n\n\n\nlive code these"
+  },
+  {
+    "objectID": "data-manipulation.html#using-mutate",
+    "href": "data-manipulation.html#using-mutate",
+    "title": "Advanced Data Manipulation with dplyr and tidyr",
+    "section": "Using mutate()",
+    "text": "Using mutate()\nCreate new columns or modify existing columns:\n\nmutate(penguins, mass_kg = body_mass / 1000)\n\n# A tibble: 344 × 9\n  species island    bill_len bill_dep flipper_len body_mass sex     year mass_kg\n  &lt;fct&gt;   &lt;fct&gt;        &lt;dbl&gt;    &lt;dbl&gt;       &lt;int&gt;     &lt;int&gt; &lt;fct&gt;  &lt;int&gt;   &lt;dbl&gt;\n1 Adelie  Torgersen     39.1     18.7         181      3750 male    2007    3.75\n2 Adelie  Torgersen     39.5     17.4         186      3800 female  2007    3.8 \n3 Adelie  Torgersen     40.3     18           195      3250 female  2007    3.25\n4 Adelie  Torgersen     NA       NA            NA        NA &lt;NA&gt;    2007   NA   \n5 Adelie  Torgersen     36.7     19.3         193      3450 female  2007    3.45\n# ℹ 339 more rows\n\n\n\nCreate multiple columns in one mutate call:\n\nmutate(\n  penguins,\n  mass_kg = body_mass / 1000,\n  bill_ratio = bill_len / bill_dep\n)\n\n# A tibble: 344 × 10\n  species island    bill_len bill_dep flipper_len body_mass sex     year mass_kg bill_ratio\n  &lt;fct&gt;   &lt;fct&gt;        &lt;dbl&gt;    &lt;dbl&gt;       &lt;int&gt;     &lt;int&gt; &lt;fct&gt;  &lt;int&gt;   &lt;dbl&gt;      &lt;dbl&gt;\n1 Adelie  Torgersen     39.1     18.7         181      3750 male    2007    3.75       2.09\n2 Adelie  Torgersen     39.5     17.4         186      3800 female  2007    3.8        2.27\n3 Adelie  Torgersen     40.3     18           195      3250 female  2007    3.25       2.24\n4 Adelie  Torgersen     NA       NA            NA        NA &lt;NA&gt;    2007   NA         NA   \n5 Adelie  Torgersen     36.7     19.3         193      3450 female  2007    3.45       1.90\n# ℹ 339 more rows\n\n\n\n\nlive code these"
+  },
+  {
+    "objectID": "data-manipulation.html#the-pipe",
+    "href": "data-manipulation.html#the-pipe",
+    "title": "Advanced Data Manipulation with dplyr and tidyr",
+    "section": "The pipe ( |> )",
+    "text": "The pipe ( |&gt; )\nThe pipe operator (|&gt;) passes the output of one function as the first argument to the next function. It allows us to chain together multiple operations in a readable way.\n\n\nHelps avoid deeply nested function calls, which are hard to read.\n\nfilter(select(penguins, species, island, body_mass), body_mass &gt; 4000)\n\n\n\nHelps avoid creating many intermediate variables.\n\nselected_data &lt;- select(penguins, species, island, body_mass)\nfiltered_data &lt;- filter(selected_data, body_mass &gt; 4000)\n\n\nRead it out loud as “and then”\n\npenguins |&gt; # and then\n  select(species, island, body_mass) |&gt; # and then\n  filter(body_mass &gt; 4000)\n\n# A tibble: 172 × 3\n  species island    body_mass\n  &lt;fct&gt;   &lt;fct&gt;         &lt;int&gt;\n1 Adelie  Torgersen      4675\n2 Adelie  Torgersen      4250\n3 Adelie  Torgersen      4400\n4 Adelie  Torgersen      4500\n5 Adelie  Torgersen      4200\n# ℹ 167 more rows"
+  },
+  {
+    "objectID": "data-manipulation.html#using-group_by",
+    "href": "data-manipulation.html#using-group_by",
+    "title": "Advanced Data Manipulation with dplyr and tidyr",
+    "section": "Using group_by()",
+    "text": "Using group_by()\nAdd grouping attributes that tell other dplyr functions to operate by group:\n\npenguins |&gt;\n  select(species, island, body_mass) |&gt;\n  filter(body_mass &gt; 4000) |&gt;\n  group_by(species, island)\n\n# A tibble: 172 × 3\n# Groups:   species, island [5]\n  species island    body_mass\n  &lt;fct&gt;   &lt;fct&gt;         &lt;int&gt;\n1 Adelie  Torgersen      4675\n2 Adelie  Torgersen      4250\n3 Adelie  Torgersen      4400\n4 Adelie  Torgersen      4500\n5 Adelie  Torgersen      4200\n# ℹ 167 more rows"
+  },
+  {
+    "objectID": "data-manipulation.html#using-summarize",
+    "href": "data-manipulation.html#using-summarize",
+    "title": "Advanced Data Manipulation with dplyr and tidyr",
+    "section": "Using summarize()",
+    "text": "Using summarize()\nCreates one summary row per unique combination of groups:\n\npenguins |&gt;\n  select(species, island, body_mass) |&gt;\n  filter(body_mass &gt; 4000) |&gt;\n  group_by(species, island) |&gt;\n  summarise(sd_mass = sd(body_mass, na.rm = TRUE))\n\n# A tibble: 5 × 3\n# Groups:   species [3]\n  species   island    sd_mass\n  &lt;fct&gt;     &lt;fct&gt;       &lt;dbl&gt;\n1 Adelie    Biscoe       268.\n2 Adelie    Dream        170.\n3 Adelie    Torgersen    191.\n4 Chinstrap Dream        230.\n5 Gentoo    Biscoe       496."
+  },
+  {
+    "objectID": "data-manipulation.html#your-turn---pulling-it-all-together",
+    "href": "data-manipulation.html#your-turn---pulling-it-all-together",
+    "title": "Advanced Data Manipulation with dplyr and tidyr",
+    "section": "Your turn - pulling it all together",
+    "text": "Your turn - pulling it all together\nUsing the rodents data set find the mean hindfoot length per weight of Merriam’s Kangaroo Rats (\"DM\") grouped by plot and arranged by thew new hfl per weight column."
+  },
+  {
+    "objectID": "data-manipulation.html#dplyr-practice",
+    "href": "data-manipulation.html#dplyr-practice",
+    "title": "Advanced Data Manipulation with dplyr and tidyr",
+    "section": "dplyr practice",
+    "text": "dplyr practice\n\n\n\nRemove records from invalid sampling periods (when period is negative). Re-assign the result to the rodents data frame.\nHow many individuals of each species were caught in 1995?\nWhat date had the highest number of individual rodents caught?\n\n\n\nKey columns\n\nid = individual identifier\nday, month, year = date of capture\nperiod = sampling period\nspecies = species code\nwgt = weight (grams)\nyear = year of capture"
+  },
+  {
+    "objectID": "data-manipulation.html#dplyr-practice-1",
+    "href": "data-manipulation.html#dplyr-practice-1",
+    "title": "Advanced Data Manipulation with dplyr and tidyr",
+    "section": "dplyr practice",
+    "text": "dplyr practice\n\n\n\nFor each capture record, calculate the percent difference in weight from the average weight of that species.\nOf all individual Ord’s Kangaroo Rats (species code “DO”) that have been caught more than 5 times, which individual was consistently the biggest? (i.e., has the highest average percent difference in weight from the species’ average weight)?\n\n\n\nKey columns\n\nid = individual identifier\nday, month, year = date of capture\nperiod = sampling period\nspecies = species code\nwgt = weight (grams)\nyear = year of capture"
+  },
+  {
+    "objectID": "data-manipulation.html#column-wise-operations",
+    "href": "data-manipulation.html#column-wise-operations",
+    "title": "Advanced Data Manipulation with dplyr and tidyr",
+    "section": "Column-wise operations",
+    "text": "Column-wise operations\n\n\nApply one or more functions to a set of columns in a data frame using across()\n\nacross(&lt;columns&gt;, &lt;functions&gt;)\n\nSpecify columns using a vector of names or selection helpers (e.g., starts_with(), ends_with(), contains(), where(), etc.)\nSpecify function(s) to apply to selected columns\nUsed with summarize() & mutate()\n\n\nExample: calculate mean of all numeric columns\n\nlibrary(dplyr)\n\nmtcars |&gt;\n  group_by(cyl) |&gt;\n  summarize(across(where(is.numeric), mean))\n\n\n\nSelection syntax is the same as in select(), i.e., using the same selection helpers\nWe are passing the function mean to across(), not calling it (i.e., no parentheses). Functions in R are objects that can be passed around and used later."
+  },
+  {
+    "objectID": "data-manipulation.html#your-turn-1",
+    "href": "data-manipulation.html#your-turn-1",
+    "title": "Advanced Data Manipulation with dplyr and tidyr",
+    "section": "Your turn",
+    "text": "Your turn\n\nScale hfl and wgt (use across()) in rodents to have mean 0 and standard deviation 1. (Hint: Check out the scale() function)\nBonus: Use the .names argument to keep the original columns and give the new columns a sensible name\nSee help with ?across"
+  },
+  {
+    "objectID": "data-manipulation.html#column-wise-operations-1",
+    "href": "data-manipulation.html#column-wise-operations-1",
+    "title": "Advanced Data Manipulation with dplyr and tidyr",
+    "section": "Column-wise operations",
+    "text": "Column-wise operations\nSpecify multiple functions to apply to selected in a named list()\n\n\nExample: calculate mean and sd of all numeric columns\n\nlibrary(dplyr)\nmtcars |&gt;\n  group_by(cyl) |&gt;\n  summarize(\n    across(where(is.numeric), list(mean = mean, sd = sd))\n  )\n\n\n\n# A tibble: 3 × 21\n    cyl mpg_mean mpg_sd disp_mean disp_sd hp_mean hp_sd drat_mean drat_sd wt_mean wt_sd qsec_mean qsec_sd\n  &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;\n1     4     26.7   4.51      105.    26.9    82.6  20.9      4.07   0.365    2.29 0.570      19.1    1.68\n2     6     19.7   1.45      183.    41.6   122.   24.3      3.59   0.476    3.12 0.356      18.0    1.71\n3     8     15.1   2.56      353.    67.8   209.   51.0      3.23   0.372    4.00 0.759      16.8    1.20\n# ℹ 8 more variables: vs_mean &lt;dbl&gt;, vs_sd &lt;dbl&gt;, am_mean &lt;dbl&gt;, am_sd &lt;dbl&gt;, gear_mean &lt;dbl&gt;, gear_sd &lt;dbl&gt;,\n#   carb_mean &lt;dbl&gt;, carb_sd &lt;dbl&gt;\n\n\n\n\nhttps://tidyselect.r-lib.org/reference/language.html"
+  },
+  {
+    "objectID": "data-manipulation.html#column-wise-operations-2",
+    "href": "data-manipulation.html#column-wise-operations-2",
+    "title": "Advanced Data Manipulation with dplyr and tidyr",
+    "section": "Column-wise operations",
+    "text": "Column-wise operations\nRun this in your R session, what do you get?\n\nlibrary(dplyr)\npenguins |&gt;\n  summarize(\n    across(where(is.numeric), list(mean = mean, sd = sd))\n  )\n\n\n\n# A tibble: 1 × 10\n  bill_len_mean bill_len_sd bill_dep_mean bill_dep_sd flipper_len_mean flipper_len_sd body_mass_mean\n          &lt;dbl&gt;       &lt;dbl&gt;         &lt;dbl&gt;       &lt;dbl&gt;            &lt;dbl&gt;          &lt;dbl&gt;          &lt;dbl&gt;\n1            NA          NA            NA          NA               NA             NA             NA\n# ℹ 3 more variables: body_mass_sd &lt;dbl&gt;, year_mean &lt;dbl&gt;, year_sd &lt;dbl&gt;\n\n\n\n\n\nWhen we use a function in across() it is called with its default arguments\n\nmean() and sd() both have an argument na.rm that defaults to FALSE\n\nWe can’t pass extra arguments to functions inside across() directly\nWe need to specify a function with the argument values we want “baked in”\n\n\n\nhttps://tidyselect.r-lib.org/reference/language.html"
+  },
+  {
+    "objectID": "data-manipulation.html#specifying-extra-arguments",
+    "href": "data-manipulation.html#specifying-extra-arguments",
+    "title": "Advanced Data Manipulation with dplyr and tidyr",
+    "section": "Specifying extra arguments",
+    "text": "Specifying extra arguments\nWe can define our own helper functions:\n\nlibrary(dplyr)\n\nsd_na &lt;- function(x) {\n  sd(x, na.rm = TRUE)\n}\n\nmean_na &lt;- function(x) {\n  mean(x, na.rm = TRUE)\n}\n\npenguins |&gt;\n  summarize(\n    across(where(is.numeric), list(mean = mean_na, sd = sd_na))\n  )\n\n\n\n# A tibble: 1 × 10\n  bill_len_mean bill_len_sd bill_dep_mean bill_dep_sd flipper_len_mean flipper_len_sd body_mass_mean\n          &lt;dbl&gt;       &lt;dbl&gt;         &lt;dbl&gt;       &lt;dbl&gt;            &lt;dbl&gt;          &lt;dbl&gt;          &lt;dbl&gt;\n1          43.9        5.46          17.2        1.97             201.           14.1          4202.\n# ℹ 3 more variables: body_mass_sd &lt;dbl&gt;, year_mean &lt;dbl&gt;, year_sd &lt;dbl&gt;\n\n\n\nLive code this"
+  },
+  {
+    "objectID": "data-manipulation.html#specifying-extra-arguments-1",
+    "href": "data-manipulation.html#specifying-extra-arguments-1",
+    "title": "Advanced Data Manipulation with dplyr and tidyr",
+    "section": "Specifying extra arguments",
+    "text": "Specifying extra arguments\nBut if we’re doing this only once we can define them in place with an anonymous function:\n\\(x) function(x, other_args)\n\n\\(x) is shorthand for function(x), used for anonymous functions\nThis defines a function “on the fly” with the arguments specified how we want\nThe x will take the values of each column passed to it by across()\n\n\nlibrary(dplyr)\n\npenguins |&gt;\n  summarize(\n    across(\n      where(is.numeric),\n      list(\n        mean = \\(x) mean(x, na.rm = TRUE),\n        sd = \\(x) sd(x, na.rm = TRUE)\n      )\n    )\n  )\n\n\n\n# A tibble: 1 × 10\n  bill_len_mean bill_len_sd bill_dep_mean bill_dep_sd flipper_len_mean flipper_len_sd body_mass_mean\n          &lt;dbl&gt;       &lt;dbl&gt;         &lt;dbl&gt;       &lt;dbl&gt;            &lt;dbl&gt;          &lt;dbl&gt;          &lt;dbl&gt;\n1          43.9        5.46          17.2        1.97             201.           14.1          4202.\n# ℹ 3 more variables: body_mass_sd &lt;dbl&gt;, year_mean &lt;dbl&gt;, year_sd &lt;dbl&gt;\n\n\n\nLive code this"
+  },
+  {
+    "objectID": "data-manipulation.html#your-turn-2",
+    "href": "data-manipulation.html#your-turn-2",
+    "title": "Advanced Data Manipulation with dplyr and tidyr",
+    "section": "Your turn",
+    "text": "Your turn\n\nCalculate maximum of all bill measurements for each species in the built-in penguins dataset.\nCalculate the median of hind-foot length (hfl) and weight (wgt) for each species in rodents, ignoring NA values."
+  },
+  {
+    "objectID": "data-manipulation.html#two-table-verbs-joins",
+    "href": "data-manipulation.html#two-table-verbs-joins",
+    "title": "Advanced Data Manipulation with dplyr and tidyr",
+    "section": "Two-table verbs (joins)",
+    "text": "Two-table verbs (joins)\n\n\n\n\nMutating joins\n\nCombine two tables based on common values in one or more columns\n\nFiltering joins\n\nFilter rows from one table based on values in another table\n\n\n\nhttps://r4ds.hadley.nz/joins.html#how-do-joins-work"
+  },
+  {
+    "objectID": "data-manipulation.html#mutating-joins-1",
+    "href": "data-manipulation.html#mutating-joins-1",
+    "title": "Advanced Data Manipulation with dplyr and tidyr",
+    "section": "Mutating joins",
+    "text": "Mutating joins\n\n\nleft_join()\n\nKeeps all rows in the left table\nDrops rows from the right table that don’t match\nRows in the left that don’t match get NA in the columns from the right table\n\n\n\n\n\nhttps://r4ds.hadley.nz/joins.html#how-do-joins-work"
+  },
+  {
+    "objectID": "data-manipulation.html#mutating-joins-2",
+    "href": "data-manipulation.html#mutating-joins-2",
+    "title": "Advanced Data Manipulation with dplyr and tidyr",
+    "section": "Mutating joins",
+    "text": "Mutating joins\n\n\nright_join()\n\nKeeps all rows in the right table\nDrops rows from the left table that don’t match\nRows in the right table that don’t match get NA in the columns from the left table\n\n\n\n\n\nhttps://r4ds.hadley.nz/joins.html#how-do-joins-work"
+  },
+  {
+    "objectID": "data-manipulation.html#mutating-joins-3",
+    "href": "data-manipulation.html#mutating-joins-3",
+    "title": "Advanced Data Manipulation with dplyr and tidyr",
+    "section": "Mutating joins",
+    "text": "Mutating joins\n\n\ninner_join()\n\nKeeps all rows in both tables where keys match\nRows from either table that don’t match are dropped\n\n\n\n\n\nhttps://r4ds.hadley.nz/joins.html#how-do-joins-work"
+  },
+  {
+    "objectID": "data-manipulation.html#mutating-joins-4",
+    "href": "data-manipulation.html#mutating-joins-4",
+    "title": "Advanced Data Manipulation with dplyr and tidyr",
+    "section": "Mutating joins",
+    "text": "Mutating joins\n\n\nfull_join()\n\nKeeps all rows in both tables\nValues in x and y that don’t match get NA in the result\n\n\n\n\n\nhttps://r4ds.hadley.nz/joins.html#how-do-joins-work"
+  },
+  {
+    "objectID": "data-manipulation.html#join-syntax",
+    "href": "data-manipulation.html#join-syntax",
+    "title": "Advanced Data Manipulation with dplyr and tidyr",
+    "section": "Join syntax",
+    "text": "Join syntax\nIf don’t specify join columns, will join on all common names\n\nE.g., both tables have columns year, month, day\n\nleft_join(x, y)\n#&gt; Joining with `by = join_by(year, month, day)`\n\nBetter to specify the join columns explicitly\n\nBoth tables have columns column_1 and column_2\n\nleft_join(x, y, by = c(\"column_1\", \"column_2\"))\n\nIf the columns to join on have different names in each table\n\nleft_join(x, y, by = c(\"column_in_x\" = \"column_in_y\"))"
+  },
+  {
+    "objectID": "data-manipulation.html#your-turn-3",
+    "href": "data-manipulation.html#your-turn-3",
+    "title": "Advanced Data Manipulation with dplyr and tidyr",
+    "section": "Your turn",
+    "text": "Your turn\nUse a join to add location information to the rodent captures data\n\nWhat kind of join would be appropriate here?\n\n\nThe rodent captures data is in the PortalData/Rodents/Portal_rodent.csv file.\nThe SiteandMethods/Portal_UTMCoords.csv file contains information about the location of each plot"
+  },
+  {
+    "objectID": "data-manipulation.html#filtering-joins-1",
+    "href": "data-manipulation.html#filtering-joins-1",
+    "title": "Advanced Data Manipulation with dplyr and tidyr",
+    "section": "Filtering joins",
+    "text": "Filtering joins\n\n\nsemi_join()\n\nKeeps all rows in the left table where there are matching key values in the right table\nDoes not add any columns"
+  },
+  {
+    "objectID": "data-manipulation.html#filtering-joins-2",
+    "href": "data-manipulation.html#filtering-joins-2",
+    "title": "Advanced Data Manipulation with dplyr and tidyr",
+    "section": "Filtering joins",
+    "text": "Filtering joins\n\n\nanti_join()\n\nKeeps all rows in the left table where there are not matching values in the right table\nDoes not add any columns"
+  },
+  {
+    "objectID": "data-manipulation.html#your-turn-4",
+    "href": "data-manipulation.html#your-turn-4",
+    "title": "Advanced Data Manipulation with dplyr and tidyr",
+    "section": "Your turn",
+    "text": "Your turn\nUse a join to find all the captures where the species is a granivore\n\nThe rodent captures data is in the PortalData/Rodents/Portal_rodent.csv file\nThe PortalData/Rodents/Portal_rodent_species.csv file contains information about the species"
+  },
+  {
+    "objectID": "data-manipulation.html#more-complex-joins-using-dplyrjoin_by.",
+    "href": "data-manipulation.html#more-complex-joins-using-dplyrjoin_by.",
+    "title": "Advanced Data Manipulation with dplyr and tidyr",
+    "section": "More complex joins using dplyr::join_by().",
+    "text": "More complex joins using dplyr::join_by().\nCross joins create the full cartesian product of two tables\n\n\nlibrary(dplyr)\nx &lt;- data.frame(a = 1:3)\ny &lt;- data.frame(b = c(\"x\", \"y\"))\ncross_join(x, y)\n\n\n  a b\n1 1 x\n2 1 y\n3 2 x\n4 2 y\n5 3 x\n6 3 y\n\n\n\nInequality joins\nleft_join(x, y, by = join_by(column_1 &gt;= column_2))\n\n\n\nRolling joins (inequality joins constrained by closest())\nleft_join(\n    x, y, \n    by = join_by(id, closest(capture_date &gt;= survey_start_date))\n)\nRolling joins are good for finding things like “the most recent rainy day before a survey date”\n\n\nI haven’t found a good reason to use inequality joins, but they are a necessary precursor to rolling joins, which are very useful."
+  },
+  {
+    "objectID": "data-manipulation.html#overlap-joins",
+    "href": "data-manipulation.html#overlap-joins",
+    "title": "Advanced Data Manipulation with dplyr and tidyr",
+    "section": "Overlap joins",
+    "text": "Overlap joins\n\n\nbetween(x, y_1, y_2)\nwithin(x_1, x_2, y_1, y_2)\noverlaps(x_1, x_2, y_1, y_2)\n\nbetween(x, y_1, y_2):\n\n  y_1 [════════════════════] y_2\n         •\n         x\n\n\nwithin(x_1, x_2, y_1, y_2):\n\n  y_1 [════════════════════] y_2\n         [═════]\n       x_1     x_2\n\n\noverlaps(x_1, x_2, y_1, y_2):\n\n  y_1 [════════════════════] y_2\n                   [═══════════════] \n                 x_1             x_2\n\n\nhttps://dplyr.tidyverse.org/reference/join_by.html#join-types"
+  },
+  {
+    "objectID": "data-manipulation.html#your-turn-5",
+    "href": "data-manipulation.html#your-turn-5",
+    "title": "Advanced Data Manipulation with dplyr and tidyr",
+    "section": "Your turn",
+    "text": "Your turn\nUsing the rodent trapping data and the plant census dates data, join the two datasets to find out which plant census (year and season) each rodent capture is associated with.\nStarting code:\nlibrary(dplyr)\nlibrary(readr)\nlibrary(lubridate)\n\nplant_census_dates &lt;- read_csv(\n  \"PortalData/Plants/Portal_plant_census_dates.csv\",\n  na = c(\"unknown\", \"none\")\n)\n\nrodent_trapping &lt;- read_csv(\"PortalData/Rodents/Portal_rodent_trapping.csv\")\n\nHint: use an overlap join with between()"
+  },
+  {
+    "objectID": "data-manipulation.html#what-is-tidy-data",
+    "href": "data-manipulation.html#what-is-tidy-data",
+    "title": "Advanced Data Manipulation with dplyr and tidyr",
+    "section": "What is tidy data?",
+    "text": "What is tidy data?\n\nEach variable is a column; each column is a variable.\nEach observation is a row; each row is an observation.\nEach value is a cell; each cell is a single value."
+  },
+  {
+    "objectID": "data-manipulation.html#wide-vs.-long-tidy-data",
+    "href": "data-manipulation.html#wide-vs.-long-tidy-data",
+    "title": "Advanced Data Manipulation with dplyr and tidyr",
+    "section": "Wide vs. long (tidy) data",
+    "text": "Wide vs. long (tidy) data\n\nWide data often has “data” stored in the column names\n\nExample: dates, treatment groups, measurement types\n\n\n\n\n\n\n\n\n\nsubject\ntreatment_A\ntreatment_B\n\n\n\n\n1\n5\n7\n\n\n2\n6\n8\n\n\n\n\n\n\n\n\n\n\n\n\nsubject\ntreatment\nvalue\n\n\n\n\n1\nA\n5\n\n\n1\nB\n7\n\n\n2\nA\n6\n\n\n2\nB\n8\n\n\n\n\n\n\n\n\n\n\n\n\n\nid\n20250101\n20250201\n\n\n\n\n1\n150\n165\n\n\n2\n125\n118\n\n\n\n\n\n\nDates are stored in the column names\nValues are masses (in grams).\n\n\n\n\n\n\n\n\nid\ndate\nmass\n\n\n\n\n1\n2025-01-01\n150\n\n\n1\n2025-02-01\n165\n\n\n2\n2025-01-01\n125\n\n\n2\n2025-02-01\n118\n\n\n\n\n\n\n\n\n\nEach row has more than one observation (more than one time, place, or subject)\nVariables split across multiple columns\n\nEg., what if we wanted to the get the mean mass per subject?\n\nSecond example - we hopefully have metadata that tells us that the values are masses (in grams)"
+  },
+  {
+    "objectID": "data-manipulation.html#example---billboard-data",
+    "href": "data-manipulation.html#example---billboard-data",
+    "title": "Advanced Data Manipulation with dplyr and tidyr",
+    "section": "Example - billboard data",
+    "text": "Example - billboard data\n\nlibrary(tidyr)\nbillboard\n\n# A tibble: 317 × 79\n  artist      track date.entered   wk1   wk2   wk3   wk4   wk5   wk6   wk7   wk8   wk9  wk10  wk11  wk12  wk13\n  &lt;chr&gt;       &lt;chr&gt; &lt;date&gt;       &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;\n1 2 Pac       Baby… 2000-02-26      87    82    72    77    87    94    99    NA    NA    NA    NA    NA    NA\n2 2Ge+her     The … 2000-09-02      91    87    92    NA    NA    NA    NA    NA    NA    NA    NA    NA    NA\n3 3 Doors Do… Kryp… 2000-04-08      81    70    68    67    66    57    54    53    51    51    51    51    47\n4 3 Doors Do… Loser 2000-10-21      76    76    72    69    67    65    55    59    62    61    61    59    61\n5 504 Boyz    Wobb… 2000-04-15      57    34    25    17    17    31    36    49    53    57    64    70    75\n# ℹ 312 more rows\n# ℹ 63 more variables: wk14 &lt;dbl&gt;, wk15 &lt;dbl&gt;, wk16 &lt;dbl&gt;, wk17 &lt;dbl&gt;, wk18 &lt;dbl&gt;, wk19 &lt;dbl&gt;, wk20 &lt;dbl&gt;,\n#   wk21 &lt;dbl&gt;, wk22 &lt;dbl&gt;, wk23 &lt;dbl&gt;, wk24 &lt;dbl&gt;, wk25 &lt;dbl&gt;, wk26 &lt;dbl&gt;, wk27 &lt;dbl&gt;, wk28 &lt;dbl&gt;,\n#   wk29 &lt;dbl&gt;, wk30 &lt;dbl&gt;, wk31 &lt;dbl&gt;, wk32 &lt;dbl&gt;, wk33 &lt;dbl&gt;, wk34 &lt;dbl&gt;, wk35 &lt;dbl&gt;, wk36 &lt;dbl&gt;,\n#   wk37 &lt;dbl&gt;, wk38 &lt;dbl&gt;, wk39 &lt;dbl&gt;, wk40 &lt;dbl&gt;, wk41 &lt;dbl&gt;, wk42 &lt;dbl&gt;, wk43 &lt;dbl&gt;, wk44 &lt;dbl&gt;,\n#   wk45 &lt;dbl&gt;, wk46 &lt;dbl&gt;, wk47 &lt;dbl&gt;, wk48 &lt;dbl&gt;, wk49 &lt;dbl&gt;, wk50 &lt;dbl&gt;, wk51 &lt;dbl&gt;, wk52 &lt;dbl&gt;,\n#   wk53 &lt;dbl&gt;, wk54 &lt;dbl&gt;, wk55 &lt;dbl&gt;, wk56 &lt;dbl&gt;, wk57 &lt;dbl&gt;, wk58 &lt;dbl&gt;, wk59 &lt;dbl&gt;, wk60 &lt;dbl&gt;, …\n\n\n\nHow would we plot this data to show how the rank of different songs changed over time?\n\n\nWhat shape would this data have in long format?"
+  },
+  {
+    "objectID": "data-manipulation.html#tidyrpivot_longer",
+    "href": "data-manipulation.html#tidyrpivot_longer",
+    "title": "Advanced Data Manipulation with dplyr and tidyr",
+    "section": "tidyr::pivot_longer()",
+    "text": "tidyr::pivot_longer()\nReshape data from wide to long format\n\n\n\npivot_longer(\n  data,\n  cols,\n  ...,\n  cols_vary = \"fastest\",\n  names_to = \"name\",\n  names_prefix = NULL,\n  names_sep = NULL,\n  names_pattern = NULL,\n  names_ptypes = NULL,\n  names_transform = NULL,\n  names_repair = \"check_unique\",\n  values_to = \"value\",\n  values_drop_na = FALSE,\n  values_ptypes = NULL,\n  values_transform = NULL\n)\n\n\n\ncols: columns to pivot from wide to long. Uses tidyselect syntax.\nnames_to: name of new column to create from the column names\nvalues_to: name of new column to create from the values in the selected columns\nvalues_drop_na: if TRUE, drops rows with NA in the values column\n\n\n\nLet’s practice with the billboard data\n\n\n\ngo to R and do pivot_longer() on billboard data"
+  },
+  {
+    "objectID": "data-manipulation.html#your-turn-6",
+    "href": "data-manipulation.html#your-turn-6",
+    "title": "Advanced Data Manipulation with dplyr and tidyr",
+    "section": "Your turn",
+    "text": "Your turn\n\nUse SitesandMethods/Portal_plot_treatments.csv and pivot it to longer so there is a start_date, end_date, and treatment column. See if you can get the dates into proper date format. The lubridate package may be helpful."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Parks Canada - Intermediate R",
+    "section": "",
+    "text": "This website contains the materials for the Parks Canada Intermediate R workshop. The workshop is designed to help participants improve their R programming skills, focusing on efficient workflows, , and reproducible research practices."
+  },
+  {
+    "objectID": "index.html#workshop-overview",
+    "href": "index.html#workshop-overview",
+    "title": "Parks Canada - Intermediate R",
+    "section": "Workshop Overview:",
+    "text": "Workshop Overview:\nThis intermediate R workshop is designed for data professionals and scientists who have basic R experience and want to advance their skills in data analysis and programming.\nThis will be an online, interactive workshop delivered virtually."
+  },
+  {
+    "objectID": "index.html#modules",
+    "href": "index.html#modules",
+    "title": "Parks Canada - Intermediate R",
+    "section": "Modules",
+    "text": "Modules\n\n1. Project-oriented workflows and effective use of your IDE (RStudio/Positron)\n\n\n2. Version control and Collaboration with Git and GitHub\n\n\n3. Advanced data manipulation with dplyr and tidyr\n\n\n4. Programming with R - functions, functional programming, and iteration\n\n\n5. Reproducible reporting with Quarto"
+  },
+  {
+    "objectID": "index.html#exercises",
+    "href": "index.html#exercises",
+    "title": "Parks Canada - Intermediate R",
+    "section": "Exercises",
+    "text": "Exercises\n\nExercises (with solutions) for the data manipulation module can be found here.\nExercises (with solutions) for the programming module can be found here."
+  },
+  {
+    "objectID": "index.html#prework",
+    "href": "index.html#prework",
+    "title": "Parks Canada - Intermediate R",
+    "section": "Prework",
+    "text": "Prework\nPlease ensure you have completed the steps in System Setup."
+  },
+  {
+    "objectID": "index.html#instructor",
+    "href": "index.html#instructor",
+    "title": "Parks Canada - Intermediate R",
+    "section": "Instructor:",
+    "text": "Instructor:\nAndy Teucher is a freelance data scientist and package developer with a passion for teaching others how to use data science tools to make their work more efficient and reproducible. His background is in conservation biology, with an MSc in Ecology from the University of Calgary. He has spent much of his career as a data scientist in government, where he made it his mission to promote and teach open, reproducible data science practices. He has written many R packages for internal use in his teams as well as for a broader audience, with several hosted on CRAN. Andy is a certified Software Carpentry and Data Carpentry instructor, and has led many workshops teaching programming skills to scientists and data professionals."
+  },
+  {
+    "objectID": "index.html#acknowledgements-and-resources",
+    "href": "index.html#acknowledgements-and-resources",
+    "title": "Parks Canada - Intermediate R",
+    "section": "Acknowledgements and Resources:",
+    "text": "Acknowledgements and Resources:\nThe material for this workshop has origins and inspiration from several sources, including:\n\nHappy Git and GitHub for the useR: A free book by Jenny Bryan and Jim Hester that teaches version control with Git and GitHub using R.\nThe Carpentries: An organization dedicated to teaching foundational coding and data science skills to researchers worldwide.\nR for Data Science: A comprehensive resource by Hadley Wickham and Garrett Grolemund that covers data science using R.\nWhat they forgot to teach you about R: A collection of tips and best practices for R programming by Jennifer Bryan, Jim Hester, Shannon Pileggi, E. David Ajal.\nFrom R User to R Programmer: Posit conf workshop by Emma Rand and Ian Lyttle."
   },
   {
     "objectID": "setup.html",
