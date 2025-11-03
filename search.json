@@ -1117,7 +1117,7 @@
     "href": "data-manipulation.html#outline",
     "title": "Advanced Data Manipulation with dplyr and tidyr",
     "section": "Outline",
-    "text": "Outline\n\n\nToday:\n\ndplyr fundamentals review\nColumn-wise operations\nTwo-table verbs (joins)\nData reshaping with tidyr\nWindow functions?"
+    "text": "Outline\n\n\nToday:\n\ndplyr fundamentals review\nColumn-wise operations\nTwo-table verbs (joins)\nData reshaping with tidyr"
   },
   {
     "objectID": "data-manipulation.html#data",
