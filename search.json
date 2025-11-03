@@ -910,6 +910,20 @@
     "text": "Your turn\n\nAdd a check to my_summary() to ensure that the summary_var is numeric. If not, throw an error.\nAdd a warning to to_z() if the input vector has fewer than 3 non-NA values, since the standard deviation may not be meaningful in that case."
   },
   {
+    "objectID": "programming-functions.html#practical-use-of-functions-in-a-project",
+    "href": "programming-functions.html#practical-use-of-functions-in-a-project",
+    "title": "Programming with R: Functions",
+    "section": "Practical use of functions in a project",
+    "text": "Practical use of functions in a project\n\nFunctions can be stored in separate R scripts and sourced into your analysis scripts\nThis keeps your analysis scripts cleaner and more focused on the analysis logic\nIt is best practice to keep your functions in a dedicated folder called R/\nThen in the top of your scripts you can use source(\"R/your_function.R\") to load them"
+  },
+  {
+    "objectID": "programming-functions.html#documenting-functions",
+    "href": "programming-functions.html#documenting-functions",
+    "title": "Programming with R: Functions",
+    "section": "Documenting functions",
+    "text": "Documenting functions\n\nUse roxygen2 style comments to document your functions\nIn Positron - put your cursor on the name of the function and click the 💡 and choose “Generate a Roxygen Template”"
+  },
+  {
     "objectID": "programming-functions.html#summary",
     "href": "programming-functions.html#summary",
     "title": "Programming with R: Functions",
