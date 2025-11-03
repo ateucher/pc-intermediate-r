@@ -164,7 +164,7 @@ name <- function(arguments) {
 ## Function name
 
 ::: {.incremental}
-- Use a verb
+- Use a verb or a clear descriptive phrase. Long is ok!
 - Difficulty in naming? Maybe this should this be two or three functions?
 - What should we call the function we write to do a $z$ score transformation?
 :::
@@ -193,7 +193,7 @@ name <- function(x) {
 
 - Output - what the function _returns_ to the user
 - By default, the last expression evaluated is returned
-- Using explicit `return()` is optional but not usually done
+- Using explicit `return()` is optional but not considered best practice in R (though common in other languages).
 
 :::
 
@@ -205,7 +205,7 @@ name <- function(x) {
 ### explicit return statement
 
 ```r
-farenheit_to_celsius <- function(f) {
+fahrenheit_to_celsius <- function(f) {
   celsius <- (f - 32) * 5 / 9
   return(celsius)
 }
@@ -215,7 +215,7 @@ farenheit_to_celsius <- function(f) {
 ### implicit return of last named object
 
 ```r
-farenheit_to_celsius <- function(f) {
+fahrenheit_to_celsius <- function(f) {
   celsius <- (f - 32) * 5 / 9
   celsius
 }
@@ -224,13 +224,22 @@ farenheit_to_celsius <- function(f) {
 
 ### implicit return of last expression
 
-```r
-farenheit_to_celsius <- function(f) {
+```{r}
+fahrenheit_to_celsius <- function(f) {
   (f - 32) * 5 / 9
 }
 ```
 
+
 :::
+
+:::
+
+::: {.fragment}
+
+```{r}
+fahrenheit_to_celsius(100)
+```
 
 :::
 
@@ -790,9 +799,9 @@ my_summary(penguins, bill_len, c(species, island))
 
 It's good practice to include data validation and error handling in your functions to ensure they behave as expected when given incorrect or unexpected inputs.
 
+- Use `if` statements to check that inputs meet certain criteria or if specific conditions are met.
 - Use `stop()` to throw an **`Error`** if issues are serious enough that it should not proceed.
 - Use `warning()` to issue a **`Warning`** for non-critical issues.
-
 
 ::: {.columns}
 
@@ -818,13 +827,20 @@ if (some_condition_not_met) {
 ```r
 if (some_non_critical_condition) {
   warning("Descriptive warning message.")
-  # Function continues executing
+  # Function continues executing and returns a result
 }
-```	
+```
+
 
 :::
 
 ::: 
+
+:::
+
+::: {.fragment}
+
+- Warnings are often used later in the execution if the result to be returned is cause for concern. (e.g., result is all `NA`). It is a signal to the user to check the results carefully.
 
 :::
 
