@@ -28,7 +28,6 @@ Today:
 - Column-wise operations
 - Two-table verbs (joins)
 - Data reshaping with `tidyr`
-- Window functions?
 
 :::
 :::
