@@ -17,6 +17,7 @@ website:
           - workflows.qmd
           - git-github.qmd
           - data-manipulation.qmd
+          - programming-functions.qmd
 
 execute: 
   freeze: auto

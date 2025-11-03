@@ -121,8 +121,3 @@ I highly recommend the book [Happy Git with R](https://happygitwithr.com/) for a
 ## Troubleshooting
 
 If you are having issues with the setup please start a discussion on GitHub [here](https://github.com/ateucher/pc-intermediate-r/discussions).
-
-<!-- ### References
-
-::: {#refs}
-::: -->
