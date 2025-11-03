@@ -243,47 +243,6 @@ fahrenheit_to_celsius(100)
 
 :::
 
-## Functions should be **"pure"**
-
--   Should not depend on external state (e.g., global variables)
--   Should not have side effects (e.g., modifying global variables, printing to console, plotting, etc.)
--   Given the same inputs, should always return the same outputs
-
-::: {.columns}
-::: {.column width="49%"}
-
-### Pure
-
-``` r
-add_one <- function(x) {
-  x + 1
-}
-```
-
-:::
-
-::: {.column width="2%"}
-:::
-
-::: {.column width="49%"}
-
-### Impure
-
-```r
-y <- 10
-
-add_y <- function(x) {
-  x + y
-}
-
-add_to_global <- function(x) {
-  y <<- x + 1
-}
-```
-
-:::
-:::
-
 ## Example
 
 $$z = \frac{x - \bar{x}}{s.d.}$$
@@ -794,6 +753,47 @@ Try it out with more than one group
 ```{r}
 my_summary(penguins, bill_len, c(species, island))
 ```
+
+## Functions should be **"pure"**
+
+-   Should not depend on external state (e.g., global variables)
+-   Should not have side effects (e.g., modifying global variables, printing to console, plotting, etc.)
+-   Given the same inputs, should always return the same outputs
+
+::: {.columns}
+::: {.column width="49%"}
+
+### Pure
+
+``` r
+add_one <- function(x) {
+  x + 1
+}
+```
+
+:::
+
+::: {.column width="2%"}
+:::
+
+::: {.column width="49%"}
+
+### Impure
+
+```r
+y <- 10
+
+add_y <- function(x) {
+  x + y
+}
+
+add_to_global <- function(x) {
+  y <<- x + 1
+}
+```
+
+:::
+:::
 
 ## Functions - data validation and error handling
 
