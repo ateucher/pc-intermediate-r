@@ -6,4 +6,4 @@ Images in this directory come from various sources:
 
 - Drawings of Fuzzy Monsters in the Git module are by [Allison Horst](https://allisonhorst.com/) and are from the Openscapes blog [GitHub for supporting, reusing, contributing, and failing safely by Allison Horst and Julia Lowndes](https://openscapes.org/blog/2022-05-27-github-illustrated-series/). The images are available under Creative Commons Attribution 4.0 International (CC BY 4.0) license. For more information, see https://creativecommons.org/licenses/by/4.0/.
 
-- The diagram of the `farenheit_to_celsius()` function is from the Software Carpentries [Functions lessson](https://swcarpentry.github.io/r-novice-inflammation/02-func-R.html). Carpentries material is available under Creative Commons Attribution 4.0 International (CC BY 4.0) license.
+- The diagram of the `farenheit_to_celsius()` function is from the Software Carpentries [Functions lesson](https://swcarpentry.github.io/r-novice-inflammation/02-func-R.html). Carpentries material is available under Creative Commons Attribution 4.0 International (CC BY 4.0) license.
