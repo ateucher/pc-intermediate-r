@@ -25,8 +25,8 @@ This will be an online, interactive workshop delivered virtually.
 
 ## Exercises
 
-- Exercises for the data manipulation module can be found [here](https://github.com/ateucher/pc-data-manipulation).
-- Exercises for the programming module can be found [here](https://github.com/ateucher/pc-programming).
+- Exercises (with solutions) for the data manipulation module can be found [here](https://github.com/ateucher/pc-data-manipulation).
+- Exercises (with solutions) for the programming module can be found [here](https://github.com/ateucher/pc-programming).
 
 ## Prework
 
@@ -35,3 +35,17 @@ Please ensure you have completed the steps in [System Setup](setup.qmd).
 ## Instructor:
 
 [***Andy Teucher***](https://andyteucher.ca) is a freelance data scientist and package developer with a passion for teaching others how to use data science tools to make their work more efficient and reproducible. His background is in conservation biology, with an MSc in Ecology from the University of Calgary. He has spent much of his career as a data scientist in government, where he made it his mission to promote and teach open, reproducible data science practices. He has written many R packages for internal use in his teams as well as for a broader audience, with several hosted on CRAN. Andy is a certified Software Carpentry and Data Carpentry instructor, and has led many workshops teaching programming skills to scientists and data professionals.
+
+## Acknowledgements and Resources:
+
+The material for this workshop has origins and inspiration from several sources, including:
+
+- [Happy Git and GitHub for the useR](https://happygitwithr.com/): A free book by Jenny Bryan and Jim Hester that teaches version control with Git and GitHub using R.
+
+- [The Carpentries](https://carpentries.org/): An organization dedicated to teaching foundational coding and data science skills to researchers worldwide.
+
+- [R for Data Science](https://r4ds.had.co.nz/): A comprehensive resource by Hadley Wickham and Garrett Grolemund that covers data science using R.
+
+- [What they forgot to teach you about R](https://rstats.wtf/): A collection of tips and best practices for R programming by Jennifer Bryan, Jim Hester, Shannon Pileggi, E. David Ajal.
+
+- [From R User to R Programmer](https://posit-conf-2025.github.io/r-programming/): Posit conf workshop by Emma Rand and Ian Lyttle.
