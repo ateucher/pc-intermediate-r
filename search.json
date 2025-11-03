@@ -1113,11 +1113,18 @@
     "text": "Your turn\nAdd a license to your repo via a pull request"
   },
   {
+    "objectID": "data-manipulation.html#schedule",
+    "href": "data-manipulation.html#schedule",
+    "title": "Advanced Data Manipulation with dplyr and tidyr",
+    "section": "Schedule",
+    "text": "Schedule\n\n\n\nPacific Time\nEastern Time\nDuration\n\n\n\n\n09:00 - 10:20\n12:00 – 13:20\n80 min\n\n\nBreak\nBreak\n15 min\n\n\n10:35 – 11:55\n13:35 – 14:55\n80 min\n\n\nBreak\nBreak\n15 min\n\n\n12:10 – 13:30\n15:10 – 16:30\n80 min"
+  },
+  {
     "objectID": "data-manipulation.html#outline",
     "href": "data-manipulation.html#outline",
     "title": "Advanced Data Manipulation with dplyr and tidyr",
     "section": "Outline",
-    "text": "Outline\n\n\nToday:\n\ndplyr fundamentals review\nColumn-wise operations\nTwo-table verbs (joins)\nData reshaping with tidyr"
+    "text": "Outline\n\n\nToday\n\ndplyr fundamentals review\nColumn-wise operations\nTwo-table verbs (joins)\nData reshaping with tidyr\nProgramming with R - Functions\n\n\nNext time\n\nProgramming with R - iteration\nReproducible reporing with Quarto"
   },
   {
     "objectID": "data-manipulation.html#data",
