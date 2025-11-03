@@ -381,10 +381,11 @@ Functions in R are objects that can be passed around and used later.
 
 - Scale `hfl` and `wgt` (use `across()`) in `rodents` to have mean 0 and standard deviation 1. *(Hint: Check out the `scale()` function)*
 - **Bonus:** Use the `.names` argument to keep the original columns and give the new columns a sensible name
+- See help with `?across`
 
 ## Column-wise operations
 
-specify multiple functions to apply in a `list()`
+Specify _multiple_ functions to apply to selected in a named `list()`
 
 <br>
 
@@ -429,7 +430,7 @@ penguins |>
 - When we use a function in `across()` it is called with its default arguments
 	- `mean()` and `sd()` both have an argument `na.rm` that defaults to `FALSE`
 - We can't pass extra arguments to functions inside `across()` directly
-- We need to pass a function with the argument values we want "baked in"
+- We need to specify a function with the argument values we want "baked in"
 
 :::
 
@@ -475,6 +476,7 @@ But if we're doing this only once we can define them in place with an [anonymous
 \(x) function(x, other_args)
 ```
 
+- `\(x)` is shorthand for `function(x)`, used for anonymous functions
 - This defines a function "on the fly" with the arguments specified how we want
 - The `x` will take the values of each column passed to it by `across()`
 
@@ -502,7 +504,7 @@ Live code this
 
 ## Your turn
 
-1. Calculate maximum of all bill measurements for each species in the built-in penguins dataset
+1. Calculate maximum of all bill measurements for each species in the built-in penguins dataset.
 2. Calculate the median of hind-foot length (`hfl`) and weight (`wgt`) for each species in `rodents`, ignoring `NA` values.
 
 ## Two-table verbs (joins)
@@ -665,6 +667,10 @@ left_join(x, y, by = c("column_in_x" = "column_in_y"))
 
 Use a join to add location information to the rodent captures data
 
+::: {.question}
+What kind of join would be appropriate here?
+:::
+
 - The rodent captures data is in the `PortalData/Rodents/Portal_rodent.csv` file.
 
 - The `SiteandMethods/Portal_UTMCoords.csv` file contains information about the location of each plot
@@ -727,7 +733,6 @@ y <- data.frame(b = c("x", "y"))
 cross_join(x, y)
 ```
 
-<br>
 
 ::: {.fragment}
 
