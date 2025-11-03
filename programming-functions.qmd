@@ -537,8 +537,6 @@ We will cover two types of function
 
 **2. ➡️ data frame functions: df as input and df as output**
 
-# Dataframe functions
-
 ## Dataframe functions
 
 Dataframe as input and Dataframe as output
@@ -805,7 +803,7 @@ It's good practice to include data validation and error handling in your functio
 ```r
 if (some_condition_not_met) {
   stop("Descriptive error message.")
-	# Function exits and does not return a result
+  # Function exits and does not return a result
 }
 ```
 
@@ -820,7 +818,7 @@ if (some_condition_not_met) {
 ```r
 if (some_non_critical_condition) {
   warning("Descriptive warning message.")
-	# Function continues executing
+  # Function continues executing
 }
 ```	
 
