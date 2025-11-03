@@ -123,7 +123,7 @@ penguins <- penguins |>
 
 How to shorten and make more clear?
 
-## Coping and pasting
+## Copying and pasting
 
 -   Is error prone
 -   Did anyone catch my mistake in the example?
