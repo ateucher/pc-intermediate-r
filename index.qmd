@@ -26,6 +26,7 @@ This will be an online, interactive workshop delivered virtually.
 ## Exercises
 
 - Exercises for the data manipulation module can be found [here](https://github.com/ateucher/pc-data-manipulation).
+- Exercises for the programming module can be found [here](https://github.com/ateucher/pc-programming).
 
 ## Prework
 
