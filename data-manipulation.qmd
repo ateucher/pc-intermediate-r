@@ -17,19 +17,41 @@ knitr:
 penguins <- dplyr::as_tibble(penguins)
 ```
 
+## Schedule
+
+| Pacific Time   | Eastern Time      | Duration |
+| :------------- | :---------------- | :------- |
+| 09:00 - 10:20  | 12:00 – 13:20     | 80 min   |
+| Break          | Break             | 15 min   |
+| 10:35 – 11:55  | 13:35 – 14:55     | 80 min   |
+| Break          | Break             | 15 min   |
+| 12:10 – 13:30  | 15:10 – 16:30     | 80 min   |
+
 ## Outline
 
 ::: {.columns}
+
 ::: {.column width="50%"}
 
-Today:
+### Today
 
 - `dplyr` fundamentals review
 - Column-wise operations
 - Two-table verbs (joins)
 - Data reshaping with `tidyr`
+- Programming with R - Functions
 
 :::
+
+::: {.column width="50%"}
+
+### Next time
+
+- Programming with R - iteration
+- Reproducible reporing with Quarto
+
+:::
+
 :::
 
 ## Data
