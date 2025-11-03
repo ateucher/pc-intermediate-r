@@ -14,6 +14,7 @@ knitr:
 
 ```{r setup, include=FALSE}
 library(tidyverse)
+penguins <- palmerpenguins::penguins
 ```
 
 ## Outline
@@ -53,10 +54,10 @@ It makes it easier to reuse work from project-to-project, increasing your produc
 
 We have several measurements:
 
--   `bill_len`
--   `bill_dep`
--   `flipper_len`
--   `body_mass`
+-   `bill_length_mm`
+-   `bill_depth_mm`
+-   `flipper_length_mm`
+-   `body_mass_g`
 
 These are on very different scales
 
@@ -66,19 +67,19 @@ These are on very different scales
 #| echo: false
 #| layout-ncol: 2
 penguins |>
-  ggplot(aes(x = bill_len)) +
+  ggplot(aes(x = bill_length_mm)) +
   geom_histogram(bins = 20) +
   theme_gray(base_size = 22)
 penguins |>
-  ggplot(aes(x = bill_dep)) +
+  ggplot(aes(x = bill_depth_mm)) +
   geom_histogram(bins = 20) +
   theme_gray(base_size = 22)
 penguins |>
-  ggplot(aes(x = flipper_len)) +
+  ggplot(aes(x = flipper_length_mm)) +
   geom_histogram(bins = 20) +
   theme_gray(base_size = 22)
 penguins |>
-  ggplot(aes(x = body_mass)) +
+  ggplot(aes(x = body_mass_g)) +
   geom_histogram(bins = 20) +
   theme_gray(base_size = 22)
 ```
@@ -103,20 +104,21 @@ We can apply the same transformation to each variable:
 ```{r}
 penguins <- penguins |>
   mutate(
-    z_bill_len = (bill_len - mean(bill_len, na.rm = TRUE)) /
-      sd(bill_len, na.rm = TRUE),
-    z_bill_dep = (bill_dep - mean(bill_len, na.rm = TRUE)) /
-      sd(bill_dep, na.rm = TRUE),
-    z_flipper_len = (flipper_len - mean(flipper_len, na.rm = TRUE)) /
-      sd(flipper_len, na.rm = TRUE),
-    z_body_mass = (body_mass - mean(body_mass, na.rm = TRUE)) /
-      sd(body_mass, na.rm = TRUE)
+    z_bill_length_mm = (bill_length_mm - mean(bill_length_mm, na.rm = TRUE)) /
+      sd(bill_length_mm, na.rm = TRUE),
+    z_bill_depth_mm = (bill_depth_mm - mean(bill_length_mm, na.rm = TRUE)) /
+      sd(bill_depth_mm, na.rm = TRUE),
+    z_flipper_length_mm = (flipper_length_mm -
+      mean(flipper_length_mm, na.rm = TRUE)) /
+      sd(flipper_length_mm, na.rm = TRUE),
+    z_body_mass_g = (body_mass_g - mean(body_mass_g, na.rm = TRUE)) /
+      sd(body_mass_g, na.rm = TRUE)
   )
 ```
 
 ## Long, unclear
 
-`(bill_len - mean(bill_len, na.rm = TRUE)) / sd(bill_len, na.rm = TRUE)`
+`(bill_length_mm - mean(bill_length_mm, na.rm = TRUE)) / sd(bill_length_mm, na.rm = TRUE)`
 
 -   Quite a lot of code
 -   Difficult to glance at and determine what the transformation is
@@ -250,10 +252,10 @@ $$z = \frac{x - \bar{x}}{s.d.}$$
 ``` r
 penguins <- penguins |>
   mutate(
-    z_bill_len = (bill_len - mean(bill_len, na.rm = TRUE)) / sd(bill_len, na.rm = TRUE),
-    z_bill_dep = (bill_dep - mean(bill_dep, na.rm = TRUE)) / sd(bill_dep, na.rm = TRUE),
-    z_flipper_len = (flipper_len - mean(flipper_len, na.rm = TRUE)) / sd(flipper_len, na.rm = TRUE),
-    z_body_mass = (body_mass - mean(body_mass, na.rm = TRUE)) / sd(body_mass, na.rm = TRUE)
+    z_bill_length_mm = (bill_length_mm - mean(bill_length_mm, na.rm = TRUE)) / sd(bill_length_mm, na.rm = TRUE),
+    z_bill_depth_mm = (bill_depth_mm - mean(bill_depth_mm, na.rm = TRUE)) / sd(bill_depth_mm, na.rm = TRUE),
+    z_flipper_length_mm = (flipper_length_mm - mean(flipper_length_mm, na.rm = TRUE)) / sd(flipper_length_mm, na.rm = TRUE),
+    z_body_mass_g = (body_mass_g - mean(body_mass_g, na.rm = TRUE)) / sd(body_mass_g, na.rm = TRUE)
   )
 ```
 
@@ -262,10 +264,10 @@ penguins <- penguins |>
 Identify the arguments: the things that vary across calls
 
 ``` r
-(bill_len    - mean(bill_len,    na.rm = TRUE)) / sd(bill_len,    na.rm = TRUE)
-(bill_dep    - mean(bill_dep,    na.rm = TRUE)) / sd(bill_dep,    na.rm = TRUE)
-(flipper_len - mean(flipper_len, na.rm = TRUE)) / sd(flipper_len, na.rm = TRUE)
-(body_mass   - mean(body_mass,   na.rm = TRUE)) / sd(body_mass,   na.rm = TRUE)
+(bill_length_mm    - mean(bill_length_mm,    na.rm = TRUE)) / sd(bill_length_mm,    na.rm = TRUE)
+(bill_depth_mm    - mean(bill_depth_mm,    na.rm = TRUE)) / sd(bill_depth_mm,    na.rm = TRUE)
+(flipper_length_mm - mean(flipper_length_mm, na.rm = TRUE)) / sd(flipper_length_mm, na.rm = TRUE)
+(body_mass_g   - mean(body_mass_g,   na.rm = TRUE)) / sd(body_mass_g,   na.rm = TRUE)
 ```
 
 \
@@ -306,10 +308,10 @@ Rewrite the call to `mutate()` as:
 ```{r}
 penguins <- penguins |>
   mutate(
-    z_bill_len = to_z(bill_len),
-    z_bill_dep = to_z(bill_dep),
-    z_flipper_len = to_z(flipper_len),
-    z_body_mass = to_z(body_mass)
+    z_bill_length_mm = to_z(bill_length_mm),
+    z_bill_depth_mm = to_z(bill_depth_mm),
+    z_flipper_length_mm = to_z(flipper_length_mm),
+    z_body_mass_g = to_z(body_mass_g)
   )
 ```
 
@@ -351,7 +353,7 @@ to_z <- function(x, middle) {
 ## Try it out
 
 ```{r}
-to_z(penguins$bill_len, middle = 0.2)
+to_z(penguins$bill_length_mm, middle = 0.2)
 
 ```
 
@@ -359,7 +361,7 @@ to_z(penguins$bill_len, middle = 0.2)
 
 ```{r}
 #| error: true
-to_z(penguins$bill_len)
+to_z(penguins$bill_length_mm)
 ```
 
 ## Give a default
@@ -376,7 +378,7 @@ to_z <- function(x, middle = 1) {
 ## Try it out
 
 ```{r}
-to_z(penguins$bill_len)
+to_z(penguins$bill_length_mm)
 ```
 
 ## Your turn
@@ -438,10 +440,10 @@ bit shorter than `length(x[!is.na(x)])`
 
 ## Try it out
 
-Call the function on `penguins$bill_len`
+Call the function on `penguins$bill_length_mm`
 
 ```{r}
-std_error(penguins$bill_len)
+std_error(penguins$bill_length_mm)
 ```
 
 . . .
@@ -451,7 +453,7 @@ Or in a pipeline
 ```{r}
 penguins |>
   group_by(species) |>
-  summarise(se = std_error(bill_len))
+  summarise(se = std_error(bill_length_mm))
 ```
 
 ## Your turn
@@ -488,9 +490,9 @@ sum_sq2 <- function(x) {
 Try it out
 
 ```{r}
-sum_sq(penguins$bill_len)
+sum_sq(penguins$bill_length_mm)
 
-sum_sq2(penguins$bill_len)
+sum_sq2(penguins$bill_length_mm)
 ```
 
 ## Types of function
@@ -516,10 +518,10 @@ For example, we might summarise one of our columns like this:
 ```{r}
 penguins |>
   summarise(
-    mean = mean(bill_len, na.rm = TRUE),
-    n = sum(!is.na(bill_len)),
-    sd = sd(bill_len, na.rm = TRUE),
-    se = std_error(bill_len)
+    mean = mean(bill_length_mm, na.rm = TRUE),
+    n = sum(!is.na(bill_length_mm)),
+    sd = sd(bill_length_mm, na.rm = TRUE),
+    se = std_error(bill_length_mm)
   )
 ```
 
@@ -547,7 +549,7 @@ my_summary <- function(df, column) {
 
 ```{r}
 #| error: true
-my_summary(penguins, bill_len)
+my_summary(penguins, bill_length_mm)
 ```
 
 😕
@@ -561,13 +563,13 @@ you can use:
 either
 
 ``` r
-penguins |> summarise(mean = mean(bill_dep))
+penguins |> summarise(mean = mean(bill_depth_mm))
 ```
 
 Or
 
 ``` r
-summarise(penguins, mean = mean(bill_dep))
+summarise(penguins, mean = mean(bill_depth_mm))
 ```
 
 ## Tidy evaluation
@@ -575,7 +577,7 @@ summarise(penguins, mean = mean(bill_dep))
 This is instead of having to use the full dataframe name with `$`, e.g.
 
 ``` r
-summarise(penguins, mean = mean(penguins$bill_dep))
+summarise(penguins, mean = mean(penguins$bill_depth_mm))
 ```
 
 . . .
@@ -658,7 +660,7 @@ my_summary <- function(df, column) {
 ## Use function
 
 ```{r}
-my_summary(penguins, bill_len)
+my_summary(penguins, bill_length_mm)
 ```
 
 🎉
@@ -692,7 +694,7 @@ my_summary <- function(df, summary_var, group_var = NULL) {
 ```
 
 ```{r}
-my_summary(penguins, bill_len, species)
+my_summary(penguins, bill_length_mm, species)
 ```
 
 ## Your turn
@@ -704,7 +706,7 @@ Improvement: Have a default of `NULL` for the grouping variable. Why?
 Try it out
 
 ```{r}
-my_summary(penguins, bill_len)
+my_summary(penguins, bill_length_mm)
 ```
 
 ## Your turn
@@ -714,7 +716,7 @@ Try it out with more than one group
 ```{r}
 #| error: true
 #| output-location: fragment
-my_summary(penguins, bill_len, c(species, island))
+my_summary(penguins, bill_length_mm, c(species, island))
 ```
 
 . . . 
@@ -751,7 +753,7 @@ my_summary <- function(df, summary_var, group_var = NULL) {
 Try it out with more than one group
 
 ```{r}
-my_summary(penguins, bill_len, c(species, island))
+my_summary(penguins, bill_length_mm, c(species, island))
 ```
 
 ## Functions should be **"pure"**
