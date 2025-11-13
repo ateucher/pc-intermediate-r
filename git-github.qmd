@@ -452,3 +452,105 @@ usethis::use_mit_license(
 ## Your turn
 
 Add a license to your repo via a pull request
+
+## When your PAT expires
+
+Personal Access Tokens (PATs) have an expiration date for security reasons.
+
+- GitHub will email you before your token expires
+- After expiration, you won't be able to push/pull from GitHub
+- You'll see authentication errors like:
+  - `remote: Invalid username or password`
+  - `fatal: Authentication failed`
+
+::: {.fragment}
+**Don't panic!** It's easy to fix.
+:::
+
+## Step 1: Regenerate your PAT
+
+Navigate to your GitHub tokens page:
+
+1. Go to [github.com](https://github.com) and sign in
+2. Click your profile picture (top right) → **Settings**
+3. Scroll down and click **Developer settings** (bottom of left sidebar)
+4. Click **Personal access tokens** → **Tokens (classic)**
+
+## 
+
+**Then, regenerate the token:**
+
+1. Find your expired (or soon-to-expire) token in the list
+2. Click on the token name to view its details
+3. Click **"Regenerate token"** at the bottom
+4. **Update the expiration date** (consider 180 days or 1 year)
+5. Click **"Regenerate token"** to confirm
+6. **Copy the new token immediately** - you won't be able to see it again!
+
+::: {.notes}
+Regenerating keeps the same token name and scopes, but gives you a new token value with an updated expiry date.
+:::
+
+## Step 2: Replace the old PAT
+
+Store the new token using `gitcreds`:
+
+```r
+gitcreds::gitcreds_set()
+```
+
+::: {.fragment}
+When prompted:
+```
+-> Your current credentials for 'https://github.com':
+
+  protocol: https
+  host    : github.com
+  username: PersonalAccessToken
+  password: <-- hidden -->
+
+-> What would you like to do? 
+
+1: Keep these credentials
+2: Replace these credentials
+3: See the password / token
+
+Selection: 2
+```
+:::
+
+::: {.fragment}
+Choose **2: Replace these credentials** and paste your new PAT
+:::
+
+## Step 3: Verify it worked
+
+Check your Git setup:
+
+```r
+usethis::git_sitrep()
+```
+
+::: {.fragment}
+Look for this line:
+
+```plaintext
+• Personal access token for 'https://github.com': '<discovered>'
+```
+:::
+
+::: {.fragment}
+**Success!** You should now be able to push and pull from GitHub again.
+:::
+
+::: {.notes}
+If you see `<not found>` instead of `<discovered>`, try running `gitcreds::gitcreds_set()` again and make sure you copied the entire token.
+:::
+
+## Pro tips
+
+- **Store your PAT securely** in a password manager (1Password, Bitwarden, etc.)
+- **Consider longer expiration periods** for tokens you use regularly (180 days, 1 year)
+- **Create multiple PATs** for different machines/purposes
+  - Makes it easier to revoke access to a specific machine if needed
+  - Helps you track which device is having authentication issues
