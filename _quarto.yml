@@ -18,6 +18,7 @@ website:
           - git-github.qmd
           - data-manipulation.qmd
           - programming-functions.qmd
+          - regex.qmd
 
 execute: 
   freeze: auto
