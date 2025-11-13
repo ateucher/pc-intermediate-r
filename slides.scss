@@ -39,6 +39,10 @@ $h3-font-size: 1.15em !default;
     color: #C7B41D;
 }
 
+.color-yellow {
+    color: #ffed27ff;
+}
+
 .small {
   font-size: 0.75em;
 }
@@ -54,6 +58,10 @@ $h3-font-size: 1.15em !default;
   padding-bottom: 0.25em;
   background: #2fc89fff;
   text-align: center;
+}
+
+.reveal .slide .question p::before {
+  content: "🤔 ";
 }
 
 .reveal .slide .notebox {
@@ -220,3 +228,7 @@ span.git-orange {
   color: $quote-color;
   border-color: $quote-color;
 }
+
+// .column-divider {
+//   border-left-color: red !important;
+// }

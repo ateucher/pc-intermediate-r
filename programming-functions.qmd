@@ -1,0 +1,945 @@
+---
+title: "Programming with R: Functions"
+subtitle: "Parks Canada; Ecological Integrity Monitoring Program"
+author: "Andy Teucher"
+format: revealjs
+knitr:
+  opts_chunk: 
+    R.options:
+      width: 110
+      pillar.print_max: 5
+      pillar.print_min: 5
+    echo: true
+---
+
+```{r setup, include=FALSE}
+library(tidyverse)
+penguins <- palmerpenguins::penguins
+```
+
+## Outline
+
+- Motivation
+- Fundamentals of functions
+
+## Learning objectives
+
+-   explain the rationale for writing functions
+-   write vector functions
+    -   that take a vector as input and output a vector
+    -   that take a vector as input and output a single value
+-   specify defaults for function arguments
+-   write functions that take dataframes as input and output a dataframe
+
+## Why write functions?
+
+- Make code easier to read and understand
+- Make code shorter
+- Make code less error-prone
+- Make code reusable
+
+::: {.notes}
+
+You can give a function an evocative name that makes your code easier to understand.
+
+As requirements change, you only need to update code in one place, instead of many.
+
+You eliminate the chance of making incidental mistakes when you copy and paste (i.e. updating a variable name in one place, but not in another).
+
+It makes it easier to reuse work from project-to-project, increasing your productivity over time.
+
+:::
+
+## Example: Penguins
+
+We have several measurements:
+
+-   `bill_length_mm`
+-   `bill_depth_mm`
+-   `flipper_length_mm`
+-   `body_mass_g`
+
+These are on very different scales
+
+## 
+
+```{r}
+#| echo: false
+#| layout-ncol: 2
+penguins |>
+  ggplot(aes(x = bill_length_mm)) +
+  geom_histogram(bins = 20) +
+  theme_gray(base_size = 22)
+penguins |>
+  ggplot(aes(x = bill_depth_mm)) +
+  geom_histogram(bins = 20) +
+  theme_gray(base_size = 22)
+penguins |>
+  ggplot(aes(x = flipper_length_mm)) +
+  geom_histogram(bins = 20) +
+  theme_gray(base_size = 22)
+penguins |>
+  ggplot(aes(x = body_mass_g)) +
+  geom_histogram(bins = 20) +
+  theme_gray(base_size = 22)
+```
+
+## Example
+
+-   difficult to plot on same axis or determine what value is large for
+		that variable
+
+-   A common solution is to apply a $z$ score transformation to each
+		variable.
+
+-   Normalises the values to have a mean of 0 and a standard deviation
+		of 1
+
+$$z = \frac{x - \bar{x}}{s.d.}$$
+
+## Apply transformation
+
+We can apply the same transformation to each variable:
+
+```{r}
+penguins <- penguins |>
+  mutate(
+    z_bill_length_mm = (bill_length_mm - mean(bill_length_mm, na.rm = TRUE)) /
+      sd(bill_length_mm, na.rm = TRUE),
+    z_bill_depth_mm = (bill_depth_mm - mean(bill_length_mm, na.rm = TRUE)) /
+      sd(bill_depth_mm, na.rm = TRUE),
+    z_flipper_length_mm = (flipper_length_mm -
+      mean(flipper_length_mm, na.rm = TRUE)) /
+      sd(flipper_length_mm, na.rm = TRUE),
+    z_body_mass_g = (body_mass_g - mean(body_mass_g, na.rm = TRUE)) /
+      sd(body_mass_g, na.rm = TRUE)
+  )
+```
+
+## Long, unclear
+
+`(bill_length_mm - mean(bill_length_mm, na.rm = TRUE)) / sd(bill_length_mm, na.rm = TRUE)`
+
+-   Quite a lot of code
+-   Difficult to glance at and determine what the transformation is
+
+How to shorten and make more clear?
+
+## Copying and pasting
+
+-   Is error prone
+-   Did anyone catch my mistake in the example?
+
+## What is a function?
+
+A named object that:
+
+1. Takes inputs (arguments)
+2. Performs a specific task
+3. Returns outputs (results)
+
+## Vector functions
+
+-   take one or more vectors as input
+-   output same length as input
+-   work well in `mutate()`
+-   appropriate for the *z*-transformation example
+
+## Parts of a function
+
+To turn your code into a function you need:
+
+-   a name
+-   the arguments - (the pieces that vary)
+-   the body (the code that does the thing)
+
+. . .
+
+```r
+name <- function(arguments) {
+  code body
+}
+```
+
+![](img/carpentries-f-to-c.png)
+
+## Function name
+
+::: {.incremental}
+- Use a verb or a clear descriptive phrase. Long is ok!
+- Difficulty in naming? Maybe this should this be two or three functions?
+- What should we call the function we write to do a $z$ score transformation?
+:::
+
+## Arguments
+
+-   the input vector
+
+-   additional arguments
+
+Naming conventions
+
+-   x for the vector input
+
+``` r
+name <- function(x) {
+  body does things with x
+}
+```
+
+## Return value
+
+::: {.columns}
+
+::: {.column width="48%"}
+
+- Output - what the function _returns_ to the user
+- By default, the last expression evaluated is returned
+- Using explicit `return()` is optional but not considered best practice in R (though common in other languages).
+
+:::
+
+::: {.column width="2%"}
+:::
+
+::: {.column width="50%"}
+
+### explicit return statement
+
+```r
+fahrenheit_to_celsius <- function(f) {
+  celsius <- (f - 32) * 5 / 9
+  return(celsius)
+}
+```
+\
+
+### implicit return of last named object
+
+```r
+fahrenheit_to_celsius <- function(f) {
+  celsius <- (f - 32) * 5 / 9
+  celsius
+}
+```
+\
+
+### implicit return of last expression
+
+```{r}
+fahrenheit_to_celsius <- function(f) {
+  (f - 32) * 5 / 9
+}
+```
+
+
+:::
+
+:::
+
+::: {.fragment}
+
+```{r}
+fahrenheit_to_celsius(100)
+```
+
+:::
+
+## Example
+
+$$z = \frac{x - \bar{x}}{s.d.}$$
+
+``` r
+penguins <- penguins |>
+  mutate(
+    z_bill_length_mm = (bill_length_mm - mean(bill_length_mm, na.rm = TRUE)) / sd(bill_length_mm, na.rm = TRUE),
+    z_bill_depth_mm = (bill_depth_mm - mean(bill_depth_mm, na.rm = TRUE)) / sd(bill_depth_mm, na.rm = TRUE),
+    z_flipper_length_mm = (flipper_length_mm - mean(flipper_length_mm, na.rm = TRUE)) / sd(flipper_length_mm, na.rm = TRUE),
+    z_body_mass_g = (body_mass_g - mean(body_mass_g, na.rm = TRUE)) / sd(body_mass_g, na.rm = TRUE)
+  )
+```
+
+## Example
+
+Identify the arguments: the things that vary across calls
+
+``` r
+(bill_length_mm    - mean(bill_length_mm,    na.rm = TRUE)) / sd(bill_length_mm,    na.rm = TRUE)
+(bill_depth_mm    - mean(bill_depth_mm,    na.rm = TRUE)) / sd(bill_depth_mm,    na.rm = TRUE)
+(flipper_length_mm - mean(flipper_length_mm, na.rm = TRUE)) / sd(flipper_length_mm, na.rm = TRUE)
+(body_mass_g   - mean(body_mass_g,   na.rm = TRUE)) / sd(body_mass_g,   na.rm = TRUE)
+```
+
+\
+
+. . .
+
+``` r
+(🟧 - mean(🟧, na.rm = TRUE)) / sd(🟧, na.rm = TRUE)
+(🟧 - mean(🟧, na.rm = TRUE)) / sd(🟧, na.rm = TRUE)
+(🟧 - mean(🟧, na.rm = TRUE)) / sd(🟧, na.rm = TRUE)
+(🟧 - mean(🟧, na.rm = TRUE)) / sd(🟧, na.rm = TRUE)
+```
+
+🟧 is x
+
+## Example
+
+Put into the template
+
+``` r
+name <- function(x) {
+  body does things with x
+}
+```
+
+\
+
+```{r}
+to_z <- function(x) {
+  (x - mean(x, na.rm = TRUE)) / sd(x, na.rm = TRUE)
+}
+```
+
+## Apply
+
+Rewrite the call to `mutate()` as:
+
+```{r}
+penguins <- penguins |>
+  mutate(
+    z_bill_length_mm = to_z(bill_length_mm),
+    z_bill_depth_mm = to_z(bill_depth_mm),
+    z_flipper_length_mm = to_z(flipper_length_mm),
+    z_body_mass_g = to_z(body_mass_g)
+  )
+```
+
+. . .
+
+Much shorter, much more clear.
+
+## A modification
+
+`mean()` has a `trim` argument: `mean(x, trim = 0, na.rm = FALSE, ...)`
+
+*the fraction (0 to 0.5) of observations to be trimmed from each end of
+x before the mean is computed.*
+
+. . .
+
+Suppose we want to specify the *middle* proportion left rather than the
+proportion trimmed from each end.
+
+## A modification
+
+-   A value of 0.1 for `trim` trims 0.1 from each end leaving 0.8 in the
+    middle
+
+-   trim = (1 - middle)/2
+
+![Trim is the proportion trimmed off each end; middle is what's 
+left](img/vector-functions-trim.png){fig-alt="schematic of trim and middle demonstrating that trim = (1 - middle)/2"}
+
+## Add an argument
+
+```{r}
+to_z <- function(x, middle) {
+  trim = (1 - middle) / 2
+  (x - mean(x, na.rm = TRUE, trim = trim)) / sd(x, na.rm = TRUE)
+}
+```
+
+## Try it out
+
+```{r}
+to_z(penguins$bill_length_mm, middle = 0.2)
+
+```
+
+## But what if we forget?
+
+```{r}
+#| error: true
+to_z(penguins$bill_length_mm)
+```
+
+## Give a default
+
+Give defaults whenever possible:
+
+```{r}
+to_z <- function(x, middle = 1) {
+  trim = (1 - middle) / 2
+  (x - mean(x, na.rm = TRUE, trim = trim)) / sd(x, na.rm = TRUE)
+}
+```
+
+## Try it out
+
+```{r}
+to_z(penguins$bill_length_mm)
+```
+
+## Your turn
+
+See if you can add another argument to `to_z()` to allow the user to specify
+if `NA` values should be removed or not. Give it a default value.
+
+## Your turn
+
+Create a function called `percent_diff` that calculates the percent difference between two (vectors of)
+values:
+
+$$\%diff = \frac{|a - b|}{((a + b)/2)} * 100$$
+
+* Hint: you can use the `abs()` function to calculate the absolute value.
+
+## Your turn
+
+Create a function called `is_big()` that takes a numeric vector and outputs a logical vector indicating whether each value is larger than a specified quantile threshold.
+
+- The function should have two arguments: the numeric vector and the quantile threshold (default to 0.75).
+
+## Types of function
+
+1.  vector functions: one or more vectors as input, one vector as output
+
+    i.  ✔️ output same length as input.
+
+    **ii. ➡️ summary functions: input is vector, output is a single
+    value**
+
+2.  data frame functions: df as input and df as output
+
+## Summary functions
+
+-   input is vector
+-   output is a single value
+-   could be used in `summarise()`
+
+## Example
+
+Write a function to compute the standard error of a sample.
+
+$$s.e. = \frac{s.d.}{\sqrt{n}}$$
+
+## Example
+
+```{r}
+std_error <- function(x) {
+  sd(x, na.rm = TRUE) / sqrt(sum(!is.na(x)))
+}
+```
+
+. . .
+
+Note: `sum(TRUE)` = 1 and `sum(FALSE)` = 0 Thus,`sum(!is.na(x))` gives
+you the number of `TRUE` (i.e., the number of non-NA values) and is a
+bit shorter than `length(x[!is.na(x)])`
+
+## Try it out
+
+Call the function on `penguins$bill_length_mm`
+
+```{r}
+std_error(penguins$bill_length_mm)
+```
+
+. . .
+
+Or in a pipeline
+
+```{r}
+penguins |>
+  group_by(species) |>
+  summarise(se = std_error(bill_length_mm))
+```
+
+## Your turn
+
+Write a function to compute the sums of squares (sum of the squared
+deviations from the mean). This can be calculated with either:
+
+$$SS(x) = \sum{(x - \bar{x})^2}$$
+
+or
+
+$$SS(x) = s^2 * (n-1)$$
+
+## A solution - one option
+
+```{r}
+sum_sq <- function(x) {
+  sum((x - mean(x, na.rm = TRUE))^2, na.rm = TRUE)
+}
+```
+
+OR
+
+```{r}
+sum_sq2 <- function(x) {
+  var_x <- var(x, na.rm = TRUE)
+  n <- sum(!is.na(x))
+  var_x * (n - 1)
+}
+```
+
+. . .
+
+Try it out
+
+```{r}
+sum_sq(penguins$bill_length_mm)
+
+sum_sq2(penguins$bill_length_mm)
+```
+
+## Types of function
+
+We will cover two types of function
+
+1.  vector functions: one or more vectors as input, one vector as output
+
+    i.  ✔️ output same length as input.
+
+    ii. ✔️ summary functions: input is vector, output is a single value
+
+**2. ➡️ data frame functions: df as input and df as output**
+
+## Dataframe functions
+
+Dataframe as input and Dataframe as output
+
+. . .
+
+For example, we might summarise one of our columns like this:
+
+```{r}
+penguins |>
+  summarise(
+    mean = mean(bill_length_mm, na.rm = TRUE),
+    n = sum(!is.na(bill_length_mm)),
+    sd = sd(bill_length_mm, na.rm = TRUE),
+    se = std_error(bill_length_mm)
+  )
+```
+
+Output is a dataframe
+
+## Dataframe functions
+
+Good candidate for a function to avoid repetitive code: `my_summary()`
+
+## Define `my_summary()` function
+
+```{r}
+my_summary <- function(df, column) {
+  df |>
+    summarise(
+      mean = mean(column, na.rm = TRUE),
+      n = sum(!is.na(column)),
+      sd = sd(column, na.rm = TRUE),
+      se = std_error(column)
+    )
+}
+```
+
+## Use function
+
+```{r}
+#| error: true
+my_summary(penguins, bill_length_mm)
+```
+
+😕
+
+## Tidy evaluation
+
+`tidyverse` functions like `dplyr::summarise()` use "tidy evaluation" so
+you can refer to the names of variables inside dataframes. For example,
+you can use:
+
+either
+
+``` r
+penguins |> summarise(mean = mean(bill_depth_mm))
+```
+
+Or
+
+``` r
+summarise(penguins, mean = mean(bill_depth_mm))
+```
+
+## Tidy evaluation
+
+This is instead of having to use the full dataframe name with `$`, e.g.
+
+``` r
+summarise(penguins, mean = mean(penguins$bill_depth_mm))
+```
+
+. . .
+
+This is known as data-masking: the dataframe environment *masks* the
+user environment by giving priority to the dataframe.
+
+## Data masking is great....
+
+and makes life easier when working interactively
+
+\
+
+. . .
+
+But kind of annoying in functions
+
+\
+
+::: {.columns}
+
+::: {.column width="49%"}
+
+```r
+my_summary <- function(df, column) {
+  df |>
+    summarise(
+      mean = mean(column, na.rm = TRUE),
+      n = sum(!is.na(column)),
+      sd = sd(column, na.rm = TRUE),
+      se = std_error(column)
+    )
+}
+```
+
+:::
+
+::: {.column width="2%"}
+:::
+
+::: {.column width="49%"}
+
+Because of data-masking, `summarise()` in `my_summary()` is looking for
+a column *literally* called `column` in the dataframe that has been
+passed in. It is not looking *inside* the variable `column` for the name
+of column you want to give it.
+
+::: 
+
+:::
+
+. . .
+
+Read more: [Programming with
+dplyr](https://dplyr.tidyverse.org/articles/programming.html)
+
+## Fix `my_summary()` function
+
+The solution is to use embracing: `{{{ var }}}`
+
+```{r}
+my_summary <- function(df, column) {
+  df |>
+    summarise(
+      mean = mean({{ column }}, na.rm = TRUE),
+      n = sum(!is.na({{ column }})),
+      sd = sd({{ column }}, na.rm = TRUE),
+      se = std_error({{ column }})
+    )
+}
+```
+
+. . .
+
+-   tells `summarize()` to look inside `column` variable to get the column name
+-   style with spaces
+-   `.groups = "drop"` to avoid message and leave the data in an
+    ungrouped state
+
+## Use function
+
+```{r}
+my_summary(penguins, bill_length_mm)
+```
+
+🎉
+
+## When to embrace?
+
+When tidy evaluation is used
+
+## Your turn
+
+Write a new summary function which calculates the median, maximum and
+minimum values of a variable in a dataset. Incorporate an argument to allow the
+summary to be performed grouped by another variable.
+
+## Your turn
+
+Try it out
+
+```{r}
+#| include: false
+my_summary <- function(df, summary_var, group_var = NULL) {
+  df |>
+    group_by({{ group_var }}) |>
+    summarise(
+      median = median({{ summary_var }}, na.rm = TRUE),
+      minimum = min({{ summary_var }}, na.rm = TRUE),
+      maximum = max({{ summary_var }}, na.rm = TRUE),
+      .groups = "drop"
+    )
+}
+```
+
+```{r}
+my_summary(penguins, bill_length_mm, species)
+```
+
+## Your turn
+
+Improvement: Have a default of `NULL` for the grouping variable. Why?
+
+## Your turn
+
+Try it out
+
+```{r}
+my_summary(penguins, bill_length_mm)
+```
+
+## Your turn
+
+Try it out with more than one group
+
+```{r}
+#| error: true
+#| output-location: fragment
+my_summary(penguins, bill_length_mm, c(species, island))
+```
+
+. . . 
+
+😕
+
+::: {.notes}
+By using embracing in this way, it is actually trying to group by the contents of the two columns concatenated, not the two columns separately.
+:::
+
+## A solution
+
+Use `pick()` which allows you to select a subset of columns inside a
+data masking function:
+
+. . .
+
+```{r}
+#| code-line-numbers: "|3"
+my_summary <- function(df, summary_var, group_var = NULL) {
+  df |>
+    group_by(pick({{ group_var }})) |>
+    summarise(
+      median = median({{ summary_var }}, na.rm = TRUE),
+      minimum = min({{ summary_var }}, na.rm = TRUE),
+      maximum = max({{ summary_var }}, na.rm = TRUE),
+      .groups = "drop"
+    )
+}
+```
+
+## 
+
+Try it out with more than one group
+
+```{r}
+my_summary(penguins, bill_length_mm, c(species, island))
+```
+
+## Functions should be **"pure"**
+
+-   Should not depend on external state (e.g., global variables)
+-   Should not have side effects (e.g., modifying global variables, printing to console, plotting, etc.)
+-   Given the same inputs, should always return the same outputs
+
+::: {.columns}
+::: {.column width="49%"}
+
+### Pure
+
+``` r
+add_one <- function(x) {
+  x + 1
+}
+```
+
+:::
+
+::: {.column width="2%"}
+:::
+
+::: {.column width="49%"}
+
+### Impure
+
+```r
+y <- 10
+
+add_y <- function(x) {
+  x + y
+}
+
+add_to_global <- function(x) {
+  y <<- x + 1
+}
+```
+
+:::
+:::
+
+## Functions - data validation and error handling
+
+It's good practice to include data validation and error handling in your functions to ensure they behave as expected when given incorrect or unexpected inputs.
+
+- Use `if` statements to check that inputs meet certain criteria or if specific conditions are met.
+- Use `stop()` to throw an **`Error`** if issues are serious enough that it should not proceed.
+- Use `warning()` to issue a **`Warning`** for non-critical issues.
+
+::: {.columns}
+
+::: {.column}
+
+### Errors
+
+```r
+if (some_condition_not_met) {
+  stop("Descriptive error message.")
+  # Function exits and does not return a result
+}
+```
+
+::: 
+
+::: {.column}
+
+::: {.fragment}
+
+### Warnings
+
+```r
+if (some_non_critical_condition) {
+  warning("Descriptive warning message.")
+  # Function continues executing and returns a result
+}
+```
+
+
+:::
+
+::: 
+
+:::
+
+::: {.fragment}
+
+- Warnings are often used later in the execution if the result to be returned is cause for concern. (e.g., result is all `NA`). It is a signal to the user to check the results carefully.
+
+:::
+
+## Example
+
+If a function expects two numeric vectors of the same length, you should check
+and stop the if they are not.
+
+::: {.columns}
+
+::: {.column}
+
+```{r}
+#| eval: false
+
+percent_diff <- function(x, y) {
+  (abs(x - y) /
+    ((x + y) / 2)) *
+    100
+}
+```
+
+:::
+
+::: {.column}
+
+::: {.fragment}
+
+```{r}
+percent_diff <- function(x, y) {
+  if (length(x) != length(y)) {
+    stop("Input vectors must be of the same length.")
+  }
+
+  (abs(x - y) /
+    ((x + y) / 2)) *
+    100
+}
+```
+
+:::
+
+\
+
+::: {.fragment}
+
+```{r}
+#| error: true
+#| output-location: fragment
+
+a <- c(1, 2, 3)
+b <- c(4, 5)
+
+percent_diff(a, b)
+```
+
+:::
+:::
+:::
+
+## Your turn
+
+1. Add a check to `my_summary()` to ensure that the `summary_var` is numeric. If not, throw an error.
+
+2. Add a warning to `to_z()` if the input vector has fewer than 3 non-NA values, since the standard deviation may not be meaningful in that case.
+
+## Practical use of functions in a project
+
+- Functions can be stored in separate R scripts and sourced into your
+  analysis scripts
+- This keeps your analysis scripts cleaner and more focused on the
+  analysis logic
+- It is best practice to keep your functions in a dedicated folder called `R/`
+- Then in the top of your scripts you can use `source("R/your_function.R")` to load them
+
+## Documenting functions
+
+- Use `roxygen2` style comments to document your functions
+- In Positron - put your cursor on the name of the function and click the 💡 and choose
+  "Generate a Roxygen Template"
+
+## Summary ☕
+
+-   Writing functions can make you more efficient and make your code
+    more readable. This can be just for your benefit.
+
+-   Vector functions take one or more vectors as input; their output can
+    be a vector (useful in `mutate()` and `filter()`) or a single value
+    (useful in `summarise()`).
+
+-   Dataframe functions take a dataframe as input and give a dataframe
+    as output
+
+-   Give arguments a default where possible
+
+-   We use `{{ var }}` embracing to manage data masking
+
+-   We use `pick({{ vars }})` to select more than one variable
+
+-   Include data validation and error handling in your functions
