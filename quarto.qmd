@@ -1,0 +1,6 @@
+---
+title: "An Introduction to Quarto"
+subtitle: "Parks Canada; Ecological Integrity Monitoring Program"
+author: "Andy Teucher"
+format: revealjs
+---

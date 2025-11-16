@@ -11,3 +11,715 @@ knitr:
       pillar.print_min: 5
     echo: true
 ---
+
+## Learning Objectives
+
+At the end of this section you will be able to:
+
+::: {style="font-size: 80%;"}
+
+- recognise that much iteration comes free with R
+- understand fundamentals of loops
+- use `purrr` functions for elegant iteration
+- understand functional programming and use anonymous functions with `purrr`
+
+```{r}
+#| include: false
+library(purrr)
+```
+
+:::
+
+## What is iteration?
+
+-   Iteration means repeating steps multiple times until a condition is
+    met
+
+-   In other languages, iteration is performed with loops: `for`, `while`
+
+. . .
+
+-   Iteration is different in R
+
+-   You *can* use loops....... but you often don't *need* to
+
+## Iteration in R
+
+Iteration is an inherent part of the **`R`** language. For example, if
+
+```{r}
+nums <- c(3, 1, 6, 4)
+```
+
+Then
+
+. . .
+
+```{r}
+#| eval: false
+2 * nums
+```
+
+is
+
+. . .
+
+```
+[1]  6  2 12  8
+```
+
+and NOT
+
+. . .
+
+```
+[1] 3 1 6 4 3 1 6 4
+```
+
+. . .
+
+**This is called vectorization** - operations are automatically applied to each element of a vector.
+
+::: {.notes}
+We take this for granted in R, but in most other programming languages, you would need to write a loop to achieve the same result. For example, in Python, you would typically use a list comprehension or a for loop to multiply each element of a list by 2. R's vectorized operations make code more concise and often faster.
+:::
+
+## Meanwhile with `python`
+
+```python
+nums = [3,1,6,4]
+
+nums * 2
+```
+
+```
+[3, 1, 6, 4, 3, 1, 6, 4]
+```
+
+. . .
+
+To achieve the desired result:
+
+```python
+[x * 2 for x in nums]
+```
+
+```
+[6, 2, 12, 8]
+```
+
+. . .
+
+Or
+
+```python
+y = []
+for x in nums:
+    y.append(x * 2)
+y
+```
+
+```
+[6, 2, 12, 8]
+```
+
+## Vectorization
+
+```{r}
+library(dplyr)
+
+penguins |>
+  mutate(bill_ratio = bill_len / bill_dep)
+```
+
+
+## Iteration in R
+
+We also have:
+
+-   `group_by()` with `summarize()` *(for every group, do this summary)*
+
+-   `ggplot2::facet_wrap()` *(for every level of a factor, make a plot)*
+
+-   `*apply()` and `purrr::map*()` and *(for every element of a list/vector, do this function)*
+
+
+## Why iteration?
+
+Doing the same operation multiple times:
+
+- Process multiple files
+- Analyze data from multiple sites
+- Apply the same transformation to multiple columns
+- Run simulations
+
+. . .
+
+**Goal**: Write code that is:
+
+- Less repetitive
+- Easier to maintain
+- Harder to make mistakes in
+
+# Loops
+
+## Basic `for` loop syntax
+
+```{r}
+#| eval: false
+for (item in vector_or_list) {
+  # item takes on each value in vector
+  # Do something with item
+}
+```
+
+<br>
+
+. . .
+
+
+```{r}
+parks <- c("Banff", "Jasper", "Yoho", "Riding Mountain")
+
+for (park in parks) {
+  print(paste("Processing", park))
+}
+```
+
+## Loop over values vs indices
+
+**Loop over values** when you only need the *value* of each element.
+
+```{r}
+parks <- c("Banff", "Jasper", "Yoho", "Riding Mountain")
+
+for (park in parks) {
+  print(paste("Processing", park))
+}
+```
+
+. . .
+
+**Loop over indices** when you need to know the *position*.
+
+## When to use indices
+
+Use `seq_along()`, `seq_len()`, `seq()` when you need to:
+
+1. **Access the same position in multiple objects**:
+```{r}
+parks <- c("Banff", "Jasper", "Yoho", "Riding Mountain")
+provinces <- c("Alberta", "Alberta", "British Columbia", "Manitoba")
+
+for (i in seq_along(parks)) {
+  print(paste(parks[i], "is in", provinces[i]))
+}
+```
+
+. . . 
+
+2. **Store results at specific positions**:
+```{r}
+#| eval: false
+results <- vector("list", length(files))
+
+for (i in seq_along(files)) {
+  results[[i]] <- read_csv(files[i])
+}
+```
+
+
+## Example: Reading multiple files
+
+```{r}
+#| eval: false
+library(readr)
+library(dplyr)
+
+files <- list.files("data/", pattern = "\\.csv$", full.names = TRUE)
+
+data_list <- vector(mode = "list", length = length(files))
+
+for (i in seq_along(files)) {
+  data_list[[i]] <- read_csv(files[i])
+}
+
+# Combine into one data frame
+all_data <- rbind_list(data_list)
+```
+
+## Your Turn: Create a `for` loop to make and save plots for each rodent site (plot)
+
+```{r}
+#| eval: false
+rodents <- read_csv("PortalData/Rodents/Portal_rodent.csv")
+
+rodent_counts <- rodents |>
+  filter(species == "DM") |>
+  group_by(year, plot) |>
+  summarise(n = n()) |>
+  ungroup()
+```
+
+<br>
+
+. . .
+
+Starting code in `04-iteration.R`
+
+## `while` loops
+
+- Loop continues *while* the condition is `TRUE`
+- Stops when the condition is `FALSE`.
+
+::: columns
+::: {.column width="50%"}
+
+```{r}
+#| eval: false
+while (condition_is_true) {
+  # Do something
+}
+```
+
+:::
+
+::: {.column width="50%"}
+::: fragment
+
+```{r}
+i <- 1
+while (i < 6) {
+  print(i)
+  i <- i + 1
+}
+```
+
+:::
+:::
+:::
+
+. . . 
+
+Use when you don't know in advance how many iterations you'll need.
+
+. . . 
+
+Usually need to advance the iterator inside the loop.
+
+## While loop example: Simulation
+
+```{r}
+# Simulate until estimate stabilizes
+estimate <- 0
+previous <- Inf
+tolerance <- 0.001
+n <- 100
+reps <- 0
+
+while (abs(estimate - previous) > tolerance) {
+  previous <- estimate
+  sample_data <- rnorm(n, mean = 5, sd = 2)
+  estimate <- mean(sample_data)
+  n <- n + 100
+  reps <- reps + 1
+}
+n
+reps
+```
+
+::: {.notes}
+This code simulates data repeatedly until the estimated mean stabilizes within a tolerance threshold:
+
+Initialize: Start with an estimate of 0, track the previous estimate, set a tolerance of 0.001, and begin with sample size 100
+
+Loop: Continue while the change in estimate exceeds the tolerance
+
+Save current estimate as previous
+Generate random normal data (mean=5, sd=2) with current sample size
+Calculate new estimate (mean of sample)
+Increase sample size by 100
+Result: Stops when consecutive estimates differ by less than 0.001
+
+This demonstrates the law of large numbers - as sample size increases, the sample mean converges to the true population mean (5). The loop automatically determines how many observations are needed for the estimate to stabilize.
+:::
+
+Rarely needed in data analysis work.
+
+# Iterating with `{purrr}`
+
+## Functional programming
+
+"functional programming" because functions take other functions as input
+
+-   modifying multiple columns `dplyr::across()`
+
+-   reading multiple files `purrr::map()` and friends
+
+-   saving multiple outputs `purrr::walk()`
+
+## Why `purrr`?
+
+The `purrr` package provides tools for functional programming:
+
+- Clearer intent than loops
+- Less boilerplate code
+- Type-safe variants
+- Works seamlessly with pipes
+
+## Fundamental paradigms
+
+Functional programming has three fundamental paradigms; they act on lists or vectors:
+
+::: incremental
+-   `map` - do *this* to each element: `purrr::map()`
+-   `filter` - like spaghetti, not coffee: `purrr::keep()`
+-   `reduce` - combine into new thing: `purrr::reduce()`
+:::
+
+. . .
+
+Each of these takes a *function* as an argument, to tell the operator *what* to do.
+
+. . . 
+
+We are going to focus on `map()` and friends.
+
+## `map()`: Apply a function to each element
+
+```{r}
+parks <- c("Banff", "Jasper", "Yoho", "Riding Mountain")
+```
+
+<br>
+
+::: {.columns}
+::: {.column width="50%"}
+
+::: fragment
+
+### `for` loop:
+
+```{r}
+for (park in parks) {
+  print(nchar(park))
+}
+```
+
+:::
+:::
+::: {.column width="50%"}
+
+::: fragment
+### `map()`
+
+`map(.x, .f)` applies function `.f` to each element of `.x`
+
+```{r}
+map(parks, nchar)
+```
+
+::: fragment
+
+Returns a **list** by default.
+
+:::
+:::
+:::
+:::
+
+## Review of lists
+
+Lists are like vectors, but instead of each element being a single value, each 
+element can be a more complex object (vector, data-frame, function, etc.)
+
+::: columns
+::: {.column width="50%"}
+
+```{r}
+my_list <- list(
+  c(1, 2, 3),
+  c("a", "b", "c"),
+  data.frame(x = 1:3, y = c("A", "B", "C"))
+)
+my_list
+```
+
+:::
+::: {.column width="50%"}
+
+```{r}
+my_named_list <- list(
+  numbers = c(1, 2, 3),
+  letters = c("a", "b", "c"),
+  df = data.frame(x = 1:3, y = c("A", "B", "C"))
+)
+my_named_list
+names(my_named_list)
+```
+
+:::
+:::
+
+## Type-specific map variants
+
+`map_*()` functions return ***atomic* vectors** of specific types:
+
+- `map_dbl()` → numeric vector
+- `map_chr()` → character vector
+- `map_int()` → integer vector
+- `map_lgl()` → logical vector
+
+## Type-specific map variants
+
+```{r}
+map_dbl(parks, nchar)
+```
+
+. . .
+
+```{r}
+map_chr(parks, toupper)
+```
+
+<br>
+
+. . .
+
+**Note:** These are simple examples to illustrate, but `nchar()` and `toupper()` are already vectorized, so you wouldn't normally use `map()` for them.
+
+<br>
+
+. . .
+
+```{r}
+nchar(parks)
+toupper(parks)
+```
+
+## Anonymous functions
+
+```r
+map(.x, .f)
+```
+
+The `.f` argument to `map()` can be:
+
+-   a named function (e.g., `nchar`, `toupper`)
+-   an anonymous function (a function defined *in place*)
+
+## Syntax for anonymous functions:
+
+::: {.columns}
+::: {.column}
+
+If simple, on one line:
+
+``` r
+\(x) what to do with x
+```
+
+<br>
+
+::: {.fragment}
+
+```{r}
+num <- 1:4
+map(num, \(x) x + 1)
+```
+
+:::
+:::
+::: {.column}
+
+::: {.fragment}
+
+Or more complex:
+
+``` r
+\(arg1, arg2, ...) {
+  # function body
+}
+```
+
+:::
+
+<br>
+
+::: {.fragment}
+
+```{r}
+num <- 1:4
+map(num, \(x) {
+  y <- x^2
+  z <- y + 3
+  z
+})
+```
+
+:::
+:::
+:::
+
+## Map: Atomic variants
+
+::::: columns
+::: {.column width="50%"}
+`map()` always returns a list:
+
+```{r}
+num <- 1:4
+map(num, \(x) x + 1)
+```
+
+:::
+
+::: {.column width="50%"}
+Use an atomic variant to specify type:
+
+```{r}
+num <- 1:4
+map_int(num, \(x) x + 1)
+```
+
+:::
+:::::
+
+## Reading multiple files
+
+Iteration functions in {purrr} can help with repetitive tasks.
+
+. . .
+
+### Example
+
+Read Excel files from a directory, then combine into a single data-frame.
+
+## Our turn: Reading data manually
+
+Here's our starting code:
+
+``` r
+data1952 <- read_excel("data/gapminder/1952.xlsx")
+data1957 <- read_excel("data/gapminder/1957.xlsx")
+data1962 <- read_excel("data/gapminder/1952.xlsx")
+data1967 <- read_excel("data/gapminder/1967.xlsx")
+
+data_manual <- bind_rows(data1952, data1957, data1962, data1967)
+```
+
+. . .
+
+What problems do you see?
+
+(I see one real problem, and one philosophical problem)
+
+<br>
+
+. . .
+
+Starting code in `04-iteration.R`
+
+## Our turn: Make list of paths
+
+I see this as a two step problem:
+
+::: incremental
+-   make a named list of paths, name is year
+-   use list of paths to read data frames, combine
+:::
+
+. . .
+
+Let's work together to improve this code to get paths:
+
+``` r
+paths <-
+  # get the filepaths from the directory
+  fs::dir_ls("data/gapminder") |>
+  # extract the year as names
+```
+
+## Our turn: Read data
+
+Let's work together to improve this code to read data:
+
+``` r
+data <-
+  paths |>
+  # read each file from excel, into data frame
+  # set list-names as column `year`
+  # bind into single data-frame
+  # convert year to number
+```
+
+## Map over two inputs
+
+Sometimes you need to map over two inputs that are the same length.
+
+```{r}
+params1 <- c(1, 2, 3)
+params2 <- c(10, 20, 30)
+
+map2(
+  params1,
+  params2,
+  \(x, y) x + y
+)
+```
+
+. . .
+
+**Vector variants:** `map2_dbl()`, `map2_chr()`, etc.
+
+## `purrr::walk()`
+
+For functions called for their *side effects* (i.e., not for their return value)
+
+Useful for:
+
+- writing data files
+- saving plots
+- `walk2()` for two inputs
+
+. . . 
+
+```{r}
+#| eval: false
+walk2(
+  list_of_dataframes,
+  list_of_filepaths,
+  \(df, f) {
+    write_csv(df, f)
+  }
+)
+```
+
+## Your turn
+
+Using our first example with the rodent data, use `purrr` instead of a `for`
+loop to:
+
+1. Make a list of plots
+2. Save plots for each rodent site (plot)
+
+<br>
+
+. . .
+
+Starting code in `04-iteration.R`
+
+## Summary
+
+- **Loops** are explicit but verbose
+- **Functional programming** (`purrr`) is usually clearer and efficient
+- Use `map_*()` to iterate over lists/vectors
+- Use `walk()` (and variants) for side effects
+- `purrr` functions can be parallelized with `in_parallel()`
+
+## Resources
+
+- R4DS chapter on iteration: <https://r4ds.hadley.nz/iteration>
+- purrr documentation: <https://purrr.tidyverse.org/>
+- tidyverse blog on purrr: <https://tidyverse.org/blog/2023/05/purrr-walk-this-way/>
+- Parallel processing with purrr: <https://purrr.tidyverse.org/articles/parallel.html>
