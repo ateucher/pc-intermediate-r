@@ -214,7 +214,7 @@
     "href": "quarto.html#your-turn-1",
     "title": "Reproducible Reporting with Quarto",
     "section": "Your turn",
-    "text": "Your turn\n\nAdd a parameter island with default value \"Torgerson\"\nAdd a sentence in the text that tells the reader what island is being reported on, using inline code.\nModify the code chunk to filter and plot only data for the selected island\nRender the document\n\n\nBonus:\n\nRender the document for a different island by specifying the parameter using quarto::quarto_render() in R.\nWrite a short R script to use purrr::walk() to render the report for all islands in your dataset\n\nHint: See ?quarto::quarto_render for details on passing parameters."
+    "text": "Your turn\n\nAdd a parameter island with default value \"Torgerson\"\nAdd a sentence in the text that tells the reader what island is being reported on, using inline code.\nModify the code chunk to filter and plot only data for the selected island\nRender the document\n\n\nBonus:\n\nRender the document for a different island by specifying the parameter using quarto::quarto_render() in R.\nWrite a short R script to use purrr::walk() to render the report for all islands in your dataset\n\nHint: See ?quarto::quarto_render for details on passing parameters.\nFor an example of a parameterized report and a script to render multiple reports, see 06-quarto.qmd and 06a-render-report.R in the course GitHub repository solutions folder."
   },
   {
     "objectID": "quarto.html#quarto-beyond-reports",
@@ -1327,7 +1327,7 @@
     "href": "programming-iteration.html#while-loop-example-simulation",
     "title": "Programming with R: Iteration",
     "section": "While loop example: Simulation",
-    "text": "While loop example: Simulation\n\n# Simulate until estimate stabilizes\nestimate &lt;- 0\nprevious &lt;- Inf\ntolerance &lt;- 0.001\nn &lt;- 100\nreps &lt;- 0\n\nwhile (abs(estimate - previous) &gt; tolerance) {\n  previous &lt;- estimate\n  sample_data &lt;- rnorm(n, mean = 5, sd = 2)\n  estimate &lt;- mean(sample_data)\n  n &lt;- n + 100\n  reps &lt;- reps + 1\n}\nn\n\n[1] 4300\n\nreps\n\n[1] 42\n\n\n\nThis code simulates data repeatedly until the estimated mean stabilizes within a tolerance threshold:\nInitialize: Start with an estimate of 0, track the previous estimate, set a tolerance of 0.001, and begin with sample size 100\nLoop: Continue while the change in estimate exceeds the tolerance\nSave current estimate as previous Generate random normal data (mean=5, sd=2) with current sample size Calculate new estimate (mean of sample) Increase sample size by 100 Result: Stops when consecutive estimates differ by less than 0.001\nThis demonstrates the law of large numbers - as sample size increases, the sample mean converges to the true population mean (5). The loop automatically determines how many observations are needed for the estimate to stabilize.\n\nRarely needed in data analysis work."
+    "text": "While loop example: Simulation\n\n# Simulate until estimate stabilizes\nestimate &lt;- 0\nprevious &lt;- Inf\ntolerance &lt;- 0.001\nn &lt;- 100\nreps &lt;- 0\n\nwhile (abs(estimate - previous) &gt; tolerance) {\n  previous &lt;- estimate\n  sample_data &lt;- rnorm(n, mean = 5, sd = 2)\n  estimate &lt;- mean(sample_data)\n  n &lt;- n + 100\n  reps &lt;- reps + 1\n}\nn\n\n[1] 8800\n\nreps\n\n[1] 87\n\n\n\nThis code simulates data repeatedly until the estimated mean stabilizes within a tolerance threshold:\nInitialize: Start with an estimate of 0, track the previous estimate, set a tolerance of 0.001, and begin with sample size 100\nLoop: Continue while the change in estimate exceeds the tolerance\nSave current estimate as previous Generate random normal data (mean=5, sd=2) with current sample size Calculate new estimate (mean of sample) Increase sample size by 100 Result: Stops when consecutive estimates differ by less than 0.001\nThis demonstrates the law of large numbers - as sample size increases, the sample mean converges to the true population mean (5). The loop automatically determines how many observations are needed for the estimate to stabilize.\n\nRarely needed in data analysis work."
   },
   {
     "objectID": "programming-iteration.html#functional-programming",
@@ -1461,6 +1461,13 @@
     "title": "Programming with R: Iteration",
     "section": "Resources",
     "text": "Resources\n\nR4DS chapter on iteration: https://r4ds.hadley.nz/iteration\npurrr documentation: https://purrr.tidyverse.org/\ntidyverse blog on purrr: https://tidyverse.org/blog/2023/05/purrr-walk-this-way/\nParallel processing with purrr: https://purrr.tidyverse.org/articles/parallel.html"
+  },
+  {
+    "objectID": "programming-iteration.html#another-example",
+    "href": "programming-iteration.html#another-example",
+    "title": "Programming with R: Iteration",
+    "section": "Another example",
+    "text": "Another example\nSee https://github.com/ateucher/pc-programming/blob/main/solutions/07-advanced-iteration.qmd for an example of using purrr to conduct a power analysis on rodent data in Quarto. It includes a section on running it in parallel.\nThe rendered report is at https://github.com/ateucher/pc-programming/blob/main/solutions/07-advanced-iteration.pdf"
   },
   {
     "objectID": "regex.html#why-regular-expressions",
