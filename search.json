@@ -840,6 +840,20 @@
     "text": "Your turn\nAdd a license to your repo via a pull request"
   },
   {
+    "objectID": "git-github.html#schedule-1",
+    "href": "git-github.html#schedule-1",
+    "title": "Version Control with Git and Collaboration with GitHub",
+    "section": "Schedule",
+    "text": "Schedule\n\n\n\nPacific Time\nEastern Time\nDuration\n\n\n\n\n09:00 - 10:20\n12:00 – 13:20\n80 min\n\n\nBreak\nBreak\n15 min\n\n\n10:35 – 11:55\n13:35 – 14:55\n80 min\n\n\nBreak\nBreak\n15 min\n\n\n12:10 – 13:30\n15:10 – 16:30\n80 min"
+  },
+  {
+    "objectID": "git-github.html#outline",
+    "href": "git-github.html#outline",
+    "title": "Version Control with Git and Collaboration with GitHub",
+    "section": "Outline",
+    "text": "Outline\n\nQuickly - Updating GitHub Personal Access Tokens (PATs)\nString manipulation and regular expressions with stringr\nIteration and functional programming with purrr\nReproducible reporting with Quarto"
+  },
+  {
     "objectID": "git-github.html#when-your-pat-expires",
     "href": "git-github.html#when-your-pat-expires",
     "title": "Version Control with Git and Collaboration with GitHub",
