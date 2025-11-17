@@ -5,12 +5,30 @@ author: "Andy Teucher"
 format: revealjs
 ---
 
-## Why reproducible reporting?
+## What is reproducible reporting?
+
+Research is considered to be reproducible when the exact results can be 
+reproduced if given access to the original data, software, and code.
+
+\
+
+. . .
+
+Code and narrative text in a single document means:
+
+::: {.incremental}
+
+- You don't have to copy and paste figures and tables into reports
+- Reports are automatically updated when data or analyses change
+- Human error is reduced
+- Enhanced transparency and reproducibility
+
+:::
 
 ## What is Quarto?
 
 - Open-source scientific and technical publishing system
-- Supports multiple data science languages (R, Python, Julia, Observable)
+- Supports multiple data science languages (R, Python, Julia, ...)
 - Integrated with Positron and RStudio
 - Renders to multiple formats (HTML, PDF, Word, slides, books, websites)
 
@@ -19,6 +37,7 @@ format: revealjs
 - Literate programming: Combine code and narrative text
 - Markdown syntax for easy formatting and works with version control
 - Support for code execution and output embedding
+
 
 . . .
 
@@ -29,7 +48,7 @@ format: revealjs
 - HTML documents (`format: html`)
 - Word documents (`format: docx`)
 - PDF reports 
-    - via LaTeX (`format: pdf`)
+    - via $LaTeX$ (`format: pdf`)
     - via [typst](https://quarto.org/docs/output-formats/typst.html) (`format: typst`)
 - Presentations
     - Reveal.js (`format: revealjs`)
@@ -104,7 +123,7 @@ Focus on content, not formatting
 
 ## Markdown Lists
 
-Can use `*`, `-`, or `+` may be used for unordered list items.
+**`*`**, **`-`**, or **`+`** may be used for unordered list items.
 
 :::columns
 :::{.column width=50%}
@@ -127,7 +146,7 @@ Ordered list:
 
 :::
 
-:::{.column width=50%}
+:::{.column width=50% .fragment}
 
 #### Output
 
@@ -216,7 +235,7 @@ Help on equations: <https://quarto.org/docs/authoring/markdown-basics.html#equat
 - Bare URLs:
     - `<https://andyteucher.ca>` -> <https://andyteucher.ca>
 - Images:
-    - `![rainbow cat](https://media.giphy.com/media/BSx6mzbW1ew7K/giphy.gif)` -> ![rainbow cat](https://media.giphy.com/media/BSx6mzbW1ew7K/giphy.gif){style="width:150px;"}
+    - `![](https://media.giphy.com/media/BSx6mzbW1ew7K/giphy.gif)` -> ![](https://media.giphy.com/media/BSx6mzbW1ew7K/giphy.gif){style="width:150px;"}
 
 :::
 
@@ -233,20 +252,12 @@ summary(data)
 
 ## Code chunk options
 
-- Specified on opening lines
-- Prefaced with special comment prefix: `#|`
+Prefaced with special comment prefix: `#|`
 
-. . .
+\
 
-- `label:` Name of the code chunk (used for referencing)
-- `echo:` Show or hide code (`true`/`false`)
-- `eval:` Execute or skip code (`true`/`false`)
-- `message:` Show or hide messages (`true`/`false`)
-- `warning:` Show or hide warnings (`true`/`false`)
-- `fig.width:` and `fig.height:` Set figure dimensions
-- many others
-
-## Example Code Chunk with Options
+::: {.columns}
+::: {.column width="35%"}
 
 ````markdown
 ```{{r}}
@@ -258,6 +269,20 @@ data <- read.csv("data.csv")
 summary(data)
 ```
 ````
+
+:::
+::: {.column width="65%"}
+
+- `label:` Name of the code chunk (used for referencing)
+- `echo:` Show or hide code (`true`/`false`)
+- `eval:` Execute or skip code (`true`/`false`)
+- `message:` Show or hide messages (`true`/`false`)
+- `warning:` Show or hide warnings (`true`/`false`)
+- `fig.width:` and `fig.height:` Set figure dimensions
+- many others
+
+:::
+:::
 
 ## Inline code execution
 
@@ -337,7 +362,7 @@ format: html
 
 . . .
 
-- Access parameters in code chunks via the `params` object
+- Access parameters in code chunks via the special `params` object
 
 ````markdown
 ```{{r}}
@@ -348,7 +373,6 @@ site_data <- data |>
 
 ## Your turn
 
-- Open `05-quarto.qmd` in Positron
 - Add a parameter `island` with default value `"Torgerson"`
 - Add a sentence in the text that tells the reader what island is being reported on, using inline code.
 - Modify the code chunk to filter and plot only data for the selected island
@@ -357,7 +381,18 @@ site_data <- data |>
 . . .
 
 ### Bonus:
-- Render the document for a different island by specifying the parameter at the command line or using `quarto::quarto_render()` in R.
+- Render the document for a different island by specifying the parameter using `quarto::quarto_render()` in R.
 - Write a short R script to use `purrr::walk()` to render the report for all islands in your dataset
 
 *Hint: See `?quarto::quarto_render` for details on passing parameters.*
+
+## Quarto beyond reports
+
+- Websites and blogs
+    - <https://quarto.org/docs/websites/>
+- Books and long-form documents
+    - <https://quarto.org/docs/books/>
+- Dashboards and interactive documents
+    - <https://quarto.org/docs/dashboards/>
+- Presentations and slideshows
+    - <https://quarto.org/docs/presentations/>

@@ -250,6 +250,10 @@ all_data <- rbind_list(data_list)
 
 ## Your Turn: Create a `for` loop to make and save plots for each rodent site (plot)
 
+Starting code in `04-iteration.R`
+
+<br>
+
 ```{r}
 #| eval: false
 rodents <- read_csv("PortalData/Rodents/Portal_rodent.csv")
@@ -261,11 +265,7 @@ rodent_counts <- rodents |>
   ungroup()
 ```
 
-<br>
 
-. . .
-
-Starting code in `04-iteration.R`
 
 ## `while` loops
 
@@ -428,10 +428,12 @@ Returns a **list** by default.
 :::
 :::
 
-## Review of lists
+## Aside: Review of lists
 
 Lists are like vectors, but instead of each element being a single value, each 
 element can be a more complex object (vector, data-frame, function, etc.)
+
+Lists can have `names`
 
 ::: columns
 ::: {.column width="50%"}
@@ -459,6 +461,10 @@ names(my_named_list)
 ```
 
 :::
+:::
+
+::: {.notes}
+Let's make and explore this object in R
 :::
 
 ## Type-specific map variants
@@ -657,6 +663,8 @@ data <-
 
 Sometimes you need to map over two inputs that are the same length.
 
+Use `map2()` with two inputs, and supply a function that takes two arguments.
+
 ```{r}
 params1 <- c(1, 2, 3)
 params2 <- c(10, 20, 30)
@@ -671,6 +679,8 @@ map2(
 . . .
 
 **Vector variants:** `map2_dbl()`, `map2_chr()`, etc.
+
+**See `pmap()` for more than two inputs.**
 
 ## `purrr::walk()`
 
