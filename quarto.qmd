@@ -386,6 +386,9 @@ site_data <- data |>
 
 *Hint: See `?quarto::quarto_render` for details on passing parameters.*
 
+For an example of a parameterized report and a script to render multiple reports, 
+see `06-quarto.qmd` and `06a-render-report.R` in the course [GitHub repository `solutions` folder](https://github.com/ateucher/pc-programming/tree/main/solutions).
+
 ## Quarto beyond reports
 
 - Websites and blogs

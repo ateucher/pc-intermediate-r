@@ -733,3 +733,11 @@ Starting code in `04-iteration.R`
 - purrr documentation: <https://purrr.tidyverse.org/>
 - tidyverse blog on purrr: <https://tidyverse.org/blog/2023/05/purrr-walk-this-way/>
 - Parallel processing with purrr: <https://purrr.tidyverse.org/articles/parallel.html>
+
+## Another example
+
+See <https://github.com/ateucher/pc-programming/blob/main/solutions/07-advanced-iteration.qmd>
+for an example of using `purrr` to conduct a power analysis on Rodent data. It 
+includes a section on running it in parallel.
+
+The rendered report is at <https://github.com/ateucher/pc-programming/blob/main/solutions/07-advanced-iteration.pdf>
