@@ -21,6 +21,7 @@ website:
           - regex.qmd
           - programming-iteration.qmd
           - quarto.qmd
+          - wrapup.qmd
 
 execute: 
   freeze: auto

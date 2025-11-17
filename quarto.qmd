@@ -1,6 +1,363 @@
 ---
-title: "An Introduction to Quarto"
+title: "Reproducible Reporting with Quarto"
 subtitle: "Parks Canada; Ecological Integrity Monitoring Program"
 author: "Andy Teucher"
 format: revealjs
 ---
+
+## Why reproducible reporting?
+
+## What is Quarto?
+
+- Open-source scientific and technical publishing system
+- Supports multiple data science languages (R, Python, Julia, Observable)
+- Integrated with Positron and RStudio
+- Renders to multiple formats (HTML, PDF, Word, slides, books, websites)
+
+## Key Features of Quarto
+
+- Literate programming: Combine code and narrative text
+- Markdown syntax for easy formatting and works with version control
+- Support for code execution and output embedding
+
+. . .
+
+**Note: You can render existing R Markdown (`.Rmd`) documents with Quarto and/or rename them to `.qmd` files to turn them into Quarto documents.**
+
+## Output Formats
+
+- HTML documents (`format: html`)
+- Word documents (`format: docx`)
+- PDF reports 
+    - via LaTeX (`format: pdf`)
+    - via [typst](https://quarto.org/docs/output-formats/typst.html) (`format: typst`)
+- Presentations
+    - Reveal.js (`format: revealjs`)
+    - PowerPoint (`format: pptx`)
+- Books and websites
+
+## Our turn
+
+- Open `05-quarto.qmd` in Positron
+- Explore the document structure and code chunks
+- Render the document to HTML using the Preview button
+
+## Three ways to render
+
+. . .
+
+1. **Quarto is integrated into Positron**
+
+   Click ![](img/positron-quarto-render.png){fig-alt="small icon of render arrow" width="100"} in Editor pane of Positron.
+
+. . .
+
+2. **Quarto is an R package**
+
+   Run in R:
+
+   ```r
+   quarto::quarto_render(input = ___, output_format = ___)
+   ```
+
+. . .
+
+3. **Quarto has a command line interface (CLI)**
+
+   Run at the terminal:
+
+   ```bash
+   quarto render <input> --to <format>
+   ```
+
+## Quarto uses Markdown syntax
+
+Markdown is designed to be easy to write and easy to read:
+\
+
+> A Markdown-formatted document should be publishable as-is, as plain text, without looking like it's been marked up with tags or formatting instructions.\
+> -John Gruber
+
+\
+Focus on content, not formatting
+
+## Markdown Headings
+
+`#`, `##`, `###`, etc.  for different levels
+
+\
+
++---------------------+-----------------------------------+
+| Markdown Syntax     | Output                            |
++=====================+===================================+
+|     # Header 1      | # Header 1 {.heading-output}      |
++---------------------+-----------------------------------+
+|     ## Header 2     | ## Header 2 {.heading-output}     |
++---------------------+-----------------------------------+
+|     ### Header 3    | ### Header 3 {.heading-output}    |
++---------------------+-----------------------------------+
+|     #### Header 4   | #### Header 4 {.heading-output}   |
++---------------------+-----------------------------------+
+|     ##### Header 5  | ##### Header 5 {.heading-output}  |
++---------------------+-----------------------------------+
+
+
+## Markdown Lists
+
+Can use `*`, `-`, or `+` may be used for unordered list items.
+
+:::columns
+:::{.column width=50%}
+
+#### Markdown
+
+```{.markdown}
+Unordered list:
+
+* red
+* green
+* blue
+
+Ordered list:
+
+1. red
+1. green
+3. blue
+```
+
+:::
+
+:::{.column width=50%}
+
+#### Output
+
+Unordered list:
+
+* red
+* green
+* blue
+
+Ordered list:
+
+1. red
+1. green
+3. blue
+:::
+:::
+
+## Inline Elements: Text Formatting
+
+::: columns
+::: {.column width="50%"}
+
+#### Markdown
+
+```{.markdown}
+Markdown allows you to format text
+with *emphasis (italics)* and 
+**strong emphasis (bold)**.
+You can also add superscripts^2^, 
+subscripts~2~, and display code 
+`verbatim`. Little known fact: you can 
+also ~~strikethrough~~ text and present
+it in [small caps]{.smallcaps}.
+```
+
+:::
+
+::: {.column width="50%" .fragment}
+
+#### Output
+
+Markdown allows you to format text with *emphasis (italics)* and **strong emphasis (bold)**. You can also add superscripts^2^, subscripts~2~, and display code `verbatim`. Little known fact: you can also ~~strikethrough~~ text and present it in [small caps]{.smallcaps}.
+
+:::
+:::
+
+::: footer
+^[Either the `*` or `_` can be used for emphasis and strong.]
+:::
+
+## Inline Elements: Math
+
+::: columns
+::: {.column width="50%"}
+
+#### Markdown
+
+```markdown
+The area of a circle is $A = \pi r^2$,
+where $r$ is the radius and $\pi$ is
+the constant $3.141592\ldots$.
+```
+
+:::
+::: {.column width="50%" .fragment}
+
+#### Output
+
+The area of a circle is $A = \pi r^2$, where $r$ is the radius and $\pi$ is the constant $3.141592\ldots$.
+
+:::
+:::
+
+. . .
+
+Help on equations: <https://quarto.org/docs/authoring/markdown-basics.html#equations>
+
+## Inline Elements: Links and Images
+
+::: {.incremental}
+
+- Clickable hyperlinks
+    - `[Andy's website](https://andyteucher.ca)` -> [Andy's website](https://andyteucher.ca)
+- Links within the document:
+    -  `[code chunks](#quarto-uses-markdown-syntax)` -> [code chunks](#quarto-uses-markdown-syntax)
+- Bare URLs:
+    - `<https://andyteucher.ca>` -> <https://andyteucher.ca>
+- Images:
+    - `![rainbow cat](https://media.giphy.com/media/BSx6mzbW1ew7K/giphy.gif)` -> ![rainbow cat](https://media.giphy.com/media/BSx6mzbW1ew7K/giphy.gif){style="width:150px;"}
+
+:::
+
+## Computational Code Chunks
+
+- Use triple backticks with language identifier (e.g., `r`, `python`)
+
+````markdown
+```{{r}}
+data <- read.csv("data.csv")
+summary(data)
+```
+````
+
+## Code chunk options
+
+- Specified on opening lines
+- Prefaced with special comment prefix: `#|`
+
+. . .
+
+- `label:` Name of the code chunk (used for referencing)
+- `echo:` Show or hide code (`true`/`false`)
+- `eval:` Execute or skip code (`true`/`false`)
+- `message:` Show or hide messages (`true`/`false`)
+- `warning:` Show or hide warnings (`true`/`false`)
+- `fig.width:` and `fig.height:` Set figure dimensions
+- many others
+
+## Example Code Chunk with Options
+
+````markdown
+```{{r}}
+#| label: summary-stats
+#| echo: true
+#| message: false
+
+data <- read.csv("data.csv")
+summary(data)
+```
+````
+
+## Inline code execution
+
+- Use single backticks with language identifier
+
+````markdown
+```{{r}}
+data <- data.frame(
+    id = c("A", "B", "C", "D", "E"),
+    variable = c(1, 2, 3, 4, 5)
+)
+```
+
+The mean of the data variable is `{{r}} mean(data$variable)`.
+````
+
+. . .
+
+\
+
+```{r}
+#| echo: true
+data <- data.frame(
+  id = c("A", "B", "C", "D", "E"),
+  variable = c(1, 2, 3, 4, 5)
+)
+```
+
+The mean of the data variable is `{r} mean(data$variable)`.
+
+## Quarto Document Metadata
+
+YAML header at the top of the document
+
+```yaml
+---
+title: "Document Title"
+author: "Author Name"
+date: "2024-06-01"
+format: html
+---
+```
+
+. . .
+
+Also specify default code chunk options globally (`echo: false`, `fig-width: 6`, etc.)
+
+## Your turn
+
+- Open `05-quarto.qmd` in Positron
+- Modify the YAML header to add an author and date
+- Experiment with code chunk options to *hide the code in the ggplot2 chunk*
+- Render the document to Word using `docx`, or pdf using `typst`
+- Render with the Keyboard shortcut (`Ctrl+Shift+K`)
+
+## Parameterized Reports
+
+You may want to create different variations of a single document. For example:
+
+- Showing results for a specific geographic location.
+- Running a report that covers a specific time period.
+- Running a single analysis multiple times for different assumptions.
+
+## Parameterized Reports
+
+- Define parameters and their defaults in YAML header
+
+```yaml
+---
+title: "Parameterized Report"
+params:
+  site_id: "1"
+  year: 2023
+format: html
+---
+```
+
+. . .
+
+- Access parameters in code chunks via the `params` object
+
+````markdown
+```{{r}}
+site_data <- data |> 
+    filter(site == params$site_id, year == params$year)
+```
+````
+
+## Your turn
+
+- Open `05-quarto.qmd` in Positron
+- Add a parameter `island` with default value `"Torgerson"`
+- Add a sentence in the text that tells the reader what island is being reported on, using inline code.
+- Modify the code chunk to filter and plot only data for the selected island
+- Render the document
+
+. . .
+
+### Bonus:
+- Render the document for a different island by specifying the parameter at the command line or using `quarto::quarto_render()` in R.
+- Write a short R script to use `purrr::walk()` to render the report for all islands in your dataset
+
+*Hint: See `?quarto::quarto_render` for details on passing parameters.*
