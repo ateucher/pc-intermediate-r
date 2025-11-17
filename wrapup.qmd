@@ -12,6 +12,7 @@ format: revealjs
 - Project-oriented workflows
 - Git and GitHub
 - Advanced data manipulation with dplyr
+- Writing functions in R
 - String manipulation with stringr
 - Iteration and functional programming with purrr
 - Quarto for reproducible reporting
