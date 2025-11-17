@@ -1,0 +1,78 @@
+---
+title: "Wrapping up"
+subtitle: "Parks Canada; Ecological Integrity Monitoring Program"
+author: "Andy Teucher"
+format: revealjs
+---
+
+## We've covered a lot!
+
+::: {.incremental}
+
+- Project-oriented workflows
+- Git and GitHub
+- Advanced data manipulation with dplyr
+- String manipulation with stringr
+- Iteration and functional programming with purrr
+- Quarto for reproducible reporting
+
+:::
+
+. . .
+
+Exposure to concepts & tools, it's up to you to practice & apply
+
+## Big Picture
+
+. . .
+
+Project-oriented workflows 
+
+. . .
+
+\+
+
+Git and GitHub 
+
+. . .
+
+\+
+
+Shared coding styles and conventions
+
+<br>
+
+. . .
+
+[= better and reproducible science in less time]{style="font-weight: bold; font-size: 1.2em;"}
+
+. . .
+
+> “It’s like agreeing that we will all drive on the left or the right. A hallmark of civilization is following conventions that constrain your behavior a little, in the name of public safety.”
+
+- Jenny Bryan & Jim Hester, What They Forgot to Teach You About R
+
+
+## Wrap up
+
+Identify as a team & prioritize helping each other
+
+- Work on many different projects
+- Use same workflows, share feedback, think together across projects
+
+Shared workflows are a daily opportunity for efficiency & inclusion
+
+- Increase participation and inclusion; focus on onboarding
+- Common ground, easier to talk about, easier to ask for help
+
+## Key resources
+
+- [R for Data Science book](https://r4ds.had.co.nz/)
+- [Happy Git and GitHub for the useR](https://happygitwithr.com/)
+- [Quarto documentation](https://quarto.org/docs/)
+- [Cheat Sheets](https://posit.co/resources/cheatsheets/)
+    - [dplyr](https://rstudio.github.io/cheatsheets/html/dplyr.html)
+    - [stringr](https://rstudio.github.io/cheatsheets/html/strings.html)
+    - [purrr](https://rstudio.github.io/cheatsheets/html/purrr.html)
+    - [Quarto](https://rstudio.github.io/cheatsheets/html/quarto.html)
+    - ...

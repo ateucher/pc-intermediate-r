@@ -18,6 +18,10 @@ website:
           - git-github.qmd
           - data-manipulation.qmd
           - programming-functions.qmd
+          - regex.qmd
+          - programming-iteration.qmd
+          - quarto.qmd
+          - wrapup.qmd
 
 execute: 
   freeze: auto
