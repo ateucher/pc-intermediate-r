@@ -33,7 +33,7 @@ Working with text data is common in data science:
 
 ## The `stringr` package
 
-Part of the tidyverse, `stringr` makes working with strings consistent and easy.
+Part of the tidyverse, `stringr` makes working with strings consistent and ~~easy~~ easier.
 
 ```{r}
 library(stringr)
@@ -52,7 +52,7 @@ All `stringr` functions:
 Before regex, let's see simple `stringr` functions:
 
 ```{r}
-sites <- c(
+parks <- c(
   "Banff National Park",
   "Jasper National Park",
   "Yoho National Park",
@@ -63,21 +63,21 @@ sites <- c(
 ::: {.fragment}
 
 ```{r}
-str_length(sites) # Count characters
+str_length(parks) # Count characters
 ```
 
 :::
 ::: {.fragment}
 
 ```{r}
-str_to_upper(sites) # Convert to uppercase
+str_to_upper(parks) # Convert to uppercase
 ```
 
 :::
 ::: {.fragment}
 
 ```{r}
-str_detect(sites, "Banff") # Does it contain "Banff"?
+str_detect(parks, "Banff") # Does it contain "Banff"?
 ```
 
 :::
@@ -359,6 +359,10 @@ str_extract(dates, "(\\d{4})-(\\d{2})-(\\d{2})", group = 2)
 
 :::
 
+::: {.notes}
+More often we want to extract a particular part
+:::
+
 ## Replacing text: `str_replace()`
 
 ```{r}
@@ -387,7 +391,7 @@ clean_codes
 
 :::
 
-## Replace all occurrences: `str_replace_all()`
+## Replace all occurrences: `str_replace_all()` {visibility="hidden"}
 
 ```{r}
 text <- "The quick brown fox jumps over the lazy dog"
@@ -433,8 +437,26 @@ files <- c(
 ```
 
 1. Extract all dates (YYYY-MM-DD format)
+
+```{r}
+#| echo: false
+str_extract(files, "^\\d{4}-\\d{2}-\\d{2}")
+```
+
 2. Find files from site1
+
+```{r}
+#| echo: false
+str_subset(files, "site1")
+```
+
 3. Extract the plot letter (A, B, or C)
+
+```{r}
+#| echo: false
+str_extract(files, "plot-[A-Z]") |>
+  str_extract("[A-Z]$")
+```
 
 ::: {.notes}
 Give participants 5 minutes to work on this
@@ -468,10 +490,30 @@ species <- c(
 ```
 
 1. Extract just the 4-letter species codes
+
+```{r}
+#| echo: false
+str_extract(species, "^[A-Z]{4}")
+```
+
 2. Replace all separators (spaces, -, /, parentheses) with a single space
-3. Create clean format: "CODE: Common Name"
+
+```{r}
+#| echo: false
+(cleaned <- str_replace_all(species, "[()/-]", " ") |>
+  str_squish())
+```
 
 Hint: Check out `str_squish()` to remove extra whitespace!
+
+3. Create clean format: `"CODE: Common Name"`
+
+```{r}
+#| echo: false
+codes <- str_extract(cleaned, "^[A-Z]{4}")
+names <- str_replace_all(cleaned, "^[A-Z]{4} ", "")
+paste0(codes, ": ", names)
+```
 
 ::: {.notes}
 Give participants 5-7 minutes for this one
@@ -486,6 +528,7 @@ str_extract(species, "^[A-Z]{4}")
 # 2. Replace separators with space
 cleaned <- str_replace_all(species, "[()/-]", " ") |>
   str_squish() # Remove extra whitespace
+cleaned
 
 # 3. Create clean format
 codes <- str_extract(cleaned, "^[A-Z]{4}")
@@ -493,24 +536,27 @@ names <- str_replace_all(cleaned, "^[A-Z]{4} ", "")
 paste0(codes, ": ", names)
 ```
 
-## Resources
-
-- **`stringr` cheatsheet**: [posit.co/resources/cheatsheets](https://posit.co/resources/cheatsheets/)
-- **Interactive testing**: [regex101.com](https://regex101.com)
-- **Book chapter**: [R for Data Science - Strings](https://r4ds.hadley.nz/strings)
-- **Practice**: [regexone.com](https://regexone.com)
-
-::: {.fragment}
-**Remember**: Regular expressions are a skill built through practice. Start simple and build complexity as needed!
-:::
-
 ## Key takeaways
 
 ::: {.incremental}
-1. `stringr` functions are consistent and pipe-friendly
-2. Start with literal matches, add complexity iteratively
-3. Common patterns: `.` (any), `[abc]` (one of), `+/*/?/{}` (quantifiers)
-4. Use `\\` to escape (match) special characters
-5. Test frequently with `str_detect()` and `str_subset()`
-6. Anchors (`^`, `$`) and groups `()` give you control
+
+- Common patterns: `.` (any), `[abc]` (one of), `+/*/?/{}` (quantifiers)
+- Use `\\` to escape (match) special characters
+- Test frequently with `str_detect()` and `str_subset()`
+- Anchors (`^`, `$`) and groups `()` give you control
+- It's often easier to pipe multiple `stringr` functions together than to write one complex regex
+
 :::
+
+::: {.fragment}
+Regular expressions are a skill built through practice. Start simple and build complexity as needed!
+
+You're going to have to look things up a lot!
+:::
+
+## Resources
+
+- **`stringr` cheatsheet**: [posit.co/resources/cheatsheets](https://posit.co/resources/cheatsheets/)
+- **Regular Expressions Help**: [regular-expressions.info/](https://www.regular-expressions.info/)
+- **Book chapter**: [R for Data Science - Strings](https://r4ds.hadley.nz/strings)
+- **Practice**: [regexone.com](https://regexone.com)
