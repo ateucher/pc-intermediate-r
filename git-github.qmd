@@ -453,6 +453,23 @@ usethis::use_mit_license(
 
 Add a license to your repo via a pull request
 
+## Schedule
+
+| Pacific Time   | Eastern Time      | Duration |
+| :------------- | :---------------- | :------- |
+| 09:00 - 10:20  | 12:00 – 13:20     | 80 min   |
+| Break          | Break             | 15 min   |
+| 10:35 – 11:55  | 13:35 – 14:55     | 80 min   |
+| Break          | Break             | 15 min   |
+| 12:10 – 13:30  | 15:10 – 16:30     | 80 min   |
+
+## Outline
+
+- Quickly - Updating GitHub Personal Access Tokens (PATs)
+- String manipulation and regular expressions with `stringr`
+- Iteration and functional programming with `purrr`
+- Reproducible reporting with Quarto
+
 ## When your PAT expires
 
 Personal Access Tokens (PATs) have an expiration date for security reasons.
