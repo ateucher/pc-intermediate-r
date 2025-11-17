@@ -1,0 +1,1223 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-html/tabby.min.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-d6a2ae2cb249da1580f0a11f71b8f854.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-contrib/fontawesome6-6.7.2/all.min.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/fontawesome6-6.7.2/latex-fontsize.css" rel="stylesheet"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.8.26">
+
+  <meta name="author" content="Andy Teucher">
+  <title>Parks Canada - Intermediate R – String Manipulation with Regular Expressions</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="site_libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="site_libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #97947a;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #97947a;  padding-left: 4px; }
+    div.sourceCode
+      { color: #f8f8f2; background-color: #2b2b2b; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #f8f8f2; } /* Normal */
+    code span.al { color: #dcc6e0; } /* Alert */
+    code span.an { color: #d4d0ab; } /* Annotation */
+    code span.at { color: #ffd700; } /* Attribute */
+    code span.bn { color: #dcc6e0; } /* BaseN */
+    code span.bu { color: #f5ab35; } /* BuiltIn */
+    code span.cf { color: #ffa07a; } /* ControlFlow */
+    code span.ch { color: #abe338; } /* Char */
+    code span.cn { color: #ffa07a; } /* Constant */
+    code span.co { color: #d4d0ab; } /* Comment */
+    code span.cv { color: #d4d0ab; font-style: italic; } /* CommentVar */
+    code span.do { color: #d4d0ab; font-style: italic; } /* Documentation */
+    code span.dt { color: #dcc6e0; } /* DataType */
+    code span.dv { color: #dcc6e0; } /* DecVal */
+    code span.er { color: #dcc6e0; } /* Error */
+    code span.ex { color: #ffd700; } /* Extension */
+    code span.fl { color: #f5ab35; } /* Float */
+    code span.fu { color: #ffd700; } /* Function */
+    code span.im { } /* Import */
+    code span.in { color: #d4d0ab; } /* Information */
+    code span.kw { color: #ffa07a; } /* Keyword */
+    code span.op { color: #00e0e0; } /* Operator */
+    code span.ot { color: #ffa07a; } /* Other */
+    code span.pp { color: #dcc6e0; } /* Preprocessor */
+    code span.sc { color: #00e0e0; } /* SpecialChar */
+    code span.ss { color: #abe338; } /* SpecialString */
+    code span.st { color: #abe338; } /* String */
+    code span.va { color: #f5ab35; } /* Variable */
+    code span.vs { color: #abe338; } /* VerbatimString */
+    code span.wa { color: #d4d0ab; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-30a2a0ed8b387a71ee81c4eb70847720.css">
+  <link href="site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+</head>
+<body class="quarto-dark">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="quarto-title-block center">
+  <h1 class="title">String Manipulation with Regular Expressions</h1>
+  <p class="subtitle">Parks Canada; Ecological Integrity Monitoring Program</p>
+
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Andy Teucher 
+</div>
+</div>
+</div>
+
+</section>
+<section id="why-regular-expressions" class="slide level2">
+<h2>Why regular expressions?</h2>
+<p>Working with text data is common in data science:</p>
+<ul>
+<li class="fragment"><strong>File names</strong>: Extract dates, site IDs, or plot numbers</li>
+<li class="fragment"><strong>Data cleaning</strong>: Standardize species codes, fix formatting</li>
+<li class="fragment"><strong>Data validation</strong>: Check if values match expected patterns</li>
+</ul>
+<div class="fragment">
+<p><strong>Regular expressions</strong> (regex) are a powerful pattern-matching language for working with text.</p>
+</div>
+</section>
+<section id="the-stringr-package" class="slide level2">
+<h2>The <code>stringr</code> package</h2>
+<p>Part of the tidyverse, <code>stringr</code> makes working with strings consistent and <del>easy</del> easier.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="fu">library</span>(stringr)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>All <code>stringr</code> functions:</p>
+<ul>
+<li class="fragment">Start with <code>str_</code></li>
+<li class="fragment">Take the string as the first argument (pipe-friendly!)</li>
+<li class="fragment">Use regular expressions for pattern matching</li>
+</ul>
+</section>
+<section id="basic-string-operations" class="slide level2">
+<h2>Basic string operations</h2>
+<p>Before regex, let’s see simple <code>stringr</code> functions:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a>parks <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb2-2"><a></a>  <span class="st">"Banff National Park"</span>,</span>
+<span id="cb2-3"><a></a>  <span class="st">"Jasper National Park"</span>,</span>
+<span id="cb2-4"><a></a>  <span class="st">"Yoho National Park"</span>,</span>
+<span id="cb2-5"><a></a>  <span class="st">"Kootenay National Park"</span></span>
+<span id="cb2-6"><a></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a><span class="fu">str_length</span>(parks) <span class="co"># Count characters</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 19 20 18 22</code></pre>
+</div>
+</div>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a><span class="fu">str_to_upper</span>(parks) <span class="co"># Convert to uppercase</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "BANFF NATIONAL PARK"    "JASPER NATIONAL PARK"   "YOHO NATIONAL PARK"     "KOOTENAY NATIONAL PARK"</code></pre>
+</div>
+</div>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a><span class="fu">str_detect</span>(parks, <span class="st">"Banff"</span>) <span class="co"># Does it contain "Banff"?</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  TRUE FALSE FALSE FALSE</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="literal-pattern-matching" class="slide level2">
+<h2>Literal pattern matching</h2>
+<p>The simplest regex: match exact text</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a>files <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb9-2"><a></a>  <span class="st">"2024-08-12_site-1_plot-data.csv"</span>,</span>
+<span id="cb9-3"><a></a>  <span class="st">"2024-08-12_site-2_plot-data.csv"</span>,</span>
+<span id="cb9-4"><a></a>  <span class="st">"2024-09-15_site-1_plot-data.csv"</span></span>
+<span id="cb9-5"><a></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a><span class="co"># Which files are from site-1?</span></span>
+<span id="cb10-2"><a></a><span class="fu">str_detect</span>(files, <span class="st">"site-1"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  TRUE FALSE  TRUE</code></pre>
+</div>
+</div>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a><span class="co"># Extract just the matching files</span></span>
+<span id="cb12-2"><a></a>site1_files <span class="ot">&lt;-</span> <span class="fu">str_subset</span>(files, <span class="st">"site-1"</span>)</span>
+<span id="cb12-3"><a></a>site1_files</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "2024-08-12_site-1_plot-data.csv" "2024-09-15_site-1_plot-data.csv"</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="the-dot-.-match-any-character" class="slide level2">
+<h2>The dot (<code>.</code>): match any character</h2>
+<p><code>.</code> matches <em>any single</em> character</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a></a>species <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"PIEN"</span>, <span class="st">"PICO"</span>, <span class="st">"ABLA"</span>, <span class="st">"POTR"</span>)</span>
+<span id="cb14-2"><a></a></span>
+<span id="cb14-3"><a></a><span class="co"># Match PI followed by any two characters</span></span>
+<span id="cb14-4"><a></a><span class="fu">str_detect</span>(species, <span class="st">"PI.."</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  TRUE  TRUE FALSE FALSE</code></pre>
+</div>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a></a><span class="co"># What does it match?</span></span>
+<span id="cb16-2"><a></a><span class="fu">str_subset</span>(species, <span class="st">"PI.."</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "PIEN" "PICO"</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="character-classes" class="slide level2">
+<h2>Character classes: <code>[]</code></h2>
+<p>Match <strong>one</strong> of several characters</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a></a>codes <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Plot1"</span>, <span class="st">"Plot2"</span>, <span class="st">"Plot3"</span>, <span class="st">"PlotA"</span>, <span class="st">"PlotB"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a></a><span class="co"># Match Plot followed by a digit</span></span>
+<span id="cb19-2"><a></a><span class="fu">str_subset</span>(codes, <span class="st">"Plot[123]"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Plot1" "Plot2" "Plot3"</code></pre>
+</div>
+</div>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a></a><span class="co"># Match Plot followed by a letter</span></span>
+<span id="cb21-2"><a></a><span class="fu">str_subset</span>(codes, <span class="st">"Plot[AB]"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "PlotA" "PlotB"</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="character-ranges" class="slide level2">
+<h2>Character ranges</h2>
+<p>Use <code>-</code> inside <code>[ ]</code> for ranges:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a></a><span class="co"># Match any digit</span></span>
+<span id="cb23-2"><a></a><span class="fu">str_subset</span>(codes, <span class="st">"Plot[0-9]"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Plot1" "Plot2" "Plot3"</code></pre>
+</div>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a></a><span class="co"># Match any lowercase letter</span></span>
+<span id="cb25-2"><a></a><span class="fu">str_subset</span>(codes, <span class="st">"Plot[a-z]"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>character(0)</code></pre>
+</div>
+</div>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a></a><span class="co"># Match any letter (upper or lower)</span></span>
+<span id="cb27-2"><a></a><span class="fu">str_subset</span>(codes, <span class="st">"Plot[A-Za-z]"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "PlotA" "PlotB"</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="negating-character-classes" class="slide level2">
+<h2>Negating character classes: <code>[^ ]</code></h2>
+<p><code>^</code> inside <code>[ ]</code> means “NOT these characters”</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a></a>measurements <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"temp_C"</span>, <span class="st">"temp_F"</span>, <span class="st">"precip_mm"</span>, <span class="st">"wind_kph"</span>)</span>
+<span id="cb29-2"><a></a></span>
+<span id="cb29-3"><a></a><span class="co"># Match measurements NOT in Celsius</span></span>
+<span id="cb29-4"><a></a><span class="fu">str_subset</span>(measurements, <span class="st">"temp_[^C]"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "temp_F"</code></pre>
+</div>
+</div>
+</section>
+<section id="quantifiers-how-many-times" class="slide level2">
+<h2>Quantifiers: how many times?</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li><code>?</code> - 0 or 1 time (optional)</li>
+<li><code>*</code> - 0 or more times</li>
+<li><code>+</code> - 1 or more times</li>
+<li><code>{n}</code> - exactly n times</li>
+<li><code>{n,m}</code> - between n and m times</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<div class="fragment">
+<p>Quantifiers apply to the preceding element.</p>
+<ul>
+<li><code>a+</code> matches one or more ’a’s</li>
+<li><code>[0-9]{2}</code> matches exactly two digits</li>
+<li><code>-?</code> matches an optional hyphen</li>
+<li><code>8{3,4}</code> matches the number <code>8</code> repeated 3 or 4 times (i.e., <code>888</code> or <code>8888</code>)</li>
+</ul>
+</div>
+</div></div>
+</section>
+<section id="quantifiers-in-action" class="slide level2">
+<h2>Quantifiers in action</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a></a>dates <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"2024-8-12"</span>, <span class="st">"2024-08-12"</span>, <span class="st">"2024-8-1"</span>, <span class="st">"24-08-12"</span>, <span class="st">"20240523"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a></a><span class="co"># Match 4-digit year 2024 and 1 or 2 digits for month</span></span>
+<span id="cb32-2"><a></a><span class="fu">str_detect</span>(dates, <span class="st">"2024-[0-9]{1,2}-"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  TRUE  TRUE  TRUE FALSE FALSE</code></pre>
+</div>
+</div>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a></a><span class="co"># Match exactly 2 digits for month (more strict)</span></span>
+<span id="cb34-2"><a></a><span class="fu">str_detect</span>(dates, <span class="st">"2024-[0-9]{2}-"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE  TRUE FALSE FALSE FALSE</code></pre>
+</div>
+</div>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a></a><span class="co"># Match dates regardless of if they use `-` as a separator</span></span>
+<span id="cb36-2"><a></a><span class="fu">str_detect</span>(dates, <span class="st">"[0-9]{4}-?[0-9]{1,2}-?[0-9]{1,2}"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  TRUE  TRUE  TRUE FALSE  TRUE</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="anchors-position-matters" class="slide level2">
+<h2>Anchors: position matters</h2>
+<ul>
+<li><code>^</code> - start of string</li>
+<li><code>$</code> - end of string</li>
+</ul>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a></a>filenames <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"data.csv"</span>, <span class="st">"plot-data.csv"</span>, <span class="st">"data-plot.csv"</span>)</span>
+<span id="cb38-2"><a></a></span>
+<span id="cb38-3"><a></a><span class="co"># Files that START with "data"</span></span>
+<span id="cb38-4"><a></a><span class="fu">str_subset</span>(filenames, <span class="st">"^data"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "data.csv"      "data-plot.csv"</code></pre>
+</div>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a></a><span class="co"># Files that </span><span class="re">END</span><span class="co"> with ".csv"</span></span>
+<span id="cb40-2"><a></a><span class="fu">str_subset</span>(filenames, <span class="st">"</span><span class="sc">\\</span><span class="st">.csv$"</span>) <span class="co"># \\ escapes the .</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "data.csv"      "plot-data.csv" "data-plot.csv"</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="special-characters-need-escaping" class="slide level2">
+<h2>Special characters need escaping</h2>
+<p>Some characters have special meaning: <code>. * + ? [ ] { } ( ) ^ $ | \</code></p>
+<p>To match them literally, escape with <code>\\</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a></a>prices <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"$12.99"</span>, <span class="st">"$5.00"</span>, <span class="st">"12.99"</span>, <span class="st">"free"</span>)</span>
+<span id="cb42-2"><a></a></span>
+<span id="cb42-3"><a></a><span class="co"># Match prices with dollar sign</span></span>
+<span id="cb42-4"><a></a><span class="fu">str_subset</span>(prices, <span class="st">"</span><span class="sc">\\</span><span class="st">$"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "$12.99" "$5.00" </code></pre>
+</div>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a></a><span class="co"># Match prices with decimal point</span></span>
+<span id="cb44-2"><a></a><span class="fu">str_subset</span>(prices, <span class="st">"</span><span class="sc">\\</span><span class="st">."</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "$12.99" "$5.00"  "12.99" </code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="shorthand-character-classes" class="slide level2">
+<h2>Shorthand character classes</h2>
+<p>Convenient shortcuts:</p>
+<ul>
+<li><code>\\d</code> - any digit (same as <code>[0-9]</code>)</li>
+<li><code>\\s</code> - whitespace (space, tab, newline)</li>
+<li><code>\\w</code> - word character (letter, digit, underscore)</li>
+</ul>
+<div class="fragment">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a></a>site_codes <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"SITE_001"</span>, <span class="st">"SITE 002"</span>, <span class="st">"SITE-003"</span>)</span>
+<span id="cb46-2"><a></a></span>
+<span id="cb46-3"><a></a><span class="co"># Match SITE followed by any character, followed by a digit</span></span>
+<span id="cb46-4"><a></a><span class="fu">str_subset</span>(site_codes, <span class="st">"SITE.</span><span class="sc">\\</span><span class="st">d+"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "SITE_001" "SITE 002" "SITE-003"</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="extracting-matches-str_extract" class="slide level2">
+<h2>Extracting matches: <code>str_extract()</code></h2>
+<p>Get the actual matching text:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a></a>data_files <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"2024-08-12_banff_temp.csv"</span>, <span class="st">"2024-09-15_jasper_precip.csv"</span>)</span>
+<span id="cb48-2"><a></a></span>
+<span id="cb48-3"><a></a><span class="co"># Extract the dates</span></span>
+<span id="cb48-4"><a></a><span class="fu">str_extract</span>(data_files, <span class="st">"</span><span class="sc">\\</span><span class="st">d{4}-</span><span class="sc">\\</span><span class="st">d{2}-</span><span class="sc">\\</span><span class="st">d{2}"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "2024-08-12" "2024-09-15"</code></pre>
+</div>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb50"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a></a><span class="co"># Extract the park names</span></span>
+<span id="cb50-2"><a></a><span class="fu">str_extract</span>(data_files, <span class="st">"[a-z]+"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "banff"  "jasper"</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="capturing-groups" class="slide level2">
+<h2>Capturing groups: <code>( )</code></h2>
+<p>Parentheses create groups you can extract separately:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb52"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a></a>dates <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"2024-08-12"</span>, <span class="st">"2024-09-15"</span>, <span class="st">"2023-12-31"</span>)</span>
+<span id="cb52-2"><a></a></span>
+<span id="cb52-3"><a></a><span class="co"># Extract year, month, day separately</span></span>
+<span id="cb52-4"><a></a><span class="fu">str_match</span>(dates, <span class="st">"(</span><span class="sc">\\</span><span class="st">d{4})-(</span><span class="sc">\\</span><span class="st">d{2})-(</span><span class="sc">\\</span><span class="st">d{2})"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1]         [,2]   [,3] [,4]
+[1,] "2024-08-12" "2024" "08" "12"
+[2,] "2024-09-15" "2024" "09" "15"
+[3,] "2023-12-31" "2023" "12" "31"</code></pre>
+</div>
+</div>
+<div class="fragment">
+<p>First column is the full match, then each group.</p>
+</div>
+<p><br></p>
+<div class="fragment">
+<h3 id="use-str_extract-and-specify-group-to-just-get-the-months">Use <code>str_extract()</code> and specify <code>group</code> to just get the months</h3>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb54"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a></a><span class="fu">str_extract</span>(dates, <span class="st">"(</span><span class="sc">\\</span><span class="st">d{4})-(</span><span class="sc">\\</span><span class="st">d{2})-(</span><span class="sc">\\</span><span class="st">d{2})"</span>, <span class="at">group =</span> <span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "08" "09" "12"</code></pre>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p>More often we want to extract a particular part</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="replacing-text-str_replace" class="slide level2">
+<h2>Replacing text: <code>str_replace()</code></h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb56"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a></a>messy_codes <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"SITE_001"</span>, <span class="st">"SITE-002"</span>, <span class="st">"SITE_003"</span>, <span class="st">"PLOT_004"</span>, <span class="st">"PLOT-005"</span>)</span>
+<span id="cb56-2"><a></a></span>
+<span id="cb56-3"><a></a><span class="co"># Replace hyphens with underscores</span></span>
+<span id="cb56-4"><a></a><span class="fu">str_replace</span>(messy_codes, <span class="st">"-"</span>, <span class="st">"_"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "SITE_001" "SITE_002" "SITE_003" "PLOT_004" "PLOT_005"</code></pre>
+</div>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb58"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a></a><span class="co"># Replace "SITE" with "PLOT"</span></span>
+<span id="cb58-2"><a></a><span class="fu">str_replace</span>(messy_codes, <span class="st">"SITE"</span>, <span class="st">"PLOT"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "PLOT_001" "PLOT-002" "PLOT_003" "PLOT_004" "PLOT-005"</code></pre>
+</div>
+</div>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb60"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a></a><span class="co"># Combine them with pipes</span></span>
+<span id="cb60-2"><a></a>clean_codes <span class="ot">&lt;-</span> <span class="fu">str_replace</span>(messy_codes, <span class="st">"-"</span>, <span class="st">"_"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb60-3"><a></a>  <span class="fu">str_replace</span>(<span class="st">"SITE"</span>, <span class="st">"PLOT"</span>)</span>
+<span id="cb60-4"><a></a>clean_codes</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "PLOT_001" "PLOT_002" "PLOT_003" "PLOT_004" "PLOT_005"</code></pre>
+</div>
+</div>
+</div>
+</section>
+
+<section id="practical-regex-workflow" class="slide level2">
+<h2>Practical regex workflow</h2>
+<ol type="1">
+<li class="fragment"><strong>Start simple</strong>: Match literal text first</li>
+<li class="fragment"><strong>Test iteratively</strong>: Use <code>str_detect()</code> and <code>str_subset()</code> to verify</li>
+<li class="fragment"><strong>Build complexity</strong>: Add character classes, quantifiers</li>
+<li class="fragment"><strong>Extract or replace</strong>: Use <code>str_extract()</code> or <code>str_replace()</code></li>
+<li class="fragment"><strong>Validate</strong>: Check edge cases</li>
+</ol>
+<div class="fragment">
+<p><strong>Pro tip</strong>: Use <a href="https://regex101.com">regex101.com</a> to test and debug patterns!</p>
+</div>
+</section>
+<section id="your-turn-exercise-1" class="slide level2 exercise">
+<h2>Your turn: Exercise 1</h2>
+<p>You have these file names:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb66"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a></a>files <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb66-2"><a></a>  <span class="st">"2024-08-12_site1_plot-A_data.csv"</span>,</span>
+<span id="cb66-3"><a></a>  <span class="st">"2024-08-12_site2_plot-B_data.csv"</span>,</span>
+<span id="cb66-4"><a></a>  <span class="st">"2024-09-15_site1_plot-C_data.csv"</span>,</span>
+<span id="cb66-5"><a></a>  <span class="st">"2023-12-31_site3_plot-A_data.csv"</span></span>
+<span id="cb66-6"><a></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<ol type="1">
+<li>Extract all dates (YYYY-MM-DD format)</li>
+</ol>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "2024-08-12" "2024-08-12" "2024-09-15" "2023-12-31"</code></pre>
+</div>
+</div>
+<ol start="2" type="1">
+<li>Find files from site1</li>
+</ol>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "2024-08-12_site1_plot-A_data.csv" "2024-09-15_site1_plot-C_data.csv"</code></pre>
+</div>
+</div>
+<ol start="3" type="1">
+<li>Extract the plot letter (A, B, or C)</li>
+</ol>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "A" "B" "C" "A"</code></pre>
+</div>
+</div>
+<aside class="notes">
+<p>Give participants 5 minutes to work on this</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="solution-exercise-1" class="slide level2">
+<h2>Solution: Exercise 1</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb70"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a></a><span class="co"># 1. Extract dates</span></span>
+<span id="cb70-2"><a></a><span class="fu">str_extract</span>(files, <span class="st">"^</span><span class="sc">\\</span><span class="st">d{4}-</span><span class="sc">\\</span><span class="st">d{2}-</span><span class="sc">\\</span><span class="st">d{2}"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "2024-08-12" "2024-08-12" "2024-09-15" "2023-12-31"</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb72"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a></a><span class="co"># 2. Find files from site1</span></span>
+<span id="cb72-2"><a></a><span class="fu">str_subset</span>(files, <span class="st">"site1"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "2024-08-12_site1_plot-A_data.csv" "2024-09-15_site1_plot-C_data.csv"</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb74"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a></a><span class="co"># 3. Extract plot letter</span></span>
+<span id="cb74-2"><a></a><span class="fu">str_extract</span>(files, <span class="st">"plot-[A-Z]"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb74-3"><a></a>  <span class="fu">str_extract</span>(<span class="st">"[A-Z]$"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "A" "B" "C" "A"</code></pre>
+</div>
+</div>
+</section>
+<section id="your-turn-exercise-2" class="slide level2 exercise">
+<h2>Your turn: Exercise 2</h2>
+<p>You have messy species codes:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb76"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a></a>species <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb76-2"><a></a>  <span class="st">"PIEN (Engelmann Spruce)"</span>,</span>
+<span id="cb76-3"><a></a>  <span class="st">"PICO   Lodgepole Pine"</span>,</span>
+<span id="cb76-4"><a></a>  <span class="st">"ABLA - Subalpine Fir"</span>,</span>
+<span id="cb76-5"><a></a>  <span class="st">"POTR/Trembling Aspen"</span></span>
+<span id="cb76-6"><a></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<ol type="1">
+<li>Extract just the 4-letter species codes</li>
+</ol>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "PIEN" "PICO" "ABLA" "POTR"</code></pre>
+</div>
+</div>
+<ol start="2" type="1">
+<li>Replace all separators (spaces, -, /, parentheses) with a single space</li>
+</ol>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "PIEN Engelmann Spruce" "PICO Lodgepole Pine"   "ABLA Subalpine Fir"    "POTR Trembling Aspen" </code></pre>
+</div>
+</div>
+<p>Hint: Check out <code>str_squish()</code> to remove extra whitespace!</p>
+<ol start="3" type="1">
+<li>Create clean format: <code>"CODE: Common Name"</code></li>
+</ol>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "PIEN: Engelmann Spruce" "PICO: Lodgepole Pine"   "ABLA: Subalpine Fir"    "POTR: Trembling Aspen" </code></pre>
+</div>
+</div>
+<aside class="notes">
+<p>Give participants 5-7 minutes for this one</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="solution-exercise-2" class="slide level2">
+<h2>Solution: Exercise 2</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb80"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a></a><span class="co"># 1. Extract 4-letter codes</span></span>
+<span id="cb80-2"><a></a><span class="fu">str_extract</span>(species, <span class="st">"^[A-Z]{4}"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "PIEN" "PICO" "ABLA" "POTR"</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb82"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb82-1"><a></a><span class="co"># 2. Replace separators with space</span></span>
+<span id="cb82-2"><a></a>cleaned <span class="ot">&lt;-</span> <span class="fu">str_replace_all</span>(species, <span class="st">"[()/-]"</span>, <span class="st">" "</span>) <span class="sc">|&gt;</span></span>
+<span id="cb82-3"><a></a>  <span class="fu">str_squish</span>() <span class="co"># Remove extra whitespace</span></span>
+<span id="cb82-4"><a></a>cleaned</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "PIEN Engelmann Spruce" "PICO Lodgepole Pine"   "ABLA Subalpine Fir"    "POTR Trembling Aspen" </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb84"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb84-1"><a></a><span class="co"># 3. Create clean format</span></span>
+<span id="cb84-2"><a></a>codes <span class="ot">&lt;-</span> <span class="fu">str_extract</span>(cleaned, <span class="st">"^[A-Z]{4}"</span>)</span>
+<span id="cb84-3"><a></a>names <span class="ot">&lt;-</span> <span class="fu">str_replace_all</span>(cleaned, <span class="st">"^[A-Z]{4} "</span>, <span class="st">""</span>)</span>
+<span id="cb84-4"><a></a><span class="fu">paste0</span>(codes, <span class="st">": "</span>, names)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "PIEN: Engelmann Spruce" "PICO: Lodgepole Pine"   "ABLA: Subalpine Fir"    "POTR: Trembling Aspen" </code></pre>
+</div>
+</div>
+</section>
+<section id="key-takeaways" class="slide level2">
+<h2>Key takeaways</h2>
+<ul>
+<li class="fragment">Common patterns: <code>.</code> (any), <code>[abc]</code> (one of), <code>+/*/?/{}</code> (quantifiers)</li>
+<li class="fragment">Use <code>\\</code> to escape (match) special characters</li>
+<li class="fragment">Test frequently with <code>str_detect()</code> and <code>str_subset()</code></li>
+<li class="fragment">Anchors (<code>^</code>, <code>$</code>) and groups <code>()</code> give you control</li>
+<li class="fragment">It’s often easier to pipe multiple <code>stringr</code> functions together than to write one complex regex</li>
+</ul>
+<div class="fragment">
+<p>Regular expressions are a skill built through practice. Start simple and build complexity as needed!</p>
+<p>You’re going to have to look things up a lot!</p>
+</div>
+</section>
+<section id="resources" class="slide level2">
+<h2>Resources</h2>
+<ul>
+<li><strong><code>stringr</code> cheatsheet</strong>: <a href="https://posit.co/resources/cheatsheets/">posit.co/resources/cheatsheets</a></li>
+<li><strong>Regular Expressions Help</strong>: <a href="https://www.regular-expressions.info/">regular-expressions.info/</a></li>
+<li><strong>Book chapter</strong>: <a href="https://r4ds.hadley.nz/strings">R for Data Science - Strings</a></li>
+<li><strong>Practice</strong>: <a href="https://regexone.com">regexone.com</a></li>
+</ul>
+
+
+<script> window._input_file = "---\n" + "title: \"String Manipulation with Regular Expressions\"\n" + "subtitle: \"Parks Canada; Ecological Integrity Monitoring Program\"\n" + "author: \"Andy Teucher\"\n" + "format: revealjs\n" + "knitr:\n" + "  opts_chunk: \n" + "    R.options:\n" + "      width: 110\n" + "      pillar.print_max: 5\n" + "      pillar.print_min: 5\n" + "    echo: true\n" + "---\n" + "\n" + "```{r}\n" + "#| include: false\n" + "library(stringr)\n" + "```\n" + "\n" + "## Why regular expressions?\n" + "\n" + "Working with text data is common in data science:\n" + "\n" + "::: {.incremental}\n" + "- **File names**: Extract dates, site IDs, or plot numbers\n" + "- **Data cleaning**: Standardize species codes, fix formatting\n" + "- **Data validation**: Check if values match expected patterns\n" + ":::\n" + "\n" + "::: {.fragment}\n" + "**Regular expressions** (regex) are a powerful pattern-matching language for working with text.\n" + ":::\n" + "\n" + "## The `stringr` package\n" + "\n" + "Part of the tidyverse, `stringr` makes working with strings consistent and ~~easy~~ easier.\n" + "\n" + "```{r}\n" + "library(stringr)\n" + "```\n" + "\n" + "::: {.incremental}\n" + "All `stringr` functions:\n" + "\n" + "- Start with `str_`\n" + "- Take the string as the first argument (pipe-friendly!)\n" + "- Use regular expressions for pattern matching\n" + ":::\n" + "\n" + "## Basic string operations\n" + "\n" + "Before regex, let's see simple `stringr` functions:\n" + "\n" + "```{r}\n" + "parks <- c(\n" + "  \"Banff National Park\",\n" + "  \"Jasper National Park\",\n" + "  \"Yoho National Park\",\n" + "  \"Kootenay National Park\"\n" + ")\n" + "```\n" + "\n" + "::: {.fragment}\n" + "\n" + "```{r}\n" + "str_length(parks) # Count characters\n" + "```\n" + "\n" + ":::\n" + "::: {.fragment}\n" + "\n" + "```{r}\n" + "str_to_upper(parks) # Convert to uppercase\n" + "```\n" + "\n" + ":::\n" + "::: {.fragment}\n" + "\n" + "```{r}\n" + "str_detect(parks, \"Banff\") # Does it contain \"Banff\"?\n" + "```\n" + "\n" + ":::\n" + "\n" + "## Literal pattern matching\n" + "\n" + "The simplest regex: match exact text\n" + "\n" + "```{r}\n" + "files <- c(\n" + "  \"2024-08-12_site-1_plot-data.csv\",\n" + "  \"2024-08-12_site-2_plot-data.csv\",\n" + "  \"2024-09-15_site-1_plot-data.csv\"\n" + ")\n" + "```\n" + "\n" + "::: {.fragment}\n" + "\n" + "```{r}\n" + "# Which files are from site-1?\n" + "str_detect(files, \"site-1\")\n" + "```\n" + "\n" + ":::\n" + "\n" + "::: {.fragment}\n" + "\n" + "```{r}\n" + "# Extract just the matching files\n" + "site1_files <- str_subset(files, \"site-1\")\n" + "site1_files\n" + "```\n" + "\n" + ":::\n" + "\n" + "## The dot (`.`): match any character\n" + "\n" + "`.` matches *any single* character\n" + "\n" + "```{r}\n" + "species <- c(\"PIEN\", \"PICO\", \"ABLA\", \"POTR\")\n" + "\n" + "# Match PI followed by any two characters\n" + "str_detect(species, \"PI..\")\n" + "```\n" + "\n" + "::: {.fragment}\n" + "```{r}\n" + "# What does it match?\n" + "str_subset(species, \"PI..\")\n" + "```\n" + "\n" + ":::\n" + "\n" + "## Character classes: `[]`\n" + "\n" + "Match **one** of several characters\n" + "\n" + "```{r}\n" + "codes <- c(\"Plot1\", \"Plot2\", \"Plot3\", \"PlotA\", \"PlotB\")\n" + "```\n" + "\n" + "::: {.fragment}\n" + "\n" + "```{r}\n" + "# Match Plot followed by a digit\n" + "str_subset(codes, \"Plot[123]\")\n" + "```\n" + "\n" + ":::\n" + "::: {.fragment}\n" + "\n" + "```{r}\n" + "# Match Plot followed by a letter\n" + "str_subset(codes, \"Plot[AB]\")\n" + "```\n" + "\n" + ":::\n" + "\n" + "## Character ranges\n" + "\n" + "Use `-` inside `[ ]` for ranges:\n" + "\n" + "```{r}\n" + "# Match any digit\n" + "str_subset(codes, \"Plot[0-9]\")\n" + "```\n" + "\n" + "::: {.fragment}\n" + "```{r}\n" + "# Match any lowercase letter\n" + "str_subset(codes, \"Plot[a-z]\")\n" + "```\n" + "\n" + ":::\n" + "\n" + "::: {.fragment}\n" + "```{r}\n" + "# Match any letter (upper or lower)\n" + "str_subset(codes, \"Plot[A-Za-z]\")\n" + "```\n" + "\n" + ":::\n" + "\n" + "## Negating character classes: `[^ ]`\n" + "\n" + "`^` inside `[ ]` means \"NOT these characters\"\n" + "\n" + "```{r}\n" + "measurements <- c(\"temp_C\", \"temp_F\", \"precip_mm\", \"wind_kph\")\n" + "\n" + "# Match measurements NOT in Celsius\n" + "str_subset(measurements, \"temp_[^C]\")\n" + "```\n" + "\n" + "## Quantifiers: how many times?\n" + "\n" + "::: {.columns}\n" + "::: {.column width=\"50%\"}\n" + "\n" + "- `?` - 0 or 1 time (optional)\n" + "- `*` - 0 or more times\n" + "- `+` - 1 or more times\n" + "- `{n}` - exactly n times\n" + "- `{n,m}` - between n and m times\n" + "\n" + ":::\n" + "\n" + "::: {.column width=\"50%\"}\n" + "\n" + "::: {.fragment}\n" + "\n" + "Quantifiers apply to the preceding element.\n" + "\n" + "- `a+` matches one or more 'a's\n" + "- `[0-9]{2}` matches exactly two digits\n" + "- `-?` matches an optional hyphen\n" + "- `8{3,4}` matches the number `8` repeated 3 or 4 times (i.e., `888` or `8888`)\n" + "\n" + ":::\n" + ":::\n" + ":::\n" + "\n" + "## Quantifiers in action\n" + "\n" + "```{r}\n" + "dates <- c(\"2024-8-12\", \"2024-08-12\", \"2024-8-1\", \"24-08-12\", \"20240523\")\n" + "```\n" + "\n" + "::: {.fragment}\n" + "\n" + "```{r}\n" + "# Match 4-digit year 2024 and 1 or 2 digits for month\n" + "str_detect(dates, \"2024-[0-9]{1,2}-\")\n" + "```\n" + "\n" + ":::\n" + "::: {.fragment}\n" + "\n" + "```{r}\n" + "# Match exactly 2 digits for month (more strict)\n" + "str_detect(dates, \"2024-[0-9]{2}-\")\n" + "```\n" + "\n" + ":::\n" + "::: {.fragment}\n" + "```{r}\n" + "# Match dates regardless of if they use `-` as a separator\n" + "str_detect(dates, \"[0-9]{4}-?[0-9]{1,2}-?[0-9]{1,2}\")\n" + "```\n" + "\n" + ":::\n" + "\n" + "## Anchors: position matters\n" + "\n" + "- `^` - start of string\n" + "- `$` - end of string\n" + "\n" + "```{r}\n" + "filenames <- c(\"data.csv\", \"plot-data.csv\", \"data-plot.csv\")\n" + "\n" + "# Files that START with \"data\"\n" + "str_subset(filenames, \"^data\")\n" + "```\n" + "\n" + "::: {.fragment}\n" + "\n" + "```{r}\n" + "# Files that END with \".csv\"\n" + "str_subset(filenames, \"\\.csv$\") # \\ escapes the .\n" + "```\n" + "\n" + ":::\n" + "\n" + "## Special characters need escaping\n" + "\n" + "Some characters have special meaning: `. * + ? [ ] { } ( ) ^ $ | \`\n" + "\n" + "To match them literally, escape with `\\`:\n" + "\n" + "```{r}\n" + "prices <- c(\"$12.99\", \"$5.00\", \"12.99\", \"free\")\n" + "\n" + "# Match prices with dollar sign\n" + "str_subset(prices, \"\\$\")\n" + "```\n" + "\n" + "::: {.fragment}\n" + "\n" + "```{r}\n" + "# Match prices with decimal point\n" + "str_subset(prices, \"\\.\")\n" + "```\n" + "\n" + ":::\n" + "\n" + "## Shorthand character classes\n" + "\n" + "Convenient shortcuts:\n" + "\n" + "- `\\d` - any digit (same as `[0-9]`)\n" + "- `\\s` - whitespace (space, tab, newline)\n" + "- `\\w` - word character (letter, digit, underscore)\n" + "\n" + "::: {.fragment}\n" + "```{r}\n" + "site_codes <- c(\"SITE_001\", \"SITE 002\", \"SITE-003\")\n" + "\n" + "# Match SITE followed by any character, followed by a digit\n" + "str_subset(site_codes, \"SITE.\\d+\")\n" + "```\n" + "\n" + ":::\n" + "\n" + "## Extracting matches: `str_extract()`\n" + "\n" + "Get the actual matching text:\n" + "\n" + "```{r}\n" + "data_files <- c(\"2024-08-12_banff_temp.csv\", \"2024-09-15_jasper_precip.csv\")\n" + "\n" + "# Extract the dates\n" + "str_extract(data_files, \"\\d{4}-\\d{2}-\\d{2}\")\n" + "```\n" + "\n" + "::: {.fragment}\n" + "\n" + "```{r}\n" + "# Extract the park names\n" + "str_extract(data_files, \"[a-z]+\")\n" + "```\n" + "\n" + ":::\n" + "\n" + "## Capturing groups: `( )`\n" + "\n" + "Parentheses create groups you can extract separately:\n" + "\n" + "```{r}\n" + "dates <- c(\"2024-08-12\", \"2024-09-15\", \"2023-12-31\")\n" + "\n" + "# Extract year, month, day separately\n" + "str_match(dates, \"(\\d{4})-(\\d{2})-(\\d{2})\")\n" + "```\n" + "\n" + "::: {.fragment}\n" + "First column is the full match, then each group.\n" + ":::\n" + "\n" + "<br>\n" + "\n" + "::: {.fragment}\n" + "\n" + "### Use `str_extract()` and specify `group` to just get the months\n" + "\n" + "```{r}\n" + "str_extract(dates, \"(\\d{4})-(\\d{2})-(\\d{2})\", group = 2)\n" + "```\n" + "\n" + ":::\n" + "\n" + "::: {.notes}\n" + "More often we want to extract a particular part\n" + ":::\n" + "\n" + "## Replacing text: `str_replace()`\n" + "\n" + "```{r}\n" + "messy_codes <- c(\"SITE_001\", \"SITE-002\", \"SITE_003\", \"PLOT_004\", \"PLOT-005\")\n" + "\n" + "# Replace hyphens with underscores\n" + "str_replace(messy_codes, \"-\", \"_\")\n" + "```\n" + "\n" + "::: {.fragment}\n" + "\n" + "```{r}\n" + "# Replace \"SITE\" with \"PLOT\"\n" + "str_replace(messy_codes, \"SITE\", \"PLOT\")\n" + "```\n" + "\n" + ":::\n" + "::: {.fragment}\n" + "\n" + "```{r}\n" + "# Combine them with pipes\n" + "clean_codes <- str_replace(messy_codes, \"-\", \"_\") |>\n" + "  str_replace(\"SITE\", \"PLOT\")\n" + "clean_codes\n" + "```\n" + "\n" + ":::\n" + "\n" + "## Replace all occurrences: `str_replace_all()` {visibility=\"hidden\"}\n" + "\n" + "```{r}\n" + "text <- \"The quick brown fox jumps over the lazy dog\"\n" + "\n" + "# Replace first \"the\" (case-sensitive)\n" + "str_replace(text, \"the\", \"a\")\n" + "```\n" + "\n" + "::: {.fragment}\n" + "\n" + "```{r}\n" + "# Replace all spaces with underscores\n" + "str_replace_all(text, \" \", \"_\")\n" + "```\n" + "\n" + ":::\n" + "\n" + "## Practical regex workflow\n" + "\n" + "::: {.incremental}\n" + "1. **Start simple**: Match literal text first\n" + "2. **Test iteratively**: Use `str_detect()` and `str_subset()` to verify\n" + "3. **Build complexity**: Add character classes, quantifiers\n" + "4. **Extract or replace**: Use `str_extract()` or `str_replace()`\n" + "5. **Validate**: Check edge cases\n" + ":::\n" + "\n" + "::: {.fragment}\n" + "**Pro tip**: Use [regex101.com](https://regex101.com) to test and debug patterns!\n" + ":::\n" + "\n" + "## Your turn: Exercise 1 {.exercise}\n" + "\n" + "You have these file names:\n" + "\n" + "```{r}\n" + "files <- c(\n" + "  \"2024-08-12_site1_plot-A_data.csv\",\n" + "  \"2024-08-12_site2_plot-B_data.csv\",\n" + "  \"2024-09-15_site1_plot-C_data.csv\",\n" + "  \"2023-12-31_site3_plot-A_data.csv\"\n" + ")\n" + "```\n" + "\n" + "1. Extract all dates (YYYY-MM-DD format)\n" + "\n" + "```{r}\n" + "#| echo: false\n" + "str_extract(files, \"^\\d{4}-\\d{2}-\\d{2}\")\n" + "```\n" + "\n" + "2. Find files from site1\n" + "\n" + "```{r}\n" + "#| echo: false\n" + "str_subset(files, \"site1\")\n" + "```\n" + "\n" + "3. Extract the plot letter (A, B, or C)\n" + "\n" + "```{r}\n" + "#| echo: false\n" + "str_extract(files, \"plot-[A-Z]\") |>\n" + "  str_extract(\"[A-Z]$\")\n" + "```\n" + "\n" + "::: {.notes}\n" + "Give participants 5 minutes to work on this\n" + ":::\n" + "\n" + "## Solution: Exercise 1\n" + "\n" + "```{r}\n" + "# 1. Extract dates\n" + "str_extract(files, \"^\\d{4}-\\d{2}-\\d{2}\")\n" + "\n" + "# 2. Find files from site1\n" + "str_subset(files, \"site1\")\n" + "\n" + "# 3. Extract plot letter\n" + "str_extract(files, \"plot-[A-Z]\") |>\n" + "  str_extract(\"[A-Z]$\")\n" + "```\n" + "\n" + "## Your turn: Exercise 2 {.exercise}\n" + "\n" + "You have messy species codes:\n" + "\n" + "```{r}\n" + "species <- c(\n" + "  \"PIEN (Engelmann Spruce)\",\n" + "  \"PICO   Lodgepole Pine\",\n" + "  \"ABLA - Subalpine Fir\",\n" + "  \"POTR/Trembling Aspen\"\n" + ")\n" + "```\n" + "\n" + "1. Extract just the 4-letter species codes\n" + "\n" + "```{r}\n" + "#| echo: false\n" + "str_extract(species, \"^[A-Z]{4}\")\n" + "```\n" + "\n" + "2. Replace all separators (spaces, -, /, parentheses) with a single space\n" + "\n" + "```{r}\n" + "#| echo: false\n" + "(cleaned <- str_replace_all(species, \"[()/-]\", \" \") |>\n" + "  str_squish())\n" + "```\n" + "\n" + "Hint: Check out `str_squish()` to remove extra whitespace!\n" + "\n" + "3. Create clean format: `\"CODE: Common Name\"`\n" + "\n" + "```{r}\n" + "#| echo: false\n" + "codes <- str_extract(cleaned, \"^[A-Z]{4}\")\n" + "names <- str_replace_all(cleaned, \"^[A-Z]{4} \", \"\")\n" + "paste0(codes, \": \", names)\n" + "```\n" + "\n" + "::: {.notes}\n" + "Give participants 5-7 minutes for this one\n" + ":::\n" + "\n" + "## Solution: Exercise 2\n" + "\n" + "```{r}\n" + "# 1. Extract 4-letter codes\n" + "str_extract(species, \"^[A-Z]{4}\")\n" + "\n" + "# 2. Replace separators with space\n" + "cleaned <- str_replace_all(species, \"[()/-]\", \" \") |>\n" + "  str_squish() # Remove extra whitespace\n" + "cleaned\n" + "\n" + "# 3. Create clean format\n" + "codes <- str_extract(cleaned, \"^[A-Z]{4}\")\n" + "names <- str_replace_all(cleaned, \"^[A-Z]{4} \", \"\")\n" + "paste0(codes, \": \", names)\n" + "```\n" + "\n" + "## Key takeaways\n" + "\n" + "::: {.incremental}\n" + "\n" + "- Common patterns: `.` (any), `[abc]` (one of), `+/*/?/{}` (quantifiers)\n" + "- Use `\\` to escape (match) special characters\n" + "- Test frequently with `str_detect()` and `str_subset()`\n" + "- Anchors (`^`, `$`) and groups `()` give you control\n" + "- It's often easier to pipe multiple `stringr` functions together than to write one complex regex\n" + "\n" + ":::\n" + "\n" + "::: {.fragment}\n" + "Regular expressions are a skill built through practice. Start simple and build complexity as needed!\n" + "\n" + "You're going to have to look things up a lot!\n" + ":::\n" + "\n" + "## Resources\n" + "\n" + "- **`stringr` cheatsheet**: [posit.co/resources/cheatsheets](https://posit.co/resources/cheatsheets/)\n" + "- **Regular Expressions Help**: [regular-expressions.info/](https://www.regular-expressions.info/)\n" + "- **Book chapter**: [R for Data Science - Strings](https://r4ds.hadley.nz/strings)\n" + "- **Practice**: [regexone.com](https://regexone.com)\n" + ""</script>
+<script> window._input_filename = '/home/runner/work/pc-intermediate-r/pc-intermediate-r/regex.qmd'</script>
+</section>
+    </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<div class="footer footer-default">
+<p><a href="./index.html"><i class="fa-solid fa-house" aria-label="house"></i></a></p>
+</div>
+</div></div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="site_libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="site_libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="site_libs/revealjs/plugin/revealeditable/editable.js"></script>
+  <script src="site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="site_libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="site_libs/revealjs/plugin/search/search.js"></script>
+  <script src="site_libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="site_libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'chalkboard': {"buttons":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'none',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1600,
+
+        height: 900,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, Revealeditable, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        // dispatch for htmlwidgets
+        function fireSlideEnter() {
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+        }
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+          fireSlideEnter();
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
+    <script id="quarto-html-after-body" type="application/javascript">
+      window.document.addEventListener("DOMContentLoaded", function (event) {
+        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+        tabsets.forEach(function(tabset) {
+          const tabby = new Tabby('#' + tabset.id);
+        });
+        const isCodeAnnotation = (el) => {
+          for (const clz of el.classList) {
+            if (clz.startsWith('code-annotation-')) {                     
+              return true;
+            }
+          }
+          return false;
+        }
+        const onCopySuccess = function(e) {
+          // button target
+          const button = e.trigger;
+          // don't keep focus
+          button.blur();
+          // flash "checked"
+          button.classList.add('code-copy-button-checked');
+          var currentTitle = button.getAttribute("title");
+          button.setAttribute("title", "Copied!");
+          let tooltip;
+          if (window.bootstrap) {
+            button.setAttribute("data-bs-toggle", "tooltip");
+            button.setAttribute("data-bs-placement", "left");
+            button.setAttribute("data-bs-title", "Copied!");
+            tooltip = new bootstrap.Tooltip(button, 
+              { trigger: "manual", 
+                customClass: "code-copy-button-tooltip",
+                offset: [0, -8]});
+            tooltip.show();    
+          }
+          setTimeout(function() {
+            if (tooltip) {
+              tooltip.hide();
+              button.removeAttribute("data-bs-title");
+              button.removeAttribute("data-bs-toggle");
+              button.removeAttribute("data-bs-placement");
+            }
+            button.setAttribute("title", currentTitle);
+            button.classList.remove('code-copy-button-checked');
+          }, 1000);
+          // clear code selection
+          e.clearSelection();
+        }
+        const getTextToCopy = function(trigger) {
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+        }
+        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+          text: getTextToCopy
+        });
+        clipboard.on('success', onCopySuccess);
+        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+            text: getTextToCopy,
+            container: window.document.getElementById('quarto-embedded-source-code-modal')
+          });
+          clipboardModal.on('success', onCopySuccess);
+        }
+          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var mailtoRegex = new RegExp(/^mailto:/);
+            var filterRegex = new RegExp("https:\/\/ateucher\.github\.io\/pc-intermediate-r\/");
+          var isInternal = (href) => {
+              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          }
+          // Inspect non-navigation links and adorn them if external
+         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          for (var i=0; i<links.length; i++) {
+            const link = links[i];
+            if (!isInternal(link.href)) {
+              // undo the damage that might have been done by quarto-nav.js in the case of
+              // links that we want to consider external
+              if (link.dataset.originalHref !== undefined) {
+                link.href = link.dataset.originalHref;
+              }
+            }
+          }
+        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+          const config = {
+            allowHTML: true,
+            maxWidth: 500,
+            delay: 100,
+            arrow: false,
+            appendTo: function(el) {
+                return el.closest('section.slide') || el.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'light-border',
+            placement: 'bottom-start',
+          };
+          if (contentFn) {
+            config.content = contentFn;
+          }
+          if (onTriggerFn) {
+            config.onTrigger = onTriggerFn;
+          }
+          if (onUntriggerFn) {
+            config.onUntrigger = onUntriggerFn;
+          }
+            config['offset'] = [0,0];
+            config['maxWidth'] = 700;
+          window.tippy(el, config); 
+        }
+        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+        for (var i=0; i<noterefs.length; i++) {
+          const ref = noterefs[i];
+          tippyHover(ref, function() {
+            // use id or data attribute instead here
+            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+            try { href = new URL(href).hash; } catch {}
+            const id = href.replace(/^#\/?/, "");
+            const note = window.document.getElementById(id);
+            if (note) {
+              return note.innerHTML;
+            } else {
+              return "";
+            }
+          });
+        }
+        const findCites = (el) => {
+          const parentEl = el.parentElement;
+          if (parentEl) {
+            const cites = parentEl.dataset.cites;
+            if (cites) {
+              return {
+                el,
+                cites: cites.split(' ')
+              };
+            } else {
+              return findCites(el.parentElement)
+            }
+          } else {
+            return undefined;
+          }
+        };
+        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+        for (var i=0; i<bibliorefs.length; i++) {
+          const ref = bibliorefs[i];
+          const citeInfo = findCites(ref);
+          if (citeInfo) {
+            tippyHover(citeInfo.el, function() {
+              var popup = window.document.createElement('div');
+              citeInfo.cites.forEach(function(cite) {
+                var citeDiv = window.document.createElement('div');
+                citeDiv.classList.add('hanging-indent');
+                citeDiv.classList.add('csl-entry');
+                var biblioDiv = window.document.getElementById('ref-' + cite);
+                if (biblioDiv) {
+                  citeDiv.innerHTML = biblioDiv.innerHTML;
+                }
+                popup.appendChild(citeDiv);
+              });
+              return popup.innerHTML;
+            });
+          }
+        }
+      });
+      </script>
+    
+
+</body></html>

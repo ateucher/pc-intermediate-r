@@ -1,514 +1,227 @@
 [
   {
-    "objectID": "workflows.html#introductions",
-    "href": "workflows.html#introductions",
-    "title": "Creating Efficient Workflows in R",
-    "section": "Introductions",
-    "text": "Introductions\n\n\n\nMe: Andy Teucher\n\n andyteucher.ca\n ateucher\n andyteucher\n andy-teucher\n\nYourselves\n\nName\nWhere you are\nWhat you work on\nHardest thing about R"
+    "objectID": "wrapup.html#weve-covered-a-lot",
+    "href": "wrapup.html#weve-covered-a-lot",
+    "title": "Wrapping up",
+    "section": "We’ve covered a lot!",
+    "text": "We’ve covered a lot!\n\nProject-oriented workflows\nGit and GitHub\nAdvanced data manipulation with dplyr\nString manipulation with stringr\nIteration and functional programming with purrr\nQuarto for reproducible reporting\n\n\nExposure to concepts & tools, it’s up to you to practice & apply"
   },
   {
-    "objectID": "workflows.html#resources",
-    "href": "workflows.html#resources",
-    "title": "Creating Efficient Workflows in R",
-    "section": "Resources",
-    "text": "Resources\n\nWorkshop website: https://andyteucher.ca/pc-intermediate-r/\n\nWTF Book: https://rstats.wtf/"
+    "objectID": "wrapup.html#big-picture",
+    "href": "wrapup.html#big-picture",
+    "title": "Wrapping up",
+    "section": "Big Picture",
+    "text": "Big Picture\n\nProject-oriented workflows\n\n\n+\nGit and GitHub\n\n\n+\nShared coding styles and conventions\n\n\n\n= better and reproducible science in less time\n\n\n\n“It’s like agreeing that we will all drive on the left or the right. A hallmark of civilization is following conventions that constrain your behavior a little, in the name of public safety.”\n\n\nJenny Bryan & Jim Hester, What They Forgot to Teach You About R"
   },
   {
-    "objectID": "workflows.html#project-oriented-workflows",
-    "href": "workflows.html#project-oriented-workflows",
-    "title": "Creating Efficient Workflows in R",
-    "section": "Project-oriented workflows",
-    "text": "Project-oriented workflows\n\nConcept of a project \nProject structure\nEmbrace the blank slate \nNaming things\nFile organization"
+    "objectID": "wrapup.html#wrap-up",
+    "href": "wrapup.html#wrap-up",
+    "title": "Wrapping up",
+    "section": "Wrap up",
+    "text": "Wrap up\nIdentify as a team & prioritize helping each other\n\nWork on many different projects\nUse same workflows, share feedback, think together across projects\n\nShared workflows are a daily opportunity for efficiency & inclusion\n\nIncrease participation and inclusion; focus on onboarding\nCommon ground, easier to talk about, easier to ask for help"
   },
   {
-    "objectID": "workflows.html#personal-r-administration",
-    "href": "workflows.html#personal-r-administration",
-    "title": "Creating Efficient Workflows in R",
-    "section": "Personal R administration",
-    "text": "Personal R administration\n\nWhere do packages live?\nInstalling and updating packages\nR Startup\n.Rprofile and .Renviron files"
+    "objectID": "wrapup.html#key-resources",
+    "href": "wrapup.html#key-resources",
+    "title": "Wrapping up",
+    "section": "Key resources",
+    "text": "Key resources\n\nR for Data Science book\nHappy Git and GitHub for the useR\nQuarto documentation\nCheat Sheets\n\ndplyr\nstringr\npurrr\nQuarto\n…"
   },
   {
-    "objectID": "workflows.html#efficient-use-of-your-ide",
-    "href": "workflows.html#efficient-use-of-your-ide",
-    "title": "Creating Efficient Workflows in R",
-    "section": "Efficient use of your IDE",
-    "text": "Efficient use of your IDE\n\nCustomizing your IDE\nKeyboard shortcuts\nCommand palette\nTab completion\nAutoformatting code\nGetting help: Reprexes"
+    "objectID": "setup.html",
+    "href": "setup.html",
+    "title": "System Setup 🤖",
+    "section": "",
+    "text": "You will require the following software installed and configured for the workshop. Please have this set up and ready to go before we start."
   },
   {
-    "objectID": "workflows.html#layout",
-    "href": "workflows.html#layout",
-    "title": "Creating Efficient Workflows in R",
-    "section": "Layout",
-    "text": "Layout\n\n\nhttps://github.com/posit-dev/positron-website/pull/116/"
+    "objectID": "setup.html#computing-requirements",
+    "href": "setup.html#computing-requirements",
+    "title": "System Setup 🤖",
+    "section": "Computing requirements",
+    "text": "Computing requirements\nYou will need:\n\nA laptop computer with administrative privileges\nR and RStudio\nR package development toolchain\nSeveral R packages\nGit\nGitHub account"
   },
   {
-    "objectID": "workflows.html#layout-1",
-    "href": "workflows.html#layout-1",
-    "title": "Creating Efficient Workflows in R",
-    "section": "Layout",
-    "text": "Layout\n\n\nhttps://github.com/posit-dev/positron-website/pull/116/\n\n\nThese UI elements are the most novel for RStudio users:\nThe Activity bar provides access to different functional capabilities of Positron. Clicking here changes what appears in the Primary side bar. The Primary side bar displays context-specific content based on which icon is clicked in the Activity bar."
+    "objectID": "setup.html#install-r-and-rstudio",
+    "href": "setup.html#install-r-and-rstudio",
+    "title": "System Setup 🤖",
+    "section": "Install R and RStudio",
+    "text": "Install R and RStudio\nYou will need:\n\nR version &gt;= 4.4.0\nRStudio &gt;= 2024.04 or Positron &gt;= 2025.09.0-139\n\n\nInstall R\nDownload and install R for your operating system from https://cloud.r-project.org/.\n\n\nInstall R Studio\nDownload and install RStudio Desktop from https://posit.co/download/rstudio-desktop/. This page should automatically offer you the version suitable for your operating system, but you can scroll down to find versions for all operating systems.\n\n\nInstall Positron\nDownload and install Positron from https://positron.posit.co/download.html. This page should automatically offer you the version suitable for your operating system, but you can scroll down to find versions for all operating systems."
   },
   {
-    "objectID": "workflows.html#keyboard-shortcuts",
-    "href": "workflows.html#keyboard-shortcuts",
-    "title": "Creating Efficient Workflows in R",
-    "section": "Keyboard shortcuts",
-    "text": "Keyboard shortcuts\nEnable Rstudio keyboard shortcuts via:\nSettings &gt; Workbench &gt; Keybindings: Rstudio Keybindings"
+    "objectID": "setup.html#install-r-package-development-tools",
+    "href": "setup.html#install-r-package-development-tools",
+    "title": "System Setup 🤖",
+    "section": "Install R package development tools",
+    "text": "Install R package development tools\n\nFor Windows\nDownload and run the latest Rtools installer, Rtools.exe, from https://cran.r-project.org/bin/windows/Rtools/.\n\nKeep the default settings for the installation location and components to install\ncheck the box to add rtools to the system PATH.\n\n\n\nFor Mac\nInstall XCode. The easiest way is to open a Terminal window (Applications &gt; Utilities &gt; Terminal.app; or use the Terminal pane in RStudio) and type the following:\nxcode-select --install\nYou will be prompted to confirm the install, and possibly enter your computer password. Do so to complete the installation.\nAlternatively you can:\n\nDownload and install XCode from the Mac AppStore: http://itunes.apple.com/us/app/xcode/id497799835?mt=12\nWithin XCode go to Preferences : Downloads and install the Command Line Tools\n\n\n\nFor Linux\nIf you installed r-base-dev when installing R, you should have all you need to build packages from source. If not, go back to https://cloud.r-project.org/ and follow the instructions for your distribution (Ubuntu and Debian are likely the most common, and install it with sudo apt-get install r-base-dev)."
   },
   {
-    "objectID": "workflows.html#command-palette",
-    "href": "workflows.html#command-palette",
-    "title": "Creating Efficient Workflows in R",
-    "section": "Command palette",
-    "text": "Command palette\n\nAccess all the things\n Ctrl + Shift + P"
+    "objectID": "setup.html#git",
+    "href": "setup.html#git",
+    "title": "System Setup 🤖",
+    "section": "Git",
+    "text": "Git\nWe will be learning the use of Git and GitHub for version control and collaboration.\n\nWindows\nCheck if Git is installed by running which git in the Terminal pane in RStudio.\nIf which git didn’t find Git installed:\n\nDownload and install from https://git-scm.com/downloads\nKeep all the default settings. If asked about “Adjusting your PATH environment”, make sure to select “Git from the command line and also from 3rd-party software”.\n\n\nRStudio + Git\n\nOpen RStudio. In the menus go to Tools &gt; Global Options &gt; Git/SVN.\nCheck RStudio has found git under “Git executable”. If it hasn’t:\n\nYou may need to click Browse and find the git executable.\nIt may be in C:/Users/[username]/AppData/Local/Programs/Git/\n\n\n\n\nPositron + Git\n\nPositron is smart about finding git, but if it doesn’t find it automatically:\nIn the menu go to File &gt; Preferences &gt; Settings.\nSearch for “Git Path”.\n\nClick “Edit in settings.json” and add the path to the git executable.\nIt may be in C:/Users/[username]/AppData/Local/Programs/Git/cmd/git.exe\n\n\n\n\n\nMac\nCheck if Git is installed by running which git in the Terminal. You should see something like /usr/bin/git, /usr/local/bin/, or /opt/homebrew/bin/git.\nIf you are asked to install the Xcode command line tools, say yes.\nIf which git didn’t find Git installed, and if you weren’t prompted to install it, run the following in the Terminal: xcode-select --install\n\n\nIf you do lots of scientific computing and especially if you use command-line programs in the Terminal, we recommend using Homebrew. See brew.sh for installation instructions. To install Git using Homebrew, run the following in the Terminal: brew install git"
   },
   {
-    "objectID": "workflows.html#extensions",
-    "href": "workflows.html#extensions",
-    "title": "Creating Efficient Workflows in R",
-    "section": "Extensions",
-    "text": "Extensions\n\n\n\nPre-installed\n\nQuarto\nAir\n\n\nOther extensions\n\nRainbow csv\nvscode-pdf\nThemes\n\n\n\nCommand palette: “install”. Search “tomorrow night”."
+    "objectID": "setup.html#github",
+    "href": "setup.html#github",
+    "title": "System Setup 🤖",
+    "section": "GitHub",
+    "text": "GitHub\nRegister a GitHub account at github.com.\nI highly recommend the book Happy Git with R for advice on setting up and using Git with R [@bryan]."
   },
   {
-    "objectID": "workflows.html#data-explorer",
-    "href": "workflows.html#data-explorer",
-    "title": "Creating Efficient Workflows in R",
-    "section": "Data Explorer",
-    "text": "Data Explorer"
+    "objectID": "setup.html#troubleshooting",
+    "href": "setup.html#troubleshooting",
+    "title": "System Setup 🤖",
+    "section": "Troubleshooting",
+    "text": "Troubleshooting\nIf you are having issues with the setup please start a discussion on GitHub here."
   },
   {
-    "objectID": "workflows.html#learning-objectives",
-    "href": "workflows.html#learning-objectives",
-    "title": "Creating Efficient Workflows in R",
-    "section": "Learning objectives",
-    "text": "Learning objectives\n\nEstablish the concept of the project as the basic organizational unit of work.\nApply best practices in and leverage benefits of using a project-oriented workflow.\n\n\nCreating robust file paths that travel well in time and space.\nConstructing human and machine readable file names that sort nicely.\nDifferentiating workflow elements, analysis inputs, and analysis outputs in project structure to create navigable programming interfaces.\nRestarting R frequently, with a blank slate."
+    "objectID": "quarto.html#what-is-reproducible-reporting",
+    "href": "quarto.html#what-is-reproducible-reporting",
+    "title": "Reproducible Reporting with Quarto",
+    "section": "What is reproducible reporting?",
+    "text": "What is reproducible reporting?\nResearch is considered to be reproducible when the exact results can be reproduced if given access to the original data, software, and code.\n\n\n\nCode and narrative text in a single document means:\n\nYou don’t have to copy and paste figures and tables into reports\nReports are automatically updated when data or analyses change\nHuman error is reduced\nEnhanced transparency and reproducibility"
   },
   {
-    "objectID": "workflows.html#prerequisites",
-    "href": "workflows.html#prerequisites",
-    "title": "Creating Efficient Workflows in R",
-    "section": "Prerequisites",
-    "text": "Prerequisites\n\ninstall.packages(c(\"tidyverse\", \"devtools\"))\n\ndevtools::install_github(\"r-lib/usethis\")"
+    "objectID": "quarto.html#what-is-quarto",
+    "href": "quarto.html#what-is-quarto",
+    "title": "Reproducible Reporting with Quarto",
+    "section": "What is Quarto?",
+    "text": "What is Quarto?\n\nOpen-source scientific and technical publishing system\nSupports multiple data science languages (R, Python, Julia, …)\nIntegrated with Positron and RStudio\nRenders to multiple formats (HTML, PDF, Word, slides, books, websites)"
   },
   {
-    "objectID": "workflows.html#be-organized-as-you-go-not-tomorrow",
-    "href": "workflows.html#be-organized-as-you-go-not-tomorrow",
-    "title": "Creating Efficient Workflows in R",
-    "section": "Be organized as you go, not “tomorrow”",
-    "text": "Be organized as you go, not “tomorrow”\n\n\nDon’t fret over past mistakes.\n\n\n\n\nRaise the bar for new work."
+    "objectID": "quarto.html#key-features-of-quarto",
+    "href": "quarto.html#key-features-of-quarto",
+    "title": "Reproducible Reporting with Quarto",
+    "section": "Key Features of Quarto",
+    "text": "Key Features of Quarto\n\nLiterate programming: Combine code and narrative text\nMarkdown syntax for easy formatting and works with version control\nSupport for code execution and output embedding\n\n\nNote: You can render existing R Markdown (.Rmd) documents with Quarto and/or rename them to .qmd files to turn them into Quarto documents."
   },
   {
-    "objectID": "workflows.html#prerequisite-save-code-in-scripts",
-    "href": "workflows.html#prerequisite-save-code-in-scripts",
-    "title": "Creating Efficient Workflows in R",
-    "section": "Prerequisite: Save code in scripts",
-    "text": "Prerequisite: Save code in scripts\nSaving code is an absolute requirement for reproducibility. (Future you, future us)\n\nSave commands as “scripts” (.R) or “notebooks” (.Rmd).\nIt doesn’t have to be polished.\nJust save it!\nEverything that really matters should be achieved through code that you save\nContrast: Series of unrecorded mouse clicks\n\nThe process is important, the product is just an outcome\n\nOutputs should be treated as disposable\nScripts are the source of truth"
+    "objectID": "quarto.html#output-formats",
+    "href": "quarto.html#output-formats",
+    "title": "Reproducible Reporting with Quarto",
+    "section": "Output Formats",
+    "text": "Output Formats\n\nHTML documents (format: html)\nWord documents (format: docx)\nPDF reports\n\nvia \\(LaTeX\\) (format: pdf)\nvia typst (format: typst)\n\nPresentations\n\nReveal.js (format: revealjs)\nPowerPoint (format: pptx)\n\nBooks and websites"
   },
   {
-    "objectID": "workflows.html#adopt-a-project-oriented-workflow",
-    "href": "workflows.html#adopt-a-project-oriented-workflow",
-    "title": "Creating Efficient Workflows in R",
-    "section": "Adopt a project-oriented workflow",
-    "text": "Adopt a project-oriented workflow\n\n\n\nWhy\n\nwork on more than 1 thing at a time\ncollaborate, communicate, distribute\nstart and stop safely\n\n\n\n\nHow\n\ndedicated directory\nRStudio Project or Positron Workspace\nGit repo, probably syncing to a remote\n\n\n\nProject-oriented workflows"
+    "objectID": "quarto.html#our-turn",
+    "href": "quarto.html#our-turn",
+    "title": "Reproducible Reporting with Quarto",
+    "section": "Our turn",
+    "text": "Our turn\n\nOpen 05-quarto.qmd in Positron\nExplore the document structure and code chunks\nRender the document to HTML using the Preview button"
   },
   {
-    "objectID": "workflows.html#if-the-top-of-your-script-is",
-    "href": "workflows.html#if-the-top-of-your-script-is",
-    "title": "Creating Efficient Workflows in R",
-    "section": "If the top of your script is",
-    "text": "If the top of your script is\n\n\nsetwd(\"C:/Users/andy/path/that/only/I/have\")\nrm(list = ls())\n\n\nThere is another path.\n\n\nProject-oriented workflow designs this away. 🙌\n\n\nProject-oriented workflows"
+    "objectID": "quarto.html#three-ways-to-render",
+    "href": "quarto.html#three-ways-to-render",
+    "title": "Reproducible Reporting with Quarto",
+    "section": "Three ways to render",
+    "text": "Three ways to render\n\n\nQuarto is integrated into Positron\nClick  in Editor pane of Positron.\n\n\n\n\nQuarto is an R package\nRun in R:\nquarto::quarto_render(input = ___, output_format = ___)\n\n\n\n\nQuarto has a command line interface (CLI)\nRun at the terminal:\nquarto render &lt;input&gt; --to &lt;format&gt;"
   },
   {
-    "objectID": "workflows.html#organize-your-work-into-projects",
-    "href": "workflows.html#organize-your-work-into-projects",
-    "title": "Creating Efficient Workflows in R",
-    "section": "Organize your work into projects",
-    "text": "Organize your work into projects\nOne folder per project.\n\nReport? R package? Chapter? Website? Whatever.\nCan be the same unit as a GitHub Repo.\nIf using RStudio, it’s Project (capital P)\nIf using Positron, it’s Workspace\nEach Project gets its own R instance\nR starts at the project root working directory: all paths are relative to the project’s folder.\n\n\nProject-oriented workflows"
+    "objectID": "quarto.html#quarto-uses-markdown-syntax",
+    "href": "quarto.html#quarto-uses-markdown-syntax",
+    "title": "Reproducible Reporting with Quarto",
+    "section": "Quarto uses Markdown syntax",
+    "text": "Quarto uses Markdown syntax\nMarkdown is designed to be easy to write and easy to read:\n\n\nA Markdown-formatted document should be publishable as-is, as plain text, without looking like it’s been marked up with tags or formatting instructions.\n-John Gruber\n\n\nFocus on content, not formatting"
   },
   {
-    "objectID": "workflows.html#organize-your-work-into-projects-1",
-    "href": "workflows.html#organize-your-work-into-projects-1",
-    "title": "Creating Efficient Workflows in R",
-    "section": "Organize your work into projects",
-    "text": "Organize your work into projects\n\n\nmy-project/\n├── 01_read-data.R\n├── 02_clean-data.R\n├── 03_analysis.R\n├── 04_output.R\n├── R\n├── README.md\n├── data\n│   ├── derived_data\n│   └── raw_data\n├── outputs\n└── paper\n    ├── paper.qmd\n    └── references.bib\n\n\n\nProject-oriented workflows"
+    "objectID": "quarto.html#markdown-headings",
+    "href": "quarto.html#markdown-headings",
+    "title": "Reproducible Reporting with Quarto",
+    "section": "Markdown Headings",
+    "text": "Markdown Headings\n#, ##, ###, etc. for different levels\n\n\n\n\n\n\n\n\n\nMarkdown Syntax\nOutput\n\n\n\n\n# Header 1\nHeader 1\n\n\n## Header 2\nHeader 2\n\n\n### Header 3\nHeader 3\n\n\n#### Header 4\nHeader 4\n\n\n##### Header 5\nHeader 5"
   },
   {
-    "objectID": "workflows.html#what-does-it-mean-to-be-an-rstudio-project",
-    "href": "workflows.html#what-does-it-mean-to-be-an-rstudio-project",
-    "title": "Creating Efficient Workflows in R",
-    "section": "What does it mean to be an RStudio Project?",
-    "text": "What does it mean to be an RStudio Project?\nOpen Project = dedicated instance of RStudio\n\ndedicated R process\nfile browser pointed at Project directory\nworking directory set to Project directory\n\n\n\nRStudio leaves notes to itself in foo.Rproj"
+    "objectID": "quarto.html#markdown-lists",
+    "href": "quarto.html#markdown-lists",
+    "title": "Reproducible Reporting with Quarto",
+    "section": "Markdown Lists",
+    "text": "Markdown Lists\n*, -, or + may be used for unordered list items.\n\n\nMarkdown\nUnordered list:\n\n* red\n* green\n* blue\n\nOrdered list:\n\n1. red\n1. green\n3. blue\n\nOutput\nUnordered list:\n\nred\ngreen\nblue\n\nOrdered list:\n\nred\ngreen\nblue"
   },
   {
-    "objectID": "workflows.html#what-does-it-mean-to-be-a-positron-project-workspace",
-    "href": "workflows.html#what-does-it-mean-to-be-a-positron-project-workspace",
-    "title": "Creating Efficient Workflows in R",
-    "section": "What does it mean to be a Positron Project Workspace?",
-    "text": "What does it mean to be a Positron Project Workspace?\nOpen Project = dedicated instance of Positron\n\ndedicated R process\nfile browser pointed at Project directory\nworking directory set to Project directory\n\n\n\nOften just a project folder that’s been opened in its own window via Open Folder or similar\n\n.git/ directory\n.Rproj file\n.vscode/settings.json file\n_quarto.yml file\nDESCRIPTION file\nrenv.lock file\n.here file"
+    "objectID": "quarto.html#inline-elements-text-formatting",
+    "href": "quarto.html#inline-elements-text-formatting",
+    "title": "Reproducible Reporting with Quarto",
+    "section": "Inline Elements: Text Formatting",
+    "text": "Inline Elements: Text Formatting\n\n\nMarkdown\nMarkdown allows you to format text\nwith *emphasis (italics)* and \n**strong emphasis (bold)**.\nYou can also add superscripts^2^, \nsubscripts~2~, and display code \n`verbatim`. Little known fact: you can \nalso ~~strikethrough~~ text and present\nit in [small caps]{.smallcaps}.\n\nOutput\nMarkdown allows you to format text with emphasis (italics) and strong emphasis (bold). You can also add superscripts2, subscripts2, and display code verbatim. Little known fact: you can also strikethrough text and present it in small caps.\n\n\n1\n\nEither the * or _ can be used for emphasis and strong."
   },
   {
-    "objectID": "workflows.html#practice-safe-paths",
-    "href": "workflows.html#practice-safe-paths",
-    "title": "Creating Efficient Workflows in R",
-    "section": "Practice “safe paths”",
-    "text": "Practice “safe paths”\nThe chance of setwd() having the desired effect – making the file paths work – for anyone besides its author is ~0%.\nlibrary(ggplot2)\nsetwd(\"/Users/andy/cuddly_broccoli/verbose/foofy/data\")\ndf &lt;- read.csv(“raw_foofy_data.csv”)\np &lt;- ggplot(df, aes(x, y)) + geom_point()\nggsave(\"/Users/andy/cuddly_broccoi/ambiguous/fig.png\")\n It’s also unlikely to work for the author one or two years or computers from now.\nHard-wired, absolute paths, especially when sprinkled throughout the code, make a project brittle. Such code does not travel well across time or space."
+    "objectID": "quarto.html#inline-elements-math",
+    "href": "quarto.html#inline-elements-math",
+    "title": "Reproducible Reporting with Quarto",
+    "section": "Inline Elements: Math",
+    "text": "Inline Elements: Math\n\n\nMarkdown\nThe area of a circle is $A = \\pi r^2$,\nwhere $r$ is the radius and $\\pi$ is\nthe constant $3.141592\\ldots$.\n\nOutput\nThe area of a circle is \\(A = \\pi r^2\\), where \\(r\\) is the radius and \\(\\pi\\) is the constant \\(3.141592\\ldots\\).\n\n\nHelp on equations: https://quarto.org/docs/authoring/markdown-basics.html#equations"
   },
   {
-    "objectID": "workflows.html#practice-safe-paths-1",
-    "href": "workflows.html#practice-safe-paths-1",
-    "title": "Creating Efficient Workflows in R",
-    "section": "Practice “safe paths”",
-    "text": "Practice “safe paths”\n\nrelative to a stable base, not absolute paths.\n\nuse file system functions, not paste(), strsplit(), etc.\n\nWorking directory is associated with a specific process or running application.\nWhen you open a project in RStudio or Positron, it sets the working directory to the project root - this is that “stable base”\n“Working directory” as a concept is not comparable to “home directory”. “Home directory” is a static, persistent thing."
+    "objectID": "quarto.html#inline-elements-links-and-images",
+    "href": "quarto.html#inline-elements-links-and-images",
+    "title": "Reproducible Reporting with Quarto",
+    "section": "Inline Elements: Links and Images",
+    "text": "Inline Elements: Links and Images\n\nClickable hyperlinks\n\n[Andy's website](https://andyteucher.ca) -&gt; Andy’s website\n\nLinks within the document:\n\n[code chunks](#quarto-uses-markdown-syntax) -&gt; code chunks\n\nBare URLs:\n\n&lt;https://andyteucher.ca&gt; -&gt; https://andyteucher.ca\n\nImages:\n\n![](https://media.giphy.com/media/BSx6mzbW1ew7K/giphy.gif) -&gt;"
   },
   {
-    "objectID": "workflows.html#practice-safe-paths-2",
-    "href": "workflows.html#practice-safe-paths-2",
-    "title": "Creating Efficient Workflows in R",
-    "section": "Practice “safe paths”",
-    "text": "Practice “safe paths”\nInstead of:\n\nsetwd(\"C:/Users/andy/path/that/only/I/have\")\nmy_data &lt;- read.csv(\"data/my_data.csv\")\n\nOr:\n\nmy_data &lt;- read.csv(\"C:/Users/andy/path/that/only/I/have/data/my_data.csv\")"
+    "objectID": "quarto.html#computational-code-chunks",
+    "href": "quarto.html#computational-code-chunks",
+    "title": "Reproducible Reporting with Quarto",
+    "section": "Computational Code Chunks",
+    "text": "Computational Code Chunks\n\nUse triple backticks with language identifier (e.g., r, python)\n\n```{r}\ndata &lt;- read.csv(\"data.csv\")\nsummary(data)\n```"
   },
   {
-    "objectID": "workflows.html#practice-safe-paths-3",
-    "href": "workflows.html#practice-safe-paths-3",
-    "title": "Creating Efficient Workflows in R",
-    "section": "Practice “safe paths”",
-    "text": "Practice “safe paths”\nSet your work up as an RStudio or Positron Project/Workspace and use relative paths:\n\nmy_data &lt;- read.csv(\"data/my_data.csv\")\n\nOr:\n\nmy_data &lt;- read.csv(file.path(\"data\", \"my_data.csv\"))"
+    "objectID": "quarto.html#code-chunk-options",
+    "href": "quarto.html#code-chunk-options",
+    "title": "Reproducible Reporting with Quarto",
+    "section": "Code chunk options",
+    "text": "Code chunk options\nPrefaced with special comment prefix: #|\n\n\n\n\n```{r}\n#| label: summary-stats\n#| echo: true\n#| message: false\n\ndata &lt;- read.csv(\"data.csv\")\nsummary(data)\n```\n\n\nlabel: Name of the code chunk (used for referencing)\necho: Show or hide code (true/false)\neval: Execute or skip code (true/false)\nmessage: Show or hide messages (true/false)\nwarning: Show or hide warnings (true/false)\nfig.width: and fig.height: Set figure dimensions\nmany others"
   },
   {
-    "objectID": "workflows.html#work-on-multiple-projects-at-once",
-    "href": "workflows.html#work-on-multiple-projects-at-once",
-    "title": "Creating Efficient Workflows in R",
-    "section": "Work on multiple projects at once",
-    "text": "Work on multiple projects at once\nBecause each project uses an isolated R process"
+    "objectID": "quarto.html#inline-code-execution",
+    "href": "quarto.html#inline-code-execution",
+    "title": "Reproducible Reporting with Quarto",
+    "section": "Inline code execution",
+    "text": "Inline code execution\n\nUse single backticks with language identifier\n\n```{r}\ndata &lt;- data.frame(\n    id = c(\"A\", \"B\", \"C\", \"D\", \"E\"),\n    variable = c(1, 2, 3, 4, 5)\n)\n```\n\nThe mean of the data variable is `{r} mean(data$variable)`.\n\n\n\n\ndata &lt;- data.frame(\n  id = c(\"A\", \"B\", \"C\", \"D\", \"E\"),\n  variable = c(1, 2, 3, 4, 5)\n)\n\nThe mean of the data variable is 3."
   },
   {
-    "objectID": "workflows.html#which-persist-after-rmlist-ls",
-    "href": "workflows.html#which-persist-after-rmlist-ls",
-    "title": "Creating Efficient Workflows in R",
-    "section": "Which persist after rm(list = ls())?",
-    "text": "Which persist after rm(list = ls())?\n\n\n\nOption\nPersists?\n\n\n\n\nA. library(dplyr)\n\n\n\nB. summary &lt;- head\n\n\n\nC. options(stringsAsFactors = FALSE)\n\n\n\nD. Sys.setenv(LANGUAGE = \"fr\")\n\n\n\nE. x &lt;- 1:5\n\n\n\nF. attach(iris)\n\n\n\n\n\n\n\n−+\n02:00"
+    "objectID": "quarto.html#quarto-document-metadata",
+    "href": "quarto.html#quarto-document-metadata",
+    "title": "Reproducible Reporting with Quarto",
+    "section": "Quarto Document Metadata",
+    "text": "Quarto Document Metadata\nYAML header at the top of the document\n---\ntitle: \"Document Title\"\nauthor: \"Author Name\"\ndate: \"2024-06-01\"\nformat: html\n---\n\nAlso specify default code chunk options globally (echo: false, fig-width: 6, etc.)"
   },
   {
-    "objectID": "workflows.html#which-persist-after-rmlist-ls-1",
-    "href": "workflows.html#which-persist-after-rmlist-ls-1",
-    "title": "Creating Efficient Workflows in R",
-    "section": "Which persist after rm(list = ls())?",
-    "text": "Which persist after rm(list = ls())?\n\n\n\n\n\n\n\nOption\nPersists?\n\n\n\n\nA. library(dplyr)\n\n\n\nB. summary &lt;- head\n\n\n\nC. options(stringsAsFactors = FALSE)\n\n\n\nD. Sys.setenv(LANGUAGE = \"fr\")\n\n\n\nE. x &lt;- 1:5\n\n\n\nF. attach(iris)"
-  },
-  {
-    "objectID": "workflows.html#start-r-with-a-blank-slate",
-    "href": "workflows.html#start-r-with-a-blank-slate",
-    "title": "Creating Efficient Workflows in R",
-    "section": "Start R with a blank slate",
-    "text": "Start R with a blank slate\n\n\n\nSave code for reproducibility.\nWhen you quit: do not save the workspace to an .Rdata file.\nWhen you start: do not reload the workspace from an .Rdata file.\nIn RStudio, set this via Tools &gt; Global Options.\nOr use usethis::use_blank_slate()\n\n\n\n\n\n\nThis is the default (and not customizable) in Positron"
-  },
-  {
-    "objectID": "workflows.html#restart-r-often",
-    "href": "workflows.html#restart-r-often",
-    "title": "Creating Efficient Workflows in R",
-    "section": "Restart R often",
-    "text": "Restart R often\n\n\n\nSession -&gt; Restart R\n\n\n\n\nWindows\n\nCtrl + Shift + F10\n\nMac\n\nCmd + Shift + 0"
-  },
-  {
-    "objectID": "workflows.html#project-initiation-rstudio-project",
-    "href": "workflows.html#project-initiation-rstudio-project",
-    "title": "Creating Efficient Workflows in R",
-    "section": "Project initiation: RStudio Project",
-    "text": "Project initiation: RStudio Project\n\nNew folder + make it an RStudio Project\n\n\nusethis::create_project(\"~/i_am_new\")\nFile -&gt; New Project -&gt; New Directory -&gt; New Project\n\n\nMake existing folder into an RStudio Project\n\n\nusethis::create_project(\"~/i_exist\")\nFile -&gt; New Project -&gt; Existing Directory"
-  },
-  {
-    "objectID": "workflows.html#project-initiation-positron-workspace",
-    "href": "workflows.html#project-initiation-positron-workspace",
-    "title": "Creating Efficient Workflows in R",
-    "section": "Project initiation: Positron Workspace",
-    "text": "Project initiation: Positron Workspace\n\nNew folder + make it a workspace\n\n\nusethis::create_project(\"~/i_am_new\", rstudio = FALSE)\nFile -&gt; New Folder From Template\n\n\nOpen an existing directory as a workspace\n\n\nusethis::create_project(\"~/i_exist\", rstudio = FALSE)\nFile -&gt; New Project -&gt; Existing Directory\n\nNote: if you don’t specify rstudio = FALSE, it will create an RStudio .Rproj file. This does no harm.\n\n\nTry either option now with a folder containing (or that will contain) Bivalve Data 2014-2022_ICE.csv."
-  },
-  {
-    "objectID": "workflows.html#naming-things",
-    "href": "workflows.html#naming-things",
-    "title": "Creating Efficient Workflows in R",
-    "section": "Naming things",
-    "text": "Naming things\n\n\n machine readable\n\nhuman readable\n\nsort nicely\n\n\n\n\nJenny Bryan “Naming things” video\nNormConf · Dec 4, 2022:\nhttps://www.youtube.com/watch?v=ES1LTlnpLMk"
-  },
-  {
-    "objectID": "workflows.html#naming-things-1",
-    "href": "workflows.html#naming-things-1",
-    "title": "Creating Efficient Workflows in R",
-    "section": "Naming things",
-    "text": "Naming things\n\nWhat features differentiate 😔 vs 😍?\n\n\n\n\n\n😔\n\n\n\n\n😍\n\n\n\n\nmyabstract.docx\nJoe’s Filenames Use Spaces and Punctuation.xlsx\nfigure 1.png\nhomework.R\nJW7d^(2sl@deletethisandyourcareerisoverWx2*.txt\n\n2018-01_teucher-abstract-conference.docx\njoes-filenames-are-getting-better.xlsx\nfig01_scatterplot-talk-length-vs-interest.png\n2024-07-25_ecol-455_assignment-5.R\n1986-01-28_raw-data-from-challenger-o-rings.txt\n\n\n\n\n−+\n01:00"
-  },
-  {
-    "objectID": "workflows.html#names-machines-like",
-    "href": "workflows.html#names-machines-like",
-    "title": "Creating Efficient Workflows in R",
-    "section": "Names machines like",
-    "text": "Names machines like\n\ndon’t leave white space\n\n\n\nuse letters, numbers, hyphens and underscores… that’s it  (characters like ^.*?+|$ can have a special meaning)\n\n\n\n\nbe consistent with case  (some operating systems treat a and A the same, some differently).\n\n\n\n\nuse separator characters wisely\n\n    use underscore _ to separate different chunks\n    use hyphen - for words in the same chunk\n\n\n\nThis creates names that are regular expression and globbing friendly, and easy to compute on! 🎉\n\nAdapted from  https://djnavarro.net/slides-project-structure/#1.\n\n\nGlobbing: use of pattern matching against the names in a filesystem directory such that a name pattern is expanded into a list of names matching that pattern."
-  },
-  {
-    "objectID": "workflows.html#names-humans-like",
-    "href": "workflows.html#names-humans-like",
-    "title": "Creating Efficient Workflows in R",
-    "section": "Names humans like",
-    "text": "Names humans like\n\nname contains info on content\nname anticipates context\nconcept of a slug 🐌 from user-friendly URLs\n\n1986-01-28_raw-data-from-challenger-o-rings.txt\nconcise, meaningful description\nusually appended to the end\n\n\nNote: A URL slug is the part of the URL after the last backslash"
-  },
-  {
-    "objectID": "workflows.html#names-that-sort-nicely",
-    "href": "workflows.html#names-that-sort-nicely",
-    "title": "Creating Efficient Workflows in R",
-    "section": "Names that sort nicely",
-    "text": "Names that sort nicely\n\nput something numeric in there\nleft pad with zeros for constant width, nice sorting, 01\nuse the ISO 8601 standard for dates, YYYY-MM-DD\norder = chronological or … consider common sense"
-  },
-  {
-    "objectID": "workflows.html#iso-8601",
-    "href": "workflows.html#iso-8601",
-    "title": "Creating Efficient Workflows in R",
-    "section": "ISO 8601",
-    "text": "ISO 8601\n\n\n\n\n\n\n\nYYYY-MM-DD\nISO 8601\n\nhttps://www.iso.org/iso-8601-date-and-time-format.html\n\n\nhttps://twitter.com/JennyBryan/status/816143967695687684"
-  },
-  {
-    "objectID": "workflows.html#file-names",
-    "href": "workflows.html#file-names",
-    "title": "Creating Efficient Workflows in R",
-    "section": "👍 file names",
-    "text": "👍 file names\n\nlibrary(fs)\nlibrary(dplyr)\n\nft &lt;- tibble(files = dir_ls(\"_examples/data/\", glob = \"*.csv\"))\n\n\nIntuitive sorting.\n\n\n\nft\n\n# A tibble: 4 × 1\n  files                                           \n  &lt;fs::path&gt;                                      \n1 _examples/data/2024-07-16_site-2_plot-data.csv  \n2 _examples/data/2024-07-25_site-2_survey-data.csv\n3 _examples/data/2024-08-12_site-1_plot-data.csv  \n4 _examples/data/2024-08-18_site-1_survey-data.csv\n\n\n\n\narrange(ft, desc(files))\n\n# A tibble: 4 × 1\n  files                                           \n  &lt;fs::path&gt;                                      \n1 _examples/data/2024-08-18_site-1_survey-data.csv\n2 _examples/data/2024-08-12_site-1_plot-data.csv  \n3 _examples/data/2024-07-25_site-2_survey-data.csv\n4 _examples/data/2024-07-16_site-2_plot-data.csv"
-  },
-  {
-    "objectID": "workflows.html#file-names-1",
-    "href": "workflows.html#file-names-1",
-    "title": "Creating Efficient Workflows in R",
-    "section": "👍 file names",
-    "text": "👍 file names\n\nlibrary(stringr)\n\nfilter(ft, str_detect(files, pattern = \"plot-data\"))\n\n# A tibble: 2 × 1\n  files                                         \n  &lt;fs::path&gt;                                    \n1 _examples/data/2024-07-16_site-2_plot-data.csv\n2 _examples/data/2024-08-12_site-1_plot-data.csv\n\n\nEasy to filter in R (or the shell or whatever)"
-  },
-  {
-    "objectID": "workflows.html#file-names-2",
-    "href": "workflows.html#file-names-2",
-    "title": "Creating Efficient Workflows in R",
-    "section": "👍 file names",
-    "text": "👍 file names\n\nlibrary(tidyr)\n\nft |&gt; \n  mutate(files = path_ext_remove(files)) |&gt; \n  separate(files, into = c(\"date\", \"site\", \"data_type\"), sep = \"_\")\n\n# A tibble: 4 × 3\n  date  site                     data_type\n  &lt;chr&gt; &lt;chr&gt;                    &lt;chr&gt;    \n1 \"\"    examples/data/2024-07-16 site-2   \n2 \"\"    examples/data/2024-07-25 site-2   \n3 \"\"    examples/data/2024-08-12 site-1   \n4 \"\"    examples/data/2024-08-18 site-1   \n\n\nIntentional delimiters means meta-data is easily recovered.\n_ delimits fields; - delimits words\n\nRename the file Bivalve Data 2014-2022_ICE.csv to something that is machine readable, human readable, and sorts nicely.\nRead the file in to R using a relateive path"
-  },
-  {
-    "objectID": "workflows.html#names-matter",
-    "href": "workflows.html#names-matter",
-    "title": "Creating Efficient Workflows in R",
-    "section": "Names matter",
-    "text": "Names matter\n\nmachine readable, human readable, and sort nicely\n\n\neasy to implement NOW\n\npayoffs accumulate as your skills evolve and  projects get more complex"
-  },
-  {
-    "objectID": "workflows.html#project-structure",
-    "href": "workflows.html#project-structure",
-    "title": "Creating Efficient Workflows in R",
-    "section": "Project structure",
-    "text": "Project structure\n\n\nmy-project/\n├── 01_read-data.R\n├── 02_clean-data.R\n├── 03_analysis.R\n├── 04_output.R\n├── R\n├── README.md\n├── data\n│   ├── derived_data\n│   └── raw_data\n├── outputs\n└── paper\n    ├── paper.qmd\n    └── references.bib"
-  },
-  {
-    "objectID": "workflows.html#your-r-installation",
-    "href": "workflows.html#your-r-installation",
-    "title": "Creating Efficient Workflows in R",
-    "section": "Your R installation",
-    "text": "Your R installation"
-  },
-  {
-    "objectID": "workflows.html#r-packages",
-    "href": "workflows.html#r-packages",
-    "title": "Creating Efficient Workflows in R",
-    "section": "R packages",
-    "text": "R packages\n\nR packages\n\nthe natural unit for distributing R code\n\n\n\nbase R\n\n14 base + 15 recommended packages\nships with all binary distributions of R"
-  },
-  {
-    "objectID": "workflows.html#additional-packages",
-    "href": "workflows.html#additional-packages",
-    "title": "Creating Efficient Workflows in R",
-    "section": "Additional packages",
-    "text": "Additional packages\n\n\nCRAN, ~20k packages\n\n# install from CRAN\ninstall.packages(\"devtools\")\n# attach\nlibrary(devtools)\n\n\n\n\nGitHub ~∞ packages\n\n# install from GitHub\nremotes::install_github(\"r-lib/devtools\")\n# attach\nlibrary(devtools)\n\ndevelopment versions, or packages not on CRAN"
-  },
-  {
-    "objectID": "workflows.html#r-libraries---where-do-packages-live",
-    "href": "workflows.html#r-libraries---where-do-packages-live",
-    "title": "Creating Efficient Workflows in R",
-    "section": "R Libraries - where do packages live?",
-    "text": "R Libraries - where do packages live?\n\nA library is a directory containing installed packages\nYou have at least one library on your computer\nCommon (and recommended) to have two libraries:\n\nA system library with base (14) and recommended (15) packages; installed with R.\nA user library with user-installed packages\n\nWe use library(pkg) function to attach a package\n7 base packages are always attached (base, methods, utils, stats, grDevices, datasets, graphics)"
-  },
-  {
-    "objectID": "workflows.html#where-do-packages-live-locally",
-    "href": "workflows.html#where-do-packages-live-locally",
-    "title": "Creating Efficient Workflows in R",
-    "section": "Where do packages live locally?",
-    "text": "Where do packages live locally?\n\nThe system library (base/recommended packages).\n.Library\n\nAll libraries for the current session\n.libPaths()\n\nAll installed packages\ninstalled.packages()"
-  },
-  {
-    "objectID": "workflows.html#your-turn",
-    "href": "workflows.html#your-turn",
-    "title": "Creating Efficient Workflows in R",
+    "objectID": "quarto.html#your-turn",
+    "href": "quarto.html#your-turn",
+    "title": "Reproducible Reporting with Quarto",
     "section": "Your turn",
-    "text": "Your turn\n\nWhat libraries are in use in your current R session?\nUsing installed.packages(), what are the base and recommended packages?"
+    "text": "Your turn\n\nOpen 05-quarto.qmd in Positron\nModify the YAML header to add an author and date\nExperiment with code chunk options to hide the code in the ggplot2 chunk\nRender the document to Word using docx, or pdf using typst\nRender with the Keyboard shortcut (Ctrl+Shift+K)"
   },
   {
-    "objectID": "workflows.html#installing-and-updating-packages",
-    "href": "workflows.html#installing-and-updating-packages",
-    "title": "Creating Efficient Workflows in R",
-    "section": "Installing and updating packages",
-    "text": "Installing and updating packages"
+    "objectID": "quarto.html#parameterized-reports",
+    "href": "quarto.html#parameterized-reports",
+    "title": "Reproducible Reporting with Quarto",
+    "section": "Parameterized Reports",
+    "text": "Parameterized Reports\nYou may want to create different variations of a single document. For example:\n\nShowing results for a specific geographic location.\nRunning a report that covers a specific time period.\nRunning a single analysis multiple times for different assumptions."
   },
   {
-    "objectID": "workflows.html#r-startup",
-    "href": "workflows.html#r-startup",
-    "title": "Creating Efficient Workflows in R",
-    "section": "R Startup",
-    "text": "R Startup\n\n\ncomplexity in R startup, for both personal and system-level customization. We can ignore most of it"
+    "objectID": "quarto.html#parameterized-reports-1",
+    "href": "quarto.html#parameterized-reports-1",
+    "title": "Reproducible Reporting with Quarto",
+    "section": "Parameterized Reports",
+    "text": "Parameterized Reports\n\nDefine parameters and their defaults in YAML header\n\n---\ntitle: \"Parameterized Report\"\nparams:\n  site_id: \"1\"\n  year: 2023\nformat: html\n---\n\n\nAccess parameters in code chunks via the special params object\n\n```{r}\nsite_data &lt;- data |&gt; \n    filter(site == params$site_id, year == params$year)\n```"
   },
   {
-    "objectID": "workflows.html#r-startup-1",
-    "href": "workflows.html#r-startup-1",
-    "title": "Creating Efficient Workflows in R",
-    "section": "R Startup",
-    "text": "R Startup\n\n.Rprofile - contains R code to be run at the start of each session.\n.Renviron - contains environment variables to be set in R sessions."
-  },
-  {
-    "objectID": "workflows.html#what-to-put-in-.rprofile",
-    "href": "workflows.html#what-to-put-in-.rprofile",
-    "title": "Creating Efficient Workflows in R",
-    "section": "what to put in .Rprofile",
-    "text": "what to put in .Rprofile\n\nset a default CRAN mirror\ncustom startup message"
-  },
-  {
-    "objectID": "workflows.html#what-not-to-put-in-.rprofile",
-    "href": "workflows.html#what-not-to-put-in-.rprofile",
-    "title": "Creating Efficient Workflows in R",
-    "section": "what not to put in .Rprofile",
-    "text": "what not to put in .Rprofile\nIf it matters for code you share, it should not be in .Rprofile\nwhy shouldn’t these go in .Rprofile?\n\nlibrary(tidyverse)\nf &lt;- dplyr::filter\ntheme_set(theme_bw())"
-  },
-  {
-    "objectID": "workflows.html#why-might-these-be-safe-to-put-in-.rprofile",
-    "href": "workflows.html#why-might-these-be-safe-to-put-in-.rprofile",
-    "title": "Creating Efficient Workflows in R",
-    "section": "Why might these be safe to put in .Rprofile?",
-    "text": "Why might these be safe to put in .Rprofile?\n\nlibrary(usethis)\nlibrary(devtools)"
-  },
-  {
-    "objectID": "workflows.html#rprofile",
-    "href": "workflows.html#rprofile",
-    "title": "Creating Efficient Workflows in R",
-    "section": ".Rprofile",
-    "text": ".Rprofile\n\nusethis::edit_r_profile()"
-  },
-  {
-    "objectID": "workflows.html#renviron",
-    "href": "workflows.html#renviron",
-    "title": "Creating Efficient Workflows in R",
-    "section": ".Renviron",
-    "text": ".Renviron\n\nSet environment variables for R sessions\nOften sensitive information that you don’t want to share\n\nExamples\n\nAPI Keys (Eg GitHub, ChatGPT etc)\nDatabase username and password\nSome R options"
-  },
-  {
-    "objectID": "workflows.html#renviron-1",
-    "href": "workflows.html#renviron-1",
-    "title": "Creating Efficient Workflows in R",
-    "section": ".Renviron",
-    "text": ".Renviron\n\nusethis::edit_r_environ()\n\nVAR_NAME=value\nGOOGLE_API_KEY=your_api_key_here"
-  },
-  {
-    "objectID": "workflows.html#renviron-2",
-    "href": "workflows.html#renviron-2",
-    "title": "Creating Efficient Workflows in R",
-    "section": ".Renviron",
-    "text": ".Renviron\nAccess environment variables in R with Sys.getenv(\"VAR_NAME\")\n\nSys.getenv(\"GOOGLE_API_KEY\")\n#&gt; [1] \"your_api_key_here\""
-  },
-  {
-    "objectID": "workflows.html#your-turn-1",
-    "href": "workflows.html#your-turn-1",
-    "title": "Creating Efficient Workflows in R",
+    "objectID": "quarto.html#your-turn-1",
+    "href": "quarto.html#your-turn-1",
+    "title": "Reproducible Reporting with Quarto",
     "section": "Your turn",
-    "text": "Your turn\n\nCreate an environment variable in .Renviron called MY_NAME with your name as the value.\nCreate a custom startup message in .Rprofile that gives you a personalized message when you start R."
+    "text": "Your turn\n\nAdd a parameter island with default value \"Torgerson\"\nAdd a sentence in the text that tells the reader what island is being reported on, using inline code.\nModify the code chunk to filter and plot only data for the selected island\nRender the document\n\n\nBonus:\n\nRender the document for a different island by specifying the parameter using quarto::quarto_render() in R.\nWrite a short R script to use purrr::walk() to render the report for all islands in your dataset\n\nHint: See ?quarto::quarto_render for details on passing parameters."
   },
   {
-    "objectID": "workflows.html#customizing-your-ide",
-    "href": "workflows.html#customizing-your-ide",
-    "title": "Creating Efficient Workflows in R",
-    "section": "Customizing your IDE",
-    "text": "Customizing your IDE\n\n\nPane layout\nThemes\nFonts\nPositron extensions"
-  },
-  {
-    "objectID": "workflows.html#keyboard-shortcuts-1",
-    "href": "workflows.html#keyboard-shortcuts-1",
-    "title": "Creating Efficient Workflows in R",
-    "section": "Keyboard shortcuts",
-    "text": "Keyboard shortcuts\nIf in doubt, use the command palette: Ctrl + Shift + P"
-  },
-  {
-    "objectID": "workflows.html#navigation-files",
-    "href": "workflows.html#navigation-files",
-    "title": "Creating Efficient Workflows in R",
-    "section": "Navigation & Files",
-    "text": "Navigation & Files\n\nCtrl + Shift + N - New file\nCtrl + S - Save current file\nCtrl + F - Find in current file\nCtrl + Shift + F - Find in files (global search)\nCtrl + . - Go to file/function\nCtrl + 1 - Focus source editor\nCtrl + 2 - Focus console"
-  },
-  {
-    "objectID": "workflows.html#code-editing",
-    "href": "workflows.html#code-editing",
-    "title": "Creating Efficient Workflows in R",
-    "section": "Code Editing",
-    "text": "Code Editing\n\nCtrl + Shift + C - Comment/uncomment lines\nTab - Indent selection\nShift + Tab - Unindent selection\nAlt + Up/Down - Move line(s) up/down\nAlt + Shift + Up/Down - Duplicate line(s) ???\nCtrl + X - Cut entire line (when no selection)"
-  },
-  {
-    "objectID": "workflows.html#magic-of-multiple-cursors",
-    "href": "workflows.html#magic-of-multiple-cursors",
-    "title": "Creating Efficient Workflows in R",
-    "section": "Magic of Multiple Cursors",
-    "text": "Magic of Multiple Cursors\n\nCtrl + Alt + Up/Down - Add cursor above/below\nCtrl + D - Add next occurrence of selected text (custom)"
-  },
-  {
-    "objectID": "workflows.html#navigation-within-code",
-    "href": "workflows.html#navigation-within-code",
-    "title": "Creating Efficient Workflows in R",
-    "section": "Navigation Within Code",
-    "text": "Navigation Within Code\n\nCtrl + Left/Right - Jump word by word\nHome/End - Jump to beginning/end of line\nCtrl + Home/End - Jump to beginning/end of document\nCtrl + P - Jump to matching brace"
-  },
-  {
-    "objectID": "workflows.html#r-specific",
-    "href": "workflows.html#r-specific",
-    "title": "Creating Efficient Workflows in R",
-    "section": "R-Specific",
-    "text": "R-Specific\n\nTab - Auto-complete\nF1 - Show help for function under cursor\nCtrl + Shift + F10 - Restart R session\nCtrl + Shift + M - Insert pipe operator (%&gt;% or |&gt;)\nAlt + - - Insert assignment operator (&lt;-)"
-  },
-  {
-    "objectID": "workflows.html#last.value",
-    "href": "workflows.html#last.value",
-    "title": "Creating Efficient Workflows in R",
-    "section": ".Last.value",
-    "text": ".Last.value\nShows last evaluated value in console\nRStudio\n\nTools &gt; Global Options &gt; General &gt; Advanced &gt; Show .Last.value in environment listing\n\nPositron\nControlled by an option:\n\nusethis::edit_r_profile()\noptions(positron.show_last_value = TRUE)"
-  },
-  {
-    "objectID": "workflows.html#automatic-code-formatting",
-    "href": "workflows.html#automatic-code-formatting",
-    "title": "Creating Efficient Workflows in R",
-    "section": "Automatic code formatting",
-    "text": "Automatic code formatting\nAir: https://posit-dev.github.io/air/\n\nIn charge of the layout of your R code.\nFormatters do not change the meaning of code\nEnsure that whitespace, newlines, and other punctuation conform to a set of rules and standards\n\n\nusethis::use_air()"
-  },
-  {
-    "objectID": "workflows.html#reprexes",
-    "href": "workflows.html#reprexes",
-    "title": "Creating Efficient Workflows in R",
-    "section": "Reprexes",
-    "text": "Reprexes"
-  },
-  {
-    "objectID": "workflows.html#start-using-project-oriented-workflows-in-your-work",
-    "href": "workflows.html#start-using-project-oriented-workflows-in-your-work",
-    "title": "Creating Efficient Workflows in R",
-    "section": "Start using project-oriented workflows in your work",
-    "text": "Start using project-oriented workflows in your work\n\n\nUse RStudio or Positron Projects/Workspaces\ndon’t use setwd()\nuse relative paths\nUse a blank slate - restart R often"
-  },
-  {
-    "objectID": "workflows.html#try-to-name-files-well",
-    "href": "workflows.html#try-to-name-files-well",
-    "title": "Creating Efficient Workflows in R",
-    "section": "Try to name files well",
-    "text": "Try to name files well\n\n\nmachine readable\nhuman readable\nsorts nicely (including ISO 8601 dates)"
-  },
-  {
-    "objectID": "workflows.html#use-positron-or-rstudio-more-efficiently",
-    "href": "workflows.html#use-positron-or-rstudio-more-efficiently",
-    "title": "Creating Efficient Workflows in R",
-    "section": "Use Positron or RStudio more efficiently",
-    "text": "Use Positron or RStudio more efficiently\n\n\nuse keyboard shortcuts\nuse the command palette\nuse Air"
+    "objectID": "quarto.html#quarto-beyond-reports",
+    "href": "quarto.html#quarto-beyond-reports",
+    "title": "Reproducible Reporting with Quarto",
+    "section": "Quarto beyond reports",
+    "text": "Quarto beyond reports\n\nWebsites and blogs\n\nhttps://quarto.org/docs/websites/\n\nBooks and long-form documents\n\nhttps://quarto.org/docs/books/\n\nDashboards and interactive documents\n\nhttps://quarto.org/docs/dashboards/\n\nPresentations and slideshows\n\nhttps://quarto.org/docs/presentations/"
   },
   {
     "objectID": "programming-functions.html#outline",
@@ -1127,6 +840,48 @@
     "text": "Your turn\nAdd a license to your repo via a pull request"
   },
   {
+    "objectID": "git-github.html#when-your-pat-expires",
+    "href": "git-github.html#when-your-pat-expires",
+    "title": "Version Control with Git and Collaboration with GitHub",
+    "section": "When your PAT expires",
+    "text": "When your PAT expires\nPersonal Access Tokens (PATs) have an expiration date for security reasons.\n\nGitHub will email you before your token expires\nAfter expiration, you won’t be able to push/pull from GitHub\nYou’ll see authentication errors like:\n\nremote: Invalid username or password\nfatal: Authentication failed\n\n\n\nDon’t panic! It’s easy to fix."
+  },
+  {
+    "objectID": "git-github.html#step-1-regenerate-your-pat",
+    "href": "git-github.html#step-1-regenerate-your-pat",
+    "title": "Version Control with Git and Collaboration with GitHub",
+    "section": "Step 1: Regenerate your PAT",
+    "text": "Step 1: Regenerate your PAT\nNavigate to your GitHub tokens page:\n\nGo to github.com and sign in\nClick your profile picture (top right) → Settings\nScroll down and click Developer settings (bottom of left sidebar)\nClick Personal access tokens → Tokens (classic)"
+  },
+  {
+    "objectID": "git-github.html#section",
+    "href": "git-github.html#section",
+    "title": "Version Control with Git and Collaboration with GitHub",
+    "section": "",
+    "text": "Then, regenerate the token:\n\nFind your expired (or soon-to-expire) token in the list\nClick on the token name to view its details\nClick “Regenerate token” at the bottom\nUpdate the expiration date (consider 180 days or 1 year)\nClick “Regenerate token” to confirm\nCopy the new token immediately - you won’t be able to see it again!\n\n\nRegenerating keeps the same token name and scopes, but gives you a new token value with an updated expiry date."
+  },
+  {
+    "objectID": "git-github.html#step-2-replace-the-old-pat",
+    "href": "git-github.html#step-2-replace-the-old-pat",
+    "title": "Version Control with Git and Collaboration with GitHub",
+    "section": "Step 2: Replace the old PAT",
+    "text": "Step 2: Replace the old PAT\nStore the new token using gitcreds:\ngitcreds::gitcreds_set()\n\nWhen prompted:\n-&gt; Your current credentials for 'https://github.com':\n\n  protocol: https\n  host    : github.com\n  username: PersonalAccessToken\n  password: &lt;-- hidden --&gt;\n\n-&gt; What would you like to do? \n\n1: Keep these credentials\n2: Replace these credentials\n3: See the password / token\n\nSelection: 2\n\n\nChoose 2: Replace these credentials and paste your new PAT"
+  },
+  {
+    "objectID": "git-github.html#step-3-verify-it-worked",
+    "href": "git-github.html#step-3-verify-it-worked",
+    "title": "Version Control with Git and Collaboration with GitHub",
+    "section": "Step 3: Verify it worked",
+    "text": "Step 3: Verify it worked\nCheck your Git setup:\nusethis::git_sitrep()\n\nLook for this line:\n• Personal access token for 'https://github.com': '&lt;discovered&gt;'\n\n\nSuccess! You should now be able to push and pull from GitHub again.\n\n\nIf you see &lt;not found&gt; instead of &lt;discovered&gt;, try running gitcreds::gitcreds_set() again and make sure you copied the entire token."
+  },
+  {
+    "objectID": "git-github.html#pro-tips",
+    "href": "git-github.html#pro-tips",
+    "title": "Version Control with Git and Collaboration with GitHub",
+    "section": "Pro tips",
+    "text": "Pro tips\n\nStore your PAT securely in a password manager (1Password, Bitwarden, etc.)\nConsider longer expiration periods for tokens you use regularly (180 days, 1 year)\nCreate multiple PATs for different machines/purposes\n\nMakes it easier to revoke access to a specific machine if needed\nHelps you track which device is having authentication issues"
+  },
+  {
     "objectID": "data-manipulation.html#schedule",
     "href": "data-manipulation.html#schedule",
     "title": "Advanced Data Manipulation with dplyr and tidyr",
@@ -1477,52 +1232,906 @@
     "text": "Acknowledgements and Resources:\nThe material for this workshop has origins and inspiration from several sources, including:\n\nHappy Git and GitHub for the useR: A free book by Jenny Bryan and Jim Hester that teaches version control with Git and GitHub using R.\nThe Carpentries: An organization dedicated to teaching foundational coding and data science skills to researchers worldwide.\nR for Data Science: A comprehensive resource by Hadley Wickham and Garrett Grolemund that covers data science using R.\nWhat they forgot to teach you about R: A collection of tips and best practices for R programming by Jennifer Bryan, Jim Hester, Shannon Pileggi, E. David Ajal.\nFrom R User to R Programmer: Posit conf workshop by Emma Rand and Ian Lyttle."
   },
   {
-    "objectID": "setup.html",
-    "href": "setup.html",
-    "title": "System Setup 🤖",
-    "section": "",
-    "text": "You will require the following software installed and configured for the workshop. Please have this set up and ready to go before we start."
+    "objectID": "programming-iteration.html#learning-objectives",
+    "href": "programming-iteration.html#learning-objectives",
+    "title": "Programming with R: Iteration",
+    "section": "Learning Objectives",
+    "text": "Learning Objectives\nAt the end of this section you will be able to:\n\n\nrecognise that much iteration comes free with R\nunderstand fundamentals of loops\nuse purrr functions for elegant iteration\nunderstand functional programming and use anonymous functions with purrr"
   },
   {
-    "objectID": "setup.html#computing-requirements",
-    "href": "setup.html#computing-requirements",
-    "title": "System Setup 🤖",
-    "section": "Computing requirements",
-    "text": "Computing requirements\nYou will need:\n\nA laptop computer with administrative privileges\nR and RStudio\nR package development toolchain\nSeveral R packages\nGit\nGitHub account"
+    "objectID": "programming-iteration.html#what-is-iteration",
+    "href": "programming-iteration.html#what-is-iteration",
+    "title": "Programming with R: Iteration",
+    "section": "What is iteration?",
+    "text": "What is iteration?\n\nIteration means repeating steps multiple times until a condition is met\nIn other languages, iteration is performed with loops: for, while\n\n\n\nIteration is different in R\nYou can use loops……. but you often don’t need to"
   },
   {
-    "objectID": "setup.html#install-r-and-rstudio",
-    "href": "setup.html#install-r-and-rstudio",
-    "title": "System Setup 🤖",
-    "section": "Install R and RStudio",
-    "text": "Install R and RStudio\nYou will need:\n\nR version &gt;= 4.4.0\nRStudio &gt;= 2024.04 or Positron &gt;= 2025.09.0-139\n\n\nInstall R\nDownload and install R for your operating system from https://cloud.r-project.org/.\n\n\nInstall R Studio\nDownload and install RStudio Desktop from https://posit.co/download/rstudio-desktop/. This page should automatically offer you the version suitable for your operating system, but you can scroll down to find versions for all operating systems.\n\n\nInstall Positron\nDownload and install Positron from https://positron.posit.co/download.html. This page should automatically offer you the version suitable for your operating system, but you can scroll down to find versions for all operating systems."
+    "objectID": "programming-iteration.html#iteration-in-r",
+    "href": "programming-iteration.html#iteration-in-r",
+    "title": "Programming with R: Iteration",
+    "section": "Iteration in R",
+    "text": "Iteration in R\nIteration is an inherent part of the R language. For example, if\n\nnums &lt;- c(3, 1, 6, 4)\n\nThen\n\n\n2 * nums\n\nis\n\n\n[1]  6  2 12  8\nand NOT\n\n\n[1] 3 1 6 4 3 1 6 4\n\n\nThis is called vectorization - operations are automatically applied to each element of a vector.\n\nWe take this for granted in R, but in most other programming languages, you would need to write a loop to achieve the same result. For example, in Python, you would typically use a list comprehension or a for loop to multiply each element of a list by 2. R’s vectorized operations make code more concise and often faster."
   },
   {
-    "objectID": "setup.html#install-r-package-development-tools",
-    "href": "setup.html#install-r-package-development-tools",
-    "title": "System Setup 🤖",
-    "section": "Install R package development tools",
-    "text": "Install R package development tools\n\nFor Windows\nDownload and run the latest Rtools installer, Rtools.exe, from https://cran.r-project.org/bin/windows/Rtools/.\n\nKeep the default settings for the installation location and components to install\ncheck the box to add rtools to the system PATH.\n\n\n\nFor Mac\nInstall XCode. The easiest way is to open a Terminal window (Applications &gt; Utilities &gt; Terminal.app; or use the Terminal pane in RStudio) and type the following:\nxcode-select --install\nYou will be prompted to confirm the install, and possibly enter your computer password. Do so to complete the installation.\nAlternatively you can:\n\nDownload and install XCode from the Mac AppStore: http://itunes.apple.com/us/app/xcode/id497799835?mt=12\nWithin XCode go to Preferences : Downloads and install the Command Line Tools\n\n\n\nFor Linux\nIf you installed r-base-dev when installing R, you should have all you need to build packages from source. If not, go back to https://cloud.r-project.org/ and follow the instructions for your distribution (Ubuntu and Debian are likely the most common, and install it with sudo apt-get install r-base-dev)."
+    "objectID": "programming-iteration.html#meanwhile-with-python",
+    "href": "programming-iteration.html#meanwhile-with-python",
+    "title": "Programming with R: Iteration",
+    "section": "Meanwhile with python",
+    "text": "Meanwhile with python\nnums = [3,1,6,4]\n\nnums * 2\n[3, 1, 6, 4, 3, 1, 6, 4]\n\nTo achieve the desired result:\n[x * 2 for x in nums]\n[6, 2, 12, 8]\n\n\nOr\ny = []\nfor x in nums:\n    y.append(x * 2)\ny\n[6, 2, 12, 8]"
   },
   {
-    "objectID": "setup.html#git",
-    "href": "setup.html#git",
-    "title": "System Setup 🤖",
-    "section": "Git",
-    "text": "Git\nWe will be learning the use of Git and GitHub for version control and collaboration.\n\nWindows\nCheck if Git is installed by running which git in the Terminal pane in RStudio.\nIf which git didn’t find Git installed:\n\nDownload and install from https://git-scm.com/downloads\nKeep all the default settings. If asked about “Adjusting your PATH environment”, make sure to select “Git from the command line and also from 3rd-party software”.\n\n\nRStudio + Git\n\nOpen RStudio. In the menus go to Tools &gt; Global Options &gt; Git/SVN.\nCheck RStudio has found git under “Git executable”. If it hasn’t:\n\nYou may need to click Browse and find the git executable.\nIt may be in C:/Users/[username]/AppData/Local/Programs/Git/\n\n\n\n\nPositron + Git\n\nPositron is smart about finding git, but if it doesn’t find it automatically:\nIn the menu go to File &gt; Preferences &gt; Settings.\nSearch for “Git Path”.\n\nClick “Edit in settings.json” and add the path to the git executable.\nIt may be in C:/Users/[username]/AppData/Local/Programs/Git/cmd/git.exe\n\n\n\n\n\nMac\nCheck if Git is installed by running which git in the Terminal. You should see something like /usr/bin/git, /usr/local/bin/, or /opt/homebrew/bin/git.\nIf you are asked to install the Xcode command line tools, say yes.\nIf which git didn’t find Git installed, and if you weren’t prompted to install it, run the following in the Terminal: xcode-select --install\n\n\nIf you do lots of scientific computing and especially if you use command-line programs in the Terminal, we recommend using Homebrew. See brew.sh for installation instructions. To install Git using Homebrew, run the following in the Terminal: brew install git"
+    "objectID": "programming-iteration.html#vectorization",
+    "href": "programming-iteration.html#vectorization",
+    "title": "Programming with R: Iteration",
+    "section": "Vectorization",
+    "text": "Vectorization\n\nlibrary(dplyr)\n\npenguins |&gt;\n  mutate(bill_ratio = bill_len / bill_dep)\n\n      species    island bill_len bill_dep flipper_len body_mass    sex year bill_ratio\n1      Adelie Torgersen     39.1     18.7         181      3750   male 2007   2.090909\n2      Adelie Torgersen     39.5     17.4         186      3800 female 2007   2.270115\n3      Adelie Torgersen     40.3     18.0         195      3250 female 2007   2.238889\n4      Adelie Torgersen       NA       NA          NA        NA   &lt;NA&gt; 2007         NA\n5      Adelie Torgersen     36.7     19.3         193      3450 female 2007   1.901554\n6      Adelie Torgersen     39.3     20.6         190      3650   male 2007   1.907767\n7      Adelie Torgersen     38.9     17.8         181      3625 female 2007   2.185393\n8      Adelie Torgersen     39.2     19.6         195      4675   male 2007   2.000000\n9      Adelie Torgersen     34.1     18.1         193      3475   &lt;NA&gt; 2007   1.883978\n10     Adelie Torgersen     42.0     20.2         190      4250   &lt;NA&gt; 2007   2.079208\n11     Adelie Torgersen     37.8     17.1         186      3300   &lt;NA&gt; 2007   2.210526\n12     Adelie Torgersen     37.8     17.3         180      3700   &lt;NA&gt; 2007   2.184971\n13     Adelie Torgersen     41.1     17.6         182      3200 female 2007   2.335227\n14     Adelie Torgersen     38.6     21.2         191      3800   male 2007   1.820755\n15     Adelie Torgersen     34.6     21.1         198      4400   male 2007   1.639810\n16     Adelie Torgersen     36.6     17.8         185      3700 female 2007   2.056180\n17     Adelie Torgersen     38.7     19.0         195      3450 female 2007   2.036842\n18     Adelie Torgersen     42.5     20.7         197      4500   male 2007   2.053140\n19     Adelie Torgersen     34.4     18.4         184      3325 female 2007   1.869565\n20     Adelie Torgersen     46.0     21.5         194      4200   male 2007   2.139535\n21     Adelie    Biscoe     37.8     18.3         174      3400 female 2007   2.065574\n22     Adelie    Biscoe     37.7     18.7         180      3600   male 2007   2.016043\n23     Adelie    Biscoe     35.9     19.2         189      3800 female 2007   1.869792\n24     Adelie    Biscoe     38.2     18.1         185      3950   male 2007   2.110497\n25     Adelie    Biscoe     38.8     17.2         180      3800   male 2007   2.255814\n26     Adelie    Biscoe     35.3     18.9         187      3800 female 2007   1.867725\n27     Adelie    Biscoe     40.6     18.6         183      3550   male 2007   2.182796\n28     Adelie    Biscoe     40.5     17.9         187      3200 female 2007   2.262570\n29     Adelie    Biscoe     37.9     18.6         172      3150 female 2007   2.037634\n30     Adelie    Biscoe     40.5     18.9         180      3950   male 2007   2.142857\n31     Adelie     Dream     39.5     16.7         178      3250 female 2007   2.365269\n32     Adelie     Dream     37.2     18.1         178      3900   male 2007   2.055249\n33     Adelie     Dream     39.5     17.8         188      3300 female 2007   2.219101\n34     Adelie     Dream     40.9     18.9         184      3900   male 2007   2.164021\n35     Adelie     Dream     36.4     17.0         195      3325 female 2007   2.141176\n36     Adelie     Dream     39.2     21.1         196      4150   male 2007   1.857820\n37     Adelie     Dream     38.8     20.0         190      3950   male 2007   1.940000\n38     Adelie     Dream     42.2     18.5         180      3550 female 2007   2.281081\n39     Adelie     Dream     37.6     19.3         181      3300 female 2007   1.948187\n40     Adelie     Dream     39.8     19.1         184      4650   male 2007   2.083770\n41     Adelie     Dream     36.5     18.0         182      3150 female 2007   2.027778\n42     Adelie     Dream     40.8     18.4         195      3900   male 2007   2.217391\n43     Adelie     Dream     36.0     18.5         186      3100 female 2007   1.945946\n44     Adelie     Dream     44.1     19.7         196      4400   male 2007   2.238579\n45     Adelie     Dream     37.0     16.9         185      3000 female 2007   2.189349\n46     Adelie     Dream     39.6     18.8         190      4600   male 2007   2.106383\n47     Adelie     Dream     41.1     19.0         182      3425   male 2007   2.163158\n48     Adelie     Dream     37.5     18.9         179      2975   &lt;NA&gt; 2007   1.984127\n49     Adelie     Dream     36.0     17.9         190      3450 female 2007   2.011173\n50     Adelie     Dream     42.3     21.2         191      4150   male 2007   1.995283\n51     Adelie    Biscoe     39.6     17.7         186      3500 female 2008   2.237288\n52     Adelie    Biscoe     40.1     18.9         188      4300   male 2008   2.121693\n53     Adelie    Biscoe     35.0     17.9         190      3450 female 2008   1.955307\n54     Adelie    Biscoe     42.0     19.5         200      4050   male 2008   2.153846\n55     Adelie    Biscoe     34.5     18.1         187      2900 female 2008   1.906077\n56     Adelie    Biscoe     41.4     18.6         191      3700   male 2008   2.225806\n57     Adelie    Biscoe     39.0     17.5         186      3550 female 2008   2.228571\n58     Adelie    Biscoe     40.6     18.8         193      3800   male 2008   2.159574\n59     Adelie    Biscoe     36.5     16.6         181      2850 female 2008   2.198795\n60     Adelie    Biscoe     37.6     19.1         194      3750   male 2008   1.968586\n61     Adelie    Biscoe     35.7     16.9         185      3150 female 2008   2.112426\n62     Adelie    Biscoe     41.3     21.1         195      4400   male 2008   1.957346\n63     Adelie    Biscoe     37.6     17.0         185      3600 female 2008   2.211765\n64     Adelie    Biscoe     41.1     18.2         192      4050   male 2008   2.258242\n65     Adelie    Biscoe     36.4     17.1         184      2850 female 2008   2.128655\n66     Adelie    Biscoe     41.6     18.0         192      3950   male 2008   2.311111\n67     Adelie    Biscoe     35.5     16.2         195      3350 female 2008   2.191358\n68     Adelie    Biscoe     41.1     19.1         188      4100   male 2008   2.151832\n69     Adelie Torgersen     35.9     16.6         190      3050 female 2008   2.162651\n70     Adelie Torgersen     41.8     19.4         198      4450   male 2008   2.154639\n71     Adelie Torgersen     33.5     19.0         190      3600 female 2008   1.763158\n72     Adelie Torgersen     39.7     18.4         190      3900   male 2008   2.157609\n73     Adelie Torgersen     39.6     17.2         196      3550 female 2008   2.302326\n74     Adelie Torgersen     45.8     18.9         197      4150   male 2008   2.423280\n75     Adelie Torgersen     35.5     17.5         190      3700 female 2008   2.028571\n76     Adelie Torgersen     42.8     18.5         195      4250   male 2008   2.313514\n77     Adelie Torgersen     40.9     16.8         191      3700 female 2008   2.434524\n78     Adelie Torgersen     37.2     19.4         184      3900   male 2008   1.917526\n79     Adelie Torgersen     36.2     16.1         187      3550 female 2008   2.248447\n80     Adelie Torgersen     42.1     19.1         195      4000   male 2008   2.204188\n81     Adelie Torgersen     34.6     17.2         189      3200 female 2008   2.011628\n82     Adelie Torgersen     42.9     17.6         196      4700   male 2008   2.437500\n83     Adelie Torgersen     36.7     18.8         187      3800 female 2008   1.952128\n84     Adelie Torgersen     35.1     19.4         193      4200   male 2008   1.809278\n85     Adelie     Dream     37.3     17.8         191      3350 female 2008   2.095506\n86     Adelie     Dream     41.3     20.3         194      3550   male 2008   2.034483\n87     Adelie     Dream     36.3     19.5         190      3800   male 2008   1.861538\n88     Adelie     Dream     36.9     18.6         189      3500 female 2008   1.983871\n89     Adelie     Dream     38.3     19.2         189      3950   male 2008   1.994792\n90     Adelie     Dream     38.9     18.8         190      3600 female 2008   2.069149\n91     Adelie     Dream     35.7     18.0         202      3550 female 2008   1.983333\n92     Adelie     Dream     41.1     18.1         205      4300   male 2008   2.270718\n93     Adelie     Dream     34.0     17.1         185      3400 female 2008   1.988304\n94     Adelie     Dream     39.6     18.1         186      4450   male 2008   2.187845\n95     Adelie     Dream     36.2     17.3         187      3300 female 2008   2.092486\n96     Adelie     Dream     40.8     18.9         208      4300   male 2008   2.158730\n97     Adelie     Dream     38.1     18.6         190      3700 female 2008   2.048387\n98     Adelie     Dream     40.3     18.5         196      4350   male 2008   2.178378\n99     Adelie     Dream     33.1     16.1         178      2900 female 2008   2.055901\n100    Adelie     Dream     43.2     18.5         192      4100   male 2008   2.335135\n101    Adelie    Biscoe     35.0     17.9         192      3725 female 2009   1.955307\n102    Adelie    Biscoe     41.0     20.0         203      4725   male 2009   2.050000\n103    Adelie    Biscoe     37.7     16.0         183      3075 female 2009   2.356250\n104    Adelie    Biscoe     37.8     20.0         190      4250   male 2009   1.890000\n105    Adelie    Biscoe     37.9     18.6         193      2925 female 2009   2.037634\n106    Adelie    Biscoe     39.7     18.9         184      3550   male 2009   2.100529\n107    Adelie    Biscoe     38.6     17.2         199      3750 female 2009   2.244186\n108    Adelie    Biscoe     38.2     20.0         190      3900   male 2009   1.910000\n109    Adelie    Biscoe     38.1     17.0         181      3175 female 2009   2.241176\n110    Adelie    Biscoe     43.2     19.0         197      4775   male 2009   2.273684\n111    Adelie    Biscoe     38.1     16.5         198      3825 female 2009   2.309091\n112    Adelie    Biscoe     45.6     20.3         191      4600   male 2009   2.246305\n113    Adelie    Biscoe     39.7     17.7         193      3200 female 2009   2.242938\n114    Adelie    Biscoe     42.2     19.5         197      4275   male 2009   2.164103\n115    Adelie    Biscoe     39.6     20.7         191      3900 female 2009   1.913043\n116    Adelie    Biscoe     42.7     18.3         196      4075   male 2009   2.333333\n117    Adelie Torgersen     38.6     17.0         188      2900 female 2009   2.270588\n118    Adelie Torgersen     37.3     20.5         199      3775   male 2009   1.819512\n119    Adelie Torgersen     35.7     17.0         189      3350 female 2009   2.100000\n120    Adelie Torgersen     41.1     18.6         189      3325   male 2009   2.209677\n121    Adelie Torgersen     36.2     17.2         187      3150 female 2009   2.104651\n122    Adelie Torgersen     37.7     19.8         198      3500   male 2009   1.904040\n123    Adelie Torgersen     40.2     17.0         176      3450 female 2009   2.364706\n124    Adelie Torgersen     41.4     18.5         202      3875   male 2009   2.237838\n125    Adelie Torgersen     35.2     15.9         186      3050 female 2009   2.213836\n126    Adelie Torgersen     40.6     19.0         199      4000   male 2009   2.136842\n127    Adelie Torgersen     38.8     17.6         191      3275 female 2009   2.204545\n128    Adelie Torgersen     41.5     18.3         195      4300   male 2009   2.267760\n129    Adelie Torgersen     39.0     17.1         191      3050 female 2009   2.280702\n130    Adelie Torgersen     44.1     18.0         210      4000   male 2009   2.450000\n131    Adelie Torgersen     38.5     17.9         190      3325 female 2009   2.150838\n132    Adelie Torgersen     43.1     19.2         197      3500   male 2009   2.244792\n133    Adelie     Dream     36.8     18.5         193      3500 female 2009   1.989189\n134    Adelie     Dream     37.5     18.5         199      4475   male 2009   2.027027\n135    Adelie     Dream     38.1     17.6         187      3425 female 2009   2.164773\n136    Adelie     Dream     41.1     17.5         190      3900   male 2009   2.348571\n137    Adelie     Dream     35.6     17.5         191      3175 female 2009   2.034286\n138    Adelie     Dream     40.2     20.1         200      3975   male 2009   2.000000\n139    Adelie     Dream     37.0     16.5         185      3400 female 2009   2.242424\n140    Adelie     Dream     39.7     17.9         193      4250   male 2009   2.217877\n141    Adelie     Dream     40.2     17.1         193      3400 female 2009   2.350877\n142    Adelie     Dream     40.6     17.2         187      3475   male 2009   2.360465\n143    Adelie     Dream     32.1     15.5         188      3050 female 2009   2.070968\n144    Adelie     Dream     40.7     17.0         190      3725   male 2009   2.394118\n145    Adelie     Dream     37.3     16.8         192      3000 female 2009   2.220238\n146    Adelie     Dream     39.0     18.7         185      3650   male 2009   2.085561\n147    Adelie     Dream     39.2     18.6         190      4250   male 2009   2.107527\n148    Adelie     Dream     36.6     18.4         184      3475 female 2009   1.989130\n149    Adelie     Dream     36.0     17.8         195      3450 female 2009   2.022472\n150    Adelie     Dream     37.8     18.1         193      3750   male 2009   2.088398\n151    Adelie     Dream     36.0     17.1         187      3700 female 2009   2.105263\n152    Adelie     Dream     41.5     18.5         201      4000   male 2009   2.243243\n153    Gentoo    Biscoe     46.1     13.2         211      4500 female 2007   3.492424\n154    Gentoo    Biscoe     50.0     16.3         230      5700   male 2007   3.067485\n155    Gentoo    Biscoe     48.7     14.1         210      4450 female 2007   3.453901\n156    Gentoo    Biscoe     50.0     15.2         218      5700   male 2007   3.289474\n157    Gentoo    Biscoe     47.6     14.5         215      5400   male 2007   3.282759\n158    Gentoo    Biscoe     46.5     13.5         210      4550 female 2007   3.444444\n159    Gentoo    Biscoe     45.4     14.6         211      4800 female 2007   3.109589\n160    Gentoo    Biscoe     46.7     15.3         219      5200   male 2007   3.052288\n161    Gentoo    Biscoe     43.3     13.4         209      4400 female 2007   3.231343\n162    Gentoo    Biscoe     46.8     15.4         215      5150   male 2007   3.038961\n163    Gentoo    Biscoe     40.9     13.7         214      4650 female 2007   2.985401\n164    Gentoo    Biscoe     49.0     16.1         216      5550   male 2007   3.043478\n165    Gentoo    Biscoe     45.5     13.7         214      4650 female 2007   3.321168\n166    Gentoo    Biscoe     48.4     14.6         213      5850   male 2007   3.315068\n167    Gentoo    Biscoe     45.8     14.6         210      4200 female 2007   3.136986\n168    Gentoo    Biscoe     49.3     15.7         217      5850   male 2007   3.140127\n169    Gentoo    Biscoe     42.0     13.5         210      4150 female 2007   3.111111\n170    Gentoo    Biscoe     49.2     15.2         221      6300   male 2007   3.236842\n171    Gentoo    Biscoe     46.2     14.5         209      4800 female 2007   3.186207\n172    Gentoo    Biscoe     48.7     15.1         222      5350   male 2007   3.225166\n173    Gentoo    Biscoe     50.2     14.3         218      5700   male 2007   3.510490\n174    Gentoo    Biscoe     45.1     14.5         215      5000 female 2007   3.110345\n175    Gentoo    Biscoe     46.5     14.5         213      4400 female 2007   3.206897\n176    Gentoo    Biscoe     46.3     15.8         215      5050   male 2007   2.930380\n177    Gentoo    Biscoe     42.9     13.1         215      5000 female 2007   3.274809\n178    Gentoo    Biscoe     46.1     15.1         215      5100   male 2007   3.052980\n179    Gentoo    Biscoe     44.5     14.3         216      4100   &lt;NA&gt; 2007   3.111888\n180    Gentoo    Biscoe     47.8     15.0         215      5650   male 2007   3.186667\n181    Gentoo    Biscoe     48.2     14.3         210      4600 female 2007   3.370629\n182    Gentoo    Biscoe     50.0     15.3         220      5550   male 2007   3.267974\n183    Gentoo    Biscoe     47.3     15.3         222      5250   male 2007   3.091503\n184    Gentoo    Biscoe     42.8     14.2         209      4700 female 2007   3.014085\n185    Gentoo    Biscoe     45.1     14.5         207      5050 female 2007   3.110345\n186    Gentoo    Biscoe     59.6     17.0         230      6050   male 2007   3.505882\n187    Gentoo    Biscoe     49.1     14.8         220      5150 female 2008   3.317568\n188    Gentoo    Biscoe     48.4     16.3         220      5400   male 2008   2.969325\n189    Gentoo    Biscoe     42.6     13.7         213      4950 female 2008   3.109489\n190    Gentoo    Biscoe     44.4     17.3         219      5250   male 2008   2.566474\n191    Gentoo    Biscoe     44.0     13.6         208      4350 female 2008   3.235294\n192    Gentoo    Biscoe     48.7     15.7         208      5350   male 2008   3.101911\n193    Gentoo    Biscoe     42.7     13.7         208      3950 female 2008   3.116788\n194    Gentoo    Biscoe     49.6     16.0         225      5700   male 2008   3.100000\n195    Gentoo    Biscoe     45.3     13.7         210      4300 female 2008   3.306569\n196    Gentoo    Biscoe     49.6     15.0         216      4750   male 2008   3.306667\n197    Gentoo    Biscoe     50.5     15.9         222      5550   male 2008   3.176101\n198    Gentoo    Biscoe     43.6     13.9         217      4900 female 2008   3.136691\n199    Gentoo    Biscoe     45.5     13.9         210      4200 female 2008   3.273381\n200    Gentoo    Biscoe     50.5     15.9         225      5400   male 2008   3.176101\n201    Gentoo    Biscoe     44.9     13.3         213      5100 female 2008   3.375940\n202    Gentoo    Biscoe     45.2     15.8         215      5300   male 2008   2.860759\n203    Gentoo    Biscoe     46.6     14.2         210      4850 female 2008   3.281690\n204    Gentoo    Biscoe     48.5     14.1         220      5300   male 2008   3.439716\n205    Gentoo    Biscoe     45.1     14.4         210      4400 female 2008   3.131944\n206    Gentoo    Biscoe     50.1     15.0         225      5000   male 2008   3.340000\n207    Gentoo    Biscoe     46.5     14.4         217      4900 female 2008   3.229167\n208    Gentoo    Biscoe     45.0     15.4         220      5050   male 2008   2.922078\n209    Gentoo    Biscoe     43.8     13.9         208      4300 female 2008   3.151079\n210    Gentoo    Biscoe     45.5     15.0         220      5000   male 2008   3.033333\n211    Gentoo    Biscoe     43.2     14.5         208      4450 female 2008   2.979310\n212    Gentoo    Biscoe     50.4     15.3         224      5550   male 2008   3.294118\n213    Gentoo    Biscoe     45.3     13.8         208      4200 female 2008   3.282609\n214    Gentoo    Biscoe     46.2     14.9         221      5300   male 2008   3.100671\n215    Gentoo    Biscoe     45.7     13.9         214      4400 female 2008   3.287770\n216    Gentoo    Biscoe     54.3     15.7         231      5650   male 2008   3.458599\n217    Gentoo    Biscoe     45.8     14.2         219      4700 female 2008   3.225352\n218    Gentoo    Biscoe     49.8     16.8         230      5700   male 2008   2.964286\n219    Gentoo    Biscoe     46.2     14.4         214      4650   &lt;NA&gt; 2008   3.208333\n220    Gentoo    Biscoe     49.5     16.2         229      5800   male 2008   3.055556\n221    Gentoo    Biscoe     43.5     14.2         220      4700 female 2008   3.063380\n222    Gentoo    Biscoe     50.7     15.0         223      5550   male 2008   3.380000\n223    Gentoo    Biscoe     47.7     15.0         216      4750 female 2008   3.180000\n224    Gentoo    Biscoe     46.4     15.6         221      5000   male 2008   2.974359\n225    Gentoo    Biscoe     48.2     15.6         221      5100   male 2008   3.089744\n226    Gentoo    Biscoe     46.5     14.8         217      5200 female 2008   3.141892\n227    Gentoo    Biscoe     46.4     15.0         216      4700 female 2008   3.093333\n228    Gentoo    Biscoe     48.6     16.0         230      5800   male 2008   3.037500\n229    Gentoo    Biscoe     47.5     14.2         209      4600 female 2008   3.345070\n230    Gentoo    Biscoe     51.1     16.3         220      6000   male 2008   3.134969\n231    Gentoo    Biscoe     45.2     13.8         215      4750 female 2008   3.275362\n232    Gentoo    Biscoe     45.2     16.4         223      5950   male 2008   2.756098\n233    Gentoo    Biscoe     49.1     14.5         212      4625 female 2009   3.386207\n234    Gentoo    Biscoe     52.5     15.6         221      5450   male 2009   3.365385\n235    Gentoo    Biscoe     47.4     14.6         212      4725 female 2009   3.246575\n236    Gentoo    Biscoe     50.0     15.9         224      5350   male 2009   3.144654\n237    Gentoo    Biscoe     44.9     13.8         212      4750 female 2009   3.253623\n238    Gentoo    Biscoe     50.8     17.3         228      5600   male 2009   2.936416\n239    Gentoo    Biscoe     43.4     14.4         218      4600 female 2009   3.013889\n240    Gentoo    Biscoe     51.3     14.2         218      5300   male 2009   3.612676\n241    Gentoo    Biscoe     47.5     14.0         212      4875 female 2009   3.392857\n242    Gentoo    Biscoe     52.1     17.0         230      5550   male 2009   3.064706\n243    Gentoo    Biscoe     47.5     15.0         218      4950 female 2009   3.166667\n244    Gentoo    Biscoe     52.2     17.1         228      5400   male 2009   3.052632\n245    Gentoo    Biscoe     45.5     14.5         212      4750 female 2009   3.137931\n246    Gentoo    Biscoe     49.5     16.1         224      5650   male 2009   3.074534\n247    Gentoo    Biscoe     44.5     14.7         214      4850 female 2009   3.027211\n248    Gentoo    Biscoe     50.8     15.7         226      5200   male 2009   3.235669\n249    Gentoo    Biscoe     49.4     15.8         216      4925   male 2009   3.126582\n250    Gentoo    Biscoe     46.9     14.6         222      4875 female 2009   3.212329\n251    Gentoo    Biscoe     48.4     14.4         203      4625 female 2009   3.361111\n252    Gentoo    Biscoe     51.1     16.5         225      5250   male 2009   3.096970\n253    Gentoo    Biscoe     48.5     15.0         219      4850 female 2009   3.233333\n254    Gentoo    Biscoe     55.9     17.0         228      5600   male 2009   3.288235\n255    Gentoo    Biscoe     47.2     15.5         215      4975 female 2009   3.045161\n256    Gentoo    Biscoe     49.1     15.0         228      5500   male 2009   3.273333\n257    Gentoo    Biscoe     47.3     13.8         216      4725   &lt;NA&gt; 2009   3.427536\n258    Gentoo    Biscoe     46.8     16.1         215      5500   male 2009   2.906832\n259    Gentoo    Biscoe     41.7     14.7         210      4700 female 2009   2.836735\n260    Gentoo    Biscoe     53.4     15.8         219      5500   male 2009   3.379747\n261    Gentoo    Biscoe     43.3     14.0         208      4575 female 2009   3.092857\n262    Gentoo    Biscoe     48.1     15.1         209      5500   male 2009   3.185430\n263    Gentoo    Biscoe     50.5     15.2         216      5000 female 2009   3.322368\n264    Gentoo    Biscoe     49.8     15.9         229      5950   male 2009   3.132075\n265    Gentoo    Biscoe     43.5     15.2         213      4650 female 2009   2.861842\n266    Gentoo    Biscoe     51.5     16.3         230      5500   male 2009   3.159509\n267    Gentoo    Biscoe     46.2     14.1         217      4375 female 2009   3.276596\n268    Gentoo    Biscoe     55.1     16.0         230      5850   male 2009   3.443750\n269    Gentoo    Biscoe     44.5     15.7         217      4875   &lt;NA&gt; 2009   2.834395\n270    Gentoo    Biscoe     48.8     16.2         222      6000   male 2009   3.012346\n271    Gentoo    Biscoe     47.2     13.7         214      4925 female 2009   3.445255\n272    Gentoo    Biscoe       NA       NA          NA        NA   &lt;NA&gt; 2009         NA\n273    Gentoo    Biscoe     46.8     14.3         215      4850 female 2009   3.272727\n274    Gentoo    Biscoe     50.4     15.7         222      5750   male 2009   3.210191\n275    Gentoo    Biscoe     45.2     14.8         212      5200 female 2009   3.054054\n276    Gentoo    Biscoe     49.9     16.1         213      5400   male 2009   3.099379\n277 Chinstrap     Dream     46.5     17.9         192      3500 female 2007   2.597765\n278 Chinstrap     Dream     50.0     19.5         196      3900   male 2007   2.564103\n279 Chinstrap     Dream     51.3     19.2         193      3650   male 2007   2.671875\n280 Chinstrap     Dream     45.4     18.7         188      3525 female 2007   2.427807\n281 Chinstrap     Dream     52.7     19.8         197      3725   male 2007   2.661616\n282 Chinstrap     Dream     45.2     17.8         198      3950 female 2007   2.539326\n283 Chinstrap     Dream     46.1     18.2         178      3250 female 2007   2.532967\n284 Chinstrap     Dream     51.3     18.2         197      3750   male 2007   2.818681\n285 Chinstrap     Dream     46.0     18.9         195      4150 female 2007   2.433862\n286 Chinstrap     Dream     51.3     19.9         198      3700   male 2007   2.577889\n287 Chinstrap     Dream     46.6     17.8         193      3800 female 2007   2.617978\n288 Chinstrap     Dream     51.7     20.3         194      3775   male 2007   2.546798\n289 Chinstrap     Dream     47.0     17.3         185      3700 female 2007   2.716763\n290 Chinstrap     Dream     52.0     18.1         201      4050   male 2007   2.872928\n291 Chinstrap     Dream     45.9     17.1         190      3575 female 2007   2.684211\n292 Chinstrap     Dream     50.5     19.6         201      4050   male 2007   2.576531\n293 Chinstrap     Dream     50.3     20.0         197      3300   male 2007   2.515000\n294 Chinstrap     Dream     58.0     17.8         181      3700 female 2007   3.258427\n295 Chinstrap     Dream     46.4     18.6         190      3450 female 2007   2.494624\n296 Chinstrap     Dream     49.2     18.2         195      4400   male 2007   2.703297\n297 Chinstrap     Dream     42.4     17.3         181      3600 female 2007   2.450867\n298 Chinstrap     Dream     48.5     17.5         191      3400   male 2007   2.771429\n299 Chinstrap     Dream     43.2     16.6         187      2900 female 2007   2.602410\n300 Chinstrap     Dream     50.6     19.4         193      3800   male 2007   2.608247\n301 Chinstrap     Dream     46.7     17.9         195      3300 female 2007   2.608939\n302 Chinstrap     Dream     52.0     19.0         197      4150   male 2007   2.736842\n303 Chinstrap     Dream     50.5     18.4         200      3400 female 2008   2.744565\n304 Chinstrap     Dream     49.5     19.0         200      3800   male 2008   2.605263\n305 Chinstrap     Dream     46.4     17.8         191      3700 female 2008   2.606742\n306 Chinstrap     Dream     52.8     20.0         205      4550   male 2008   2.640000\n307 Chinstrap     Dream     40.9     16.6         187      3200 female 2008   2.463855\n308 Chinstrap     Dream     54.2     20.8         201      4300   male 2008   2.605769\n309 Chinstrap     Dream     42.5     16.7         187      3350 female 2008   2.544910\n310 Chinstrap     Dream     51.0     18.8         203      4100   male 2008   2.712766\n311 Chinstrap     Dream     49.7     18.6         195      3600   male 2008   2.672043\n312 Chinstrap     Dream     47.5     16.8         199      3900 female 2008   2.827381\n313 Chinstrap     Dream     47.6     18.3         195      3850 female 2008   2.601093\n314 Chinstrap     Dream     52.0     20.7         210      4800   male 2008   2.512077\n315 Chinstrap     Dream     46.9     16.6         192      2700 female 2008   2.825301\n316 Chinstrap     Dream     53.5     19.9         205      4500   male 2008   2.688442\n317 Chinstrap     Dream     49.0     19.5         210      3950   male 2008   2.512821\n318 Chinstrap     Dream     46.2     17.5         187      3650 female 2008   2.640000\n319 Chinstrap     Dream     50.9     19.1         196      3550   male 2008   2.664921\n320 Chinstrap     Dream     45.5     17.0         196      3500 female 2008   2.676471\n321 Chinstrap     Dream     50.9     17.9         196      3675 female 2009   2.843575\n322 Chinstrap     Dream     50.8     18.5         201      4450   male 2009   2.745946\n323 Chinstrap     Dream     50.1     17.9         190      3400 female 2009   2.798883\n324 Chinstrap     Dream     49.0     19.6         212      4300   male 2009   2.500000\n325 Chinstrap     Dream     51.5     18.7         187      3250   male 2009   2.754011\n326 Chinstrap     Dream     49.8     17.3         198      3675 female 2009   2.878613\n327 Chinstrap     Dream     48.1     16.4         199      3325 female 2009   2.932927\n328 Chinstrap     Dream     51.4     19.0         201      3950   male 2009   2.705263\n329 Chinstrap     Dream     45.7     17.3         193      3600 female 2009   2.641618\n330 Chinstrap     Dream     50.7     19.7         203      4050   male 2009   2.573604\n331 Chinstrap     Dream     42.5     17.3         187      3350 female 2009   2.456647\n332 Chinstrap     Dream     52.2     18.8         197      3450   male 2009   2.776596\n333 Chinstrap     Dream     45.2     16.6         191      3250 female 2009   2.722892\n334 Chinstrap     Dream     49.3     19.9         203      4050   male 2009   2.477387\n335 Chinstrap     Dream     50.2     18.8         202      3800   male 2009   2.670213\n336 Chinstrap     Dream     45.6     19.4         194      3525 female 2009   2.350515\n337 Chinstrap     Dream     51.9     19.5         206      3950   male 2009   2.661538\n338 Chinstrap     Dream     46.8     16.5         189      3650 female 2009   2.836364\n339 Chinstrap     Dream     45.7     17.0         195      3650 female 2009   2.688235\n340 Chinstrap     Dream     55.8     19.8         207      4000   male 2009   2.818182\n341 Chinstrap     Dream     43.5     18.1         202      3400 female 2009   2.403315\n342 Chinstrap     Dream     49.6     18.2         193      3775   male 2009   2.725275\n343 Chinstrap     Dream     50.8     19.0         210      4100   male 2009   2.673684\n344 Chinstrap     Dream     50.2     18.7         198      3775 female 2009   2.684492"
   },
   {
-    "objectID": "setup.html#github",
-    "href": "setup.html#github",
-    "title": "System Setup 🤖",
-    "section": "GitHub",
-    "text": "GitHub\nRegister a GitHub account at github.com.\nI highly recommend the book Happy Git with R for advice on setting up and using Git with R [@bryan]."
+    "objectID": "programming-iteration.html#iteration-in-r-1",
+    "href": "programming-iteration.html#iteration-in-r-1",
+    "title": "Programming with R: Iteration",
+    "section": "Iteration in R",
+    "text": "Iteration in R\nWe also have:\n\ngroup_by() with summarize() (for every group, do this summary)\nggplot2::facet_wrap() (for every level of a factor, make a plot)\n*apply() and purrr::map*() and (for every element of a list/vector, do this function)"
   },
   {
-    "objectID": "setup.html#troubleshooting",
-    "href": "setup.html#troubleshooting",
-    "title": "System Setup 🤖",
-    "section": "Troubleshooting",
-    "text": "Troubleshooting\nIf you are having issues with the setup please start a discussion on GitHub here."
+    "objectID": "programming-iteration.html#why-iteration",
+    "href": "programming-iteration.html#why-iteration",
+    "title": "Programming with R: Iteration",
+    "section": "Why iteration?",
+    "text": "Why iteration?\nDoing the same operation multiple times:\n\nProcess multiple files\nAnalyze data from multiple sites\nApply the same transformation to multiple columns\nRun simulations\n\n\nGoal: Write code that is:\n\nLess repetitive\nEasier to maintain\nHarder to make mistakes in"
+  },
+  {
+    "objectID": "programming-iteration.html#basic-for-loop-syntax",
+    "href": "programming-iteration.html#basic-for-loop-syntax",
+    "title": "Programming with R: Iteration",
+    "section": "Basic for loop syntax",
+    "text": "Basic for loop syntax\n\nfor (item in vector_or_list) {\n  # item takes on each value in vector\n  # Do something with item\n}\n\n\n\n\nparks &lt;- c(\"Banff\", \"Jasper\", \"Yoho\", \"Riding Mountain\")\n\nfor (park in parks) {\n  print(paste(\"Processing\", park))\n}\n\n[1] \"Processing Banff\"\n[1] \"Processing Jasper\"\n[1] \"Processing Yoho\"\n[1] \"Processing Riding Mountain\""
+  },
+  {
+    "objectID": "programming-iteration.html#loop-over-values-vs-indices",
+    "href": "programming-iteration.html#loop-over-values-vs-indices",
+    "title": "Programming with R: Iteration",
+    "section": "Loop over values vs indices",
+    "text": "Loop over values vs indices\nLoop over values when you only need the value of each element.\n\nparks &lt;- c(\"Banff\", \"Jasper\", \"Yoho\", \"Riding Mountain\")\n\nfor (park in parks) {\n  print(paste(\"Processing\", park))\n}\n\n[1] \"Processing Banff\"\n[1] \"Processing Jasper\"\n[1] \"Processing Yoho\"\n[1] \"Processing Riding Mountain\"\n\n\n\nLoop over indices when you need to know the position."
+  },
+  {
+    "objectID": "programming-iteration.html#when-to-use-indices",
+    "href": "programming-iteration.html#when-to-use-indices",
+    "title": "Programming with R: Iteration",
+    "section": "When to use indices",
+    "text": "When to use indices\nUse seq_along(), seq_len(), seq() when you need to:\n\nAccess the same position in multiple objects:\n\n\nparks &lt;- c(\"Banff\", \"Jasper\", \"Yoho\", \"Riding Mountain\")\nprovinces &lt;- c(\"Alberta\", \"Alberta\", \"British Columbia\", \"Manitoba\")\n\nfor (i in seq_along(parks)) {\n  print(paste(parks[i], \"is in\", provinces[i]))\n}\n\n[1] \"Banff is in Alberta\"\n[1] \"Jasper is in Alberta\"\n[1] \"Yoho is in British Columbia\"\n[1] \"Riding Mountain is in Manitoba\"\n\n\n\n\nStore results at specific positions:\n\n\nresults &lt;- vector(\"list\", length(files))\n\nfor (i in seq_along(files)) {\n  results[[i]] &lt;- read_csv(files[i])\n}"
+  },
+  {
+    "objectID": "programming-iteration.html#example-reading-multiple-files",
+    "href": "programming-iteration.html#example-reading-multiple-files",
+    "title": "Programming with R: Iteration",
+    "section": "Example: Reading multiple files",
+    "text": "Example: Reading multiple files\n\nlibrary(readr)\nlibrary(dplyr)\n\nfiles &lt;- list.files(\"data/\", pattern = \"\\\\.csv$\", full.names = TRUE)\n\ndata_list &lt;- vector(mode = \"list\", length = length(files))\n\nfor (i in seq_along(files)) {\n  data_list[[i]] &lt;- read_csv(files[i])\n}\n\n# Combine into one data frame\nall_data &lt;- rbind_list(data_list)"
+  },
+  {
+    "objectID": "programming-iteration.html#your-turn-create-a-for-loop-to-make-and-save-plots-for-each-rodent-site-plot",
+    "href": "programming-iteration.html#your-turn-create-a-for-loop-to-make-and-save-plots-for-each-rodent-site-plot",
+    "title": "Programming with R: Iteration",
+    "section": "Your Turn: Create a for loop to make and save plots for each rodent site (plot)",
+    "text": "Your Turn: Create a for loop to make and save plots for each rodent site (plot)\nStarting code in 04-iteration.R\n\n\nrodents &lt;- read_csv(\"PortalData/Rodents/Portal_rodent.csv\")\n\nrodent_counts &lt;- rodents |&gt;\n  filter(species == \"DM\") |&gt;\n  group_by(year, plot) |&gt;\n  summarise(n = n()) |&gt;\n  ungroup()"
+  },
+  {
+    "objectID": "programming-iteration.html#while-loops",
+    "href": "programming-iteration.html#while-loops",
+    "title": "Programming with R: Iteration",
+    "section": "while loops",
+    "text": "while loops\n\nLoop continues while the condition is TRUE\nStops when the condition is FALSE.\n\n\n\n\nwhile (condition_is_true) {\n  # Do something\n}\n\n\n\n\ni &lt;- 1\nwhile (i &lt; 6) {\n  print(i)\n  i &lt;- i + 1\n}\n\n[1] 1\n[1] 2\n[1] 3\n[1] 4\n[1] 5\n\n\n\n\n\nUse when you don’t know in advance how many iterations you’ll need.\n\n\nUsually need to advance the iterator inside the loop."
+  },
+  {
+    "objectID": "programming-iteration.html#while-loop-example-simulation",
+    "href": "programming-iteration.html#while-loop-example-simulation",
+    "title": "Programming with R: Iteration",
+    "section": "While loop example: Simulation",
+    "text": "While loop example: Simulation\n\n# Simulate until estimate stabilizes\nestimate &lt;- 0\nprevious &lt;- Inf\ntolerance &lt;- 0.001\nn &lt;- 100\nreps &lt;- 0\n\nwhile (abs(estimate - previous) &gt; tolerance) {\n  previous &lt;- estimate\n  sample_data &lt;- rnorm(n, mean = 5, sd = 2)\n  estimate &lt;- mean(sample_data)\n  n &lt;- n + 100\n  reps &lt;- reps + 1\n}\nn\n\n[1] 4300\n\nreps\n\n[1] 42\n\n\n\nThis code simulates data repeatedly until the estimated mean stabilizes within a tolerance threshold:\nInitialize: Start with an estimate of 0, track the previous estimate, set a tolerance of 0.001, and begin with sample size 100\nLoop: Continue while the change in estimate exceeds the tolerance\nSave current estimate as previous Generate random normal data (mean=5, sd=2) with current sample size Calculate new estimate (mean of sample) Increase sample size by 100 Result: Stops when consecutive estimates differ by less than 0.001\nThis demonstrates the law of large numbers - as sample size increases, the sample mean converges to the true population mean (5). The loop automatically determines how many observations are needed for the estimate to stabilize.\n\nRarely needed in data analysis work."
+  },
+  {
+    "objectID": "programming-iteration.html#functional-programming",
+    "href": "programming-iteration.html#functional-programming",
+    "title": "Programming with R: Iteration",
+    "section": "Functional programming",
+    "text": "Functional programming\n“functional programming” because functions take other functions as input\n\nmodifying multiple columns dplyr::across()\nreading multiple files purrr::map() and friends\nsaving multiple outputs purrr::walk()"
+  },
+  {
+    "objectID": "programming-iteration.html#why-purrr",
+    "href": "programming-iteration.html#why-purrr",
+    "title": "Programming with R: Iteration",
+    "section": "Why purrr?",
+    "text": "Why purrr?\nThe purrr package provides tools for functional programming:\n\nClearer intent than loops\nLess boilerplate code\nType-safe variants\nWorks seamlessly with pipes"
+  },
+  {
+    "objectID": "programming-iteration.html#fundamental-paradigms",
+    "href": "programming-iteration.html#fundamental-paradigms",
+    "title": "Programming with R: Iteration",
+    "section": "Fundamental paradigms",
+    "text": "Fundamental paradigms\nFunctional programming has three fundamental paradigms; they act on lists or vectors:\n\nmap - do this to each element: purrr::map()\nfilter - like spaghetti, not coffee: purrr::keep()\nreduce - combine into new thing: purrr::reduce()\n\n\nEach of these takes a function as an argument, to tell the operator what to do.\n\n\nWe are going to focus on map() and friends."
+  },
+  {
+    "objectID": "programming-iteration.html#map-apply-a-function-to-each-element",
+    "href": "programming-iteration.html#map-apply-a-function-to-each-element",
+    "title": "Programming with R: Iteration",
+    "section": "map(): Apply a function to each element",
+    "text": "map(): Apply a function to each element\n\nparks &lt;- c(\"Banff\", \"Jasper\", \"Yoho\", \"Riding Mountain\")\n\n\n\n\n\nfor loop:\n\nfor (park in parks) {\n  print(nchar(park))\n}\n\n[1] 5\n[1] 6\n[1] 4\n[1] 15\n\n\n\n\n\nmap()\nmap(.x, .f) applies function .f to each element of .x\n\nmap(parks, nchar)\n\n[[1]]\n[1] 5\n\n[[2]]\n[1] 6\n\n[[3]]\n[1] 4\n\n[[4]]\n[1] 15\n\n\n\nReturns a list by default."
+  },
+  {
+    "objectID": "programming-iteration.html#aside-review-of-lists",
+    "href": "programming-iteration.html#aside-review-of-lists",
+    "title": "Programming with R: Iteration",
+    "section": "Aside: Review of lists",
+    "text": "Aside: Review of lists\nLists are like vectors, but instead of each element being a single value, each element can be a more complex object (vector, data-frame, function, etc.)\nLists can have names\n\n\n\nmy_list &lt;- list(\n  c(1, 2, 3),\n  c(\"a\", \"b\", \"c\"),\n  data.frame(x = 1:3, y = c(\"A\", \"B\", \"C\"))\n)\nmy_list\n\n[[1]]\n[1] 1 2 3\n\n[[2]]\n[1] \"a\" \"b\" \"c\"\n\n[[3]]\n  x y\n1 1 A\n2 2 B\n3 3 C\n\n\n\n\nmy_named_list &lt;- list(\n  numbers = c(1, 2, 3),\n  letters = c(\"a\", \"b\", \"c\"),\n  df = data.frame(x = 1:3, y = c(\"A\", \"B\", \"C\"))\n)\nmy_named_list\n\n$numbers\n[1] 1 2 3\n\n$letters\n[1] \"a\" \"b\" \"c\"\n\n$df\n  x y\n1 1 A\n2 2 B\n3 3 C\n\nnames(my_named_list)\n\n[1] \"numbers\" \"letters\" \"df\"     \n\n\n\n\nLet’s make and explore this object in R"
+  },
+  {
+    "objectID": "programming-iteration.html#type-specific-map-variants",
+    "href": "programming-iteration.html#type-specific-map-variants",
+    "title": "Programming with R: Iteration",
+    "section": "Type-specific map variants",
+    "text": "Type-specific map variants\nmap_*() functions return atomic vectors of specific types:\n\nmap_dbl() → numeric vector\nmap_chr() → character vector\nmap_int() → integer vector\nmap_lgl() → logical vector"
+  },
+  {
+    "objectID": "programming-iteration.html#type-specific-map-variants-1",
+    "href": "programming-iteration.html#type-specific-map-variants-1",
+    "title": "Programming with R: Iteration",
+    "section": "Type-specific map variants",
+    "text": "Type-specific map variants\n\nmap_dbl(parks, nchar)\n\n[1]  5  6  4 15\n\n\n\n\nmap_chr(parks, toupper)\n\n[1] \"BANFF\"           \"JASPER\"          \"YOHO\"            \"RIDING MOUNTAIN\"\n\n\n\n\n\nNote: These are simple examples to illustrate, but nchar() and toupper() are already vectorized, so you wouldn’t normally use map() for them.\n\n\n\n\nnchar(parks)\n\n[1]  5  6  4 15\n\ntoupper(parks)\n\n[1] \"BANFF\"           \"JASPER\"          \"YOHO\"            \"RIDING MOUNTAIN\""
+  },
+  {
+    "objectID": "programming-iteration.html#anonymous-functions",
+    "href": "programming-iteration.html#anonymous-functions",
+    "title": "Programming with R: Iteration",
+    "section": "Anonymous functions",
+    "text": "Anonymous functions\nmap(.x, .f)\nThe .f argument to map() can be:\n\na named function (e.g., nchar, toupper)\nan anonymous function (a function defined in place)"
+  },
+  {
+    "objectID": "programming-iteration.html#syntax-for-anonymous-functions",
+    "href": "programming-iteration.html#syntax-for-anonymous-functions",
+    "title": "Programming with R: Iteration",
+    "section": "Syntax for anonymous functions:",
+    "text": "Syntax for anonymous functions:\n\n\nIf simple, on one line:\n\\(x) what to do with x\n\n\n\nnum &lt;- 1:4\nmap(num, \\(x) x + 1)\n\n[[1]]\n[1] 2\n\n[[2]]\n[1] 3\n\n[[3]]\n[1] 4\n\n[[4]]\n[1] 5\n\n\n\n\n\nOr more complex:\n\\(arg1, arg2, ...) {\n  # function body\n}\n\n\n\n\nnum &lt;- 1:4\nmap(num, \\(x) {\n  y &lt;- x^2\n  z &lt;- y + 3\n  z\n})\n\n[[1]]\n[1] 4\n\n[[2]]\n[1] 7\n\n[[3]]\n[1] 12\n\n[[4]]\n[1] 19"
+  },
+  {
+    "objectID": "programming-iteration.html#map-atomic-variants",
+    "href": "programming-iteration.html#map-atomic-variants",
+    "title": "Programming with R: Iteration",
+    "section": "Map: Atomic variants",
+    "text": "Map: Atomic variants\n\n\nmap() always returns a list:\n\nnum &lt;- 1:4\nmap(num, \\(x) x + 1)\n\n[[1]]\n[1] 2\n\n[[2]]\n[1] 3\n\n[[3]]\n[1] 4\n\n[[4]]\n[1] 5\n\n\n\nUse an atomic variant to specify type:\n\nnum &lt;- 1:4\nmap_int(num, \\(x) x + 1)\n\n[1] 2 3 4 5"
+  },
+  {
+    "objectID": "programming-iteration.html#reading-multiple-files",
+    "href": "programming-iteration.html#reading-multiple-files",
+    "title": "Programming with R: Iteration",
+    "section": "Reading multiple files",
+    "text": "Reading multiple files\nIteration functions in {purrr} can help with repetitive tasks.\n\nExample\nRead Excel files from a directory, then combine into a single data-frame."
+  },
+  {
+    "objectID": "programming-iteration.html#our-turn-reading-data-manually",
+    "href": "programming-iteration.html#our-turn-reading-data-manually",
+    "title": "Programming with R: Iteration",
+    "section": "Our turn: Reading data manually",
+    "text": "Our turn: Reading data manually\nHere’s our starting code:\ndata1952 &lt;- read_excel(\"data/gapminder/1952.xlsx\")\ndata1957 &lt;- read_excel(\"data/gapminder/1957.xlsx\")\ndata1962 &lt;- read_excel(\"data/gapminder/1952.xlsx\")\ndata1967 &lt;- read_excel(\"data/gapminder/1967.xlsx\")\n\ndata_manual &lt;- bind_rows(data1952, data1957, data1962, data1967)\n\nWhat problems do you see?\n(I see one real problem, and one philosophical problem)\n\n\n\nStarting code in 04-iteration.R"
+  },
+  {
+    "objectID": "programming-iteration.html#our-turn-make-list-of-paths",
+    "href": "programming-iteration.html#our-turn-make-list-of-paths",
+    "title": "Programming with R: Iteration",
+    "section": "Our turn: Make list of paths",
+    "text": "Our turn: Make list of paths\nI see this as a two step problem:\n\nmake a named list of paths, name is year\nuse list of paths to read data frames, combine\n\n\nLet’s work together to improve this code to get paths:\npaths &lt;-\n  # get the filepaths from the directory\n  fs::dir_ls(\"data/gapminder\") |&gt;\n  # extract the year as names"
+  },
+  {
+    "objectID": "programming-iteration.html#our-turn-read-data",
+    "href": "programming-iteration.html#our-turn-read-data",
+    "title": "Programming with R: Iteration",
+    "section": "Our turn: Read data",
+    "text": "Our turn: Read data\nLet’s work together to improve this code to read data:\ndata &lt;-\n  paths |&gt;\n  # read each file from excel, into data frame\n  # set list-names as column `year`\n  # bind into single data-frame\n  # convert year to number"
+  },
+  {
+    "objectID": "programming-iteration.html#map-over-two-inputs",
+    "href": "programming-iteration.html#map-over-two-inputs",
+    "title": "Programming with R: Iteration",
+    "section": "Map over two inputs",
+    "text": "Map over two inputs\nSometimes you need to map over two inputs that are the same length.\nUse map2() with two inputs, and supply a function that takes two arguments.\n\nparams1 &lt;- c(1, 2, 3)\nparams2 &lt;- c(10, 20, 30)\n\nmap2(\n  params1,\n  params2,\n  \\(x, y) x + y\n)\n\n[[1]]\n[1] 11\n\n[[2]]\n[1] 22\n\n[[3]]\n[1] 33\n\n\n\nVector variants: map2_dbl(), map2_chr(), etc.\nSee pmap() for more than two inputs."
+  },
+  {
+    "objectID": "programming-iteration.html#purrrwalk",
+    "href": "programming-iteration.html#purrrwalk",
+    "title": "Programming with R: Iteration",
+    "section": "purrr::walk()",
+    "text": "purrr::walk()\nFor functions called for their side effects (i.e., not for their return value)\nUseful for:\n\nwriting data files\nsaving plots\nwalk2() for two inputs\n\n\n\nwalk2(\n  list_of_dataframes,\n  list_of_filepaths,\n  \\(df, f) {\n    write_csv(df, f)\n  }\n)"
+  },
+  {
+    "objectID": "programming-iteration.html#your-turn",
+    "href": "programming-iteration.html#your-turn",
+    "title": "Programming with R: Iteration",
+    "section": "Your turn",
+    "text": "Your turn\nUsing our first example with the rodent data, use purrr instead of a for loop to:\n\nMake a list of plots\nSave plots for each rodent site (plot)\n\n\n\nStarting code in 04-iteration.R"
+  },
+  {
+    "objectID": "programming-iteration.html#summary",
+    "href": "programming-iteration.html#summary",
+    "title": "Programming with R: Iteration",
+    "section": "Summary",
+    "text": "Summary\n\nLoops are explicit but verbose\nFunctional programming (purrr) is usually clearer and efficient\nUse map_*() to iterate over lists/vectors\nUse walk() (and variants) for side effects\npurrr functions can be parallelized with in_parallel()"
+  },
+  {
+    "objectID": "programming-iteration.html#resources",
+    "href": "programming-iteration.html#resources",
+    "title": "Programming with R: Iteration",
+    "section": "Resources",
+    "text": "Resources\n\nR4DS chapter on iteration: https://r4ds.hadley.nz/iteration\npurrr documentation: https://purrr.tidyverse.org/\ntidyverse blog on purrr: https://tidyverse.org/blog/2023/05/purrr-walk-this-way/\nParallel processing with purrr: https://purrr.tidyverse.org/articles/parallel.html"
+  },
+  {
+    "objectID": "regex.html#why-regular-expressions",
+    "href": "regex.html#why-regular-expressions",
+    "title": "String Manipulation with Regular Expressions",
+    "section": "Why regular expressions?",
+    "text": "Why regular expressions?\nWorking with text data is common in data science:\n\nFile names: Extract dates, site IDs, or plot numbers\nData cleaning: Standardize species codes, fix formatting\nData validation: Check if values match expected patterns\n\n\nRegular expressions (regex) are a powerful pattern-matching language for working with text."
+  },
+  {
+    "objectID": "regex.html#the-stringr-package",
+    "href": "regex.html#the-stringr-package",
+    "title": "String Manipulation with Regular Expressions",
+    "section": "The stringr package",
+    "text": "The stringr package\nPart of the tidyverse, stringr makes working with strings consistent and easy easier.\n\nlibrary(stringr)\n\nAll stringr functions:\n\nStart with str_\nTake the string as the first argument (pipe-friendly!)\nUse regular expressions for pattern matching"
+  },
+  {
+    "objectID": "regex.html#basic-string-operations",
+    "href": "regex.html#basic-string-operations",
+    "title": "String Manipulation with Regular Expressions",
+    "section": "Basic string operations",
+    "text": "Basic string operations\nBefore regex, let’s see simple stringr functions:\n\nparks &lt;- c(\n  \"Banff National Park\",\n  \"Jasper National Park\",\n  \"Yoho National Park\",\n  \"Kootenay National Park\"\n)\n\n\n\nstr_length(parks) # Count characters\n\n[1] 19 20 18 22\n\n\n\n\n\nstr_to_upper(parks) # Convert to uppercase\n\n[1] \"BANFF NATIONAL PARK\"    \"JASPER NATIONAL PARK\"   \"YOHO NATIONAL PARK\"     \"KOOTENAY NATIONAL PARK\"\n\n\n\n\n\nstr_detect(parks, \"Banff\") # Does it contain \"Banff\"?\n\n[1]  TRUE FALSE FALSE FALSE"
+  },
+  {
+    "objectID": "regex.html#literal-pattern-matching",
+    "href": "regex.html#literal-pattern-matching",
+    "title": "String Manipulation with Regular Expressions",
+    "section": "Literal pattern matching",
+    "text": "Literal pattern matching\nThe simplest regex: match exact text\n\nfiles &lt;- c(\n  \"2024-08-12_site-1_plot-data.csv\",\n  \"2024-08-12_site-2_plot-data.csv\",\n  \"2024-09-15_site-1_plot-data.csv\"\n)\n\n\n\n# Which files are from site-1?\nstr_detect(files, \"site-1\")\n\n[1]  TRUE FALSE  TRUE\n\n\n\n\n\n# Extract just the matching files\nsite1_files &lt;- str_subset(files, \"site-1\")\nsite1_files\n\n[1] \"2024-08-12_site-1_plot-data.csv\" \"2024-09-15_site-1_plot-data.csv\""
+  },
+  {
+    "objectID": "regex.html#the-dot-.-match-any-character",
+    "href": "regex.html#the-dot-.-match-any-character",
+    "title": "String Manipulation with Regular Expressions",
+    "section": "The dot (.): match any character",
+    "text": "The dot (.): match any character\n. matches any single character\n\nspecies &lt;- c(\"PIEN\", \"PICO\", \"ABLA\", \"POTR\")\n\n# Match PI followed by any two characters\nstr_detect(species, \"PI..\")\n\n[1]  TRUE  TRUE FALSE FALSE\n\n\n\n\n# What does it match?\nstr_subset(species, \"PI..\")\n\n[1] \"PIEN\" \"PICO\""
+  },
+  {
+    "objectID": "regex.html#character-classes",
+    "href": "regex.html#character-classes",
+    "title": "String Manipulation with Regular Expressions",
+    "section": "Character classes: []",
+    "text": "Character classes: []\nMatch one of several characters\n\ncodes &lt;- c(\"Plot1\", \"Plot2\", \"Plot3\", \"PlotA\", \"PlotB\")\n\n\n\n# Match Plot followed by a digit\nstr_subset(codes, \"Plot[123]\")\n\n[1] \"Plot1\" \"Plot2\" \"Plot3\"\n\n\n\n\n\n# Match Plot followed by a letter\nstr_subset(codes, \"Plot[AB]\")\n\n[1] \"PlotA\" \"PlotB\""
+  },
+  {
+    "objectID": "regex.html#character-ranges",
+    "href": "regex.html#character-ranges",
+    "title": "String Manipulation with Regular Expressions",
+    "section": "Character ranges",
+    "text": "Character ranges\nUse - inside [ ] for ranges:\n\n# Match any digit\nstr_subset(codes, \"Plot[0-9]\")\n\n[1] \"Plot1\" \"Plot2\" \"Plot3\"\n\n\n\n\n# Match any lowercase letter\nstr_subset(codes, \"Plot[a-z]\")\n\ncharacter(0)\n\n\n\n\n\n# Match any letter (upper or lower)\nstr_subset(codes, \"Plot[A-Za-z]\")\n\n[1] \"PlotA\" \"PlotB\""
+  },
+  {
+    "objectID": "regex.html#negating-character-classes",
+    "href": "regex.html#negating-character-classes",
+    "title": "String Manipulation with Regular Expressions",
+    "section": "Negating character classes: [^ ]",
+    "text": "Negating character classes: [^ ]\n^ inside [ ] means “NOT these characters”\n\nmeasurements &lt;- c(\"temp_C\", \"temp_F\", \"precip_mm\", \"wind_kph\")\n\n# Match measurements NOT in Celsius\nstr_subset(measurements, \"temp_[^C]\")\n\n[1] \"temp_F\""
+  },
+  {
+    "objectID": "regex.html#quantifiers-how-many-times",
+    "href": "regex.html#quantifiers-how-many-times",
+    "title": "String Manipulation with Regular Expressions",
+    "section": "Quantifiers: how many times?",
+    "text": "Quantifiers: how many times?\n\n\n\n? - 0 or 1 time (optional)\n* - 0 or more times\n+ - 1 or more times\n{n} - exactly n times\n{n,m} - between n and m times\n\n\n\nQuantifiers apply to the preceding element.\n\na+ matches one or more ’a’s\n[0-9]{2} matches exactly two digits\n-? matches an optional hyphen\n8{3,4} matches the number 8 repeated 3 or 4 times (i.e., 888 or 8888)"
+  },
+  {
+    "objectID": "regex.html#quantifiers-in-action",
+    "href": "regex.html#quantifiers-in-action",
+    "title": "String Manipulation with Regular Expressions",
+    "section": "Quantifiers in action",
+    "text": "Quantifiers in action\n\ndates &lt;- c(\"2024-8-12\", \"2024-08-12\", \"2024-8-1\", \"24-08-12\", \"20240523\")\n\n\n\n# Match 4-digit year 2024 and 1 or 2 digits for month\nstr_detect(dates, \"2024-[0-9]{1,2}-\")\n\n[1]  TRUE  TRUE  TRUE FALSE FALSE\n\n\n\n\n\n# Match exactly 2 digits for month (more strict)\nstr_detect(dates, \"2024-[0-9]{2}-\")\n\n[1] FALSE  TRUE FALSE FALSE FALSE\n\n\n\n\n\n# Match dates regardless of if they use `-` as a separator\nstr_detect(dates, \"[0-9]{4}-?[0-9]{1,2}-?[0-9]{1,2}\")\n\n[1]  TRUE  TRUE  TRUE FALSE  TRUE"
+  },
+  {
+    "objectID": "regex.html#anchors-position-matters",
+    "href": "regex.html#anchors-position-matters",
+    "title": "String Manipulation with Regular Expressions",
+    "section": "Anchors: position matters",
+    "text": "Anchors: position matters\n\n^ - start of string\n$ - end of string\n\n\nfilenames &lt;- c(\"data.csv\", \"plot-data.csv\", \"data-plot.csv\")\n\n# Files that START with \"data\"\nstr_subset(filenames, \"^data\")\n\n[1] \"data.csv\"      \"data-plot.csv\"\n\n\n\n\n# Files that END with \".csv\"\nstr_subset(filenames, \"\\\\.csv$\") # \\\\ escapes the .\n\n[1] \"data.csv\"      \"plot-data.csv\" \"data-plot.csv\""
+  },
+  {
+    "objectID": "regex.html#special-characters-need-escaping",
+    "href": "regex.html#special-characters-need-escaping",
+    "title": "String Manipulation with Regular Expressions",
+    "section": "Special characters need escaping",
+    "text": "Special characters need escaping\nSome characters have special meaning: . * + ? [ ] { } ( ) ^ $ | \\\nTo match them literally, escape with \\\\:\n\nprices &lt;- c(\"$12.99\", \"$5.00\", \"12.99\", \"free\")\n\n# Match prices with dollar sign\nstr_subset(prices, \"\\\\$\")\n\n[1] \"$12.99\" \"$5.00\" \n\n\n\n\n# Match prices with decimal point\nstr_subset(prices, \"\\\\.\")\n\n[1] \"$12.99\" \"$5.00\"  \"12.99\""
+  },
+  {
+    "objectID": "regex.html#shorthand-character-classes",
+    "href": "regex.html#shorthand-character-classes",
+    "title": "String Manipulation with Regular Expressions",
+    "section": "Shorthand character classes",
+    "text": "Shorthand character classes\nConvenient shortcuts:\n\n\\\\d - any digit (same as [0-9])\n\\\\s - whitespace (space, tab, newline)\n\\\\w - word character (letter, digit, underscore)\n\n\n\nsite_codes &lt;- c(\"SITE_001\", \"SITE 002\", \"SITE-003\")\n\n# Match SITE followed by any character, followed by a digit\nstr_subset(site_codes, \"SITE.\\\\d+\")\n\n[1] \"SITE_001\" \"SITE 002\" \"SITE-003\""
+  },
+  {
+    "objectID": "regex.html#extracting-matches-str_extract",
+    "href": "regex.html#extracting-matches-str_extract",
+    "title": "String Manipulation with Regular Expressions",
+    "section": "Extracting matches: str_extract()",
+    "text": "Extracting matches: str_extract()\nGet the actual matching text:\n\ndata_files &lt;- c(\"2024-08-12_banff_temp.csv\", \"2024-09-15_jasper_precip.csv\")\n\n# Extract the dates\nstr_extract(data_files, \"\\\\d{4}-\\\\d{2}-\\\\d{2}\")\n\n[1] \"2024-08-12\" \"2024-09-15\"\n\n\n\n\n# Extract the park names\nstr_extract(data_files, \"[a-z]+\")\n\n[1] \"banff\"  \"jasper\""
+  },
+  {
+    "objectID": "regex.html#capturing-groups",
+    "href": "regex.html#capturing-groups",
+    "title": "String Manipulation with Regular Expressions",
+    "section": "Capturing groups: ( )",
+    "text": "Capturing groups: ( )\nParentheses create groups you can extract separately:\n\ndates &lt;- c(\"2024-08-12\", \"2024-09-15\", \"2023-12-31\")\n\n# Extract year, month, day separately\nstr_match(dates, \"(\\\\d{4})-(\\\\d{2})-(\\\\d{2})\")\n\n     [,1]         [,2]   [,3] [,4]\n[1,] \"2024-08-12\" \"2024\" \"08\" \"12\"\n[2,] \"2024-09-15\" \"2024\" \"09\" \"15\"\n[3,] \"2023-12-31\" \"2023\" \"12\" \"31\"\n\n\n\nFirst column is the full match, then each group.\n\n\n\nUse str_extract() and specify group to just get the months\n\nstr_extract(dates, \"(\\\\d{4})-(\\\\d{2})-(\\\\d{2})\", group = 2)\n\n[1] \"08\" \"09\" \"12\"\n\n\n\n\nMore often we want to extract a particular part"
+  },
+  {
+    "objectID": "regex.html#replacing-text-str_replace",
+    "href": "regex.html#replacing-text-str_replace",
+    "title": "String Manipulation with Regular Expressions",
+    "section": "Replacing text: str_replace()",
+    "text": "Replacing text: str_replace()\n\nmessy_codes &lt;- c(\"SITE_001\", \"SITE-002\", \"SITE_003\", \"PLOT_004\", \"PLOT-005\")\n\n# Replace hyphens with underscores\nstr_replace(messy_codes, \"-\", \"_\")\n\n[1] \"SITE_001\" \"SITE_002\" \"SITE_003\" \"PLOT_004\" \"PLOT_005\"\n\n\n\n\n# Replace \"SITE\" with \"PLOT\"\nstr_replace(messy_codes, \"SITE\", \"PLOT\")\n\n[1] \"PLOT_001\" \"PLOT-002\" \"PLOT_003\" \"PLOT_004\" \"PLOT-005\"\n\n\n\n\n\n# Combine them with pipes\nclean_codes &lt;- str_replace(messy_codes, \"-\", \"_\") |&gt;\n  str_replace(\"SITE\", \"PLOT\")\nclean_codes\n\n[1] \"PLOT_001\" \"PLOT_002\" \"PLOT_003\" \"PLOT_004\" \"PLOT_005\""
+  },
+  {
+    "objectID": "regex.html#practical-regex-workflow",
+    "href": "regex.html#practical-regex-workflow",
+    "title": "String Manipulation with Regular Expressions",
+    "section": "Practical regex workflow",
+    "text": "Practical regex workflow\n\nStart simple: Match literal text first\nTest iteratively: Use str_detect() and str_subset() to verify\nBuild complexity: Add character classes, quantifiers\nExtract or replace: Use str_extract() or str_replace()\nValidate: Check edge cases\n\n\nPro tip: Use regex101.com to test and debug patterns!"
+  },
+  {
+    "objectID": "regex.html#your-turn-exercise-1",
+    "href": "regex.html#your-turn-exercise-1",
+    "title": "String Manipulation with Regular Expressions",
+    "section": "Your turn: Exercise 1",
+    "text": "Your turn: Exercise 1\nYou have these file names:\n\nfiles &lt;- c(\n  \"2024-08-12_site1_plot-A_data.csv\",\n  \"2024-08-12_site2_plot-B_data.csv\",\n  \"2024-09-15_site1_plot-C_data.csv\",\n  \"2023-12-31_site3_plot-A_data.csv\"\n)\n\n\nExtract all dates (YYYY-MM-DD format)\n\n\n\n[1] \"2024-08-12\" \"2024-08-12\" \"2024-09-15\" \"2023-12-31\"\n\n\n\nFind files from site1\n\n\n\n[1] \"2024-08-12_site1_plot-A_data.csv\" \"2024-09-15_site1_plot-C_data.csv\"\n\n\n\nExtract the plot letter (A, B, or C)\n\n\n\n[1] \"A\" \"B\" \"C\" \"A\"\n\n\n\nGive participants 5 minutes to work on this"
+  },
+  {
+    "objectID": "regex.html#solution-exercise-1",
+    "href": "regex.html#solution-exercise-1",
+    "title": "String Manipulation with Regular Expressions",
+    "section": "Solution: Exercise 1",
+    "text": "Solution: Exercise 1\n\n# 1. Extract dates\nstr_extract(files, \"^\\\\d{4}-\\\\d{2}-\\\\d{2}\")\n\n[1] \"2024-08-12\" \"2024-08-12\" \"2024-09-15\" \"2023-12-31\"\n\n# 2. Find files from site1\nstr_subset(files, \"site1\")\n\n[1] \"2024-08-12_site1_plot-A_data.csv\" \"2024-09-15_site1_plot-C_data.csv\"\n\n# 3. Extract plot letter\nstr_extract(files, \"plot-[A-Z]\") |&gt;\n  str_extract(\"[A-Z]$\")\n\n[1] \"A\" \"B\" \"C\" \"A\""
+  },
+  {
+    "objectID": "regex.html#your-turn-exercise-2",
+    "href": "regex.html#your-turn-exercise-2",
+    "title": "String Manipulation with Regular Expressions",
+    "section": "Your turn: Exercise 2",
+    "text": "Your turn: Exercise 2\nYou have messy species codes:\n\nspecies &lt;- c(\n  \"PIEN (Engelmann Spruce)\",\n  \"PICO   Lodgepole Pine\",\n  \"ABLA - Subalpine Fir\",\n  \"POTR/Trembling Aspen\"\n)\n\n\nExtract just the 4-letter species codes\n\n\n\n[1] \"PIEN\" \"PICO\" \"ABLA\" \"POTR\"\n\n\n\nReplace all separators (spaces, -, /, parentheses) with a single space\n\n\n\n[1] \"PIEN Engelmann Spruce\" \"PICO Lodgepole Pine\"   \"ABLA Subalpine Fir\"    \"POTR Trembling Aspen\" \n\n\nHint: Check out str_squish() to remove extra whitespace!\n\nCreate clean format: \"CODE: Common Name\"\n\n\n\n[1] \"PIEN: Engelmann Spruce\" \"PICO: Lodgepole Pine\"   \"ABLA: Subalpine Fir\"    \"POTR: Trembling Aspen\" \n\n\n\nGive participants 5-7 minutes for this one"
+  },
+  {
+    "objectID": "regex.html#solution-exercise-2",
+    "href": "regex.html#solution-exercise-2",
+    "title": "String Manipulation with Regular Expressions",
+    "section": "Solution: Exercise 2",
+    "text": "Solution: Exercise 2\n\n# 1. Extract 4-letter codes\nstr_extract(species, \"^[A-Z]{4}\")\n\n[1] \"PIEN\" \"PICO\" \"ABLA\" \"POTR\"\n\n# 2. Replace separators with space\ncleaned &lt;- str_replace_all(species, \"[()/-]\", \" \") |&gt;\n  str_squish() # Remove extra whitespace\ncleaned\n\n[1] \"PIEN Engelmann Spruce\" \"PICO Lodgepole Pine\"   \"ABLA Subalpine Fir\"    \"POTR Trembling Aspen\" \n\n# 3. Create clean format\ncodes &lt;- str_extract(cleaned, \"^[A-Z]{4}\")\nnames &lt;- str_replace_all(cleaned, \"^[A-Z]{4} \", \"\")\npaste0(codes, \": \", names)\n\n[1] \"PIEN: Engelmann Spruce\" \"PICO: Lodgepole Pine\"   \"ABLA: Subalpine Fir\"    \"POTR: Trembling Aspen\""
+  },
+  {
+    "objectID": "regex.html#key-takeaways",
+    "href": "regex.html#key-takeaways",
+    "title": "String Manipulation with Regular Expressions",
+    "section": "Key takeaways",
+    "text": "Key takeaways\n\nCommon patterns: . (any), [abc] (one of), +/*/?/{} (quantifiers)\nUse \\\\ to escape (match) special characters\nTest frequently with str_detect() and str_subset()\nAnchors (^, $) and groups () give you control\nIt’s often easier to pipe multiple stringr functions together than to write one complex regex\n\n\nRegular expressions are a skill built through practice. Start simple and build complexity as needed!\nYou’re going to have to look things up a lot!"
+  },
+  {
+    "objectID": "regex.html#resources",
+    "href": "regex.html#resources",
+    "title": "String Manipulation with Regular Expressions",
+    "section": "Resources",
+    "text": "Resources\n\nstringr cheatsheet: posit.co/resources/cheatsheets\nRegular Expressions Help: regular-expressions.info/\nBook chapter: R for Data Science - Strings\nPractice: regexone.com"
+  },
+  {
+    "objectID": "workflows.html#introductions",
+    "href": "workflows.html#introductions",
+    "title": "Creating Efficient Workflows in R",
+    "section": "Introductions",
+    "text": "Introductions\n\n\n\nMe: Andy Teucher\n\n andyteucher.ca\n ateucher\n andyteucher\n andy-teucher\n\nYourselves\n\nName\nWhere you are\nWhat you work on\nHardest thing about R"
+  },
+  {
+    "objectID": "workflows.html#resources",
+    "href": "workflows.html#resources",
+    "title": "Creating Efficient Workflows in R",
+    "section": "Resources",
+    "text": "Resources\n\nWorkshop website: https://andyteucher.ca/pc-intermediate-r/\n\nWTF Book: https://rstats.wtf/"
+  },
+  {
+    "objectID": "workflows.html#project-oriented-workflows",
+    "href": "workflows.html#project-oriented-workflows",
+    "title": "Creating Efficient Workflows in R",
+    "section": "Project-oriented workflows",
+    "text": "Project-oriented workflows\n\nConcept of a project \nProject structure\nEmbrace the blank slate \nNaming things\nFile organization"
+  },
+  {
+    "objectID": "workflows.html#personal-r-administration",
+    "href": "workflows.html#personal-r-administration",
+    "title": "Creating Efficient Workflows in R",
+    "section": "Personal R administration",
+    "text": "Personal R administration\n\nWhere do packages live?\nInstalling and updating packages\nR Startup\n.Rprofile and .Renviron files"
+  },
+  {
+    "objectID": "workflows.html#efficient-use-of-your-ide",
+    "href": "workflows.html#efficient-use-of-your-ide",
+    "title": "Creating Efficient Workflows in R",
+    "section": "Efficient use of your IDE",
+    "text": "Efficient use of your IDE\n\nCustomizing your IDE\nKeyboard shortcuts\nCommand palette\nTab completion\nAutoformatting code\nGetting help: Reprexes"
+  },
+  {
+    "objectID": "workflows.html#layout",
+    "href": "workflows.html#layout",
+    "title": "Creating Efficient Workflows in R",
+    "section": "Layout",
+    "text": "Layout\n\n\nhttps://github.com/posit-dev/positron-website/pull/116/"
+  },
+  {
+    "objectID": "workflows.html#layout-1",
+    "href": "workflows.html#layout-1",
+    "title": "Creating Efficient Workflows in R",
+    "section": "Layout",
+    "text": "Layout\n\n\nhttps://github.com/posit-dev/positron-website/pull/116/\n\n\nThese UI elements are the most novel for RStudio users:\nThe Activity bar provides access to different functional capabilities of Positron. Clicking here changes what appears in the Primary side bar. The Primary side bar displays context-specific content based on which icon is clicked in the Activity bar."
+  },
+  {
+    "objectID": "workflows.html#keyboard-shortcuts",
+    "href": "workflows.html#keyboard-shortcuts",
+    "title": "Creating Efficient Workflows in R",
+    "section": "Keyboard shortcuts",
+    "text": "Keyboard shortcuts\nEnable Rstudio keyboard shortcuts via:\nSettings &gt; Workbench &gt; Keybindings: Rstudio Keybindings"
+  },
+  {
+    "objectID": "workflows.html#command-palette",
+    "href": "workflows.html#command-palette",
+    "title": "Creating Efficient Workflows in R",
+    "section": "Command palette",
+    "text": "Command palette\n\nAccess all the things\n Ctrl + Shift + P"
+  },
+  {
+    "objectID": "workflows.html#extensions",
+    "href": "workflows.html#extensions",
+    "title": "Creating Efficient Workflows in R",
+    "section": "Extensions",
+    "text": "Extensions\n\n\n\nPre-installed\n\nQuarto\nAir\n\n\nOther extensions\n\nRainbow csv\nvscode-pdf\nThemes\n\n\n\nCommand palette: “install”. Search “tomorrow night”."
+  },
+  {
+    "objectID": "workflows.html#data-explorer",
+    "href": "workflows.html#data-explorer",
+    "title": "Creating Efficient Workflows in R",
+    "section": "Data Explorer",
+    "text": "Data Explorer"
+  },
+  {
+    "objectID": "workflows.html#learning-objectives",
+    "href": "workflows.html#learning-objectives",
+    "title": "Creating Efficient Workflows in R",
+    "section": "Learning objectives",
+    "text": "Learning objectives\n\nEstablish the concept of the project as the basic organizational unit of work.\nApply best practices in and leverage benefits of using a project-oriented workflow.\n\n\nCreating robust file paths that travel well in time and space.\nConstructing human and machine readable file names that sort nicely.\nDifferentiating workflow elements, analysis inputs, and analysis outputs in project structure to create navigable programming interfaces.\nRestarting R frequently, with a blank slate."
+  },
+  {
+    "objectID": "workflows.html#prerequisites",
+    "href": "workflows.html#prerequisites",
+    "title": "Creating Efficient Workflows in R",
+    "section": "Prerequisites",
+    "text": "Prerequisites\n\ninstall.packages(c(\"tidyverse\", \"devtools\"))\n\ndevtools::install_github(\"r-lib/usethis\")"
+  },
+  {
+    "objectID": "workflows.html#be-organized-as-you-go-not-tomorrow",
+    "href": "workflows.html#be-organized-as-you-go-not-tomorrow",
+    "title": "Creating Efficient Workflows in R",
+    "section": "Be organized as you go, not “tomorrow”",
+    "text": "Be organized as you go, not “tomorrow”\n\n\nDon’t fret over past mistakes.\n\n\n\n\nRaise the bar for new work."
+  },
+  {
+    "objectID": "workflows.html#prerequisite-save-code-in-scripts",
+    "href": "workflows.html#prerequisite-save-code-in-scripts",
+    "title": "Creating Efficient Workflows in R",
+    "section": "Prerequisite: Save code in scripts",
+    "text": "Prerequisite: Save code in scripts\nSaving code is an absolute requirement for reproducibility. (Future you, future us)\n\nSave commands as “scripts” (.R) or “notebooks” (.Rmd).\nIt doesn’t have to be polished.\nJust save it!\nEverything that really matters should be achieved through code that you save\nContrast: Series of unrecorded mouse clicks\n\nThe process is important, the product is just an outcome\n\nOutputs should be treated as disposable\nScripts are the source of truth"
+  },
+  {
+    "objectID": "workflows.html#adopt-a-project-oriented-workflow",
+    "href": "workflows.html#adopt-a-project-oriented-workflow",
+    "title": "Creating Efficient Workflows in R",
+    "section": "Adopt a project-oriented workflow",
+    "text": "Adopt a project-oriented workflow\n\n\n\nWhy\n\nwork on more than 1 thing at a time\ncollaborate, communicate, distribute\nstart and stop safely\n\n\n\n\nHow\n\ndedicated directory\nRStudio Project or Positron Workspace\nGit repo, probably syncing to a remote\n\n\n\nProject-oriented workflows"
+  },
+  {
+    "objectID": "workflows.html#if-the-top-of-your-script-is",
+    "href": "workflows.html#if-the-top-of-your-script-is",
+    "title": "Creating Efficient Workflows in R",
+    "section": "If the top of your script is",
+    "text": "If the top of your script is\n\n\nsetwd(\"C:/Users/andy/path/that/only/I/have\")\nrm(list = ls())\n\n\nThere is another path.\n\n\nProject-oriented workflow designs this away. 🙌\n\n\nProject-oriented workflows"
+  },
+  {
+    "objectID": "workflows.html#organize-your-work-into-projects",
+    "href": "workflows.html#organize-your-work-into-projects",
+    "title": "Creating Efficient Workflows in R",
+    "section": "Organize your work into projects",
+    "text": "Organize your work into projects\nOne folder per project.\n\nReport? R package? Chapter? Website? Whatever.\nCan be the same unit as a GitHub Repo.\nIf using RStudio, it’s Project (capital P)\nIf using Positron, it’s Workspace\nEach Project gets its own R instance\nR starts at the project root working directory: all paths are relative to the project’s folder.\n\n\nProject-oriented workflows"
+  },
+  {
+    "objectID": "workflows.html#organize-your-work-into-projects-1",
+    "href": "workflows.html#organize-your-work-into-projects-1",
+    "title": "Creating Efficient Workflows in R",
+    "section": "Organize your work into projects",
+    "text": "Organize your work into projects\n\n\nmy-project/\n├── 01_read-data.R\n├── 02_clean-data.R\n├── 03_analysis.R\n├── 04_output.R\n├── R\n├── README.md\n├── data\n│   ├── derived_data\n│   └── raw_data\n├── outputs\n└── paper\n    ├── paper.qmd\n    └── references.bib\n\n\n\nProject-oriented workflows"
+  },
+  {
+    "objectID": "workflows.html#what-does-it-mean-to-be-an-rstudio-project",
+    "href": "workflows.html#what-does-it-mean-to-be-an-rstudio-project",
+    "title": "Creating Efficient Workflows in R",
+    "section": "What does it mean to be an RStudio Project?",
+    "text": "What does it mean to be an RStudio Project?\nOpen Project = dedicated instance of RStudio\n\ndedicated R process\nfile browser pointed at Project directory\nworking directory set to Project directory\n\n\n\nRStudio leaves notes to itself in foo.Rproj"
+  },
+  {
+    "objectID": "workflows.html#what-does-it-mean-to-be-a-positron-project-workspace",
+    "href": "workflows.html#what-does-it-mean-to-be-a-positron-project-workspace",
+    "title": "Creating Efficient Workflows in R",
+    "section": "What does it mean to be a Positron Project Workspace?",
+    "text": "What does it mean to be a Positron Project Workspace?\nOpen Project = dedicated instance of Positron\n\ndedicated R process\nfile browser pointed at Project directory\nworking directory set to Project directory\n\n\n\nOften just a project folder that’s been opened in its own window via Open Folder or similar\n\n.git/ directory\n.Rproj file\n.vscode/settings.json file\n_quarto.yml file\nDESCRIPTION file\nrenv.lock file\n.here file"
+  },
+  {
+    "objectID": "workflows.html#practice-safe-paths",
+    "href": "workflows.html#practice-safe-paths",
+    "title": "Creating Efficient Workflows in R",
+    "section": "Practice “safe paths”",
+    "text": "Practice “safe paths”\nThe chance of setwd() having the desired effect – making the file paths work – for anyone besides its author is ~0%.\nlibrary(ggplot2)\nsetwd(\"/Users/andy/cuddly_broccoli/verbose/foofy/data\")\ndf &lt;- read.csv(“raw_foofy_data.csv”)\np &lt;- ggplot(df, aes(x, y)) + geom_point()\nggsave(\"/Users/andy/cuddly_broccoi/ambiguous/fig.png\")\n It’s also unlikely to work for the author one or two years or computers from now.\nHard-wired, absolute paths, especially when sprinkled throughout the code, make a project brittle. Such code does not travel well across time or space."
+  },
+  {
+    "objectID": "workflows.html#practice-safe-paths-1",
+    "href": "workflows.html#practice-safe-paths-1",
+    "title": "Creating Efficient Workflows in R",
+    "section": "Practice “safe paths”",
+    "text": "Practice “safe paths”\n\nrelative to a stable base, not absolute paths.\n\nuse file system functions, not paste(), strsplit(), etc.\n\nWorking directory is associated with a specific process or running application.\nWhen you open a project in RStudio or Positron, it sets the working directory to the project root - this is that “stable base”\n“Working directory” as a concept is not comparable to “home directory”. “Home directory” is a static, persistent thing."
+  },
+  {
+    "objectID": "workflows.html#practice-safe-paths-2",
+    "href": "workflows.html#practice-safe-paths-2",
+    "title": "Creating Efficient Workflows in R",
+    "section": "Practice “safe paths”",
+    "text": "Practice “safe paths”\nInstead of:\n\nsetwd(\"C:/Users/andy/path/that/only/I/have\")\nmy_data &lt;- read.csv(\"data/my_data.csv\")\n\nOr:\n\nmy_data &lt;- read.csv(\"C:/Users/andy/path/that/only/I/have/data/my_data.csv\")"
+  },
+  {
+    "objectID": "workflows.html#practice-safe-paths-3",
+    "href": "workflows.html#practice-safe-paths-3",
+    "title": "Creating Efficient Workflows in R",
+    "section": "Practice “safe paths”",
+    "text": "Practice “safe paths”\nSet your work up as an RStudio or Positron Project/Workspace and use relative paths:\n\nmy_data &lt;- read.csv(\"data/my_data.csv\")\n\nOr:\n\nmy_data &lt;- read.csv(file.path(\"data\", \"my_data.csv\"))"
+  },
+  {
+    "objectID": "workflows.html#work-on-multiple-projects-at-once",
+    "href": "workflows.html#work-on-multiple-projects-at-once",
+    "title": "Creating Efficient Workflows in R",
+    "section": "Work on multiple projects at once",
+    "text": "Work on multiple projects at once\nBecause each project uses an isolated R process"
+  },
+  {
+    "objectID": "workflows.html#which-persist-after-rmlist-ls",
+    "href": "workflows.html#which-persist-after-rmlist-ls",
+    "title": "Creating Efficient Workflows in R",
+    "section": "Which persist after rm(list = ls())?",
+    "text": "Which persist after rm(list = ls())?\n\n\n\nOption\nPersists?\n\n\n\n\nA. library(dplyr)\n\n\n\nB. summary &lt;- head\n\n\n\nC. options(stringsAsFactors = FALSE)\n\n\n\nD. Sys.setenv(LANGUAGE = \"fr\")\n\n\n\nE. x &lt;- 1:5\n\n\n\nF. attach(iris)\n\n\n\n\n\n\n\n−+\n02:00"
+  },
+  {
+    "objectID": "workflows.html#which-persist-after-rmlist-ls-1",
+    "href": "workflows.html#which-persist-after-rmlist-ls-1",
+    "title": "Creating Efficient Workflows in R",
+    "section": "Which persist after rm(list = ls())?",
+    "text": "Which persist after rm(list = ls())?\n\n\n\n\n\n\n\nOption\nPersists?\n\n\n\n\nA. library(dplyr)\n\n\n\nB. summary &lt;- head\n\n\n\nC. options(stringsAsFactors = FALSE)\n\n\n\nD. Sys.setenv(LANGUAGE = \"fr\")\n\n\n\nE. x &lt;- 1:5\n\n\n\nF. attach(iris)"
+  },
+  {
+    "objectID": "workflows.html#start-r-with-a-blank-slate",
+    "href": "workflows.html#start-r-with-a-blank-slate",
+    "title": "Creating Efficient Workflows in R",
+    "section": "Start R with a blank slate",
+    "text": "Start R with a blank slate\n\n\n\nSave code for reproducibility.\nWhen you quit: do not save the workspace to an .Rdata file.\nWhen you start: do not reload the workspace from an .Rdata file.\nIn RStudio, set this via Tools &gt; Global Options.\nOr use usethis::use_blank_slate()\n\n\n\n\n\n\nThis is the default (and not customizable) in Positron"
+  },
+  {
+    "objectID": "workflows.html#restart-r-often",
+    "href": "workflows.html#restart-r-often",
+    "title": "Creating Efficient Workflows in R",
+    "section": "Restart R often",
+    "text": "Restart R often\n\n\n\nSession -&gt; Restart R\n\n\n\n\nWindows\n\nCtrl + Shift + F10\n\nMac\n\nCmd + Shift + 0"
+  },
+  {
+    "objectID": "workflows.html#project-initiation-rstudio-project",
+    "href": "workflows.html#project-initiation-rstudio-project",
+    "title": "Creating Efficient Workflows in R",
+    "section": "Project initiation: RStudio Project",
+    "text": "Project initiation: RStudio Project\n\nNew folder + make it an RStudio Project\n\n\nusethis::create_project(\"~/i_am_new\")\nFile -&gt; New Project -&gt; New Directory -&gt; New Project\n\n\nMake existing folder into an RStudio Project\n\n\nusethis::create_project(\"~/i_exist\")\nFile -&gt; New Project -&gt; Existing Directory"
+  },
+  {
+    "objectID": "workflows.html#project-initiation-positron-workspace",
+    "href": "workflows.html#project-initiation-positron-workspace",
+    "title": "Creating Efficient Workflows in R",
+    "section": "Project initiation: Positron Workspace",
+    "text": "Project initiation: Positron Workspace\n\nNew folder + make it a workspace\n\n\nusethis::create_project(\"~/i_am_new\", rstudio = FALSE)\nFile -&gt; New Folder From Template\n\n\nOpen an existing directory as a workspace\n\n\nusethis::create_project(\"~/i_exist\", rstudio = FALSE)\nFile -&gt; New Project -&gt; Existing Directory\n\nNote: if you don’t specify rstudio = FALSE, it will create an RStudio .Rproj file. This does no harm.\n\n\nTry either option now with a folder containing (or that will contain) Bivalve Data 2014-2022_ICE.csv."
+  },
+  {
+    "objectID": "workflows.html#naming-things",
+    "href": "workflows.html#naming-things",
+    "title": "Creating Efficient Workflows in R",
+    "section": "Naming things",
+    "text": "Naming things\n\n\n machine readable\n\nhuman readable\n\nsort nicely\n\n\n\n\nJenny Bryan “Naming things” video\nNormConf · Dec 4, 2022:\nhttps://www.youtube.com/watch?v=ES1LTlnpLMk"
+  },
+  {
+    "objectID": "workflows.html#naming-things-1",
+    "href": "workflows.html#naming-things-1",
+    "title": "Creating Efficient Workflows in R",
+    "section": "Naming things",
+    "text": "Naming things\n\nWhat features differentiate 😔 vs 😍?\n\n\n\n\n\n😔\n\n\n\n\n😍\n\n\n\n\nmyabstract.docx\nJoe’s Filenames Use Spaces and Punctuation.xlsx\nfigure 1.png\nhomework.R\nJW7d^(2sl@deletethisandyourcareerisoverWx2*.txt\n\n2018-01_teucher-abstract-conference.docx\njoes-filenames-are-getting-better.xlsx\nfig01_scatterplot-talk-length-vs-interest.png\n2024-07-25_ecol-455_assignment-5.R\n1986-01-28_raw-data-from-challenger-o-rings.txt\n\n\n\n\n−+\n01:00"
+  },
+  {
+    "objectID": "workflows.html#names-machines-like",
+    "href": "workflows.html#names-machines-like",
+    "title": "Creating Efficient Workflows in R",
+    "section": "Names machines like",
+    "text": "Names machines like\n\ndon’t leave white space\n\n\n\nuse letters, numbers, hyphens and underscores… that’s it  (characters like ^.*?+|$ can have a special meaning)\n\n\n\n\nbe consistent with case  (some operating systems treat a and A the same, some differently).\n\n\n\n\nuse separator characters wisely\n\n    use underscore _ to separate different chunks\n    use hyphen - for words in the same chunk\n\n\n\nThis creates names that are regular expression and globbing friendly, and easy to compute on! 🎉\n\nAdapted from  https://djnavarro.net/slides-project-structure/#1.\n\n\nGlobbing: use of pattern matching against the names in a filesystem directory such that a name pattern is expanded into a list of names matching that pattern."
+  },
+  {
+    "objectID": "workflows.html#names-humans-like",
+    "href": "workflows.html#names-humans-like",
+    "title": "Creating Efficient Workflows in R",
+    "section": "Names humans like",
+    "text": "Names humans like\n\nname contains info on content\nname anticipates context\nconcept of a slug 🐌 from user-friendly URLs\n\n1986-01-28_raw-data-from-challenger-o-rings.txt\nconcise, meaningful description\nusually appended to the end\n\n\nNote: A URL slug is the part of the URL after the last backslash"
+  },
+  {
+    "objectID": "workflows.html#names-that-sort-nicely",
+    "href": "workflows.html#names-that-sort-nicely",
+    "title": "Creating Efficient Workflows in R",
+    "section": "Names that sort nicely",
+    "text": "Names that sort nicely\n\nput something numeric in there\nleft pad with zeros for constant width, nice sorting, 01\nuse the ISO 8601 standard for dates, YYYY-MM-DD\norder = chronological or … consider common sense"
+  },
+  {
+    "objectID": "workflows.html#iso-8601",
+    "href": "workflows.html#iso-8601",
+    "title": "Creating Efficient Workflows in R",
+    "section": "ISO 8601",
+    "text": "ISO 8601\n\n\n\n\n\n\n\nYYYY-MM-DD\nISO 8601\n\nhttps://www.iso.org/iso-8601-date-and-time-format.html\n\n\nhttps://twitter.com/JennyBryan/status/816143967695687684"
+  },
+  {
+    "objectID": "workflows.html#file-names",
+    "href": "workflows.html#file-names",
+    "title": "Creating Efficient Workflows in R",
+    "section": "👍 file names",
+    "text": "👍 file names\n\nlibrary(fs)\nlibrary(dplyr)\n\nft &lt;- tibble(files = dir_ls(\"_examples/data/\", glob = \"*.csv\"))\n\n\nIntuitive sorting.\n\n\n\nft\n\n# A tibble: 4 × 1\n  files                                           \n  &lt;fs::path&gt;                                      \n1 _examples/data/2024-07-16_site-2_plot-data.csv  \n2 _examples/data/2024-07-25_site-2_survey-data.csv\n3 _examples/data/2024-08-12_site-1_plot-data.csv  \n4 _examples/data/2024-08-18_site-1_survey-data.csv\n\n\n\n\narrange(ft, desc(files))\n\n# A tibble: 4 × 1\n  files                                           \n  &lt;fs::path&gt;                                      \n1 _examples/data/2024-08-18_site-1_survey-data.csv\n2 _examples/data/2024-08-12_site-1_plot-data.csv  \n3 _examples/data/2024-07-25_site-2_survey-data.csv\n4 _examples/data/2024-07-16_site-2_plot-data.csv"
+  },
+  {
+    "objectID": "workflows.html#file-names-1",
+    "href": "workflows.html#file-names-1",
+    "title": "Creating Efficient Workflows in R",
+    "section": "👍 file names",
+    "text": "👍 file names\n\nlibrary(stringr)\n\nfilter(ft, str_detect(files, pattern = \"plot-data\"))\n\n# A tibble: 2 × 1\n  files                                         \n  &lt;fs::path&gt;                                    \n1 _examples/data/2024-07-16_site-2_plot-data.csv\n2 _examples/data/2024-08-12_site-1_plot-data.csv\n\n\nEasy to filter in R (or the shell or whatever)"
+  },
+  {
+    "objectID": "workflows.html#file-names-2",
+    "href": "workflows.html#file-names-2",
+    "title": "Creating Efficient Workflows in R",
+    "section": "👍 file names",
+    "text": "👍 file names\n\nlibrary(tidyr)\n\nft |&gt; \n  mutate(files = path_ext_remove(files)) |&gt; \n  separate(files, into = c(\"date\", \"site\", \"data_type\"), sep = \"_\")\n\n# A tibble: 4 × 3\n  date  site                     data_type\n  &lt;chr&gt; &lt;chr&gt;                    &lt;chr&gt;    \n1 \"\"    examples/data/2024-07-16 site-2   \n2 \"\"    examples/data/2024-07-25 site-2   \n3 \"\"    examples/data/2024-08-12 site-1   \n4 \"\"    examples/data/2024-08-18 site-1   \n\n\nIntentional delimiters means meta-data is easily recovered.\n_ delimits fields; - delimits words\n\nRename the file Bivalve Data 2014-2022_ICE.csv to something that is machine readable, human readable, and sorts nicely.\nRead the file in to R using a relateive path"
+  },
+  {
+    "objectID": "workflows.html#names-matter",
+    "href": "workflows.html#names-matter",
+    "title": "Creating Efficient Workflows in R",
+    "section": "Names matter",
+    "text": "Names matter\n\nmachine readable, human readable, and sort nicely\n\n\neasy to implement NOW\n\npayoffs accumulate as your skills evolve and  projects get more complex"
+  },
+  {
+    "objectID": "workflows.html#project-structure",
+    "href": "workflows.html#project-structure",
+    "title": "Creating Efficient Workflows in R",
+    "section": "Project structure",
+    "text": "Project structure\n\n\nmy-project/\n├── 01_read-data.R\n├── 02_clean-data.R\n├── 03_analysis.R\n├── 04_output.R\n├── R\n├── README.md\n├── data\n│   ├── derived_data\n│   └── raw_data\n├── outputs\n└── paper\n    ├── paper.qmd\n    └── references.bib"
+  },
+  {
+    "objectID": "workflows.html#your-r-installation",
+    "href": "workflows.html#your-r-installation",
+    "title": "Creating Efficient Workflows in R",
+    "section": "Your R installation",
+    "text": "Your R installation"
+  },
+  {
+    "objectID": "workflows.html#r-packages",
+    "href": "workflows.html#r-packages",
+    "title": "Creating Efficient Workflows in R",
+    "section": "R packages",
+    "text": "R packages\n\nR packages\n\nthe natural unit for distributing R code\n\n\n\nbase R\n\n14 base + 15 recommended packages\nships with all binary distributions of R"
+  },
+  {
+    "objectID": "workflows.html#additional-packages",
+    "href": "workflows.html#additional-packages",
+    "title": "Creating Efficient Workflows in R",
+    "section": "Additional packages",
+    "text": "Additional packages\n\n\nCRAN, ~20k packages\n\n# install from CRAN\ninstall.packages(\"devtools\")\n# attach\nlibrary(devtools)\n\n\n\n\nGitHub ~∞ packages\n\n# install from GitHub\nremotes::install_github(\"r-lib/devtools\")\n# attach\nlibrary(devtools)\n\ndevelopment versions, or packages not on CRAN"
+  },
+  {
+    "objectID": "workflows.html#r-libraries---where-do-packages-live",
+    "href": "workflows.html#r-libraries---where-do-packages-live",
+    "title": "Creating Efficient Workflows in R",
+    "section": "R Libraries - where do packages live?",
+    "text": "R Libraries - where do packages live?\n\nA library is a directory containing installed packages\nYou have at least one library on your computer\nCommon (and recommended) to have two libraries:\n\nA system library with base (14) and recommended (15) packages; installed with R.\nA user library with user-installed packages\n\nWe use library(pkg) function to attach a package\n7 base packages are always attached (base, methods, utils, stats, grDevices, datasets, graphics)"
+  },
+  {
+    "objectID": "workflows.html#where-do-packages-live-locally",
+    "href": "workflows.html#where-do-packages-live-locally",
+    "title": "Creating Efficient Workflows in R",
+    "section": "Where do packages live locally?",
+    "text": "Where do packages live locally?\n\nThe system library (base/recommended packages).\n.Library\n\nAll libraries for the current session\n.libPaths()\n\nAll installed packages\ninstalled.packages()"
+  },
+  {
+    "objectID": "workflows.html#your-turn",
+    "href": "workflows.html#your-turn",
+    "title": "Creating Efficient Workflows in R",
+    "section": "Your turn",
+    "text": "Your turn\n\nWhat libraries are in use in your current R session?\nUsing installed.packages(), what are the base and recommended packages?"
+  },
+  {
+    "objectID": "workflows.html#installing-and-updating-packages",
+    "href": "workflows.html#installing-and-updating-packages",
+    "title": "Creating Efficient Workflows in R",
+    "section": "Installing and updating packages",
+    "text": "Installing and updating packages"
+  },
+  {
+    "objectID": "workflows.html#r-startup",
+    "href": "workflows.html#r-startup",
+    "title": "Creating Efficient Workflows in R",
+    "section": "R Startup",
+    "text": "R Startup\n\n\ncomplexity in R startup, for both personal and system-level customization. We can ignore most of it"
+  },
+  {
+    "objectID": "workflows.html#r-startup-1",
+    "href": "workflows.html#r-startup-1",
+    "title": "Creating Efficient Workflows in R",
+    "section": "R Startup",
+    "text": "R Startup\n\n.Rprofile - contains R code to be run at the start of each session.\n.Renviron - contains environment variables to be set in R sessions."
+  },
+  {
+    "objectID": "workflows.html#what-to-put-in-.rprofile",
+    "href": "workflows.html#what-to-put-in-.rprofile",
+    "title": "Creating Efficient Workflows in R",
+    "section": "what to put in .Rprofile",
+    "text": "what to put in .Rprofile\n\nset a default CRAN mirror\ncustom startup message"
+  },
+  {
+    "objectID": "workflows.html#what-not-to-put-in-.rprofile",
+    "href": "workflows.html#what-not-to-put-in-.rprofile",
+    "title": "Creating Efficient Workflows in R",
+    "section": "what not to put in .Rprofile",
+    "text": "what not to put in .Rprofile\nIf it matters for code you share, it should not be in .Rprofile\nwhy shouldn’t these go in .Rprofile?\n\nlibrary(tidyverse)\nf &lt;- dplyr::filter\ntheme_set(theme_bw())"
+  },
+  {
+    "objectID": "workflows.html#why-might-these-be-safe-to-put-in-.rprofile",
+    "href": "workflows.html#why-might-these-be-safe-to-put-in-.rprofile",
+    "title": "Creating Efficient Workflows in R",
+    "section": "Why might these be safe to put in .Rprofile?",
+    "text": "Why might these be safe to put in .Rprofile?\n\nlibrary(usethis)\nlibrary(devtools)"
+  },
+  {
+    "objectID": "workflows.html#rprofile",
+    "href": "workflows.html#rprofile",
+    "title": "Creating Efficient Workflows in R",
+    "section": ".Rprofile",
+    "text": ".Rprofile\n\nusethis::edit_r_profile()"
+  },
+  {
+    "objectID": "workflows.html#renviron",
+    "href": "workflows.html#renviron",
+    "title": "Creating Efficient Workflows in R",
+    "section": ".Renviron",
+    "text": ".Renviron\n\nSet environment variables for R sessions\nOften sensitive information that you don’t want to share\n\nExamples\n\nAPI Keys (Eg GitHub, ChatGPT etc)\nDatabase username and password\nSome R options"
+  },
+  {
+    "objectID": "workflows.html#renviron-1",
+    "href": "workflows.html#renviron-1",
+    "title": "Creating Efficient Workflows in R",
+    "section": ".Renviron",
+    "text": ".Renviron\n\nusethis::edit_r_environ()\n\nVAR_NAME=value\nGOOGLE_API_KEY=your_api_key_here"
+  },
+  {
+    "objectID": "workflows.html#renviron-2",
+    "href": "workflows.html#renviron-2",
+    "title": "Creating Efficient Workflows in R",
+    "section": ".Renviron",
+    "text": ".Renviron\nAccess environment variables in R with Sys.getenv(\"VAR_NAME\")\n\nSys.getenv(\"GOOGLE_API_KEY\")\n#&gt; [1] \"your_api_key_here\""
+  },
+  {
+    "objectID": "workflows.html#your-turn-1",
+    "href": "workflows.html#your-turn-1",
+    "title": "Creating Efficient Workflows in R",
+    "section": "Your turn",
+    "text": "Your turn\n\nCreate an environment variable in .Renviron called MY_NAME with your name as the value.\nCreate a custom startup message in .Rprofile that gives you a personalized message when you start R."
+  },
+  {
+    "objectID": "workflows.html#customizing-your-ide",
+    "href": "workflows.html#customizing-your-ide",
+    "title": "Creating Efficient Workflows in R",
+    "section": "Customizing your IDE",
+    "text": "Customizing your IDE\n\n\nPane layout\nThemes\nFonts\nPositron extensions"
+  },
+  {
+    "objectID": "workflows.html#keyboard-shortcuts-1",
+    "href": "workflows.html#keyboard-shortcuts-1",
+    "title": "Creating Efficient Workflows in R",
+    "section": "Keyboard shortcuts",
+    "text": "Keyboard shortcuts\nIf in doubt, use the command palette: Ctrl + Shift + P"
+  },
+  {
+    "objectID": "workflows.html#navigation-files",
+    "href": "workflows.html#navigation-files",
+    "title": "Creating Efficient Workflows in R",
+    "section": "Navigation & Files",
+    "text": "Navigation & Files\n\nCtrl + Shift + N - New file\nCtrl + S - Save current file\nCtrl + F - Find in current file\nCtrl + Shift + F - Find in files (global search)\nCtrl + . - Go to file/function\nCtrl + 1 - Focus source editor\nCtrl + 2 - Focus console"
+  },
+  {
+    "objectID": "workflows.html#code-editing",
+    "href": "workflows.html#code-editing",
+    "title": "Creating Efficient Workflows in R",
+    "section": "Code Editing",
+    "text": "Code Editing\n\nCtrl + Shift + C - Comment/uncomment lines\nTab - Indent selection\nShift + Tab - Unindent selection\nAlt + Up/Down - Move line(s) up/down\nAlt + Shift + Up/Down - Duplicate line(s) ???\nCtrl + X - Cut entire line (when no selection)"
+  },
+  {
+    "objectID": "workflows.html#magic-of-multiple-cursors",
+    "href": "workflows.html#magic-of-multiple-cursors",
+    "title": "Creating Efficient Workflows in R",
+    "section": "Magic of Multiple Cursors",
+    "text": "Magic of Multiple Cursors\n\nCtrl + Alt + Up/Down - Add cursor above/below\nCtrl + D - Add next occurrence of selected text (custom)"
+  },
+  {
+    "objectID": "workflows.html#navigation-within-code",
+    "href": "workflows.html#navigation-within-code",
+    "title": "Creating Efficient Workflows in R",
+    "section": "Navigation Within Code",
+    "text": "Navigation Within Code\n\nCtrl + Left/Right - Jump word by word\nHome/End - Jump to beginning/end of line\nCtrl + Home/End - Jump to beginning/end of document\nCtrl + P - Jump to matching brace"
+  },
+  {
+    "objectID": "workflows.html#r-specific",
+    "href": "workflows.html#r-specific",
+    "title": "Creating Efficient Workflows in R",
+    "section": "R-Specific",
+    "text": "R-Specific\n\nTab - Auto-complete\nF1 - Show help for function under cursor\nCtrl + Shift + F10 - Restart R session\nCtrl + Shift + M - Insert pipe operator (%&gt;% or |&gt;)\nAlt + - - Insert assignment operator (&lt;-)"
+  },
+  {
+    "objectID": "workflows.html#last.value",
+    "href": "workflows.html#last.value",
+    "title": "Creating Efficient Workflows in R",
+    "section": ".Last.value",
+    "text": ".Last.value\nShows last evaluated value in console\nRStudio\n\nTools &gt; Global Options &gt; General &gt; Advanced &gt; Show .Last.value in environment listing\n\nPositron\nControlled by an option:\n\nusethis::edit_r_profile()\noptions(positron.show_last_value = TRUE)"
+  },
+  {
+    "objectID": "workflows.html#automatic-code-formatting",
+    "href": "workflows.html#automatic-code-formatting",
+    "title": "Creating Efficient Workflows in R",
+    "section": "Automatic code formatting",
+    "text": "Automatic code formatting\nAir: https://posit-dev.github.io/air/\n\nIn charge of the layout of your R code.\nFormatters do not change the meaning of code\nEnsure that whitespace, newlines, and other punctuation conform to a set of rules and standards\n\n\nusethis::use_air()"
+  },
+  {
+    "objectID": "workflows.html#reprexes",
+    "href": "workflows.html#reprexes",
+    "title": "Creating Efficient Workflows in R",
+    "section": "Reprexes",
+    "text": "Reprexes"
+  },
+  {
+    "objectID": "workflows.html#start-using-project-oriented-workflows-in-your-work",
+    "href": "workflows.html#start-using-project-oriented-workflows-in-your-work",
+    "title": "Creating Efficient Workflows in R",
+    "section": "Start using project-oriented workflows in your work",
+    "text": "Start using project-oriented workflows in your work\n\n\nUse RStudio or Positron Projects/Workspaces\ndon’t use setwd()\nuse relative paths\nUse a blank slate - restart R often"
+  },
+  {
+    "objectID": "workflows.html#try-to-name-files-well",
+    "href": "workflows.html#try-to-name-files-well",
+    "title": "Creating Efficient Workflows in R",
+    "section": "Try to name files well",
+    "text": "Try to name files well\n\n\nmachine readable\nhuman readable\nsorts nicely (including ISO 8601 dates)"
+  },
+  {
+    "objectID": "workflows.html#use-positron-or-rstudio-more-efficiently",
+    "href": "workflows.html#use-positron-or-rstudio-more-efficiently",
+    "title": "Creating Efficient Workflows in R",
+    "section": "Use Positron or RStudio more efficiently",
+    "text": "Use Positron or RStudio more efficiently\n\n\nuse keyboard shortcuts\nuse the command palette\nuse Air"
   }
 ]
