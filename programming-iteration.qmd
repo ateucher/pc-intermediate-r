@@ -737,7 +737,7 @@ Starting code in `04-iteration.R`
 ## Another example
 
 See <https://github.com/ateucher/pc-programming/blob/main/solutions/07-advanced-iteration.qmd>
-for an example of using `purrr` to conduct a power analysis on Rodent data. It 
+for an example of using `purrr` to conduct a power analysis on rodent data in Quarto. It 
 includes a section on running it in parallel.
 
 The rendered report is at <https://github.com/ateucher/pc-programming/blob/main/solutions/07-advanced-iteration.pdf>
