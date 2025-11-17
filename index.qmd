@@ -13,15 +13,19 @@ This will be an online, interactive workshop delivered virtually.
 
 ## Modules
 
-### 1. Project-oriented workflows and effective use of your IDE (RStudio/Positron)
+### 1. [Project-oriented workflows and effective use of your IDE (RStudio/Positron)](workflows.qmd)
 
-### 2. Version control and Collaboration with Git and GitHub
+### 2. [Version control and Collaboration with Git and GitHub](git-github.qmd)
 
-### 3. Advanced data manipulation with dplyr and tidyr
+### 3. [Advanced data manipulation with dplyr and tidyr](data-manipulation.qmd)
 
-### 4. Programming with R - functions, functional programming, and iteration
+### 4. [Programming with R - functions](programming-functions.qmd)
 
-### 5. Reproducible reporting with Quarto
+### 5. [String manipulation and regular expressions with stringr](regex.qmd)
+
+### 6. [Iteration and functional programming with purrr](programming-iteration.qmd)
+
+### 7. [Reproducible reporting with Quarto](quarto.qmd)
 
 ## Exercises
 
@@ -48,6 +52,6 @@ The material for this workshop has origins and inspiration from several sources,
 
 - [What they forgot to teach you about R](https://rstats.wtf/): A collection of tips and best practices for R programming by Jennifer Bryan, Jim Hester, Shannon Pileggi, E. David Ajal.
 
-- [From R User to R Programmer](https://posit-conf-2025.github.io/r-programming/): Posit conf workshop by Emma Rand and Ian Lyttle.
+- [From R User to R Programmer](https://posit-conf-2025.github.io/r-programming/): Posit conf 2024 workshop by Emma Rand and Ian Lyttle.
 
-- [Intro to Quarto](https://posit-conf-2024.github.io/quarto-intro/): Posit conf workshop by Andrew Bray.
+- [Intro to Quarto](https://posit-conf-2024.github.io/quarto-intro/): Posit conf 2024 workshop by Andrew Bray.
